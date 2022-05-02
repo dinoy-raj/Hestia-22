@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
-import 'package:hestia22/screens/home/home.dart';
+//import 'package:hestia22/screens/home/home.dart';
+import 'package:hestia22/screens/profile/profile.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home:  ProfilePage(),
     );
   }
 }
@@ -38,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
+    // ignore: todo
     // TODO: Replace with provider once backend is up
     return Scaffold(
       body: Padding(
