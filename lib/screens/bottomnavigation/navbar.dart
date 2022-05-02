@@ -116,7 +116,7 @@ class _NavBarState extends State<NavBar> {
                                       },
                                       child: AnimatedContainer(
                                         duration: const Duration(seconds: 1),
-                                        curve: Curves.fastLinearToSlowEaseIn,
+                                        curve: Curves.decelerate,
                                         height: screenHeight * .07,
                                         width: start
                                             ? screenWidth * .21
@@ -264,7 +264,7 @@ class _NavBarState extends State<NavBar> {
                                       },
                                       child: AnimatedContainer(
                                         duration: const Duration(seconds: 1),
-                                        curve: Curves.fastLinearToSlowEaseIn,
+                                        curve: Curves.decelerate,
                                         height: screenHeight * .07,
                                         width: start
                                             ? screenWidth * .21
