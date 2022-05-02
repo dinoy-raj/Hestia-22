@@ -6,16 +6,16 @@ import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/cards.dart';
 import 'package:map_launcher/map_launcher.dart';
 
-class SpotPage extends StatefulWidget {
-  const SpotPage({Key? key}) : super(key: key);
+class Spots extends StatefulWidget {
+  const Spots({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return SpotPageState();
+    return SpotsState();
   }
 }
 
-class SpotPageState extends State<SpotPage> {
+class SpotsState extends State<Spots> {
   Future<List<String>> _getSuggestions(String pattern) async {
     return [pattern, pattern + 'aa', pattern + 'bb'];
   }
@@ -132,7 +132,6 @@ class SpotPageState extends State<SpotPage> {
                         ),
                         child: TypeAheadField(
                           textFieldConfiguration: TextFieldConfiguration(
-                            autofocus: true,
                             style: TextStyle(color: Colors.grey),
                             cursorColor: Colors.grey,
                             textCapitalization: TextCapitalization.sentences,
