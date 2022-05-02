@@ -37,95 +37,110 @@ class _HomeState extends State<Home> {
       child: Padding(
         padding: const EdgeInsets.only(top: 40.0, right: 10, left: 10),
         child: Stack(
-
           children: [
-
+            //notification page
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-
                 SizedBox(
                   height: screenHeight * .1,
                   width: screenWidth,
                 ),
-                AnimatedContainer(duration: const Duration(seconds: 1),
-                curve: Curves.fastLinearToSlowEaseIn,
-                height: notPressed?screenHeight*.6:0,
-                  width: screenWidth*.9,
+                AnimatedContainer(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: notPressed ? screenHeight * .6 : 0,
+                  width: screenWidth * .9,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Constants.iconIn
-                  ),
+                      borderRadius: BorderRadius.circular(15),
+                      color: Constants.iconIn),
                 ),
               ],
             ),
 
-
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: screenHeight * .1,
-                  width: screenWidth,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          AnimatedContainer(
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            height: screenHeight * .051,
-                            width: screenHeight * .051,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Constants.iconAc,
+            //homepage body part
+            AnimatedPadding(
+              duration: const Duration(seconds: 1),
+              curve: Curves.fastLinearToSlowEaseIn,
+              padding: start
+                  ? const EdgeInsets.only(left: 10, right: 10)
+                  : const EdgeInsets.only(left: 0, right: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  //header section
+                  SizedBox(
+                    height: screenHeight * .1,
+                    width: screenWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        //welcome note
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AnimatedOpacity(
+                              duration: const Duration(seconds: 3),
+                              curve: Curves.decelerate,
+                              opacity: start ? 1 : 0,
+                              child: const Text(
+                                "Hi, Dinoy Raj 👋",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    fontFamily: 'helvetica',
+                                    color: Colors.white),
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                notPressed = !notPressed;
-                              });
-                            },
-                            child: Container(
-                              height: screenHeight * .05,
-                              width: screenHeight * .05,
-                              color: Constants.bg,
+                            SizedBox(
+                              height: screenHeight * .005,
+                            ),
+                            AnimatedOpacity(
+                              duration: const Duration(seconds: 3),
+                              curve: Curves.decelerate,
+                              opacity: start ? 1 : 0,
+                              child: Text(
+                                "Explore Events",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    fontFamily: 'helvetica',
+                                    color: Constants.iconIn),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        //notification bell
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              notPressed = !notPressed;
+                            });
+                          },
+                          child: SizedBox(
+                            height: screenHeight * .05,
+                            width: screenHeight * .05,
+                            child: AnimatedOpacity(
+                              duration: const Duration(seconds: 1),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              opacity: start ? 1 : 0,
                               child: const Icon(
                                 FontAwesomeIcons.bell,
                                 color: Colors.grey,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: screenWidth * .7,
-                        child: Center(
-                          child: AnimatedOpacity(
-                            duration: const Duration(seconds: 3),
-                            curve: Curves.decelerate,
-                            opacity: start ? 1 : 0,
-                            child: const Text(
-                              "Hestia 22",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  fontFamily: 'helvetica',
-                                  color: Colors.white),
-                            ),
-                          ),
                         ),
-                      ),
-                     
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
