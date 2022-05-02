@@ -277,26 +277,54 @@ class _SpotPageState extends State<SpotPage> {
                             child: AnimatedPadding(
                               duration: Duration(milliseconds: 500),
                               padding: _padding2,
-                              child: ListTile(
-                                title: Text(
-                                  data1[index]['name'],
-                                  style: TextStyle(
-                                    color: Constants.color2,
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      data1[index]['name'],
+                                      style: TextStyle(
+                                        color: Constants.color2,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      data1[index]['category'],
+                                      style: TextStyle(
+                                        color: Constants.color2.withOpacity(.5),
+                                      ),
+                                    ),
+                                    trailing: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          DateFormat.MMMMEEEEd().format(
+                                              (data1[index]['datetime'])),
+                                          style: TextStyle(
+                                            color: Constants.color2
+                                                .withOpacity(.25),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 12,
+                                          color:
+                                              Constants.color2.withOpacity(.5),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                subtitle: Text(
-                                  data1[index]['category'],
-                                  style: TextStyle(
-                                    color: Constants.color2.withOpacity(.5),
-                                  ),
-                                ),
-                                trailing: Text(
-                                  DateFormat.MMMMEEEEd()
-                                      .format((data1[index]['datetime'])),
-                                  style: TextStyle(
-                                    color: Constants.color2.withOpacity(.25),
-                                  ),
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 10,
+                                      right: 10,
+                                    ),
+                                    child: Divider(
+                                      color: Constants.color2.withOpacity(.25),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),
