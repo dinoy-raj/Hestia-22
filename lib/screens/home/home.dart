@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
@@ -126,24 +127,41 @@ class _HomeState extends State<Home> {
                             duration: const Duration(seconds: 1),
                             curve: Curves.fastLinearToSlowEaseIn,
                             opacity: start ? 1 : 0,
-                            child: AnimatedContainer(
-                              duration: const Duration(seconds: 2),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              height: notPressed?screenHeight * .048:screenHeight * .05,
-                              width:  notPressed?screenHeight * .048:screenHeight * .05,
-                              decoration: BoxDecoration(
-                                  border: notPressed
-                                      ? Border.all(color: Constants.iconAc)
-                                      : Border.all(color: Colors.transparent),
-                                  color: Colors.grey.withOpacity(.1),
-                                  borderRadius: BorderRadius.circular(12)),
-                              child: AnimatedOpacity(
-                                duration: const Duration(seconds: 1),
+                            child: Badge(
+                              badgeColor: Constants.iconAc,
+                              badgeContent: const Text(
+                                "1",
+                                style: TextStyle(
+                                  fontFamily: 'Helvetica',
+                                  //fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              animationDuration:
+                                  const Duration(milliseconds: 700),
+                              animationType: BadgeAnimationType.scale,
+                              child: AnimatedContainer(
+                                duration: const Duration(seconds: 2),
                                 curve: Curves.fastLinearToSlowEaseIn,
-                                opacity: start ? 1 : 0,
-                                child: const Icon(
-                                  FontAwesomeIcons.bell,
-                                  color: Colors.grey,
+                                height: notPressed
+                                    ? screenHeight * .048
+                                    : screenHeight * .05,
+                                width: notPressed
+                                    ? screenHeight * .048
+                                    : screenHeight * .05,
+                                decoration: BoxDecoration(
+                                    border: notPressed
+                                        ? Border.all(color: Constants.iconAc)
+                                        : Border.all(color: Colors.transparent),
+                                    color: Colors.grey.withOpacity(.1),
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: AnimatedOpacity(
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  opacity: start ? 1 : 0,
+                                  child: const Icon(
+                                    FontAwesomeIcons.bell,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
                             ),
