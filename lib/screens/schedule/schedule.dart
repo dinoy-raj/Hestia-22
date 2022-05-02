@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+class Schedule extends StatefulWidget {
+  const Schedule({Key? key}) : super(key: key);
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<Schedule> createState() => _ScheduleState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
       height: screenHeight,
       width: screenWidth,
@@ -22,7 +23,7 @@ class _MapPageState extends State<MapPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "map",
+              "schedule",
               style: TextStyle(color: Colors.white),
             ),
           ],

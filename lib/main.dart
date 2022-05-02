@@ -5,6 +5,7 @@ import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
+  Paint.enableDithering = true;
   runApp(const MyApp());
 }
 
@@ -78,5 +79,4 @@ class Constants {
   static const TextStyle primaryText = TextStyle();
   static const TextStyle secondaryText = TextStyle();
   static const TextStyle tertiaryText = TextStyle();
-
 }
