@@ -107,7 +107,7 @@ class _HomeState extends State<Home> {
                                 "Explore Events",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 10,
+                                    fontSize: 13,
                                     fontFamily: 'helvetica',
                                     color: Constants.iconIn),
                               ),
@@ -122,16 +122,29 @@ class _HomeState extends State<Home> {
                               notPressed = !notPressed;
                             });
                           },
-                          child: SizedBox(
-                            height: screenHeight * .05,
-                            width: screenHeight * .05,
-                            child: AnimatedOpacity(
-                              duration: const Duration(seconds: 1),
+                          child: AnimatedOpacity(
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            opacity: start ? 1 : 0,
+                            child: AnimatedContainer(
+                              duration: const Duration(seconds: 2),
                               curve: Curves.fastLinearToSlowEaseIn,
-                              opacity: start ? 1 : 0,
-                              child: const Icon(
-                                FontAwesomeIcons.bell,
-                                color: Colors.grey,
+                              height: notPressed?screenHeight * .048:screenHeight * .05,
+                              width:  notPressed?screenHeight * .048:screenHeight * .05,
+                              decoration: BoxDecoration(
+                                  border: notPressed
+                                      ? Border.all(color: Constants.iconAc)
+                                      : Border.all(color: Colors.transparent),
+                                  color: Colors.grey.withOpacity(.1),
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: AnimatedOpacity(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                opacity: start ? 1 : 0,
+                                child: const Icon(
+                                  FontAwesomeIcons.bell,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                           ),
