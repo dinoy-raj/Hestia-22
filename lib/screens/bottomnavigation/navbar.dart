@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/home/home.dart';
 import 'package:hestia22/screens/map/map.dart';
 
@@ -18,12 +19,6 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   PageController pageControl = PageController();
 
-  //boolean variables to control nav item selection ( on tap )
-  bool selectHome = true;
-  bool selectSchedule = false;
-  bool selectMap = false;
-  bool selectProfile = false;
-
   //index of page selected
   int index = 0;
 
@@ -32,8 +27,7 @@ class _NavBarState extends State<NavBar> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      //backgroundColor: Colors.black,
-      backgroundColor: const Color.fromRGBO(27, 28, 33, 100),
+      backgroundColor: Constants.bg,
       // backgroundColor: const Color.fromRGBO(31, 29, 43, 100),
       body: Stack(
         children: [
@@ -66,14 +60,13 @@ class _NavBarState extends State<NavBar> {
                           decoration: BoxDecoration(
                             // color: Colors.white.withOpacity(.05),
                             borderRadius: BorderRadius.circular(15),
-                            border:
-                                Border.all(color: Colors.black.withOpacity(.1)),
+                            border: Border.all(color: Constants.navBorder),
                             gradient: LinearGradient(
                               colors: [
-                                index == 0 ? Colors.black12 : Colors.black,
-                                index == 1 ? Colors.black12 : Colors.black,
-                                index == 2 ? Colors.black12 : Colors.black,
-                                index == 3 ? Colors.black12 : Colors.black,
+                                index == 0 ? Constants.grad1 : Constants.grad2,
+                                index == 1 ? Constants.grad1 : Constants.grad2,
+                                index == 2 ? Constants.grad1 : Constants.grad2,
+                                index == 3 ? Constants.grad1 : Constants.grad2,
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -109,10 +102,8 @@ class _NavBarState extends State<NavBar> {
                                               FontAwesomeIcons.house,
                                               size: 17,
                                               color: index == 0
-                                                  ? Color.fromRGBO(
-                                                      224, 212, 254, 100)
-                                                  : Colors.grey
-                                                      .withOpacity(.35),
+                                                  ? Constants.iconAc
+                                                  : Constants.iconIn,
                                             ),
                                           ),
                                           AnimatedContainer(
@@ -126,10 +117,9 @@ class _NavBarState extends State<NavBar> {
                                             width: index == 0
                                                 ? screenHeight * .0035
                                                 : 0,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color.fromRGBO(
-                                                    224, 212, 254, 100)),
+                                                color: Constants.iconAc),
                                           )
                                         ],
                                       ),
@@ -159,10 +149,8 @@ class _NavBarState extends State<NavBar> {
                                               FontAwesomeIcons.list,
                                               size: 18,
                                               color: index == 1
-                                                  ? Color.fromRGBO(
-                                                      224, 212, 254, 100)
-                                                  : Colors.grey
-                                                      .withOpacity(.35),
+                                                  ? Constants.iconAc
+                                                  : Constants.iconIn,
                                             ),
                                           ),
                                           AnimatedContainer(
@@ -176,10 +164,9 @@ class _NavBarState extends State<NavBar> {
                                             width: index == 1
                                                 ? screenHeight * .0035
                                                 : 0,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color.fromRGBO(
-                                                    224, 212, 254, 100)),
+                                                color: Constants.iconAc),
                                           )
                                         ],
                                       ),
@@ -209,10 +196,8 @@ class _NavBarState extends State<NavBar> {
                                               FontAwesomeIcons.signsPost,
                                               size: 18,
                                               color: index == 2
-                                                  ? Color.fromRGBO(
-                                                      224, 212, 254, 100)
-                                                  : Colors.grey
-                                                      .withOpacity(.35),
+                                                  ? Constants.iconAc
+                                                  : Constants.iconIn,
                                             ),
                                           ),
                                           AnimatedContainer(
@@ -226,10 +211,9 @@ class _NavBarState extends State<NavBar> {
                                             width: index == 2
                                                 ? screenHeight * .0035
                                                 : 0,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color.fromRGBO(
-                                                    224, 212, 254, 100)),
+                                                color: Constants.iconAc),
                                           )
                                         ],
                                       ),
@@ -259,10 +243,8 @@ class _NavBarState extends State<NavBar> {
                                               FontAwesomeIcons.user,
                                               size: 18,
                                               color: index == 3
-                                                  ? Color.fromRGBO(
-                                                      224, 212, 254, 100)
-                                                  : Colors.grey
-                                                      .withOpacity(.35),
+                                                  ? Constants.iconAc
+                                                  : Constants.iconIn,
                                             ),
                                           ),
                                           AnimatedContainer(
@@ -276,10 +258,9 @@ class _NavBarState extends State<NavBar> {
                                             width: index == 3
                                                 ? screenHeight * .0035
                                                 : 0,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Color.fromRGBO(
-                                                    224, 212, 254, 100)),
+                                                color: Constants.iconAc),
                                           )
                                         ],
                                       ),
