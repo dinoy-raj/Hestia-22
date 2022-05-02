@@ -59,7 +59,6 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-
             //homepage body part
             AnimatedPadding(
               duration: const Duration(seconds: 1),
@@ -168,6 +167,86 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+
+                  //search & sort part
+                  AnimatedOpacity(
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.decelerate,
+                    opacity: start ? 1 : 0,
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      height: screenHeight * .065,
+                      width: screenWidth * .92,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(.05),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: screenHeight * .05,
+                            width: screenHeight * .05,
+                            child: Icon(
+                              FontAwesomeIcons.magnifyingGlass,
+                              size: 17,
+                              color: Constants.iconIn,
+                            ),
+                          ),
+                          AnimatedPadding(
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.decelerate,
+                            padding: start
+                                ? const EdgeInsets.only(left: 0)
+                                : const EdgeInsets.only(left: 20),
+                            child: SizedBox(
+                              height: screenHeight * .05,
+                              width: screenWidth * .65,
+                              child: TextFormField(
+                                scrollPhysics: const BouncingScrollPhysics(),
+                                cursorColor: Constants.iconIn,
+                                cursorRadius: const Radius.circular(10),
+                                style: const TextStyle(
+                                  fontFamily: 'Helvetica',
+                                  color: Constants.iconAc,
+                                  fontSize: 16,
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: "Discover new event",
+                                  hintStyle: TextStyle(
+                                    fontFamily: 'Helvetica',
+                                    color: Constants.iconIn,
+                                    fontSize: 14,
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                  hoverColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  fillColor: Colors.transparent,
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                          AnimatedOpacity(
+                            duration: const Duration(milliseconds: 1800),
+                            curve: Curves.decelerate,
+                            opacity: start ? 1 : 0,
+                            child: SizedBox(
+                              height: screenHeight * .05,
+                              width: screenHeight * .05,
+                              child: Icon(
+                                FontAwesomeIcons.sliders,
+                                color: Constants.iconIn,
+                                size: 18,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
