@@ -328,4 +328,7 @@ class _NavBarState extends State<NavBar> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn);
   }
+
 }
+
+
