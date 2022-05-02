@@ -13,7 +13,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double screenHeight = MediaQuery.of(context).size.height - 24;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(children: [
           Container(
@@ -61,21 +61,23 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            height: screenHeight * 0.16,
-            //color: Colors.orange,
+            height: screenHeight * 0.18,
+          //color: Colors.orange,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    height: 90,
-                    width: 90,
-                    color: Colors.black,
+                    height: 95,
+                    width: 95,
+                    //color: Colors.black,
+                    decoration: const BoxDecoration(shape: BoxShape.circle,color: Color(0xff444444)),
                   ),
+                  const SizedBox(height: 8,),
                   const Text(
                     'Karthik',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 20,
                         fontFamily: 'Helvetica',
                         fontWeight: FontWeight.normal),
@@ -85,33 +87,76 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            height: screenHeight * 0.20,
+            height: screenHeight * 0.18,
             //color: Colors.yellow,
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0xff121212),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Color(0xff121212),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                        height: 70,
+                        width: 140,
+                        child: Center(
+                          child: IconButton(
+                            icon: Image.asset('assets/icons/Todayy.png'),
+                            onPressed: () {},
+                          ),
+                        ),
                       ),
-                    ),
-                    height: 70,
-                    width: 150,
-                    //color: const Color(0xff121212)
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Registred Events',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Helvetica',
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ],
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0xff121212),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Center(
+                          child: IconButton(
+                            icon: Image.asset('assets/icons/Certificate.png'),
+                            onPressed: () {},
+                          ),
+                        ),
+                        decoration: const BoxDecoration(
+                          color: Color(0xff121212),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                        height: 70,
+                        width: 140,
+                        //color: const Color(0xff121212)
                       ),
-                    ),
-                    height: 70,
-                    width: 150,
-                    //color: const Color(0xff121212)
+                       const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Certificates',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Helvetica',
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -186,7 +231,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Container(
-                      
                       height: screenHeight * 0.13,
                       child: Row(
                         children: [
@@ -234,7 +278,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Container(
-                      
                       height: screenHeight * 0.13,
                       child: Row(
                         children: [
@@ -282,7 +325,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Container(
-                      
                       height: screenHeight * 0.13,
                       child: Row(
                         children: [
