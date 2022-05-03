@@ -17,6 +17,9 @@ class _HomeState extends State<Home> {
   //notification icon
   bool notPressed = false;
 
+  //notification icon
+  bool filPressed = false;
+
   //category list
   int catSelect = 10;
   List category = [
@@ -27,6 +30,8 @@ class _HomeState extends State<Home> {
     "Informals",
     "Proshows"
   ];
+
+  //workshop list data
 
   @override
   void initState() {
@@ -237,13 +242,31 @@ class _HomeState extends State<Home> {
                                 duration: const Duration(milliseconds: 1800),
                                 curve: Curves.decelerate,
                                 opacity: start ? 1 : 0,
-                                child: SizedBox(
-                                  height: screenHeight * .05,
-                                  width: screenHeight * .05,
-                                  child: Icon(
-                                    FontAwesomeIcons.sliders,
-                                    color: Constants.iconIn,
-                                    size: 18,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      filPressed = !filPressed;
+                                    });
+                                  },
+                                  child: AnimatedContainer(
+                                    duration: const Duration(seconds: 1),
+                                    curve: Curves.decelerate,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: filPressed
+                                              ? Constants.iconAc
+                                              : Colors.transparent),
+                                    ),
+                                    height: screenHeight * .05,
+                                    width: screenHeight * .05,
+                                    child: Icon(
+                                      FontAwesomeIcons.sliders,
+                                      color: filPressed
+                                          ? Colors.grey
+                                          : Constants.iconIn,
+                                      size: 18,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -252,6 +275,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
 
+                      //category section
                       Container(
                         height: screenHeight * .1,
                         width: screenWidth,
@@ -343,12 +367,126 @@ class _HomeState extends State<Home> {
                       Container(
                         height: screenHeight * .6,
                         width: screenWidth,
-                        decoration: BoxDecoration(
-                            // color: Colors.white
-                            ),
+                        decoration: BoxDecoration(),
+                        // child: ListView.builder(itemBuilder: itemBuilder),
                       ),
                     ],
                   ),
+                ),
+
+                //filter page
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * .07),
+                      child: Center(
+                        child: AnimatedContainer(
+                          duration: const Duration(seconds: 2),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          height: filPressed ? screenHeight * .4 : 0,
+                          width: screenWidth * .85,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Constants.color1),
+                          child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
+                            child: AnimatedPadding(
+                              duration: Duration(seconds: 2),
+                              curve: Curves.decelerate,
+                              padding: filPressed
+                                  ? EdgeInsets.all(8)
+                                  : EdgeInsets.all(0),
+                              child: AnimatedOpacity(
+                                duration: Duration(seconds: 2),
+                                curve: Curves.decelerate,
+                                opacity: filPressed ? 1 : 0,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: screenHeight * .05,
+                                      width: screenWidth * .85,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                              height: screenHeight * .04,
+                                              width: screenWidth * .34,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Constants.iconAc),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              child: ElevatedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      filPressed = false;
+                                                    });
+                                                  },
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors
+                                                                .transparent),
+                                                  ),
+                                                  child: Text(
+                                                    "Clear",
+                                                    style: TextStyle(
+                                                        color: Constants.color2,
+                                                        fontFamily: 'Helvetica',
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ))),
+                                          Container(
+                                              height: screenHeight * .04,
+                                              width: screenWidth * .34,
+                                              child: ElevatedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      filPressed = false;
+                                                    });
+                                                  },
+                                                  style: ButtonStyle(
+                                                      overlayColor:
+                                                          MaterialStateProperty
+                                                              .all(Colors.black
+                                                                  .withOpacity(
+                                                                      .5)),
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all(Constants
+                                                                  .iconAc)),
+                                                  child: Text(
+                                                    "Apply",
+                                                    style: TextStyle(
+                                                        color: Constants.color2,
+                                                        fontFamily: 'Helvetica',
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ))),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: screenHeight * .3,
+                                      width: screenWidth * .85,
+                                      // child: ListView.builder(itemBuilder: itemBuilder),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
 
                 //notification page
