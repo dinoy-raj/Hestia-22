@@ -35,10 +35,39 @@ class _HomeState extends State<Home> {
 
   List<Map> show = [
     {
-      'name': '',
-      'date': '',
-      'remain': '',
-      'price': '',
+      'name': 'Diego miranda',
+      'date': '26',
+      'remain': '120',
+      'price': '1500',
+      'image': '',
+    },
+    {
+      'name': 'Club banditz',
+      'date': '27',
+      'remain': '10',
+      'price': '700',
+      'image': '',
+    },
+    {
+      'name': 'pineapple express',
+      'date': '28',
+      'remain': '67',
+      'price': '1000',
+      'image': '',
+    },
+    {
+      'name': 'aron chupa',
+      'date': '28',
+      'remain': '20',
+      'price': '2000',
+      'image': '',
+    },
+    {
+      'name': 'dino',
+      'date': '29',
+      'remain': '100',
+      'price': '900',
+      'image': '',
     }
   ];
 
@@ -69,6 +98,8 @@ class _HomeState extends State<Home> {
     }
   ];
   List Sort3 = [];
+
+  PageController pageControl = new PageController();
 
   @override
   void initState() {
@@ -401,11 +432,39 @@ class _HomeState extends State<Home> {
                         ),
                       ),
 
-                      Container(
+                      SizedBox(
                         height: screenHeight * .6,
                         width: screenWidth,
-                        decoration: BoxDecoration(),
-                        // child: ListView.builder(itemBuilder: itemBuilder),
+                        // decoration: BoxDecoration(),
+                        child: PageView.builder(
+                            controller: pageControl,
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: show.length,
+                            itemBuilder: (BuildContext context, index) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AnimatedPadding(
+                                    duration: const Duration(seconds: 1),
+                                    padding: start
+                                        ? EdgeInsets.only(
+                                            left: 0,
+                                          )
+                                        : EdgeInsets.only(left: 0),
+                                    child: AnimatedContainer(
+                                      duration: const Duration(seconds: 1),
+                                      height: screenHeight * .45,
+                                      width: screenWidth * .7,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          color: Colors.grey),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
                       ),
                     ],
                   ),
