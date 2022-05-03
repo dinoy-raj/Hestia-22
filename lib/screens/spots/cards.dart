@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/spot_page.dart';
