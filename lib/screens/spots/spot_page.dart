@@ -14,8 +14,13 @@ class SpotPage extends StatefulWidget {
 
 class _SpotPageState extends State<SpotPage> {
   double _opacity = 0;
+  double _opacity1 = 1;
   EdgeInsets _padding1 = EdgeInsets.zero;
-  EdgeInsets _padding2 = EdgeInsets.zero;
+  EdgeInsets _padding2 = const EdgeInsets.only(
+    bottom: 10,
+    left: 5,
+    right: 5,
+  );
   EdgeInsets _padding3 = EdgeInsets.zero;
   List<Map> data1 = [
     {
@@ -54,18 +59,18 @@ class _SpotPageState extends State<SpotPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
         _opacity = 1;
-        _padding1 = EdgeInsets.only(
+        _padding1 = const EdgeInsets.only(
           left: 20,
           right: 20,
         );
-        _padding2 = EdgeInsets.only(
+        _padding2 = const EdgeInsets.only(
           left: 5,
           right: 5,
         );
-        _padding3 = EdgeInsets.only(
+        _padding3 = const EdgeInsets.only(
           top: 20,
         );
       });
@@ -78,30 +83,39 @@ class _SpotPageState extends State<SpotPage> {
       onWillPop: () async {
         setState(() {
           _opacity = 0;
+          _opacity1 = 0;
           _padding1 = EdgeInsets.zero;
-          _padding2 = EdgeInsets.zero;
+          _padding2 = const EdgeInsets.only(
+            bottom: 10,
+            left: 5,
+            right: 5,
+          );
           _padding3 = EdgeInsets.zero;
         });
-        await Future.delayed(Duration(milliseconds: 300));
-        return await true;
+        await Future.delayed(const Duration(milliseconds: 300));
+        return true;
       },
       child: Material(
-        color: Constants.color1,
+        color: Constants.sc,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Stack(
                 children: [
                   Hero(
                     tag: widget.data['name'],
-                    child: Image.network(
-                      widget.data['image'],
-                      height: 300,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      color: Constants.color3,
-                      colorBlendMode: BlendMode.overlay,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 500),
+                      opacity: _opacity1,
+                      child: Image.network(
+                        widget.data['image'],
+                        height: 300,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        color: Constants.color3.withOpacity(.5),
+                        colorBlendMode: BlendMode.overlay,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -120,8 +134,8 @@ class _SpotPageState extends State<SpotPage> {
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.color1.withOpacity(.4),
-                                      Constants.color1.withOpacity(.8),
+                                      Constants.bg.withOpacity(.3),
+                                      Constants.bg.withOpacity(.6),
                                     ],
                                     begin: AlignmentDirectional.topStart,
                                     end: AlignmentDirectional.bottomEnd,
@@ -144,8 +158,8 @@ class _SpotPageState extends State<SpotPage> {
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.color1.withOpacity(.4),
-                                      Constants.color1.withOpacity(.8),
+                                      Constants.bg.withOpacity(.3),
+                                      Constants.bg.withOpacity(.6),
                                     ],
                                     begin: AlignmentDirectional.topStart,
                                     end: AlignmentDirectional.bottomEnd,
@@ -166,7 +180,7 @@ class _SpotPageState extends State<SpotPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         ClipRRect(
@@ -176,12 +190,12 @@ class _SpotPageState extends State<SpotPage> {
                               height: 200,
                               width: 200,
                               decoration: BoxDecoration(
-                                color: Constants.color1,
+                                color: Constants.bg,
                                 borderRadius: BorderRadius.circular(20),
                                 gradient: LinearGradient(
                                   colors: [
-                                    Constants.color1.withOpacity(.8),
-                                    Constants.color1.withOpacity(.4),
+                                    Constants.bg.withOpacity(.8),
+                                    Constants.bg.withOpacity(.4),
                                   ],
                                   begin: AlignmentDirectional.topStart,
                                   end: AlignmentDirectional.bottomEnd,
@@ -189,10 +203,10 @@ class _SpotPageState extends State<SpotPage> {
                               ),
                               child: AnimatedOpacity(
                                 opacity: _opacity,
-                                duration: Duration(milliseconds: 500),
+                                duration: const Duration(milliseconds: 500),
                                 child: AnimatedPadding(
                                   padding: _padding1,
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -241,14 +255,14 @@ class _SpotPageState extends State<SpotPage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 1,
                   ),
                   ClipRRect(
@@ -261,8 +275,8 @@ class _SpotPageState extends State<SpotPage> {
                           borderRadius: BorderRadius.circular(30),
                           gradient: LinearGradient(
                             colors: [
-                              Constants.color3.withOpacity(.4),
-                              Constants.color3.withOpacity(.8),
+                              Constants.color3.withOpacity(.1),
+                              Constants.color3.withOpacity(.3),
                             ],
                             begin: AlignmentDirectional.topStart,
                             end: AlignmentDirectional.bottomEnd,
@@ -270,19 +284,19 @@ class _SpotPageState extends State<SpotPage> {
                         ),
                         child: ListView.builder(
                           itemCount: data1.length,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) => AnimatedOpacity(
                             opacity: _opacity,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             child: AnimatedPadding(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               padding: _padding2,
                               child: Column(
                                 children: [
                                   ListTile(
                                     title: Text(
                                       data1[index]['name'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Constants.color2,
                                       ),
                                     ),
@@ -303,7 +317,7 @@ class _SpotPageState extends State<SpotPage> {
                                                 .withOpacity(.25),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Icon(
@@ -332,22 +346,22 @@ class _SpotPageState extends State<SpotPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   AnimatedPadding(
                     padding: _padding3,
-                    duration: Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 500),
                     child: AnimatedOpacity(
                       opacity: _opacity,
-                      duration: Duration(milliseconds: 500),
-                      child: Container(
+                      duration: const Duration(milliseconds: 500),
+                      child: SizedBox(
                         height: 400,
                         child: RotatedBox(
                           quarterTurns: 1,
                           child: Text(
                             "Events held at " + widget.data['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               letterSpacing: 5,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -358,12 +372,12 @@ class _SpotPageState extends State<SpotPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
             ],
