@@ -127,14 +127,10 @@ class _CardsState extends State<Cards> {
                         onTap: () {
                           Navigator.push(
                               context,
-                              PageRouteBuilder(
-                                  transitionDuration:
-                                      const Duration(milliseconds: 500),
-                                  pageBuilder:
-                                      (context, animation1, animation2) =>
-                                          SpotPage(
-                                            data: data[index],
-                                          )));
+                              MaterialPageRoute(
+                                  builder: (context) => SpotPage(
+                                        data: data[index],
+                                      )));
                         },
                         child: AnimatedOpacity(
                           duration: const Duration(milliseconds: 300),
