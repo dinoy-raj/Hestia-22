@@ -23,15 +23,52 @@ class _HomeState extends State<Home> {
   //category list
   int catSelect = 10;
   List category = [
+    "Proshows",
+    "Culturals",
     "Workshops",
     "Technical",
-    "Culturals",
     "Lectures",
     "Informals",
-    "Proshows"
   ];
 
+  //Proshow list data
+
+  List<Map> show = [
+    {
+      'name': '',
+      'date': '',
+      'remain': '',
+      'price': '',
+    }
+  ];
+
+  List Sort1 = ["name", "price", "date"];
+  int showIndex = 0;
+
   //workshop list data
+
+  List<Map> workshop = [
+    {
+      'name': '',
+      'date': '',
+      'remain': '',
+      'price': '',
+    }
+  ];
+
+  List Sort2 = ["name", "price", "date"];
+
+  //culturals list data
+
+  List<Map> cultural = [
+    {
+      'name': '',
+      'short': '',
+      'date': '',
+      'prize': '',
+    }
+  ];
+  List Sort3 = [];
 
   @override
   void initState() {
@@ -393,10 +430,10 @@ class _HomeState extends State<Home> {
                           child: SingleChildScrollView(
                             physics: BouncingScrollPhysics(),
                             child: AnimatedPadding(
-                              duration: Duration(seconds: 2),
+                              duration: Duration(seconds: 3),
                               curve: Curves.decelerate,
                               padding: filPressed
-                                  ? EdgeInsets.all(8)
+                                  ? EdgeInsets.all(15)
                                   : EdgeInsets.all(0),
                               child: AnimatedOpacity(
                                 duration: Duration(seconds: 2),
@@ -415,68 +452,142 @@ class _HomeState extends State<Home> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Container(
-                                              height: screenHeight * .04,
-                                              width: screenWidth * .34,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Constants.iconAc),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      filPressed = false;
-                                                    });
-                                                  },
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(Colors
-                                                                .transparent),
-                                                  ),
-                                                  child: Text(
-                                                    "Clear",
-                                                    style: TextStyle(
-                                                        color: Constants.color2,
-                                                        fontFamily: 'Helvetica',
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ))),
-                                          Container(
-                                              height: screenHeight * .04,
-                                              width: screenWidth * .34,
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      filPressed = false;
-                                                    });
-                                                  },
-                                                  style: ButtonStyle(
-                                                      overlayColor:
-                                                          MaterialStateProperty
-                                                              .all(Colors.black
-                                                                  .withOpacity(
-                                                                      .5)),
+                                          AnimatedOpacity(
+                                            duration:
+                                                const Duration(seconds: 3),
+                                            curve: Curves.decelerate,
+                                            opacity: filPressed ? 1 : 0,
+                                            child: Container(
+                                                height: screenHeight * .04,
+                                                width: screenWidth * .34,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color:
+                                                            Constants.iconAc),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        filPressed = false;
+                                                      });
+                                                    },
+                                                    style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Constants
-                                                                  .iconAc)),
-                                                  child: Text(
-                                                    "Apply",
-                                                    style: TextStyle(
-                                                        color: Constants.color2,
-                                                        fontFamily: 'Helvetica',
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ))),
+                                                              .all(Colors
+                                                                  .transparent),
+                                                    ),
+                                                    child: Text(
+                                                      "Clear",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Constants.color2,
+                                                          fontFamily:
+                                                              'Helvetica',
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ))),
+                                          ),
+                                          AnimatedOpacity(
+                                            duration:
+                                                const Duration(seconds: 3),
+                                            curve: Curves.decelerate,
+                                            opacity: filPressed ? 1 : 0,
+                                            child: Container(
+                                                height: screenHeight * .04,
+                                                width: screenWidth * .34,
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        filPressed = false;
+                                                      });
+                                                    },
+                                                    style: ButtonStyle(
+                                                        overlayColor:
+                                                            MaterialStateProperty
+                                                                .all(Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        .5)),
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .all(Constants
+                                                                    .iconAc)),
+                                                    child: Text(
+                                                      "Apply",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Constants.color2,
+                                                          fontFamily:
+                                                              'Helvetica',
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ))),
+                                          ),
                                         ],
                                       ),
                                     ),
                                     Container(
                                       height: screenHeight * .3,
                                       width: screenWidth * .85,
-                                      // child: ListView.builder(itemBuilder: itemBuilder),
+                                      child: ListView.builder(
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          itemCount: Sort1.length,
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder:
+                                              (BuildContext context, index) {
+                                            return AnimatedPadding(
+                                              duration: Duration(seconds: 2),
+                                              curve: Curves.decelerate,
+                                              padding: EdgeInsets.only(
+                                                top: filPressed
+                                                    ? (screenHeight * .02)
+                                                    : 0,
+                                              ),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    showIndex = index;
+                                                  });
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  curve: Curves.decelerate,
+                                                  height: screenHeight * .06,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: showIndex == index
+                                                        ? Constants.iconAc
+                                                        : Colors.grey
+                                                            .withOpacity(.1),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        Sort1[index],
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily:
+                                                                'Helvetica',
+                                                            fontSize: 15
+                                                            //fontWeight: FontWeight.bold
+                                                            ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }),
                                     ),
                                   ],
                                 ),
