@@ -13,20 +13,23 @@ class _ScheduleState extends State<Schedule> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return SizedBox(
-      height: screenHeight,
-      width: screenWidth,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8, top: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "schedule",
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(17, 17, 19, 100),
+      body: SizedBox(
+        height: screenHeight,
+        width: screenWidth,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8, top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "schedule",
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );

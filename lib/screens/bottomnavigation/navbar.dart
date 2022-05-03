@@ -42,6 +42,7 @@ class _NavBarState extends State<NavBar> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Constants.bg,
       // backgroundColor: const Color.fromRGBO(31, 29, 43, 100),
       body: Stack(
@@ -328,7 +329,4 @@ class _NavBarState extends State<NavBar> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn);
   }
-
 }
-
-

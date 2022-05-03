@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
-import 'package:hestia22/screens/home/home.dart';
-import 'package:hestia22/screens/spots/spots.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -74,20 +72,19 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Constants {
-
   //colours for navbar
   static const Color bg = Color.fromRGBO(27, 28, 33, 100);
-  static  Color navBorder = Colors.black.withOpacity(.1);
-  static  const Color grad1 = Colors.black12 ;
-  static  const Color grad2 = Colors.black ;
+  static const Color sc = Color.fromRGBO(17, 17, 19, 100);
+  static Color navBorder = Colors.black.withOpacity(.1);
+  static const Color grad1 = Colors.black12;
+  static const Color grad2 = Colors.black;
   static const Color iconAc = Color.fromRGBO(224, 212, 254, 100);
-  static  Color iconIn = Colors.grey.withOpacity(.35);
+  static Color iconIn = Colors.grey.withOpacity(.35);
 
   static const Color color1 = Colors.black;
   static const Color color2 = Colors.white;
   static final Color color3 = Colors.brown[700]!;
   static const Color color4 = Colors.blueGrey;
-
 
   static const TextStyle primaryText = TextStyle(
     fontSize: 36,
@@ -102,5 +99,4 @@ class Constants {
   static const TextStyle tertiaryText = TextStyle(
     fontSize: 12,
   );
-
 }

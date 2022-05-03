@@ -49,7 +49,7 @@ class SpotsState extends State<Spots> {
         }
       },
       child: Scaffold(
-        backgroundColor: Constants.color1,
+        backgroundColor: Constants.sc,
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
