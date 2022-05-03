@@ -39,26 +39,7 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.only(top: 40.0, right: 10, left: 10),
         child: Stack(
           children: [
-            //notification page
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: screenHeight * .1,
-                  width: screenWidth,
-                ),
-                AnimatedContainer(
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  height: notPressed ? screenHeight * .6 : 0,
-                  width: screenWidth * .9,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Constants.iconIn),
-                ),
-              ],
-            ),
+
             //homepage body part
             AnimatedPadding(
               duration: const Duration(seconds: 1),
@@ -221,7 +202,7 @@ class _HomeState extends State<Home> {
                                     fontFamily: 'Helvetica',
                                     color: Constants.iconIn,
                                     fontSize: 14,
-                                    // fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w100,
                                   ),
                                   hoverColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -251,6 +232,28 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
+            ),
+
+            //notification page
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: screenHeight * .1,
+                  width: screenWidth,
+                ),
+                AnimatedContainer(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: notPressed ? screenHeight * .6 : 0,
+                  width: screenWidth * .9,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.black
+                  ),
+                ),
+              ],
             ),
           ],
         ),
