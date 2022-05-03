@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/home/home.dart';
-import 'package:hestia22/screens/map/map.dart';
+import 'package:hestia22/screens/spots/spots.dart';
 
 import '../profile/profile.dart';
 import '../schedule/schedule.dart';
@@ -49,7 +49,7 @@ class _NavBarState extends State<NavBar> {
           PageView(
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
-            children: const [Home(), Schedule(), MapPage(), Profile()],
+            children: const [Home(), Schedule(), Spots(), Profile()],
           ),
           Align(
             alignment: Alignment.bottomCenter,

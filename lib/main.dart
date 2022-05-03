@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/home/home.dart';
+import 'package:hestia22/screens/spots/spots.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -84,8 +85,22 @@ class Constants {
 
   static const Color color1 = Colors.black;
   static const Color color2 = Colors.white;
+  static final Color color3 = Colors.brown[700]!;
+  static const Color color4 = Colors.blueGrey;
 
-  static const TextStyle primaryText = TextStyle();
-  static const TextStyle secondaryText = TextStyle();
-  static const TextStyle tertiaryText = TextStyle();
+
+  static const TextStyle primaryText = TextStyle(
+    fontSize: 36,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+  static const TextStyle secondaryText = TextStyle(
+    fontSize: 42,
+    fontWeight: FontWeight.bold,
+    color: Colors.brown,
+  );
+  static const TextStyle tertiaryText = TextStyle(
+    fontSize: 12,
+  );
+
 }
