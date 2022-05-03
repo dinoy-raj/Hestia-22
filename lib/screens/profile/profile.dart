@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   //color: Colors.green,
                   child: Center(
                     child: IconButton(
-                      icon: Image.asset('assets/icons/backarrow.png'),
+                      icon: Image.asset('assets/icons/backk.png'),
                       onPressed: () {},
                     ),
                   ),
@@ -52,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   //color: Colors.green,
                   child: Center(
                     child: IconButton(
-                      icon: Image.asset('assets/icons/logout.png'),
+                      icon: Image.asset('assets/icons/Logout.png'),
                       onPressed: () {},
                     ),
                   ),
@@ -201,32 +201,32 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               child: Center(
                                 child: IconButton(
-                                  icon: Image.asset('assets/icons/logout.png'),
+                                  icon: Image.asset('assets/icons/person.png'),
                                   onPressed: () {},
                                 ),
                               ),
                             ),
                           ),
                           const Text(
-                            'Profile',
+                            'Karthik Sunil',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontFamily: 'Helvetica',
                                 fontWeight: FontWeight.normal),
                           ),
-                          const Spacer(),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: screenWidth * 0.1,
-                            //color: Colors.green,
-                            child: Center(
-                              child: IconButton(
-                                icon: Image.asset('assets/icons/logout.png'),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
+                          // const Spacer(),
+                          // Container(
+                          //   alignment: Alignment.centerRight,
+                          //   width: screenWidth * 0.1,
+                          //   //color: Colors.green,
+                          //   child: Center(
+                          //     child: IconButton(
+                          //       icon: Image.asset('assets/icons/logout.png'),
+                          //       onPressed: () {},
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -248,32 +248,32 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               child: Center(
                                 child: IconButton(
-                                  icon: Image.asset('assets/icons/logout.png'),
+                                  icon: Image.asset('assets/icons/Mail.png'),
                                   onPressed: () {},
                                 ),
                               ),
                             ),
                           ),
                           const Text(
-                            'Profile',
+                            'karthiksunil.me@gmail.com',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontFamily: 'Helvetica',
                                 fontWeight: FontWeight.normal),
                           ),
-                          const Spacer(),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: screenWidth * 0.1,
-                            //color: Colors.green,
-                            child: Center(
-                              child: IconButton(
-                                icon: Image.asset('assets/icons/logout.png'),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
+                          // const Spacer(),
+                          // Container(
+                          //   alignment: Alignment.centerRight,
+                          //   width: screenWidth * 0.1,
+                          //   //color: Colors.green,
+                          //   child: Center(
+                          //     child: IconButton(
+                          //       icon: Image.asset('assets/icons/logout.png'),
+                          //       onPressed: () {},
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -295,32 +295,32 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               child: Center(
                                 child: IconButton(
-                                  icon: Image.asset('assets/icons/logout.png'),
+                                  icon: Image.asset('assets/icons/info.png'),
                                   onPressed: () {},
                                 ),
                               ),
                             ),
                           ),
                           const Text(
-                            'Profile',
+                            'About Hestia',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontFamily: 'Helvetica',
                                 fontWeight: FontWeight.normal),
                           ),
-                          const Spacer(),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: screenWidth * 0.1,
-                            //color: Colors.green,
-                            child: Center(
-                              child: IconButton(
-                                icon: Image.asset('assets/icons/logout.png'),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
+                          // const Spacer(),
+                          // Container(
+                          //   alignment: Alignment.centerRight,
+                          //   width: screenWidth * 0.1,
+                          //   //color: Colors.green,
+                          //   child: Center(
+                          //     child: IconButton(
+                          //       icon: Image.asset('assets/icons/logout.png'),
+                          //       onPressed: () {},
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -342,32 +342,32 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               child: Center(
                                 child: IconButton(
-                                  icon: Image.asset('assets/icons/logout.png'),
+                                  icon: Image.asset('assets/icons/call.png'),
                                   onPressed: () {},
                                 ),
                               ),
                             ),
                           ),
                           const Text(
-                            'Profile',
+                            'Contact Admin',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontFamily: 'Helvetica',
                                 fontWeight: FontWeight.normal),
                           ),
-                          const Spacer(),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: screenWidth * 0.1,
-                            //color: Colors.green,
-                            child: Center(
-                              child: IconButton(
-                                icon: Image.asset('assets/icons/logout.png'),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
+                          // const Spacer(),
+                          // Container(
+                          //   alignment: Alignment.centerRight,
+                          //   width: screenWidth * 0.1,
+                          //   //color: Colors.green,
+                          //   child: Center(
+                          //     child: IconButton(
+                          //       icon: Image.asset('assets/icons/logout.png'),
+                          //       onPressed: () {},
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
