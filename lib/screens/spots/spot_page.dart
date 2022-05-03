@@ -14,7 +14,7 @@ class SpotPage extends StatefulWidget {
 
 class _SpotPageState extends State<SpotPage> {
   double _opacity = 0;
-  double _opacity1 = 1;
+  double _opacity1 = 0.75;
   EdgeInsets _padding1 = EdgeInsets.zero;
   EdgeInsets _padding2 = const EdgeInsets.only(
     bottom: 10,
@@ -127,6 +127,7 @@ class _SpotPageState extends State<SpotPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                               child: Container(
@@ -151,6 +152,7 @@ class _SpotPageState extends State<SpotPage> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                               child: Container(
@@ -184,6 +186,7 @@ class _SpotPageState extends State<SpotPage> {
                           width: 20,
                         ),
                         ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                             child: Container(
@@ -217,6 +220,7 @@ class _SpotPageState extends State<SpotPage> {
                                       Text(
                                         widget.data['name'],
                                         style: TextStyle(
+                                            overflow: TextOverflow.clip,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 25,
                                             color: Constants.color2
@@ -225,6 +229,7 @@ class _SpotPageState extends State<SpotPage> {
                                       Text(
                                         widget.data['caption'],
                                         style: TextStyle(
+                                            overflow: TextOverflow.clip,
                                             fontSize: 18,
                                             color: Constants.color2
                                                 .withOpacity(.5)),

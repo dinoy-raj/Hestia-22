@@ -92,7 +92,7 @@ class SpotsState extends State<Spots> {
                       "Explore",
                       style: TextStyle(
                         letterSpacing: 7,
-                        color: Constants.color2.withOpacity(.5),
+                        color: Constants.color2.withOpacity(.75),
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),

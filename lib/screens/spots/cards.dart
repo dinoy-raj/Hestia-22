@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/spot_page.dart';
@@ -140,73 +142,71 @@ class _CardsState extends State<Cards> {
                           duration: const Duration(milliseconds: 300),
                           opacity: _currentPage == index ? 1.0 : 0.5,
                           child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              decoration: BoxDecoration(
-                                color: Constants.color3.withOpacity(.1),
-                                borderRadius: BorderRadius.circular(30),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    opacity: 0.25,
-                                    image: NetworkImage(data[index]['image'])),
-                              ),
-                              padding: const EdgeInsets.all(20),
-                              margin: _currentPage == index
-                                  ? EdgeInsets.zero
-                                  : const EdgeInsets.all(30),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    index + 1 < 10
-                                        ? "0" + (index + 1).toString()
-                                        : (index + 1).toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w100,
-                                        fontSize: 30,
-                                        color:
-                                            Constants.color2.withOpacity(.5)),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        data[index]['name'],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Constants.color2
-                                                .withOpacity(.75)),
-                                      ),
-                                      Text(
-                                        data[index]['caption'],
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Constants.color2
-                                                .withOpacity(.5)),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        "Click to see what happens at " +
-                                            data[index]['name'] +
-                                            " during Hestia'22",
-                                        style: TextStyle(
-                                            overflow: TextOverflow.clip,
-                                            fontSize: 10,
-                                            color: Constants.color2
-                                                .withOpacity(.25)),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )),
+                            duration: const Duration(milliseconds: 300),
+                            padding: const EdgeInsets.all(20),
+                            margin: _currentPage == index
+                                ? EdgeInsets.zero
+                                : const EdgeInsets.all(30),
+                            decoration: BoxDecoration(
+                              color: Constants.color3.withOpacity(.25),
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                  opacity: 0.5,
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(data[index]['image'])),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  index + 1 < 10
+                                      ? "0" + (index + 1).toString()
+                                      : (index + 1).toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 30,
+                                      color: Constants.color2.withOpacity(.5)),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      data[index]['name'],
+                                      style: TextStyle(
+                                          overflow: TextOverflow.clip,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color:
+                                              Constants.color2.withOpacity(.9)),
+                                    ),
+                                    Text(
+                                      data[index]['caption'],
+                                      style: TextStyle(
+                                          overflow: TextOverflow.clip,
+                                          fontSize: 14,
+                                          color: Constants.color2
+                                              .withOpacity(.65)),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      data[index]['description'],
+                                      style: TextStyle(
+                                          overflow: TextOverflow.clip,
+                                          fontSize: 12,
+                                          color: Constants.color2
+                                              .withOpacity(.35)),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),

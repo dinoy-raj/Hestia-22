@@ -56,6 +56,8 @@ class MyApp extends StatelessWidget {
       title: 'Hestia22',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
       ),
       home: const MyHomePage(),
     );
