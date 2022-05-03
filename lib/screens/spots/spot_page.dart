@@ -59,7 +59,7 @@ class _SpotPageState extends State<SpotPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         _opacity = 1;
         _padding1 = const EdgeInsets.only(
