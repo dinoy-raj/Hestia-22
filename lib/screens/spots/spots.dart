@@ -99,44 +99,40 @@ class SpotsState extends State<Spots> {
                     ),
                   ),
                 ),
-                AnimatedPadding(
-                  padding: _padding1,
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    height: 50,
-                    child: AnimatedTextKit(
-                      pause: const Duration(milliseconds: 300),
-                      repeatForever: true,
-                      animatedTexts: [
-                        RotateAnimatedText(
-                          "TKMCE",
-                          textStyle: TextStyle(
-                            color: Constants.color3,
-                            letterSpacing: 3,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                SizedBox(
+                  height: 50,
+                  child: AnimatedTextKit(
+                    pause: const Duration(milliseconds: 300),
+                    repeatForever: true,
+                    animatedTexts: [
+                      RotateAnimatedText(
+                        "TKMCE",
+                        textStyle: TextStyle(
+                          color: Constants.color3,
+                          letterSpacing: 3,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                        RotateAnimatedText(
-                          "HESTIA'22",
-                          textStyle: TextStyle(
-                            color: Constants.color3,
-                            letterSpacing: 1,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      ),
+                      RotateAnimatedText(
+                        "HESTIA'22",
+                        textStyle: TextStyle(
+                          color: Constants.color3,
+                          letterSpacing: 1,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                        RotateAnimatedText(
-                          "UTOPIA",
-                          textStyle: TextStyle(
-                            color: Constants.color3,
-                            letterSpacing: 1,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      ),
+                      RotateAnimatedText(
+                        "UTOPIA",
+                        textStyle: TextStyle(
+                          color: Constants.color3,
+                          letterSpacing: 1,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
