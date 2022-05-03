@@ -18,14 +18,14 @@ class Spots extends StatefulWidget {
 class SpotsState extends State<Spots> {
   double _opacity = 0;
   EdgeInsets _padding1 = const EdgeInsets.only(
-    right: 50,
+    right: 10,
   );
   EdgeInsets _padding2 = const EdgeInsets.only(
     left: 30,
   );
   EdgeInsets _padding3 = const EdgeInsets.only(
     top: 20,
-    left: 50,
+    left: 10,
   );
   Future<List<String>> _getSuggestions(String pattern) async {
     return [pattern, pattern + 'aa', pattern + 'bb'];
