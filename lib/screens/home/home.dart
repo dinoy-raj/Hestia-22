@@ -546,7 +546,6 @@ class _HomeState extends State<Home> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-
                                           //date of event
                                           Padding(
                                             padding: const EdgeInsets.all(15.0),
@@ -641,7 +640,6 @@ class _HomeState extends State<Home> {
                                             ),
                                           ),
 
-
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -649,63 +647,62 @@ class _HomeState extends State<Home> {
                                               Container(
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          6),
+                                                      BorderRadius.circular(6),
                                                   child: BackdropFilter(
-                                                    filter:
-                                                        ImageFilter.blur(
-                                                            sigmaX: 2,
-                                                            sigmaY: 2),
+                                                    filter: ImageFilter.blur(
+                                                        sigmaX: 2, sigmaY: 2),
                                                     child: AnimatedOpacity(
-                                                      duration:
-                                                          const Duration(
-                                                              seconds: 1),
-                                                      curve:
-                                                          Curves.decelerate,
-                                                      opacity: index ==
-                                                              currentPage
-                                                          ? 1
-                                                          : .5,
-                                                      child:
-                                                          AnimatedPadding(
+                                                      duration: const Duration(
+                                                          seconds: 1),
+                                                      curve: Curves.decelerate,
+                                                      opacity:
+                                                          index == currentPage
+                                                              ? 1
+                                                              : .5,
+                                                      child: AnimatedPadding(
                                                         duration: Duration(
                                                             seconds: 1),
-                                                        curve: Curves
-                                                            .decelerate,
+                                                        curve:
+                                                            Curves.decelerate,
                                                         padding: index ==
                                                                 currentPage
-                                                            ? EdgeInsets
-                                                                .all(5)
-                                                            : EdgeInsets
-                                                                .all(0),
+                                                            ? EdgeInsets.all(5)
+                                                            : EdgeInsets.all(0),
                                                         child:
                                                             AnimatedContainer(
-                                                          curve: Curves
-                                                              .decelerate,
-                                                          duration:
-                                                              Duration(
-                                                                  seconds:
-                                                                      1),
-                                                          height:
-                                                              screenHeight *
-                                                                  .15,
-                                                          width:
-                                                              screenWidth *
-                                                                  .67,
+                                                          curve:
+                                                              Curves.decelerate,
+                                                          duration: Duration(
+                                                              seconds: 1),
+                                                          height: screenHeight *
+                                                              .15,
+                                                          width: index ==
+                                                                  currentPage
+                                                              ? screenWidth *
+                                                                  .67
+                                                              : screenWidth *
+                                                                  .64,
                                                           decoration:
                                                               BoxDecoration(
                                                                   borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          15),
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              15),
                                                                   gradient: LinearGradient(
                                                                       begin: Alignment
                                                                           .topCenter,
                                                                       end: Alignment
                                                                           .bottomCenter,
                                                                       colors: [
-                                                                        Colors.white.withOpacity(.04),
-                                                                        Colors.white.withOpacity(.02),
-                                                                        Colors.black.withOpacity(.01)
+                                                                        Colors
+                                                                            .white
+                                                                            .withOpacity(.04),
+                                                                        Colors
+                                                                            .white
+                                                                            .withOpacity(.02),
+                                                                        Colors
+                                                                            .black
+                                                                            .withOpacity(.01)
                                                                       ])),
                                                           child: Column(
                                                             mainAxisAlignment:
@@ -713,8 +710,8 @@ class _HomeState extends State<Home> {
                                                                     .spaceAround,
                                                             children: [
                                                               Text(
-                                                                show[index][
-                                                                    'name'],
+                                                                show[index]
+                                                                    ['name'],
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         30,
@@ -723,14 +720,16 @@ class _HomeState extends State<Home> {
                                                                     fontFamily:
                                                                         "Helvetica",
                                                                     fontWeight:
-                                                                        FontWeight.bold),
+                                                                        FontWeight
+                                                                            .bold),
                                                               ),
                                                               Container(
                                                                 child:
                                                                     ClipRRect(
                                                                   borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          10),
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10),
                                                                   child:
                                                                       BackdropFilter(
                                                                     filter: ImageFilter.blur(
@@ -740,58 +739,55 @@ class _HomeState extends State<Home> {
                                                                             3),
                                                                     child:
                                                                         AnimatedOpacity(
-                                                                      duration:
-                                                                          const Duration(seconds: 1),
-                                                                      curve:
-                                                                          Curves.decelerate,
-                                                                      opacity: index == currentPage
+                                                                      duration: const Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                      curve: Curves
+                                                                          .decelerate,
+                                                                      opacity: index ==
+                                                                              currentPage
                                                                           ? 1
                                                                           : .5,
                                                                       child:
                                                                           AnimatedContainer(
-                                                                        curve:
-                                                                            Curves.decelerate,
+                                                                        curve: Curves
+                                                                            .decelerate,
                                                                         duration:
                                                                             Duration(milliseconds: 100),
-                                                                        height:
-                                                                            screenHeight * .04,
-                                                                        width:
-                                                                            screenWidth * .4,
+                                                                        height: screenHeight *
+                                                                            .04,
+                                                                        width: screenWidth *
+                                                                            .4,
                                                                         decoration:
                                                                             BoxDecoration(
-                                                                              // border: Border.all(color: Colors.white,width: .1),
-                                                                          color: Colors.white.withOpacity(.1),
-                                                                          borderRadius: BorderRadius.circular(10),
+                                                                          // border: Border.all(color: Colors.white,width: .1),
+                                                                          color: Colors
+                                                                              .white
+                                                                              .withOpacity(.1),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10),
                                                                         ),
                                                                         child:
                                                                             Row(
-                                                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceAround,
                                                                           children: [
                                                                             Text(
-                                                                              '\u{20B9}'+ show[index]['price'],
-                                                                              style: TextStyle(
-                                                                                fontSize: 15,
-                                                                                color:  Colors.white.withOpacity(.4),
-                                                                                fontFamily: 'Helvetica',
-                                                                                fontWeight: FontWeight.bold
-                                                                              ),
+                                                                              '\u{20B9}' + show[index]['price'],
+                                                                              style: TextStyle(fontSize: 15, color: Colors.white.withOpacity(.4), fontFamily: 'Helvetica', fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Container(
                                                                               height: screenHeight * .02,
                                                                               width: 2,
-
-                                                                              decoration: BoxDecoration(
-                                                                                  color: Constants.iconIn,
-                                                                                borderRadius: BorderRadius.circular(10)
-                                                                              ),
+                                                                              decoration: BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
                                                                             ),
                                                                             Text(
-                                                                              show[index]['remain']+ " 🎫",
+                                                                              show[index]['remain'] + " 🎫",
                                                                               style: TextStyle(
                                                                                 fontSize: 15,
                                                                                 fontFamily: 'Helvetica',
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                color:  Colors.white.withOpacity(.4),
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: Colors.white.withOpacity(.4),
                                                                               ),
                                                                             ),
                                                                           ],
