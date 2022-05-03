@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/home/home.dart';
+import 'package:hestia22/screens/schedule/date_info.dart';
+import 'package:hestia22/screens/schedule/enums.dart';
+import 'package:hestia22/screens/schedule/schedule_screen.dart';
+import 'package:provider/provider.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -20,7 +24,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: ChangeNotifierProvider<DateInfo>(
+        create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
+        child: ScheduleScreen()),
     );
   }
 }
