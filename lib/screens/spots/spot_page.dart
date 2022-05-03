@@ -22,6 +22,12 @@ class _SpotPageState extends State<SpotPage> {
     right: 5,
   );
   EdgeInsets _padding3 = EdgeInsets.zero;
+  EdgeInsets _padding4 = const EdgeInsets.only(
+    top: 8.0,
+    bottom: 8.0,
+    left: 5.0,
+    right: 5.0,
+  );
   List<Map> data1 = [
     {
       'name': 'Almanac',
@@ -73,6 +79,7 @@ class _SpotPageState extends State<SpotPage> {
         _padding3 = const EdgeInsets.only(
           top: 20,
         );
+        _padding4 = const EdgeInsets.all(8.0);
       });
     });
   }
@@ -91,6 +98,12 @@ class _SpotPageState extends State<SpotPage> {
             right: 5,
           );
           _padding3 = EdgeInsets.zero;
+          _padding4 = const EdgeInsets.only(
+            top: 8.0,
+            bottom: 8.0,
+            left: 5.0,
+            right: 5.0,
+          );
         });
         await Future.delayed(const Duration(milliseconds: 300));
         return true;
@@ -124,8 +137,9 @@ class _SpotPageState extends State<SpotPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        AnimatedPadding(
+                          padding: _padding4,
+                          duration: const Duration(milliseconds: 500),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
@@ -149,8 +163,9 @@ class _SpotPageState extends State<SpotPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        AnimatedPadding(
+                          padding: _padding4,
+                          duration: const Duration(milliseconds: 500),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
