@@ -41,7 +41,6 @@ dependencies:
   map_launcher: ^2.2.1+2
   flutter_typeahead: ^3.2.5
   intl: ^0.17.0
-  change_app_package_name: ^1.0.0
 
 dev_dependencies:
   flutter_test:
