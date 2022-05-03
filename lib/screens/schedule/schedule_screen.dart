@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hestia22/screens/schedule/custompage_route.dart';
 import 'package:hestia22/screens/schedule/data.dart';
 import 'package:hestia22/screens/schedule/date_info.dart';
 import 'package:hestia22/screens/schedule/dates/first.dart';
@@ -14,112 +15,76 @@ class ScheduleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var isSelected = true;
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
+        // leading: Icon(Icons.arrow_back),
         backgroundColor: Colors.black,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(children: [
-                Container(
-                  height: 250,
-                  color: Colors.black,
-                  // child: ListView.separated(
-                  //   scrollDirection: Axis.horizontal,
-                  //     itemBuilder: (ctx, index) {
-                  //       return Container(
-                  //         width: 40,
-                  //         height: 10,
-                  //         decoration: BoxDecoration(
-                  //           color: Colors.white,
-                  //           borderRadius: BorderRadius.circular(20),
-                  //         ),
-                  //       );
-                  //     },
-                  //     separatorBuilder: (ctx, index) => const SizedBox(
-                  //           width: 10,
-                  //         ),
-                  //     itemCount: 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 30,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(children: [
+              Container(
+                height: 250,
+                color: Colors.black,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Text(
+                        'May 26-29',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Helvetica',
+                            letterSpacing: 1),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'May 26-29',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Helvetica',
-                                  letterSpacing: 1),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: dateItems
-                            .map((currentMenuInfo) =>
-                                buildDateButton(currentMenuInfo))
-                            .toList(),
-                        // [
-                        //   buildDateButton('26','Thu'),
-                        //   buildDateButton('27','Fri'),
-                        //   buildDateButton('28','Sat'),
-                        //   buildDateButton('29','Sun'),
-                        // ]
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: dateItems
+                          .map((currentMenuInfo) =>
+                              buildDateButton(currentMenuInfo))
+                          .toList(),
+                    ),
+                  ],
                 ),
-                Container(
-                    width: size.width,
-                    height: 30,
-                    margin: EdgeInsets.only(top: 220),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30)),
-                    )),
-              ]),
-              Consumer<DateInfo>(
-                builder: (context,value,child) {
-                  if (value.dateType == DateType.a)
-                return FirstPage();
-              else if (value.dateType == DateType.b)
-                return SecondPage();
-              else if(value.dateType == DateType.c)
-                return ThirdPage();
-              else 
-              return FourthPage();
-                
-                },
-                child: FirstPage()),
+              ),
+              Container(
+                  width: size.width,
+                  height: 30,
+                  margin: EdgeInsets.only(top: 220),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)),
+                  )),
+            ]),
+            Consumer<DateInfo>(
+              builder: (context,value,child) {
+                if (value.dateType == DateType.a)
+              return FirstPage();
+            else if (value.dateType == DateType.b)
+              return SecondPage();
+            else if(value.dateType == DateType.c)
+              return ThirdPage();
+            else 
+            return FourthPage();
               
+              },
+              child: FirstPage()),
+            
 
-            ],
-          ),
+          ],
         ),
       ),
     );
@@ -189,13 +154,12 @@ class EventCard extends StatelessWidget {
     required this.eventName,
     required this.description,
     required this.time,
-    required this.size,
   }) : super(key: key);
 
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
