@@ -1,212 +1,302 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
+import 'package:hestia22/providers/profile_provider.dart';
+
+import '../../main.dart';
 
 class ProfileRegistration extends StatelessWidget {
-  const ProfileRegistration({Key? key}) : super(key: key);
+  ProfileRegistration({Key? key}) : super(key: key);
+  final PageController controller = PageController();
+
+  void nextPage() => controller.animateToPage(
+        controller.page!.toInt() + 1,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+      );
 
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
-
     return SafeArea(
-      child: Scaffold(
-        body: PageView.builder(
-          itemCount: pages.length,
-          itemBuilder: (_, index) => pages[index],
-          controller: controller,
+      child: ChangeNotifierProvider<ProfileProvider>(
+        create: (context) => ProfileProvider(),
+        child: Scaffold(
+          backgroundColor: Constants.sc,
+          body: Builder(builder: (context) {
+            return PageView(
+              children: [
+                accountInfo(context),
+                personalDetails(context),
+                collegeDetails(context),
+              ],
+              controller: controller,
+              // physics: const NeverScrollableScrollPhysics(),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
+  collegeDetails(BuildContext context) {
+    // final provider = Provider.of<ProfileProvider>(context, listen: false);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          const Text(
+            'COLLEGE DETAILS',
+            style: TextStyle(
+              color: Constants.color2,
+              fontFamily: 'Helvetica',
+              fontWeight: FontWeight.w700,
+              fontSize: 30,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          // Text(
+          //   'So that we can contact you.',
+          //   style: TextStyle(
+          //     fontFamily: 'Helvetica',
+          //     fontWeight: FontWeight.normal,
+          //     fontSize: 20,
+          //   ),
+          // ),
+          const Spacer(),
+          _TextField(
+            hintText: 'college',
+            valueChanged: (val) =>
+                context.read<ProfileProvider>().setCollege('$val'),
+            errorText: context.read<ProfileProvider>().validateStep1(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _TextField(
+            hintText: 'department',
+            valueChanged: (val) =>
+                context.read<ProfileProvider>().setDepartment('$val'),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          ContinueButton(
+            onPressed: () => nextPage(),
+          ),
+          const Spacer(),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+
+  personalDetails(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          const Text(
+            'PERSONAL DETAILS',
+            style: TextStyle(
+              color: Constants.color2,
+              fontFamily: 'Helvetica',
+              fontWeight: FontWeight.w700,
+              fontSize: 30,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          // Text(
+          //   'So that you connect with people easier.',
+          //   style: TextStyle(
+          //     fontFamily: 'Helvetica',
+          //     fontWeight: FontWeight.normal,
+          //     fontSize: 20,
+          //   ),
+          // ),
+          const Spacer(),
+          _TextField(
+            hintText: 'full name',
+            valueChanged: (val) =>
+                context.read<ProfileProvider>().setName('$val'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _TextField(
+            hintText: 'address',
+            valueChanged: (val) =>
+                context.read<ProfileProvider>().setAddress('$val'),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          ContinueButton(
+            onPressed: () => nextPage(),
+          ),
+          const Spacer(),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+
+  accountInfo(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          const Text(
+            'ACCOUNT INFO',
+            style: TextStyle(
+              color: Constants.color2,
+              fontFamily: 'Helvetica',
+              fontWeight: FontWeight.w700,
+              fontSize: 30,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          // Text(
+          //   'So that we know how to call you.',
+          //   style: TextStyle(
+          //     fontFamily: 'Helvetica',
+          //     fontWeight: FontWeight.normal,
+          //     fontSize: 20,
+          //   ),
+          // ),
+          const Spacer(),
+          _TextField(
+            hintText: 'username',
+            errorText: context.read<ProfileProvider>().validateStep1(),
+            valueChanged: (val) =>
+                context.read<ProfileProvider>().setUsername('$val'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _TextField(
+            hintText: 'email',
+            valueChanged: (val) =>
+                context.read<ProfileProvider>().setEmail('$val'),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          ContinueButton(
+            onPressed: () {
+              context.read<ProfileProvider>().validateStep1();
+              nextPage();
+            },
+          ),
+          const Spacer(),
+          const Spacer(),
+        ],
+      ),
+    );
+  }
+}
+
+class _TextField extends StatefulWidget {
+  final String hintText;
+  // final VoidCallback valueChanged;
+  final Function(String?) valueChanged;
+  final String? errorText;
+  const _TextField({
+    Key? key,
+    required this.hintText,
+    required this.valueChanged,
+    this.errorText,
+  }) : super(key: key);
+
+  @override
+  State<_TextField> createState() => _TextFieldState();
+}
+
+class _TextFieldState extends State<_TextField> {
+  bool start = false;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 200)).then(
+      (value) => setState(() {
+        start = true;
+      }),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final screenHeight = MediaQuery.of(context).size.height;
+    // final screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      padding: const EdgeInsets.all(0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: TextFormField(
+        onChanged: widget.valueChanged,
+        scrollPhysics: const BouncingScrollPhysics(),
+        cursorColor: Constants.iconIn,
+        cursorRadius: const Radius.circular(10),
+        style: const TextStyle(
+          fontFamily: 'Helvetica',
+          color: Constants.iconAc,
+          fontSize: 20,
+        ),
+        decoration: InputDecoration(
+          errorText: widget.errorText,
+          hintText: 'type here',
+          labelText: widget.hintText,
+          labelStyle: const TextStyle(
+            fontFamily: 'Helvetica',
+            color: Constants.iconAc,
+            fontSize: 20,
+            fontWeight: FontWeight.w100,
+          ),
+          hintStyle: TextStyle(
+            fontFamily: 'Helvetica',
+            color: Constants.iconIn,
+            fontSize: 20,
+            fontWeight: FontWeight.w100,
+          ),
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          fillColor: Colors.grey.withOpacity(.05),
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );
   }
 }
 
-List<Widget> pages = [
-  const NameReg(),
-  const PhoneReg(),
-  const CollegeReg(),
-];
-
-class PhoneReg extends StatelessWidget {
-  const PhoneReg({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            'What\'s your phone number, Angelico?',
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.w700,
-              fontSize: 36,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'So that we can contact you.',
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.normal,
-              fontSize: 20,
-            ),
-          ),
-          Spacer(),
-          _TextField(
-            hintText: 'Your phone number',
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ContinueButton(),
-          Spacer(),
-          Spacer(),
-        ],
-      ),
-    );
-  }
-}
-
-class CollegeReg extends StatelessWidget {
-  const CollegeReg({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            'Where do you study, Angelico?',
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.w700,
-              fontSize: 36,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'So that you connect with people easier.',
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.normal,
-              fontSize: 20,
-            ),
-          ),
-          Spacer(),
-          _TextField(
-            hintText: 'Your college name',
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          _TextField(
-            hintText: 'Your department name',
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ContinueButton(),
-          Spacer(),
-          Spacer(),
-        ],
-      ),
-    );
-  }
-}
-
-class NameReg extends StatelessWidget {
-  const NameReg({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            'What\'s your name?',
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.w700,
-              fontSize: 36,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'So that we know how to call you.',
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.normal,
-              fontSize: 20,
-            ),
-          ),
-          Spacer(),
-          _TextField(
-            hintText: 'Your full name',
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ContinueButton(),
-          Spacer(),
-          Spacer(),
-        ],
-      ),
-    );
-  }
-}
-
-class _TextField extends StatelessWidget {
-  final String hintText;
-  const _TextField({
-    Key? key,
-    required this.hintText,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      cursorColor: Colors.black,
-      // onChanged: (value) => provider.setPrinciple(value),
-      keyboardType: TextInputType.number,
-      smartDashesType: SmartDashesType.enabled,
-      style: const TextStyle(
-        fontFamily: 'Helvetica',
-        fontWeight: FontWeight.w500,
-        fontSize: 18,
-      ),
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(), hintText: hintText,
-        // fillColor:  Color.fromRGBO(235, 237, 236, 1),
-        // filled: true
-        // prefixText: 'Principle',
-      ),
-    );
-  }
-}
-
 class ContinueButton extends StatelessWidget {
+  final VoidCallback onPressed;
   const ContinueButton({
     Key? key,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -215,12 +305,16 @@ class ContinueButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          primary: Constants.iconAc,
+        ),
+        onPressed: onPressed,
         child: const Text(
           'CONTINUE',
           style: TextStyle(
             fontFamily: 'Helvetica',
-            // fontWeight: FontWeight.normal,
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
             fontSize: 18,
           ),
         ),
