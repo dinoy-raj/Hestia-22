@@ -72,7 +72,7 @@ class SpotsState extends State<Spots> {
                           right: 20,
                         )
                       : EdgeInsets.zero,
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 800),
                   child: Center(
                     child: Text(
                       "Explore",
@@ -155,7 +155,7 @@ class SpotsState extends State<Spots> {
                                       left: 15,
                                       right: 0,
                                     ),
-                              duration: const Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 800),
                               child: const Icon(
                                 CupertinoIcons.search,
                                 color: Colors.grey,
@@ -206,7 +206,7 @@ class SpotsState extends State<Spots> {
                       : const EdgeInsets.only(
                           top: 20,
                         ),
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 800),
                   child: const Cards(),
                 ),
                 const SizedBox(
