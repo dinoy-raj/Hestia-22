@@ -58,25 +58,23 @@ class _EventDetailsState extends State<EventDetails> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Constants.pureBlack,
-      body: Container(
-        child: CustomScrollView(slivers: [
-          appbar(height, width),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            eventDetails(height, width),
-            Divider(
-              height: width * 0.03,
-              endIndent: width * 0.05,
-              indent: width * 0.05,
-              thickness: 0.5,
-              color: Constants.lightWhite,
-            ),
-            aboutEvent(height, width),
-            contactDetails(height, width)
-          ]))
-        ]),
-      ),
+      backgroundColor: Constants.sc,
+      body: CustomScrollView(slivers: [
+        appbar(height, width),
+        SliverList(
+            delegate: SliverChildListDelegate([
+          eventDetails(height, width),
+          Divider(
+            height: width * 0.03,
+            endIndent: width * 0.05,
+            indent: width * 0.05,
+            thickness: 0.5,
+            color: Constants.lightWhite,
+          ),
+          aboutEvent(height, width),
+          contactDetails(height, width)
+        ]))
+      ]),
       floatingActionButton: floatButton(height, width),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

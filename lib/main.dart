@@ -1,9 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/events/events.dart';
-import 'package:hestia22/screens/home/home.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
@@ -160,6 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Constants {
+
   //colours for navbar
   static const Color bg = Color.fromRGBO(27, 28, 33, 100);
   static const Color sc = Color.fromRGBO(17, 17, 19, 100);
@@ -185,3 +184,4 @@ class Constants {
   static const transaparent = Colors.transparent;
   static const lightWhite = Colors.white70;
 }
+

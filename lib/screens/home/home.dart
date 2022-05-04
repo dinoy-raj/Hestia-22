@@ -5,18 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 
+import 'notification.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Home> createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   //for initial animations future delayed
   bool start = false;
   //notification icon
-  bool notPressed = false;
+  static  bool notPressed = false;
 
   //notification icon
   bool filPressed = false;
@@ -310,8 +312,7 @@ class _HomeState extends State<Home> {
                                         scrollPhysics:
                                             const BouncingScrollPhysics(),
                                         cursorColor: Constants.iconIn,
-                                        cursorRadius:
-                                            const Radius.circular(10),
+                                        cursorRadius: const Radius.circular(10),
                                         style: const TextStyle(
                                           fontFamily: 'Helvetica',
                                           color: Constants.iconAc,
@@ -1082,25 +1083,26 @@ class _HomeState extends State<Home> {
                 ),
 
                 //notification page
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: screenHeight * .1,
-                      width: screenWidth,
-                    ),
-                    AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      height: notPressed ? screenHeight * .6 : 0,
-                      width: screenWidth * .91,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.black),
-                    ),
-                  ],
-                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     SizedBox(
+                //       height: screenHeight * .1,
+                //       width: screenWidth,
+                //     ),
+                //     AnimatedContainer(
+                //       duration: const Duration(seconds: 1),
+                //       curve: Curves.fastLinearToSlowEaseIn,
+                //       height: Constants.notPressed ? screenHeight * .7 : 0,
+                //       width: screenWidth * .91,
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(15),
+                //           color: Colors.black),
+                //     ),
+                //   ],
+                // ),
+                notificationPage(context),
               ],
             ),
           ),
