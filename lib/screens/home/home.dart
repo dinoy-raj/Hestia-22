@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/home/tab.dart';
 
 import 'notification.dart';
 
@@ -116,7 +118,7 @@ class HomeState extends State<Home> {
     super.initState();
     notPressed = false;
     start = false;
-    catSelect = 10;
+    // catSelect = 10;
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -376,7 +378,7 @@ class HomeState extends State<Home> {
                         ),
                       ),
 
-                      //category section
+                      // category section
                       AnimatedPadding(
                         duration: const Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
@@ -492,7 +494,7 @@ class HomeState extends State<Home> {
                         ),
                       ),
 
-                      //event list
+                   
                       SizedBox(
                         height: screenHeight * .6,
                         width: screenWidth,
