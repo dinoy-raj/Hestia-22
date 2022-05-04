@@ -15,372 +15,370 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: PageView(
-          children: [
-            Column(children: [
-              Container(
-                height: screenHeight * 0.09,
-                //color: Colors.green,
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      width: screenWidth * 0.1,
-                      //color: Colors.green,
-                      child: Center(
-                        child: IconButton(
-                          icon: Image.asset('assets/icons/backk.png'),
-                          onPressed: () {},
-                        ),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Container(
+              height: screenHeight * 0.09,
+              //color: Colors.green,
+              child: Row(
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    width: screenWidth * 0.1,
+                    //color: Colors.green,
+                    child: Center(
+                      child: IconButton(
+                        icon: Image.asset('assets/icons/backk.png'),
+                        onPressed: () {},
                       ),
                     ),
-                    Container(
-                      //color: Colors.red,
-                      width: screenWidth * 0.8,
-                      child: const Center(
-                        child: Text(
-                          'Profile',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      width: screenWidth * 0.08,
-                      //color: Colors.green,
-                      child: Center(
-                        child: IconButton(
-                          icon: Image.asset('assets/icons/Logout.png'),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: screenHeight * 0.18,
-              //color: Colors.orange,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        height: 95,
-                        width: 95,
-                        //color: Colors.black,
-                        child: const CircleAvatar(backgroundImage: AssetImage('assets/icons/face.png'),),
-                        decoration: const BoxDecoration(shape: BoxShape.circle,color: Color(0xff444444)),
-                      ),
-                      const SizedBox(height: 8,),
-                      const Text(
-                        'Karthik',
+                  ),
+                  Container(
+                    //color: Colors.red,
+                    width: screenWidth * 0.8,
+                    child: const Center(
+                      child: Text(
+                        'Profile',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontFamily: 'Helvetica',
                             fontWeight: FontWeight.normal),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                height: screenHeight * 0.18,
-                //color: Colors.yellow,
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Color(0xff121212),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            height: 70,
-                            width: 140,
-                            child: Center(
-                              child: IconButton(
-                                icon: Image.asset('assets/icons/Todayy.png'),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Registred Events',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Helvetica',
-                                fontWeight: FontWeight.normal),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: Center(
-                              child: IconButton(
-                                icon: Image.asset('assets/icons/Certificate.png'),
-                                onPressed: () {},
-                              ),
-                            ),
-                            decoration: const BoxDecoration(
-                              color: Color(0xff121212),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            height: 70,
-                            width: 140,
-                            //color: const Color(0xff121212)
-                          ),
-                           const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Certificates',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Helvetica',
-                                fontWeight: FontWeight.normal),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                height: screenHeight * 0.55,
-                //color: Colors.green,
-                child: Center(
-                  child: Container(
-                    height: screenHeight * 0.52,
-                    width: screenWidth * 0.8,
-                    decoration: const BoxDecoration(
-                      color: Color(0xff121212),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    width: screenWidth * 0.08,
+                    //color: Colors.green,
+                    child: Center(
+                      child: IconButton(
+                        icon: Image.asset('assets/icons/Logout.png'),
+                        onPressed: () {},
                       ),
                     ),
-                    child: Column(
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: screenHeight * 0.18,
+            //color: Colors.orange,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 95,
+                      width: 95,
+                      //color: Colors.black,
+                      child: const CircleAvatar(backgroundImage: AssetImage('assets/icons/face.png'),),
+                      decoration: const BoxDecoration(shape: BoxShape.circle,color: Color(0xff444444)),
+                    ),
+                    const SizedBox(height: 8,),
+                    const Text(
+                      'Karthik',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Helvetica',
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: screenHeight * 0.18,
+              //color: Colors.yellow,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            //color: Color.fromARGB(255, 212, 23, 23),
+                            color: Color(0xff121212),
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20),
+                              Radius.circular(15),
                             ),
                           ),
-                          height: screenHeight * 0.13,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8, right: 10),
-                                child: Container(
-                                  alignment: Alignment.topLeft,
-                                  width: screenWidth * 0.15,
-                                  height: screenWidth * 0.15,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xff444444),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: IconButton(
-                                      icon: Image.asset('assets/icons/person.png'),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                'Karthik Sunil',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                              // const Spacer(),
-                              // Container(
-                              //   alignment: Alignment.centerRight,
-                              //   width: screenWidth * 0.1,
-                              //   //color: Colors.green,
-                              //   child: Center(
-                              //     child: IconButton(
-                              //       icon: Image.asset('assets/icons/logout.png'),
-                              //       onPressed: () {},
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
+                          height: 70,
+                          width: 140,
+                          child: Center(
+                            child: IconButton(
+                              icon: Image.asset('assets/icons/Todayy.png'),
+                              onPressed: () {},
+                            ),
                           ),
                         ),
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8, right: 10),
-                                child: Container(
-                                  alignment: Alignment.topLeft,
-                                  width: screenWidth * 0.15,
-                                  height: screenWidth * 0.15,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xff444444),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: IconButton(
-                                      icon: Image.asset('assets/icons/Mail.png'),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                'karthiksunil.me@gmail.com',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                              // const Spacer(),
-                              // Container(
-                              //   alignment: Alignment.centerRight,
-                              //   width: screenWidth * 0.1,
-                              //   //color: Colors.green,
-                              //   child: Center(
-                              //     child: IconButton(
-                              //       icon: Image.asset('assets/icons/logout.png'),
-                              //       onPressed: () {},
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
-                          ),
+                        const SizedBox(
+                          height: 10,
                         ),
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8, right: 10),
-                                child: Container(
-                                  alignment: Alignment.topLeft,
-                                  width: screenWidth * 0.15,
-                                  height: screenWidth * 0.15,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xff444444),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: IconButton(
-                                      icon: Image.asset('assets/icons/info.png'),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                'About Hestia',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                              // const Spacer(),
-                              // Container(
-                              //   alignment: Alignment.centerRight,
-                              //   width: screenWidth * 0.1,
-                              //   //color: Colors.green,
-                              //   child: Center(
-                              //     child: IconButton(
-                              //       icon: Image.asset('assets/icons/logout.png'),
-                              //       onPressed: () {},
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: screenHeight * 0.13,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8, right: 10),
-                                child: Container(
-                                  alignment: Alignment.topLeft,
-                                  width: screenWidth * 0.15,
-                                  height: screenWidth * 0.15,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xff444444),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: IconButton(
-                                      icon: Image.asset('assets/icons/call.png'),
-                                      onPressed: () {},
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                'Contact Admin',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                              // const Spacer(),
-                              // Container(
-                              //   alignment: Alignment.centerRight,
-                              //   width: screenWidth * 0.1,
-                              //   //color: Colors.green,
-                              //   child: Center(
-                              //     child: IconButton(
-                              //       icon: Image.asset('assets/icons/logout.png'),
-                              //       onPressed: () {},
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
-                          ),
+                        const Text(
+                          'Registred Events',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: 'Helvetica',
+                              fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Center(
+                            child: IconButton(
+                              icon: Image.asset('assets/icons/Certificate.png'),
+                              onPressed: () {},
+                            ),
+                          ),
+                          decoration: const BoxDecoration(
+                            color: Color(0xff121212),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
+                          height: 70,
+                          width: 140,
+                          //color: const Color(0xff121212)
+                        ),
+                         const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Certificates',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: 'Helvetica',
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: screenHeight * 0.55,
+              color: Colors.green,
+              child: Center(
+                child: Container(
+                  height: screenHeight * 0.52,
+                  width: screenWidth * 0.8,
+                  decoration: const BoxDecoration(
+                    color: Color(0xff121212),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          //color: Color.fromARGB(255, 212, 23, 23),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        height: screenHeight * 0.13,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                width: screenWidth * 0.15,
+                                height: screenWidth * 0.15,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff444444),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: IconButton(
+                                    icon: Image.asset('assets/icons/person.png'),
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'Karthik Sunil',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Helvetica',
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            // const Spacer(),
+                            // Container(
+                            //   alignment: Alignment.centerRight,
+                            //   width: screenWidth * 0.1,
+                            //   //color: Colors.green,
+                            //   child: Center(
+                            //     child: IconButton(
+                            //       icon: Image.asset('assets/icons/logout.png'),
+                            //       onPressed: () {},
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 0.13,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                width: screenWidth * 0.15,
+                                height: screenWidth * 0.15,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff444444),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: IconButton(
+                                    icon: Image.asset('assets/icons/Mail.png'),
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'karthiksunil.me@gmail.com',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Helvetica',
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            // const Spacer(),
+                            // Container(
+                            //   alignment: Alignment.centerRight,
+                            //   width: screenWidth * 0.1,
+                            //   //color: Colors.green,
+                            //   child: Center(
+                            //     child: IconButton(
+                            //       icon: Image.asset('assets/icons/logout.png'),
+                            //       onPressed: () {},
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 0.13,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                width: screenWidth * 0.15,
+                                height: screenWidth * 0.15,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff444444),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: IconButton(
+                                    icon: Image.asset('assets/icons/info.png'),
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'About Hestia',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Helvetica',
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            // const Spacer(),
+                            // Container(
+                            //   alignment: Alignment.centerRight,
+                            //   width: screenWidth * 0.1,
+                            //   //color: Colors.green,
+                            //   child: Center(
+                            //     child: IconButton(
+                            //       icon: Image.asset('assets/icons/logout.png'),
+                            //       onPressed: () {},
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 0.13,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                width: screenWidth * 0.15,
+                                height: screenWidth * 0.15,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff444444),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: IconButton(
+                                    icon: Image.asset('assets/icons/call.png'),
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'Contact Admin',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Helvetica',
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            // const Spacer(),
+                            // Container(
+                            //   alignment: Alignment.centerRight,
+                            //   width: screenWidth * 0.1,
+                            //   //color: Colors.green,
+                            //   child: Center(
+                            //     child: IconButton(
+                            //       icon: Image.asset('assets/icons/logout.png'),
+                            //       onPressed: () {},
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ]),
-          ],
+            ),
+          ]),
         ),
       ),
     );
