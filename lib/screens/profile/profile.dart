@@ -166,11 +166,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Container(
               height: screenHeight * 0.55,
-              color: Colors.green,
+              //color: Colors.green,
               child: Center(
                 child: Container(
-                  height: screenHeight * 0.52,
-                  width: screenWidth * 0.8,
+                  height: 300,
+                  width: 350,
                   decoration: const BoxDecoration(
                     color: Color(0xff121212),
                     borderRadius: BorderRadius.all(
@@ -178,6 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         decoration: const BoxDecoration(
@@ -186,16 +187,17 @@ class _ProfilePageState extends State<ProfilePage> {
                             Radius.circular(20),
                           ),
                         ),
-                        height: screenHeight * 0.13,
+                        height: 60,
                         child: Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
-                                width: screenWidth * 0.15,
-                                height: screenWidth * 0.15,
+                                width: screenWidth * 0.1,
+                                height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
+                                  
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(20),
@@ -203,6 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 child: Center(
                                   child: IconButton(
+                                    
                                     icon: Image.asset('assets/icons/person.png'),
                                     onPressed: () {},
                                   ),
@@ -213,7 +216,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               'Karthik Sunil',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontFamily: 'Helvetica',
                                   fontWeight: FontWeight.normal),
                             ),
@@ -233,15 +236,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        height: screenHeight * 0.13,
+                        height: 60,
                         child: Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
-                                width: screenWidth * 0.15,
-                                height: screenWidth * 0.15,
+                                width: screenWidth * 0.1,
+                                height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
@@ -260,7 +263,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               'karthiksunil.me@gmail.com',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontFamily: 'Helvetica',
                                   fontWeight: FontWeight.normal),
                             ),
@@ -280,22 +283,22 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        height: screenHeight * 0.13,
+                        height: 60,
                         child: Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
-                                width: screenWidth * 0.15,
-                                height: screenWidth * 0.15,
+                                width: screenWidth * 0.1,
+                                height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(20),
                                   ),
                                 ),
-                                child: Center(
+                                child:Center(
                                   child: IconButton(
                                     icon: Image.asset('assets/icons/info.png'),
                                     onPressed: () {},
@@ -307,7 +310,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               'About Hestia',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontFamily: 'Helvetica',
                                   fontWeight: FontWeight.normal),
                             ),
@@ -327,15 +330,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        height: screenHeight * 0.13,
+                        height: 60,
                         child: Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
-                                width: screenWidth * 0.15,
-                                height: screenWidth * 0.15,
+                                width: screenWidth * 0.1,
+                                height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
@@ -354,7 +357,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               'Contact Admin',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontFamily: 'Helvetica',
                                   fontWeight: FontWeight.normal),
                             ),
