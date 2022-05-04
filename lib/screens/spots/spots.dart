@@ -16,17 +16,7 @@ class Spots extends StatefulWidget {
 }
 
 class SpotsState extends State<Spots> {
-  double _opacity = 0;
-  EdgeInsets _padding1 = const EdgeInsets.only(
-    right: 10,
-  );
-  EdgeInsets _padding2 = const EdgeInsets.only(
-    left: 30,
-  );
-  EdgeInsets _padding3 = const EdgeInsets.only(
-    top: 20,
-    left: 10,
-  );
+  bool _animate = true;
   Future<List<String>> _getSuggestions(String pattern) async {
     return [pattern, pattern + 'aa', pattern + 'bb'];
   }
@@ -49,15 +39,7 @@ class SpotsState extends State<Spots> {
     super.initState();
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
-        _opacity = 1;
-        _padding1 = EdgeInsets.zero;
-        _padding2 = const EdgeInsets.only(
-          left: 20,
-          right: 20,
-        );
-        _padding3 = const EdgeInsets.only(
-          top: 20,
-        );
+        _animate = false;
       });
     });
   }
@@ -78,14 +60,18 @@ class SpotsState extends State<Spots> {
           physics: const BouncingScrollPhysics(),
           child: AnimatedOpacity(
             duration: const Duration(milliseconds: 500),
-            opacity: _opacity,
+            opacity: _animate ? 0 : 1,
             child: Column(
               children: [
                 const SizedBox(
                   height: 80,
                 ),
                 AnimatedPadding(
-                  padding: _padding1,
+                  padding: _animate
+                      ? const EdgeInsets.only(
+                          right: 20,
+                        )
+                      : EdgeInsets.zero,
                   duration: const Duration(milliseconds: 500),
                   child: Center(
                     child: Text(
@@ -147,56 +133,64 @@ class SpotsState extends State<Spots> {
                       color: Constants.color1,
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: AnimatedPadding(
-                      padding: _padding2,
-                      duration: const Duration(milliseconds: 500),
-                      child: TypeAheadField(
-                        textFieldConfiguration: const TextFieldConfiguration(
-                          style: TextStyle(color: Colors.grey),
-                          cursorColor: Colors.grey,
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Where do you wanna go?",
-                              hintStyle: TextStyle(
-                                color: Colors.white24,
-                                fontSize: 15,
-                              ),
-                              icon: Icon(
+                    child: TypeAheadField(
+                      textFieldConfiguration: TextFieldConfiguration(
+                        style: const TextStyle(color: Colors.grey),
+                        cursorColor: Colors.grey,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Where do you wanna go?",
+                          hintStyle: const TextStyle(
+                            color: Colors.white24,
+                            fontSize: 15,
+                          ),
+                          icon: AnimatedPadding(
+                              padding: _animate
+                                  ? const EdgeInsets.only(
+                                      left: 10,
+                                      right: 15,
+                                    )
+                                  : const EdgeInsets.only(
+                                      left: 15,
+                                      right: 0,
+                                    ),
+                              duration: const Duration(milliseconds: 500),
+                              child: const Icon(
                                 CupertinoIcons.search,
                                 color: Colors.grey,
                               )),
                         ),
-                        suggestionsCallback: (pattern) async {
-                          return await _getSuggestions(pattern);
-                        },
-                        suggestionsBoxDecoration: SuggestionsBoxDecoration(
-                            color: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
-                        itemBuilder: (context, suggestion) {
-                          return ListTile(
-                            onTap: () {
-                              _goToCoordinates(suggestion.toString());
-                            },
-                            leading: Icon(
-                              Icons.location_on_outlined,
-                              color: Constants.color2.withOpacity(.40),
-                            ),
-                            title: Text(
-                              suggestion.toString(),
-                              style: TextStyle(
-                                  color: Constants.color2.withOpacity(.40)),
-                            ),
-                          );
-                        },
-                        hideOnError: true,
-                        hideOnEmpty: true,
-                        hideOnLoading: true,
-                        hideSuggestionsOnKeyboardHide: true,
-                        onSuggestionSelected: (suggestion) {},
                       ),
+                      suggestionsCallback: (pattern) async {
+                        return await _getSuggestions(pattern);
+                      },
+                      suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                          color: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          onTap: () {
+                            _goToCoordinates(suggestion.toString());
+                          },
+                          leading: Icon(
+                            Icons.location_on_outlined,
+                            color: Constants.color2.withOpacity(.40),
+                          ),
+                          title: Text(
+                            suggestion.toString(),
+                            style: TextStyle(
+                                color: Constants.color2.withOpacity(.40)),
+                          ),
+                        );
+                      },
+                      hideOnError: true,
+                      hideOnEmpty: true,
+                      hideOnLoading: true,
+                      hideSuggestionsOnKeyboardHide: true,
+                      onSuggestionSelected: (suggestion) {},
                     ),
                   ),
                 ),
@@ -204,7 +198,14 @@ class SpotsState extends State<Spots> {
                   height: 30,
                 ),
                 AnimatedPadding(
-                  padding: _padding3,
+                  padding: !_animate
+                      ? const EdgeInsets.only(
+                          top: 20,
+                          left: 10,
+                        )
+                      : const EdgeInsets.only(
+                          top: 20,
+                        ),
                   duration: const Duration(milliseconds: 500),
                   child: const Cards(),
                 ),
