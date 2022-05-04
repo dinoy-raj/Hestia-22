@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
   List Sort3 = [];
 
   PageController pageControl =
-      new PageController(viewportFraction: .75, initialPage: 0);
+      new PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
 
   @override
