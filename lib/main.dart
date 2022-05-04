@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
+import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/home/home.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const EventDetails(),
     );
   }
 }
@@ -72,11 +73,28 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Constants {
-  static const Color color1 = Colors.black;
+  //colours for navbar
+  static const Color bg = Color.fromRGBO(27, 28, 33, 100);
+  static const Color sc = Color.fromRGBO(17, 17, 19, 100);
+  static Color navBorder = Colors.black.withOpacity(.1);
+  static const Color grad1 = Colors.black12;
+  static const Color grad2 = Colors.black;
+  static const Color iconAc = Color.fromRGBO(224, 212, 254, 100);
+  static Color iconIn = Colors.grey.withOpacity(.35);
+
+  static final Color color1 = Colors.grey.withOpacity(0.1);
   static const Color color2 = Colors.white;
-
-  static const TextStyle primaryText = TextStyle();
-  static const TextStyle secondaryText = TextStyle();
-  static const TextStyle tertiaryText = TextStyle();
-
+  static final Color color3 = Colors.brown[700]!;
+  static const Color color4 = Colors.blueGrey;
+  static const pureBlack = Color(0x00000000);
+  static const imageColor = Color(0x0031164a);
+  static const detailsColor = Color(0x005a2d85);
+  static var pureWhite = Color(0xFFFFFFFF);
+  static var buttonPink=Colors.pink[700];
+  static const phoneIcon=Color.fromRGBO(7, 184, 13,50);
+  static const gradient1=Colors.black;
+  static const gradient2=Colors.grey;
+  static const gradient3=Colors.white10;
+  static const transaparent=Colors.transparent;
+  static const lightWhite=Colors.white70;
 }
