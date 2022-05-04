@@ -256,8 +256,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             //       icon: Image.asset('assets/icons/logout.png'),
                             //       onPressed: () {},
                             //     ),
-                            //   ),
-                            // ),
+                           
                           ],
                         ),
                       ),
