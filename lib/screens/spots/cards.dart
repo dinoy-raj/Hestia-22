@@ -15,6 +15,7 @@ class _CardsState extends State<Cards> {
     viewportFraction: 0.75,
     initialPage: 0,
   );
+  bool _animate = true;
   int _currentPage = 0;
   double _scroll = 0;
   List<Map> data = [
@@ -71,144 +72,175 @@ class _CardsState extends State<Cards> {
         _currentPage = _pageController.page!.round();
       });
     });
+    Future.delayed(const Duration(milliseconds: 200), () {
+      setState(() {
+        _animate = false;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 360,
-      child: NotificationListener(
-        onNotification: (notification) {
-          return true;
-        },
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AnimatedCrossFade(
-              duration: const Duration(milliseconds: 300),
-              firstChild: const Padding(
-                padding: EdgeInsets.only(
-                  left: 15,
-                  top: 30,
-                  bottom: 30,
-                ),
-                child: RotatedBox(
-                  quarterTurns: -1,
-                  child: Text(
-                    "The Hotspots",
-                    style: TextStyle(
-                      letterSpacing: 5,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.white24,
+    return AnimatedPadding(
+      padding: _animate
+          ? const EdgeInsets.only(
+              top: 20,
+              right: 8,
+              left: 8,
+            )
+          : const EdgeInsets.only(
+              top: 20,
+            ),
+      duration: const Duration(milliseconds: 1000),
+      child: SizedBox(
+        height: 360,
+        child: NotificationListener(
+          onNotification: (notification) {
+            return true;
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AnimatedCrossFade(
+                duration: const Duration(milliseconds: 300),
+                firstChild: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    top: 30,
+                    bottom: 30,
+                  ),
+                  child: RotatedBox(
+                    quarterTurns: -1,
+                    child: AnimatedPadding(
+                      padding: _animate
+                          ? const EdgeInsets.only(
+                              top: 20,
+                              right: 20,
+                            )
+                          : const EdgeInsets.only(
+                              top: 20,
+                            ),
+                      duration: const Duration(milliseconds: 1000),
+                      child: const Text(
+                        "The Hotspots",
+                        style: TextStyle(
+                          letterSpacing: 5,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.white24,
+                        ),
+                      ),
                     ),
                   ),
                 ),
+                secondChild: const SizedBox(
+                  height: 0,
+                ),
+                crossFadeState: _scroll <= 0.2
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
               ),
-              secondChild: const SizedBox(
-                height: 0,
-              ),
-              crossFadeState: _scroll <= 0.2
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-            ),
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                physics: const BouncingScrollPhysics(),
-                itemCount: data.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Hero(
-                    tag: data[index]['name'],
-                    child: Material(
-                      color: Colors.transparent,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SpotPage(
-                                        data: data[index],
-                                      )));
-                        },
-                        child: AnimatedOpacity(
-                          duration: const Duration(milliseconds: 300),
-                          opacity: _currentPage == index ? 1.0 : 0.5,
-                          child: AnimatedContainer(
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: data.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Hero(
+                      tag: data[index]['name'],
+                      child: Material(
+                        color: Colors.transparent,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SpotPage(
+                                          data: data[index],
+                                        )));
+                          },
+                          child: AnimatedOpacity(
                             duration: const Duration(milliseconds: 300),
-                            padding: const EdgeInsets.all(20),
-                            margin: _currentPage == index
-                                ? EdgeInsets.zero
-                                : const EdgeInsets.all(30),
-                            decoration: BoxDecoration(
-                              color: Constants.color3.withOpacity(.25),
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  opacity: 0.5,
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(data[index]['image'])),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  index + 1 < 10
-                                      ? "0" + (index + 1).toString()
-                                      : (index + 1).toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 30,
-                                      color: Constants.color2.withOpacity(.5)),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data[index]['name'],
-                                      style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          color:
-                                              Constants.color2.withOpacity(.9)),
-                                    ),
-                                    Text(
-                                      data[index]['caption'],
-                                      style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontSize: 14,
-                                          color: Constants.color2
-                                              .withOpacity(.65)),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      data[index]['description'],
-                                      style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontSize: 12,
-                                          color: Constants.color2
-                                              .withOpacity(.35)),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            opacity: _currentPage == index ? 1.0 : 0.5,
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              padding: const EdgeInsets.all(20),
+                              margin: _currentPage == index
+                                  ? EdgeInsets.zero
+                                  : const EdgeInsets.all(30),
+                              decoration: BoxDecoration(
+                                color: Constants.color3.withOpacity(.25),
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    opacity: 0.5,
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(data[index]['image'])),
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    index + 1 < 10
+                                        ? "0" + (index + 1).toString()
+                                        : (index + 1).toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 30,
+                                        color:
+                                            Constants.color2.withOpacity(.5)),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data[index]['name'],
+                                        style: TextStyle(
+                                            overflow: TextOverflow.clip,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: Constants.color2
+                                                .withOpacity(.9)),
+                                      ),
+                                      Text(
+                                        data[index]['caption'],
+                                        style: TextStyle(
+                                            overflow: TextOverflow.clip,
+                                            fontSize: 14,
+                                            color: Constants.color2
+                                                .withOpacity(.65)),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        data[index]['description'],
+                                        style: TextStyle(
+                                            overflow: TextOverflow.clip,
+                                            fontSize: 12,
+                                            color: Constants.color2
+                                                .withOpacity(.35)),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
