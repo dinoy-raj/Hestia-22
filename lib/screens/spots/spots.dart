@@ -59,7 +59,7 @@ class SpotsState extends State<Spots> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 800),
             opacity: _animate ? 0 : 1,
             child: Column(
               children: [
