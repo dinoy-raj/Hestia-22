@@ -249,8 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             // const Spacer(),
                             // Container(
                             //   alignment: Alignment.centerRight,
-                            //   width: screenWidth * 0.1,
-                            //   //color: Colors.green,
+                          
                             
                           
                           ],
