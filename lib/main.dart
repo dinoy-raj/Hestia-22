@@ -56,6 +56,8 @@ class MyApp extends StatelessWidget {
       title: 'Hestia22',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
       ),
       home: const MyHomePage(),
     );
@@ -125,18 +127,4 @@ class Constants {
   static const Color color2 = Colors.white;
   static final Color color3 = Colors.brown[700]!;
   static const Color color4 = Colors.blueGrey;
-
-  static const TextStyle primaryText = TextStyle(
-    fontSize: 36,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-  );
-  static const TextStyle secondaryText = TextStyle(
-    fontSize: 42,
-    fontWeight: FontWeight.bold,
-    color: Colors.brown,
-  );
-  static const TextStyle tertiaryText = TextStyle(
-    fontSize: 12,
-  );
 }

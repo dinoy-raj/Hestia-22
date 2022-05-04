@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +17,16 @@ class Spots extends StatefulWidget {
 
 class SpotsState extends State<Spots> {
   double _opacity = 0;
-  EdgeInsets _padding1 = const EdgeInsets.only(right: 30);
-  EdgeInsets _padding2 = const EdgeInsets.only(left: 30, right: 30);
+  EdgeInsets _padding1 = const EdgeInsets.only(
+    right: 10,
+  );
+  EdgeInsets _padding2 = const EdgeInsets.only(
+    left: 30,
+  );
+  EdgeInsets _padding3 = const EdgeInsets.only(
+    top: 20,
+    left: 10,
+  );
   Future<List<String>> _getSuggestions(String pattern) async {
     return [pattern, pattern + 'aa', pattern + 'bb'];
   }
@@ -45,10 +52,11 @@ class SpotsState extends State<Spots> {
         _opacity = 1;
         _padding1 = EdgeInsets.zero;
         _padding2 = const EdgeInsets.only(
-          top: 10,
-          bottom: 30,
-          left: 30,
-          right: 30,
+          left: 20,
+          right: 20,
+        );
+        _padding3 = const EdgeInsets.only(
+          top: 20,
         );
       });
     });
@@ -84,65 +92,64 @@ class SpotsState extends State<Spots> {
                       "Explore",
                       style: TextStyle(
                         letterSpacing: 7,
-                        color: Constants.color2.withOpacity(.5),
+                        color: Constants.color2.withOpacity(.75),
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                AnimatedPadding(
-                  padding: _padding1,
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    height: 50,
-                    child: AnimatedTextKit(
-                      repeatForever: true,
-                      animatedTexts: [
-                        RotateAnimatedText(
-                          "TKMCE",
-                          textStyle: TextStyle(
-                            color: Constants.color3,
-                            letterSpacing: 3,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                SizedBox(
+                  height: 50,
+                  child: AnimatedTextKit(
+                    pause: const Duration(milliseconds: 300),
+                    repeatForever: true,
+                    animatedTexts: [
+                      RotateAnimatedText(
+                        "TKMCE",
+                        textStyle: TextStyle(
+                          color: Constants.color3,
+                          letterSpacing: 3,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                        RotateAnimatedText(
-                          "HESTIA'22",
-                          textStyle: TextStyle(
-                            color: Constants.color3,
-                            letterSpacing: 1,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      ),
+                      RotateAnimatedText(
+                        "HESTIA'22",
+                        textStyle: TextStyle(
+                          color: Constants.color3,
+                          letterSpacing: 1,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                        RotateAnimatedText(
-                          "UTOPIA",
-                          textStyle: TextStyle(
-                            color: Constants.color3,
-                            letterSpacing: 1,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      ),
+                      RotateAnimatedText(
+                        "UTOPIA",
+                        textStyle: TextStyle(
+                          color: Constants.color3,
+                          letterSpacing: 1,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                AnimatedPadding(
-                  padding: _padding2,
-                  duration: const Duration(milliseconds: 500),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    top: 10,
+                    bottom: 10,
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Constants.color1,
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20.0,
-                        right: 20.0,
-                      ),
+                    child: AnimatedPadding(
+                      padding: _padding2,
+                      duration: const Duration(milliseconds: 500),
                       child: TypeAheadField(
                         textFieldConfiguration: const TextFieldConfiguration(
                           style: TextStyle(color: Colors.grey),
@@ -196,7 +203,11 @@ class SpotsState extends State<Spots> {
                 const SizedBox(
                   height: 30,
                 ),
-                const Cards(),
+                AnimatedPadding(
+                  padding: _padding3,
+                  duration: const Duration(milliseconds: 500),
+                  child: const Cards(),
+                ),
                 const SizedBox(
                   height: 30,
                 ),
