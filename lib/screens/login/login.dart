@@ -71,13 +71,15 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   //color: Color(0xff121212),
                   decoration: const BoxDecoration(color: Color(0xff121212), borderRadius: BorderRadius.all(Radius.circular(20))),
-                  height: 80,
-                  width: screenWidth*0.6,
+                  height: 70,
+                  width: 280,
                   
-                  child: RoundedButton(
-                    text: 'Continue with Google',
-                    color: Color(0xff121212),
-                    press: () {},
+                  child: Center(
+                    child: RoundedButton(
+                      text: 'Continue with Google',
+                      
+                      press: () {},
+                    ),
                   ),
                 )
               ],
@@ -113,19 +115,21 @@ class RoundedButton extends StatelessWidget {
           children: [
             Container(
               //color: Colors.blue,
-
               child: Lottie.network(
                 'https://assets6.lottiefiles.com/private_files/lf30_3nvqj06a.json',
                 width: 70,
                 height: 80,
               ),
             ),
-            Text(
-              text,
-              style: TextStyle(
-                color: textColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
+            Container(
+              //color: Colors.green,
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: textColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                ),
               ),
             ),
           ],
