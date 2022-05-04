@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
-      home: const EventDetails(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -109,6 +109,17 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => const LoginPage()));
                   },
                   child: const Text("login")),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EventDetails(),
+                    ),
+                  );
+                },
+                child: const Text("event-details"),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -166,11 +177,11 @@ class Constants {
   static const imageColor = Color(0x0031164a);
   static const detailsColor = Color(0x005a2d85);
   static var pureWhite = Color(0xFFFFFFFF);
-  static var buttonPink=Colors.pink[700];
-  static const phoneIcon=Color.fromRGBO(7, 184, 13,50);
-  static const gradient1=Colors.black;
-  static const gradient2=Colors.grey;
-  static const gradient3=Colors.white10;
-  static const transaparent=Colors.transparent;
-  static const lightWhite=Colors.white70;
+  static var buttonPink = Colors.pink[700];
+  static const phoneIcon = Color.fromRGBO(7, 184, 13, 50);
+  static const gradient1 = Colors.black;
+  static const gradient2 = Colors.grey;
+  static const gradient3 = Colors.white10;
+  static const transaparent = Colors.transparent;
+  static const lightWhite = Colors.white70;
 }
