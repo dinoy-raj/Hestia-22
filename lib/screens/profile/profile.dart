@@ -25,9 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   // Container(
                   //   alignment: Alignment.topLeft,
-                 
-               
-                 
+
                   Container(
                     //color: Colors.red,
                     // width: screenWidth * 0.8,
@@ -42,16 +40,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  
-               
-             
-               
                 ],
               ),
             ),
             Container(
               height: screenHeight * 0.18,
-            //color: Colors.orange,
+              //color: Colors.orange,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,10 +54,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 95,
                       width: 95,
                       //color: Colors.black,
-                      child: const CircleAvatar(backgroundImage: AssetImage('assets/icons/face.png'),),
-                      decoration: const BoxDecoration(shape: BoxShape.circle,color: Color(0xff444444)),
+                      child: const CircleAvatar(
+                        backgroundImage: AssetImage('assets/icons/face.png'),
+                      ),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Color(0xff444444)),
                     ),
-                    const SizedBox(height: 8,),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     const Text(
                       'Karthik K',
                       style: TextStyle(
@@ -135,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: 140,
                           //color: const Color(0xff121212)
                         ),
-                         const SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         const Text(
@@ -179,13 +178,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
                                 width: screenWidth * 0.1,
                                 height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
-                                  
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
@@ -193,8 +192,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 child: Center(
                                   child: IconButton(
-                                    
-                                    icon: Image.asset('assets/icons/person.png'),
+                                    icon:
+                                        Image.asset('assets/icons/person.png'),
                                     onPressed: () {},
                                   ),
                                 ),
@@ -217,9 +216,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             //     child: IconButton(
                             //       icon: Image.asset('assets/icons/logout.png'),
                             //       onPressed: () {},
-                            //     ),
-                            //   ),
-                            // ),
+                        
                           ],
                         ),
                       ),
@@ -228,7 +225,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
                                 width: screenWidth * 0.1,
@@ -270,13 +268,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                       ),
-                      
                       Container(
                         height: 60,
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
                                 width: screenWidth * 0.1,
@@ -323,7 +321,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 8, right: 10),
                               child: Container(
                                 alignment: Alignment.topLeft,
                                 width: screenWidth * 0.1,
@@ -334,9 +333,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Radius.circular(15),
                                   ),
                                 ),
-                                child:Center(
+                                child: Center(
                                   child: IconButton(
-                                    icon: Image.asset('assets/icons/Logout.png'),
+                                    icon:
+                                        Image.asset('assets/icons/Logout.png'),
                                     onPressed: () {},
                                   ),
                                 ),
