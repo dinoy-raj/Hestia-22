@@ -44,9 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   // Container(
                   //   alignment: Alignment.topLeft,
-                  //   width: screenWidth * 0.08,
-                  //   //color: Colors.green,
-                  //   child: Center(
+               
              
                
                 ],
