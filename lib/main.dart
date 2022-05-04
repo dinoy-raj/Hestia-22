@@ -10,40 +10,42 @@ import 'screens/login/login.dart';
 void main() async {
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-
-  print('User granted permission: ${settings.authorizationStatus}');
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!');
-    print('Message data: ${message.data}');
-
-    if (message.notification != null) {
-      print(
-          'Message also contained a notification: ${message.notification!.title}');
-    }
-  });
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // todo FCM TEST
+  // await Firebase.initializeApp();
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
+  //
+  // NotificationSettings settings = await messaging.requestPermission(
+  //   alert: true,
+  //   announcement: false,
+  //   badge: true,
+  //   carPlay: false,
+  //   criticalAlert: false,
+  //   provisional: false,
+  //   sound: true,
+  // );
+  // print('User granted permission: ${settings.authorizationStatus}');
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   print('Got a message whilst in the foreground!');
+  //   print('Message data: ${message.data}');
+  //
+  //   if (message.notification != null) {
+  //     print(
+  //         'Message also contained a notification: ${message.notification!.title}');
+  //   }
+  // });
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // final fcmToken = await FirebaseMessaging.instance.getToken();
+  // print(fcmToken);
   runApp(const MyApp());
 }
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-
-  print("Handling a background message: ${message.messageId}");
-}
+//
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   // If you're going to use other Firebase services in the background, such as Firestore,
+//   // make sure you call `initializeApp` before using other Firebase services.
+//   await Firebase.initializeApp();
+//
+//   print("Handling a background message: ${message.messageId}");
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -77,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
+    // ignore: todo
     // TODO: Replace with provider once backend is up
     return Scaffold(
       body: Padding(
@@ -98,11 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text("home")),
               ElevatedButton(
                   onPressed: () async {
-                    final fcmToken =
-                        await FirebaseMessaging.instance.getToken();
-                    print(fcmToken);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Login()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
                   },
                   child: const Text("login")),
               ElevatedButton(

@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
@@ -9,9 +8,7 @@ import 'package:hestia22/screens/schedule/enums.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 import 'package:hestia22/screens/spots/spots.dart';
 import 'package:provider/provider.dart';
-
-import '../profile/profile.dart';
-import '../schedule/schedule.dart';
+import 'package:hestia22/screens/profile/profile.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -60,7 +57,7 @@ class _NavBarState extends State<NavBar> {
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),
               const Spots(),
-              const Profile()
+              ProfilePage()
             ],
           ),
           Align(
