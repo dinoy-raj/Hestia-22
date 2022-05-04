@@ -13,10 +13,8 @@ class SpotPage extends StatefulWidget {
 }
 
 class _SpotPageState extends State<SpotPage> {
-  double _opacity = 0;
-  EdgeInsets _padding1 = EdgeInsets.zero;
-  EdgeInsets _padding2 = EdgeInsets.zero;
-  EdgeInsets _padding3 = EdgeInsets.zero;
+  bool _animate = true;
+  double _opacity = 0.75;
   List<Map> data1 = [
     {
       'name': 'Almanac',
@@ -54,20 +52,9 @@ class _SpotPageState extends State<SpotPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
-        _opacity = 1;
-        _padding1 = EdgeInsets.only(
-          left: 20,
-          right: 20,
-        );
-        _padding2 = EdgeInsets.only(
-          left: 5,
-          right: 5,
-        );
-        _padding3 = EdgeInsets.only(
-          top: 20,
-        );
+        _animate = false;
       });
     });
   }
@@ -77,31 +64,33 @@ class _SpotPageState extends State<SpotPage> {
     return WillPopScope(
       onWillPop: () async {
         setState(() {
+          _animate = true;
           _opacity = 0;
-          _padding1 = EdgeInsets.zero;
-          _padding2 = EdgeInsets.zero;
-          _padding3 = EdgeInsets.zero;
         });
-        await Future.delayed(Duration(milliseconds: 300));
-        return await true;
+        await Future.delayed(const Duration(milliseconds: 300));
+        return true;
       },
       child: Material(
-        color: Constants.color1,
+        color: Constants.sc,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Stack(
                 children: [
                   Hero(
                     tag: widget.data['name'],
-                    child: Image.network(
-                      widget.data['image'],
-                      height: 300,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      color: Constants.color3,
-                      colorBlendMode: BlendMode.overlay,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 500),
+                      opacity: _opacity,
+                      child: Image.network(
+                        widget.data['image'],
+                        height: 300,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        color: Constants.color3.withOpacity(.5),
+                        colorBlendMode: BlendMode.overlay,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -110,9 +99,18 @@ class _SpotPageState extends State<SpotPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        AnimatedPadding(
+                          padding: _animate
+                              ? const EdgeInsets.only(
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  left: 5.0,
+                                  right: 5.0,
+                                )
+                              : const EdgeInsets.all(8.0),
+                          duration: const Duration(milliseconds: 500),
                           child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                               child: Container(
@@ -120,8 +118,8 @@ class _SpotPageState extends State<SpotPage> {
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.color1.withOpacity(.4),
-                                      Constants.color1.withOpacity(.8),
+                                      Constants.bg.withOpacity(.3),
+                                      Constants.bg.withOpacity(.6),
                                     ],
                                     begin: AlignmentDirectional.topStart,
                                     end: AlignmentDirectional.bottomEnd,
@@ -134,9 +132,18 @@ class _SpotPageState extends State<SpotPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        AnimatedPadding(
+                          padding: _animate
+                              ? const EdgeInsets.only(
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  left: 5.0,
+                                  right: 5.0,
+                                )
+                              : const EdgeInsets.all(8.0),
+                          duration: const Duration(milliseconds: 500),
                           child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                               child: Container(
@@ -144,8 +151,8 @@ class _SpotPageState extends State<SpotPage> {
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.color1.withOpacity(.4),
-                                      Constants.color1.withOpacity(.8),
+                                      Constants.bg.withOpacity(.3),
+                                      Constants.bg.withOpacity(.6),
                                     ],
                                     begin: AlignmentDirectional.topStart,
                                     end: AlignmentDirectional.bottomEnd,
@@ -166,70 +173,83 @@ class _SpotPageState extends State<SpotPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
-                        ClipRRect(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                            child: Container(
-                              height: 200,
-                              width: 200,
-                              decoration: BoxDecoration(
-                                color: Constants.color1,
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Constants.color1.withOpacity(.8),
-                                    Constants.color1.withOpacity(.4),
-                                  ],
-                                  begin: AlignmentDirectional.topStart,
-                                  end: AlignmentDirectional.bottomEnd,
-                                ),
-                              ),
-                              child: AnimatedOpacity(
-                                opacity: _opacity,
-                                duration: Duration(milliseconds: 500),
-                                child: AnimatedPadding(
-                                  padding: _padding1,
-                                  duration: Duration(milliseconds: 500),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        widget.data['name'],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 25,
-                                            color: Constants.color2
-                                                .withOpacity(.75)),
-                                      ),
-                                      Text(
-                                        widget.data['caption'],
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Constants.color2
-                                                .withOpacity(.5)),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        widget.data['description'],
-                                        style: TextStyle(
-                                            overflow: TextOverflow.clip,
-                                            fontSize: 14,
-                                            color: Constants.color2
-                                                .withOpacity(.25)),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
+                        AnimatedPadding(
+                          padding: _animate
+                              ? const EdgeInsets.only(
+                                  right: 20,
+                                )
+                              : EdgeInsets.zero,
+                          duration: const Duration(milliseconds: 500),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  color: Constants.bg,
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Constants.bg.withOpacity(.8),
+                                      Constants.bg.withOpacity(.4),
                                     ],
+                                    begin: AlignmentDirectional.topStart,
+                                    end: AlignmentDirectional.bottomEnd,
+                                  ),
+                                ),
+                                child: AnimatedOpacity(
+                                  opacity: _animate ? 0 : 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20,
+                                      right: 20,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          widget.data['name'],
+                                          style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25,
+                                              color: Constants.color2
+                                                  .withOpacity(.75)),
+                                        ),
+                                        Text(
+                                          widget.data['caption'],
+                                          style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontSize: 18,
+                                              color: Constants.color2
+                                                  .withOpacity(.5)),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          widget.data['description'],
+                                          style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontSize: 14,
+                                              color: Constants.color2
+                                                  .withOpacity(.25)),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -241,14 +261,14 @@ class _SpotPageState extends State<SpotPage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 1,
                   ),
                   ClipRRect(
@@ -261,8 +281,8 @@ class _SpotPageState extends State<SpotPage> {
                           borderRadius: BorderRadius.circular(30),
                           gradient: LinearGradient(
                             colors: [
-                              Constants.color3.withOpacity(.4),
-                              Constants.color3.withOpacity(.8),
+                              Constants.color3.withOpacity(.1),
+                              Constants.color3.withOpacity(.3),
                             ],
                             begin: AlignmentDirectional.topStart,
                             end: AlignmentDirectional.bottomEnd,
@@ -270,19 +290,28 @@ class _SpotPageState extends State<SpotPage> {
                         ),
                         child: ListView.builder(
                           itemCount: data1.length,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) => AnimatedOpacity(
-                            opacity: _opacity,
-                            duration: Duration(milliseconds: 500),
+                            opacity: _animate ? 0 : 1,
+                            duration: const Duration(milliseconds: 500),
                             child: AnimatedPadding(
-                              duration: Duration(milliseconds: 500),
-                              padding: _padding2,
+                              duration: const Duration(milliseconds: 500),
+                              padding: _animate
+                                  ? const EdgeInsets.only(
+                                      left: 5,
+                                      right: 5,
+                                      bottom: 10,
+                                    )
+                                  : const EdgeInsets.only(
+                                      left: 5,
+                                      right: 5,
+                                    ),
                               child: Column(
                                 children: [
                                   ListTile(
                                     title: Text(
                                       data1[index]['name'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Constants.color2,
                                       ),
                                     ),
@@ -303,7 +332,7 @@ class _SpotPageState extends State<SpotPage> {
                                                 .withOpacity(.25),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Icon(
@@ -332,22 +361,26 @@ class _SpotPageState extends State<SpotPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   AnimatedPadding(
-                    padding: _padding3,
-                    duration: Duration(milliseconds: 500),
+                    padding: _animate
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.only(
+                            top: 20,
+                          ),
+                    duration: const Duration(milliseconds: 500),
                     child: AnimatedOpacity(
-                      opacity: _opacity,
-                      duration: Duration(milliseconds: 500),
-                      child: Container(
+                      opacity: _animate ? 0 : 1,
+                      duration: const Duration(milliseconds: 500),
+                      child: SizedBox(
                         height: 400,
                         child: RotatedBox(
                           quarterTurns: 1,
                           child: Text(
                             "Events held at " + widget.data['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               letterSpacing: 5,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -358,12 +391,12 @@ class _SpotPageState extends State<SpotPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
             ],
