@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/home/home.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
+import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
@@ -84,6 +85,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 child: const Text("profile-success"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegistrationFailure(),
+                    ),
+                  );
+                },
+                child: const Text("profile-failure"),
               ),
             ],
           ),
