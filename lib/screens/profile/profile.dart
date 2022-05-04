@@ -47,8 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   width: screenWidth * 0.08,
                   //   //color: Colors.green,
                   //   child: Center(
-                  //     child: IconButton(
-                  //       icon: Image.asset('assets/icons/Logout.png'),
+             
                
                 ],
               ),
