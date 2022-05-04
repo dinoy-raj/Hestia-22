@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hestia22/providers/profile_provider.dart';
@@ -9,6 +8,12 @@ import '../../main.dart';
 class ProfileRegistration extends StatelessWidget {
   ProfileRegistration({Key? key}) : super(key: key);
   final PageController controller = PageController();
+
+  void prevPage() => controller.animateToPage(
+        controller.page!.toInt() - 1,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+      );
 
   void nextPage() => controller.animateToPage(
         controller.page!.toInt() + 1,
@@ -21,10 +26,27 @@ class ProfileRegistration extends StatelessWidget {
     return SafeArea(
       child: ChangeNotifierProvider<ProfileProvider>(
         create: (context) => ProfileProvider(),
-        child: Scaffold(
-          backgroundColor: Constants.sc,
-          body: Builder(builder: (context) {
-            return PageView(
+        child: Builder(builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  if (controller.page!.toInt() <= 0) {
+                    Navigator.pop(context);
+                  }
+                  prevPage();
+                  context.read<ProfileProvider>().page =
+                      controller.page!.toInt() - 1;
+                },
+              ),
+              title: Text(
+                  'Step ${context.watch<ProfileProvider>().page + 1} of 3'),
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+            ),
+            backgroundColor: Constants.sc,
+            body: PageView(
               children: [
                 accountInfo(context),
                 personalDetails(context),
@@ -32,9 +54,9 @@ class ProfileRegistration extends StatelessWidget {
               ],
               controller: controller,
               // physics: const NeverScrollableScrollPhysics(),
-            );
-          }),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -73,15 +95,18 @@ class ProfileRegistration extends StatelessWidget {
           const Spacer(),
           _TextField(
             hintText: 'college',
+            initialValue: context.read<ProfileProvider>().profile.college,
+            errorText: context.watch<ProfileProvider>().collegeError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setCollege('$val'),
-            errorText: context.read<ProfileProvider>().validateStep1(),
           ),
           const SizedBox(
             height: 20,
           ),
           _TextField(
             hintText: 'department',
+            initialValue: context.read<ProfileProvider>().profile.department,
+            errorText: context.watch<ProfileProvider>().departmentError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setDepartment('$val'),
           ),
@@ -89,7 +114,11 @@ class ProfileRegistration extends StatelessWidget {
             height: 40,
           ),
           ContinueButton(
-            onPressed: () => nextPage(),
+            onPressed: () {
+              if (context.read<ProfileProvider>().validateStep3()) {
+                context.read<ProfileProvider>().post();
+              }
+            },
           ),
           const Spacer(),
           const Spacer(),
@@ -130,6 +159,8 @@ class ProfileRegistration extends StatelessWidget {
           const Spacer(),
           _TextField(
             hintText: 'full name',
+            initialValue: context.read<ProfileProvider>().profile.name,
+            errorText: context.watch<ProfileProvider>().nameError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setName('$val'),
           ),
@@ -137,6 +168,8 @@ class ProfileRegistration extends StatelessWidget {
             height: 20,
           ),
           _TextField(
+            initialValue: context.read<ProfileProvider>().profile.address,
+            errorText: context.watch<ProfileProvider>().addressError,
             hintText: 'address',
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setAddress('$val'),
@@ -145,7 +178,13 @@ class ProfileRegistration extends StatelessWidget {
             height: 40,
           ),
           ContinueButton(
-            onPressed: () => nextPage(),
+            onPressed: () {
+              if (context.read<ProfileProvider>().validateStep2()) {
+                context.read<ProfileProvider>().page =
+                    controller.page!.toInt() + 1;
+                nextPage();
+              }
+            },
           ),
           const Spacer(),
           const Spacer(),
@@ -185,8 +224,9 @@ class ProfileRegistration extends StatelessWidget {
           // ),
           const Spacer(),
           _TextField(
+            initialValue: context.read<ProfileProvider>().profile.username,
             hintText: 'username',
-            errorText: context.read<ProfileProvider>().validateStep1(),
+            errorText: context.watch<ProfileProvider>().userNameError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setUsername('$val'),
           ),
@@ -194,7 +234,9 @@ class ProfileRegistration extends StatelessWidget {
             height: 20,
           ),
           _TextField(
+            initialValue: context.read<ProfileProvider>().profile.email,
             hintText: 'email',
+            errorText: context.watch<ProfileProvider>().emailError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setEmail('$val'),
           ),
@@ -203,8 +245,11 @@ class ProfileRegistration extends StatelessWidget {
           ),
           ContinueButton(
             onPressed: () {
-              context.read<ProfileProvider>().validateStep1();
-              nextPage();
+              if (context.read<ProfileProvider>().validateStep1()) {
+                context.read<ProfileProvider>().page =
+                    controller.page!.toInt() + 1;
+                nextPage();
+              }
             },
           ),
           const Spacer(),
@@ -220,11 +265,13 @@ class _TextField extends StatefulWidget {
   // final VoidCallback valueChanged;
   final Function(String?) valueChanged;
   final String? errorText;
+  final String? initialValue;
   const _TextField({
     Key? key,
     required this.hintText,
     required this.valueChanged,
     this.errorText,
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -253,6 +300,7 @@ class _TextFieldState extends State<_TextField> {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
+        initialValue: widget.initialValue,
         onChanged: widget.valueChanged,
         scrollPhysics: const BouncingScrollPhysics(),
         cursorColor: Constants.iconIn,
