@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
+import 'package:hestia22/screens/events/events.dart';
+import 'package:hestia22/screens/home/home.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
@@ -110,6 +112,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EventDetails(),
+                    ),
+                  );
+                },
+                child: const Text("event-details"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => ProfileRegistration()));
@@ -160,4 +173,15 @@ class Constants {
   static const Color color2 = Colors.white;
   static final Color color3 = Colors.brown[700]!;
   static const Color color4 = Colors.blueGrey;
+  static const pureBlack = Color(0x00000000);
+  static const imageColor = Color(0x0031164a);
+  static const detailsColor = Color(0x005a2d85);
+  static var pureWhite = Color(0xFFFFFFFF);
+  static var buttonPink = Colors.pink[700];
+  static const phoneIcon = Color.fromRGBO(7, 184, 13, 50);
+  static const gradient1 = Colors.black;
+  static const gradient2 = Colors.grey;
+  static const gradient3 = Colors.white10;
+  static const transaparent = Colors.transparent;
+  static const lightWhite = Colors.white70;
 }
