@@ -213,9 +213,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             //   width: screenWidth * 0.1,
                             //   //color: Colors.green,
                             //   child: Center(
-                            //     child: IconButton(
-                            //       icon: Image.asset('assets/icons/logout.png'),
-                            //       onPressed: () {},
                         
                           ],
                         ),
