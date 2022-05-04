@@ -1,51 +1,17 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
+import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
 import 'screens/login/login.dart';
+import 'services/django/django.dart' as django;
 
 void main() async {
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
-  // todo FCM TEST
-  // await Firebase.initializeApp();
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-  //
-  // NotificationSettings settings = await messaging.requestPermission(
-  //   alert: true,
-  //   announcement: false,
-  //   badge: true,
-  //   carPlay: false,
-  //   criticalAlert: false,
-  //   provisional: false,
-  //   sound: true,
-  // );
-  // print('User granted permission: ${settings.authorizationStatus}');
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   print('Got a message whilst in the foreground!');
-  //   print('Message data: ${message.data}');
-  //
-  //   if (message.notification != null) {
-  //     print(
-  //         'Message also contained a notification: ${message.notification!.title}');
-  //   }
-  // });
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // final fcmToken = await FirebaseMessaging.instance.getToken();
-  // print(fcmToken);
   runApp(const MyApp());
 }
-//
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // If you're going to use other Firebase services in the background, such as Firestore,
-//   // make sure you call `initializeApp` before using other Firebase services.
-//   await Firebase.initializeApp();
-//
-//   print("Handling a background message: ${message.messageId}");
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -92,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -107,6 +73,17 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => const LoginPage()));
                   },
                   child: const Text("login")),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EventDetails(),
+                    ),
+                  );
+                },
+                child: const Text("event-details"),
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -155,9 +132,19 @@ class Constants {
   static const Color grad2 = Colors.black;
   static const Color iconAc = Color.fromRGBO(224, 212, 254, 100);
   static Color iconIn = Colors.grey.withOpacity(.35);
-
   static final Color color1 = Colors.grey.withOpacity(0.1);
   static const Color color2 = Colors.white;
   static final Color color3 = Colors.brown[700]!;
   static const Color color4 = Colors.blueGrey;
+  static const pureBlack = Color(0x00000000);
+  static const imageColor = Color(0x0031164a);
+  static const detailsColor = Color(0x005a2d85);
+  static var pureWhite = Color(0xFFFFFFFF);
+  static var buttonPink = Colors.pink[700];
+  static const phoneIcon = Color.fromRGBO(7, 184, 13, 50);
+  static const gradient1 = Colors.black;
+  static const gradient2 = Colors.grey;
+  static const gradient3 = Colors.white10;
+  static const transaparent = Colors.transparent;
+  static const lightWhite = Colors.white70;
 }
