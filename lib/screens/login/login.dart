@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   
                   child: Center(
                     child: RoundedButton(
-                      text: 'Continue with Google',
+                      text: 'Continue withe Google',
                       
                       press: () {},
                     ),
