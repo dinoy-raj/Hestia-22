@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/home/home.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
+import 'package:hestia22/screens/profile/registration_success.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -65,13 +66,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const Text("login")),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileRegistration()));
-                  },
-                  child: const Text("profile-reg")),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileRegistration()));
+                },
+                child: const Text("profile-reg"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegistrationSuccess(),
+                    ),
+                  );
+                },
+                child: const Text("profile-success"),
+              ),
             ],
           ),
         ),
