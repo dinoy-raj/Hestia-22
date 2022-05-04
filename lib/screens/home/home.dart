@@ -18,7 +18,7 @@ class HomeState extends State<Home> {
   //for initial animations future delayed
   bool start = false;
   //notification icon
-  static  bool notPressed = false;
+  static bool notPressed = false;
 
   //notification icon
   bool filPressed = false;
@@ -114,7 +114,7 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
+    notPressed = false;
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -1082,27 +1082,9 @@ class HomeState extends State<Home> {
                   ],
                 ),
 
-                //notification page
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     SizedBox(
-                //       height: screenHeight * .1,
-                //       width: screenWidth,
-                //     ),
-                //     AnimatedContainer(
-                //       duration: const Duration(seconds: 1),
-                //       curve: Curves.fastLinearToSlowEaseIn,
-                //       height: Constants.notPressed ? screenHeight * .7 : 0,
-                //       width: screenWidth * .91,
-                //       decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(15),
-                //           color: Colors.black),
-                //     ),
-                //   ],
-                // ),
-                notificationPage(context),
+
+
+               notificationPage(context),
               ],
             ),
           ),
