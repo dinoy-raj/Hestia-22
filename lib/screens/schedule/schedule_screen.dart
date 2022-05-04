@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/schedule/custompage_route.dart';
 import 'package:hestia22/screens/schedule/data.dart';
 import 'package:hestia22/screens/schedule/date_info.dart';
@@ -9,44 +10,69 @@ import 'package:hestia22/screens/schedule/dates/third.dart';
 import 'package:hestia22/screens/schedule/enums.dart';
 import 'package:provider/provider.dart';
 
-class ScheduleScreen extends StatelessWidget {
+class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ScheduleScreen> createState() => _ScheduleScreenState();
+}
+
+class _ScheduleScreenState extends State<ScheduleScreen> {
+  bool start = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(milliseconds: 200), () {
+      setState(() {
+        start = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: AppBar(
-        // leading: Icon(Icons.arrow_back),
-        backgroundColor: Colors.black,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(children: [
-              Container(
-                height: 250,
-                color: Colors.black,
+      backgroundColor: Constants.sc,
+      body: Column(
+        children: [
+          Stack(children: [
+            AnimatedPadding(
+              duration: const Duration(seconds: 3),
+              curve: Curves.fastLinearToSlowEaseIn,
+              padding: start
+                  ? const EdgeInsets.symmetric(horizontal: 10)
+                  : const EdgeInsets.only(left: 0, right: 0),
+              child: SizedBox(
+                height: size.width*0.7,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: size.width * 0.17,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 18.0),
-                      child: Text(
-                        'May 26-29',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Helvetica',
-                            letterSpacing: 1),
+                    AnimatedOpacity(
+                      duration: const Duration(seconds: 3),
+                      curve: Curves.decelerate,
+                      opacity: start ? 1 : 0.2,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 18.0),
+                        child: Text(
+                          'May 26-29',
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'helvetica',
+                              letterSpacing: 1.3),
+                        ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: size.width * 0.1,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -58,34 +84,36 @@ class ScheduleScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                  width: size.width,
-                  height: 30,
-                  margin: EdgeInsets.only(top: 220),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
-                  )),
-            ]),
-            Consumer<DateInfo>(
-              builder: (context,value,child) {
-                if (value.dateType == DateType.a)
-              return FirstPage();
-            else if (value.dateType == DateType.b)
-              return SecondPage();
-            else if(value.dateType == DateType.c)
-              return ThirdPage();
-            else 
-            return FourthPage();
-              
-              },
-              child: FirstPage()),
-            
-
-          ],
-        ),
+            ),
+            Container(
+                width: size.width,
+                height: 30,
+                margin: EdgeInsets.only(top: 250),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(.1),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30)),
+                )),
+          ]),
+          Expanded(
+            child: Container(
+              color: Colors.grey.withOpacity(.1),
+              child: Consumer<DateInfo>(
+                  builder: (context, value, child) {
+                    if (value.dateType == DateType.a)
+                      return FirstPage();
+                    else if (value.dateType == DateType.b)
+                      return SecondPage();
+                    else if (value.dateType == DateType.c)
+                      return ThirdPage();
+                    else
+                      return FourthPage();
+                  },
+                  child: FirstPage()),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -93,37 +121,37 @@ class ScheduleScreen extends StatelessWidget {
   Widget buildDateButton(DateInfo currentDateInfo) {
     return Consumer<DateInfo>(
       builder: (context, value, child) {
+        bool start = false;
         return InkWell(
           onTap: () {
             var dateInfo = Provider.of<DateInfo>(context, listen: false);
             dateInfo.updateDate(currentDateInfo);
           },
           child: Container(
-            width: 80,
-            height: 100,
+            width: 75,
+            height: 90,
             decoration: BoxDecoration(
-                color: currentDateInfo.dateType == value.dateType
-                    ? Color.fromARGB(255, 253, 255, 162)
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    // offset: Offset(1, 1.5),
-                    color: Colors.yellow,
-                    blurRadius: 7.0,
-                  ),
-                ]),
+              color: currentDateInfo.dateType == value.dateType
+                  ? Colors.grey.withOpacity(0.4)
+                  : Constants.color1,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   currentDateInfo.date,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: currentDateInfo.dateType == value.dateType
+                        ? FontWeight.w800
+                        : FontWeight.w500,
                     fontSize: 20,
+                    color: currentDateInfo.dateType == value.dateType
+                     ?Colors.grey.withOpacity(1)
+                     :Colors.grey.withOpacity(0.6),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -131,7 +159,7 @@ class ScheduleScreen extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Helvetica',
                     letterSpacing: 1,
-                    color: Colors.grey,
+                    color: Colors.grey.withOpacity(0.5),
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
                   ),
@@ -145,7 +173,7 @@ class ScheduleScreen extends StatelessWidget {
   }
 }
 
-class EventCard extends StatelessWidget {
+class EventCard extends StatefulWidget {
   final String time;
   final String eventName;
   final String description;
@@ -156,6 +184,23 @@ class EventCard extends StatelessWidget {
     required this.time,
   }) : super(key: key);
 
+  @override
+  State<EventCard> createState() => _EventCardState();
+}
+
+class _EventCardState extends State<EventCard> {
+  bool start = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(milliseconds: 150), () {
+      setState(() {
+        start = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,43 +210,43 @@ class EventCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            time,
+            widget.time,
             style: const TextStyle(
                 fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 15),
           ),
           const SizedBox(
             height: 16,
           ),
-          Container(
-            width: size.width * 0.8,
-            height: size.width * 0.22,
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  offset: Offset(2, 2),
-                  blurRadius: 12,
-                  color: Color.fromRGBO(0, 0, 0, 0.16),
-                )
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(eventName,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 20)),
-                    Text(description,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                            color: Colors.grey[400]))
-                  ]),
+          AnimatedOpacity(
+            duration: const Duration(seconds: 3),
+            curve: Curves.decelerate,
+            opacity: start ? 1 : 0,
+            child: AnimatedContainer(
+              duration: const Duration(seconds: 3),
+              curve: Curves.slowMiddle,
+              width: size.width * 0.8,
+              height: size.width * 0.22,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(widget.eventName,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 20)),
+                      Text(widget.description,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                              color: Colors.grey[400]))
+                    ]),
+              ),
             ),
           ),
         ],
@@ -210,29 +255,37 @@ class EventCard extends StatelessWidget {
   }
 }
 
-class TimeLine extends StatelessWidget {
+class TimeLine extends StatefulWidget {
   const TimeLine({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<TimeLine> createState() => _TimeLineState();
+}
+
+class _TimeLineState extends State<TimeLine> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50), color: Colors.grey[350]),
-        ),
-        Container(
-          width: 3,
-          height: size.width * 0.359,
-          color: Colors.grey[350],
-        ),
-      ],
+    return SizedBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: size.width*.03,
+            height: size.width*0.03,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.grey),
+          ),
+          Container(
+            width: size.width*0.006,
+            height: size.width * 0.359,
+            color: Colors.grey,
+          ),
+        ],
+      ),
     );
   }
 }
