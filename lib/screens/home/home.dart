@@ -305,28 +305,32 @@ class _HomeState extends State<Home> {
                                   child: SizedBox(
                                     height: screenHeight * .05,
                                     width: screenWidth * .65,
-                                    child: TextFormField(
-                                      scrollPhysics:
-                                          const BouncingScrollPhysics(),
-                                      cursorColor: Constants.iconIn,
-                                      cursorRadius: const Radius.circular(10),
-                                      style: const TextStyle(
-                                        fontFamily: 'Helvetica',
-                                        color: Constants.iconAc,
-                                        fontSize: 16,
-                                      ),
-                                      decoration: InputDecoration(
-                                        hintText: "Discover new event",
-                                        hintStyle: TextStyle(
+                                    child: Center(
+                                      child: TextFormField(
+                                        scrollPhysics:
+                                            const BouncingScrollPhysics(),
+                                        cursorColor: Constants.iconIn,
+                                        cursorRadius:
+                                            const Radius.circular(10),
+                                        style: const TextStyle(
                                           fontFamily: 'Helvetica',
-                                          color: Constants.iconIn,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w100,
+                                          color: Constants.iconAc,
+                                          fontSize: 16,
                                         ),
-                                        hoverColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        fillColor: Colors.transparent,
-                                        border: InputBorder.none,
+                                        textAlign: TextAlign.start,
+                                        decoration: InputDecoration(
+                                          hintText: "Discover new event",
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Helvetica',
+                                            color: Constants.iconIn,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                          hoverColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          fillColor: Colors.transparent,
+                                          border: InputBorder.none,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -719,7 +723,7 @@ class _HomeState extends State<Home> {
                                                             Text(
                                                               show[index]
                                                                   ['name'],
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   fontSize: 30,
                                                                   color: Colors
                                                                       .white,
@@ -758,7 +762,7 @@ class _HomeState extends State<Home> {
                                                                         AnimatedContainer(
                                                                       curve: Curves
                                                                           .decelerate,
-                                                                      duration: Duration(
+                                                                      duration: const Duration(
                                                                           milliseconds:
                                                                               100),
                                                                       height:
@@ -960,11 +964,11 @@ class _HomeState extends State<Home> {
                                                                             'price'])));
                                                               } else {
                                                                 show.sort((a, b) => int
-                                                                    .parse(a[
-                                                                'date'])
+                                                                        .parse(a[
+                                                                            'date'])
                                                                     .compareTo(int
-                                                                    .parse(b[
-                                                                'date'])));
+                                                                        .parse(b[
+                                                                            'date'])));
                                                               }
                                                             });
                                                           },
