@@ -7,6 +7,10 @@ import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
 import 'package:hestia22/screens/spots/spots.dart';
+import 'package:hestia22/screens/schedule/date_info.dart';
+import 'package:hestia22/screens/schedule/enums.dart';
+import 'package:hestia22/screens/schedule/schedule_screen.dart';
+import 'package:provider/provider.dart';
 import 'screens/login/login.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
@@ -62,7 +66,9 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
-      home: const MyHomePage(),
+      home: ChangeNotifierProvider<DateInfo>(
+        create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
+        child: ScheduleScreen()),
     );
   }
 }
