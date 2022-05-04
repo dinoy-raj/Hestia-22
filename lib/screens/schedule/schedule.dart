@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class Schedule extends StatefulWidget {
+  const Schedule({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<Schedule> createState() => _ScheduleState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
       height: screenHeight,
       width: screenWidth,
@@ -22,7 +23,7 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "profile",
+              "schedule",
               style: TextStyle(color: Colors.white),
             ),
           ],
