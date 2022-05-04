@@ -18,66 +18,70 @@ class _LoginPageState extends State<LoginPage> {
       body: SizedBox(
         height: screenHeight,
         width: screenWidth,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: PageView(
           children: [
-            Container(
-              height: screenHeight * 0.6,
-              child: Lottie.asset(
-                  'assets/animations/75705-welcome-animation.json'),
-            ),
-            Container(
-              //color: Color(0xff121212),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: screenHeight * 0.6,
+                  child: Lottie.asset(
+                      'assets/animations/75705-welcome-animation.json'),
+                ),
+                Container(
+                  //color: Color(0xff121212),
 
-              height: screenHeight * 0.2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Container(
-                      child: const Text(
-                        'Hello Hestia',
-                        style: TextStyle(
-                          fontFamily: 'Helvetica',
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  height: screenHeight * 0.2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Container(
+                          child: const Text(
+                            'Hello Hestia',
+                            style: TextStyle(
+                              fontFamily: 'Helvetica',
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 30, right: 30, top: 10),
-                    child: Container(
-                      child: const Text(
-                        'Hestia is the biggest south indian technocultural festival\nin Kerala India',
-                        style: TextStyle(
-                          fontFamily: 'Helvetica',
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 30, right: 30, top: 10),
+                        child: Container(
+                          child: const Text(
+                            'Hestia is the biggest south indian technocultural festival\nin Kerala India',
+                            style: TextStyle(
+                              fontFamily: 'Helvetica',
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  //color: Color(0xff121212),
+                  decoration: const BoxDecoration(color: Color(0xff121212), borderRadius: BorderRadius.all(Radius.circular(20))),
+                  height: 80,
+                  width: screenWidth*0.6,
+                  
+                  child: RoundedButton(
+                    text: 'Continue with Google',
+                    color: Color(0xff121212),
+                    press: () {},
+                  ),
+                )
+              ],
             ),
-            Container(
-              //color: Color(0xff121212),
-              decoration: const BoxDecoration(color: Color(0xff121212), borderRadius: BorderRadius.all(Radius.circular(20))),
-              height: 80,
-              width: screenWidth*0.6,
-              
-              child: RoundedButton(
-                text: 'Continue with Google',
-                color: Color(0xff121212),
-                press: () {},
-              ),
-            )
           ],
         ),
       ),
