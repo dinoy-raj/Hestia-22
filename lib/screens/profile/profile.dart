@@ -21,21 +21,22 @@ class _ProfilePageState extends State<ProfilePage> {
               height: screenHeight * 0.09,
               //color: Colors.green,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    width: screenWidth * 0.1,
-                    //color: Colors.green,
-                    child: Center(
-                      child: IconButton(
-                        icon: Image.asset('assets/icons/backk.png'),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   alignment: Alignment.topLeft,
+                  //   width: screenWidth * 0.1,
+                  //   //color: Colors.green,
+                  //   child: Center(
+                  //     child: IconButton(
+                  //       icon: Image.asset('assets/icons/backk.png'),
+                  //       onPressed: () {},
+                  //     ),
+                  //   ),
+                  // ),
                   Container(
                     //color: Colors.red,
-                    width: screenWidth * 0.8,
+                    // width: screenWidth * 0.8,
                     child: const Center(
                       child: Text(
                         'Profile',
@@ -47,17 +48,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    width: screenWidth * 0.08,
-                    //color: Colors.green,
-                    child: Center(
-                      child: IconButton(
-                        icon: Image.asset('assets/icons/Logout.png'),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   alignment: Alignment.topLeft,
+                  //   width: screenWidth * 0.08,
+                  //   //color: Colors.green,
+                  //   child: Center(
+                  //     child: IconButton(
+                  //       icon: Image.asset('assets/icons/Logout.png'),
+                  //       onPressed: () {},
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -200,7 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
+                                    Radius.circular(15),
                                   ),
                                 ),
                                 child: Center(
@@ -248,7 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 decoration: const BoxDecoration(
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
+                                    Radius.circular(15),
                                   ),
                                 ),
                                 child: Center(
@@ -282,6 +283,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                       ),
+                      
                       Container(
                         height: 60,
                         child: Row(
@@ -295,19 +297,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                 decoration: const BoxDecoration(
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
+                                    Radius.circular(15),
                                   ),
                                 ),
-                                child:Center(
+                                child: Center(
                                   child: IconButton(
-                                    icon: Image.asset('assets/icons/info.png'),
+                                    icon: Image.asset('assets/icons/call.png'),
                                     onPressed: () {},
                                   ),
                                 ),
                               ),
                             ),
                             const Text(
-                              'About Hestia',
+                              'Contact Admin',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -342,19 +344,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                 decoration: const BoxDecoration(
                                   color: Color(0xff444444),
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
+                                    Radius.circular(15),
                                   ),
                                 ),
-                                child: Center(
+                                child:Center(
                                   child: IconButton(
-                                    icon: Image.asset('assets/icons/call.png'),
+                                    icon: Image.asset('assets/icons/Logout.png'),
                                     onPressed: () {},
                                   ),
                                 ),
                               ),
                             ),
                             const Text(
-                              'Contact Admin',
+                              'Logout',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
