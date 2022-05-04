@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 8,),
                     const Text(
-                      'Karthik',
+                      'Karthik K',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
