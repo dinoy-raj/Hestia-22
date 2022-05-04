@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   //for initial animations future delayed
-  bool start = false;
+  static bool start = false;
   //notification icon
   static bool notPressed = false;
 
@@ -24,8 +24,8 @@ class HomeState extends State<Home> {
   static bool filPressed = false;
 
   //category list
-  int catSelect = 10;
-  List category = [
+  static int catSelect = 10;
+  static List category = [
     "Proshows",
     "Culturals",
     "Workshops",
@@ -115,6 +115,8 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
     notPressed = false;
+    start = false;
+    catSelect = 10;
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -838,8 +840,6 @@ class HomeState extends State<Home> {
                               );
                             }),
                       ),
-
-
                     ],
                   ),
                 ),
@@ -1084,9 +1084,7 @@ class HomeState extends State<Home> {
                   ],
                 ),
 
-
-
-               notificationPage(context),
+                notificationPage(context),
               ],
             ),
           ),
