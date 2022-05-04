@@ -20,8 +20,8 @@ class HomeState extends State<Home> {
   //notification icon
   static bool notPressed = false;
 
-  //notification icon
-  bool filPressed = false;
+  //filter icon
+  static bool filPressed = false;
 
   //category list
   int catSelect = 10;
@@ -838,6 +838,8 @@ class HomeState extends State<Home> {
                               );
                             }),
                       ),
+
+
                     ],
                   ),
                 ),
