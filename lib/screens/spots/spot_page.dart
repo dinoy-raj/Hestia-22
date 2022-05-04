@@ -107,7 +107,12 @@ class _SpotPageState extends State<SpotPage> {
                                   left: 5.0,
                                   right: 5.0,
                                 )
-                              : const EdgeInsets.all(8.0),
+                              : const EdgeInsets.only(
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  left: 10.0,
+                                  right: 5.0,
+                                ),
                           duration: const Duration(milliseconds: 500),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
@@ -140,7 +145,12 @@ class _SpotPageState extends State<SpotPage> {
                                   left: 5.0,
                                   right: 5.0,
                                 )
-                              : const EdgeInsets.all(8.0),
+                              : const EdgeInsets.only(
+                                  top: 8.0,
+                                  bottom: 8.0,
+                                  left: 12.0,
+                                  right: 5.0,
+                                ),
                           duration: const Duration(milliseconds: 500),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
@@ -266,19 +276,17 @@ class _SpotPageState extends State<SpotPage> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    width: 1,
-                  ),
                   ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                       child: Container(
                         height: 400,
                         width: 270,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
                           gradient: LinearGradient(
                             colors: [
                               Constants.color3.withOpacity(.1),
@@ -328,6 +336,7 @@ class _SpotPageState extends State<SpotPage> {
                                           DateFormat.MMMMEEEEd().format(
                                               (data1[index]['datetime'])),
                                           style: TextStyle(
+                                            fontSize: 12,
                                             color: Constants.color2
                                                 .withOpacity(.25),
                                           ),
@@ -362,7 +371,7 @@ class _SpotPageState extends State<SpotPage> {
                     ),
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 30,
                   ),
                   AnimatedPadding(
                     padding: _animate
@@ -392,7 +401,7 @@ class _SpotPageState extends State<SpotPage> {
                     ),
                   ),
                   const SizedBox(
-                    width: 30,
+                    width: 20,
                   ),
                 ],
               ),
