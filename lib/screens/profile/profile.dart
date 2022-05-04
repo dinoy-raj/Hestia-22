@@ -49,10 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   child: Center(
                   //     child: IconButton(
                   //       icon: Image.asset('assets/icons/Logout.png'),
-                  //       onPressed: () {},
-                  //     ),
-                  //   ),
-                  // ),
+               
                 ],
               ),
             ),
