@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -15,6 +16,8 @@ class EventDetails extends StatefulWidget {
 
 class _EventDetailsState extends State<EventDetails> {
   static const fontfamily = 'Helvetica';
+  double letterspace=1.5;
+  double contentspace=1.2;
   Map eventData = {
     'image': 'assets/images/spotlight.png',
     'name': 'SPOTLIGHT',
@@ -95,8 +98,9 @@ class _EventDetailsState extends State<EventDetails> {
                 color: Constants.lightWhite.withOpacity(0.4),
               ),
               Text(
-                "  " + eventData['date'],
+                "   " + eventData['date'],
                 style: TextStyle(
+                  letterSpacing: letterspace,
                   decoration: TextDecoration.none,
                   fontSize: 16,
                   fontStyle: FontStyle.normal,
@@ -115,16 +119,18 @@ class _EventDetailsState extends State<EventDetails> {
           child: Row(
             children: [
                Icon(
-                Icons.currency_rupee,
+                FontAwesomeIcons.ticket,
+                size: 20,
                 color: Constants.lightWhite.withOpacity(0.4),
               ),
               Text(
-                "  " +
+                "   " +
                     eventData['registrationfee'] +
                     " Reg. Fee /  " +
                     eventData['prize'] +
                     " Prize",
                 style: TextStyle(
+                  letterSpacing: letterspace,
                   decoration: TextDecoration.none,
                   fontSize: 16,
                   fontFamily: fontfamily,
@@ -175,12 +181,13 @@ class _EventDetailsState extends State<EventDetails> {
               Row(
                 children: [
                    Icon(
-                    Icons.person,
+                    FontAwesomeIcons.person,
                     color: Constants.lightWhite.withOpacity(0.4),
                   ),
                   Text(
                     "  " + eventData['coordinator1'],
                     style:  TextStyle(
+                      letterSpacing: letterspace,
                       decoration: TextDecoration.none,
                       fontSize: 16,
                       fontFamily: fontfamily,
@@ -194,7 +201,8 @@ class _EventDetailsState extends State<EventDetails> {
               Row(
                 children: [
                   Icon(
-                    Icons.phone,
+                    FontAwesomeIcons.phone,
+                    size: 16,
                     color: Constants.phoneIcon.withOpacity(0.8),
                   ),
                   TextButton(
@@ -206,8 +214,9 @@ class _EventDetailsState extends State<EventDetails> {
                       }
                     },
                     child: Text(
-                      eventData['phone_no_cord1'],
+                      "  "+eventData['phone_no_cord1'],
                       style: TextStyle(
+                          letterSpacing: letterspace,
                           color: Constants.pureWhite.withOpacity(0.8),
                           fontSize: 16,
                           overflow: TextOverflow.clip,
@@ -231,7 +240,7 @@ class _EventDetailsState extends State<EventDetails> {
               Row(
                 children: [
                    Icon(
-                    Icons.person,
+                    FontAwesomeIcons.person,
                     color: Constants.lightWhite.withOpacity(0.4),
                   ),
                   Text(
@@ -239,6 +248,7 @@ class _EventDetailsState extends State<EventDetails> {
                     style:  TextStyle(
                       decoration: TextDecoration.none,
                       fontSize: 16,
+                      letterSpacing: letterspace,
                       fontFamily: fontfamily,
                       overflow: TextOverflow.clip,
                       color: Constants.lightWhite.withOpacity(0.8),
@@ -250,7 +260,8 @@ class _EventDetailsState extends State<EventDetails> {
               Row(
                 children: [
                   const Icon(
-                    Icons.phone,
+                    FontAwesomeIcons.phone,
+                    size: 16,
                     color: Constants.phoneIcon,
                   ),
                   TextButton(
@@ -262,10 +273,11 @@ class _EventDetailsState extends State<EventDetails> {
                       }
                     },
                     child: Text(
-                      eventData['phone_no_cord2'],
+                     "  "+ eventData['phone_no_cord2'],
                       style:  TextStyle(
                           color: Constants.pureWhite.withOpacity(0.8),
                           fontSize: 16,
+                          letterSpacing: letterspace,
                           overflow: TextOverflow.clip,
                           fontWeight: FontWeight.normal,
                           fontFamily: fontfamily),
@@ -293,6 +305,7 @@ class _EventDetailsState extends State<EventDetails> {
             style: TextStyle(
               decoration: TextDecoration.none,
               fontSize: 24,
+              letterSpacing: letterspace,
               fontFamily: fontfamily,
               overflow: TextOverflow.clip,
               color: Constants.pureWhite.withOpacity(0.75),
@@ -304,10 +317,11 @@ class _EventDetailsState extends State<EventDetails> {
             eventData['description'],
             style: TextStyle( overflow: TextOverflow.clip,
               fontSize: 16,
+
               fontFamily: fontfamily,
               color: Constants.lightWhite.withOpacity(0.6),
               inherit: true,
-              letterSpacing: 1,
+              letterSpacing: contentspace,
               wordSpacing: 2,
               fontWeight: FontWeight.normal,
             ),
@@ -403,6 +417,7 @@ class _EventDetailsState extends State<EventDetails> {
                               Text(
                                 "Day",
                                 style: TextStyle(
+                                  letterSpacing: contentspace,
                                     color: Constants.pureWhite.withOpacity(0.7),
                                     fontSize: 16,
                                     overflow: TextOverflow.clip,
@@ -413,7 +428,7 @@ class _EventDetailsState extends State<EventDetails> {
                                 "Hrs",
                                 style: TextStyle(
                                     color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,
+                                    fontSize: 16,letterSpacing: contentspace,
                                     overflow: TextOverflow.clip,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: fontfamily),
@@ -422,7 +437,7 @@ class _EventDetailsState extends State<EventDetails> {
                                 "Min",
                                 style: TextStyle(
                                     color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,
+                                    fontSize: 16,letterSpacing: contentspace,
                                     overflow: TextOverflow.clip,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: fontfamily),
@@ -431,7 +446,7 @@ class _EventDetailsState extends State<EventDetails> {
                                 "Sec",
                                 style: TextStyle(
                                     color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,
+                                    fontSize: 16,letterSpacing: contentspace,
                                     overflow: TextOverflow.clip,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: fontfamily),
@@ -444,12 +459,14 @@ class _EventDetailsState extends State<EventDetails> {
                             fade: true,
                             separatorStyle: const TextStyle(
                                 decoration: TextDecoration.none,
+                                letterSpacing: 2.5,
                                 fontSize: 16,
                                 overflow: TextOverflow.clip,
                                 decorationStyle: TextDecorationStyle.double),
                             showZeroValue: false,
                             textStyle:  TextStyle(
                               fontSize: 16,
+
                               decoration: TextDecoration.none,
                               decorationColor: Constants.transaparent,
                               overflow: TextOverflow.clip,
@@ -476,13 +493,14 @@ class _EventDetailsState extends State<EventDetails> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(
-                        Icons.my_location_sharp,
+                        FontAwesomeIcons.locationPin,
                         color: Constants.lightWhite,
                         size: 16,
                       ),
                       Text(
                         "   " + eventData['location'],
                         style: TextStyle(
+                          letterSpacing: letterspace,
                             overflow: TextOverflow.clip,
                             color: Constants.pureWhite.withOpacity(0.8),
                             fontWeight: FontWeight.normal,
@@ -495,6 +513,7 @@ class _EventDetailsState extends State<EventDetails> {
                 eventData['name'],
                 style:  TextStyle(
                   fontFamily: fontfamily,
+                  letterSpacing: letterspace,
                   fontSize: 28,
                   color: Constants.pureWhite.withOpacity(0.8),
                   fontWeight: FontWeight.bold,
@@ -519,9 +538,10 @@ class _EventDetailsState extends State<EventDetails> {
           width * .06, width * .03, width * .06, width * .03),
       onPressed: () {},
       color: Constants.buttonPink,
-      child: const Text(
+      child:  Text(
         "Book Now",
         style: TextStyle(
+            letterSpacing: contentspace,
             overflow: TextOverflow.clip,
             color: Constants.lightWhite, fontFamily: fontfamily, fontSize: 16),
       ),
