@@ -1,29 +1,33 @@
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/home/tab.dart';
+
+import 'notification.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Home> createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   //for initial animations future delayed
-  bool start = false;
+  static bool start = false;
   //notification icon
-  bool notPressed = false;
+  static bool notPressed = false;
 
-  //notification icon
-  bool filPressed = false;
+  //filter icon
+  static bool filPressed = false;
 
   //category list
-  int catSelect = 10;
-  List category = [
+  static int catSelect = 10;
+  static List category = [
     "Proshows",
     "Culturals",
     "Workshops",
@@ -52,7 +56,7 @@ class _HomeState extends State<Home> {
           'https://img.freepik.com/free-photo/young-caucasian-female-musician-performer-singing-dancing-neon-light-gradient_155003-44335.jpg?t=st=1651607959~exp=1651608559~hmac=f554832ef41c853ed8b05414ba9bbce9a93ee95a31d0201b3fd3daca6ebb186d&w=360',
     },
     {
-      'name': 'pineapple express',
+      'name': 'Pineapple express',
       'date': '28',
       'remain': '67',
       'price': '1000',
@@ -60,7 +64,7 @@ class _HomeState extends State<Home> {
           'https://img.freepik.com/free-photo/front-view-young-female-dj-entertaining-crowd_23-2148325470.jpg?t=st=1651607959~exp=1651608559~hmac=aef81b2e61633c74b2a17941df04b3411b0aef93ffb75f052f7af2a298d29093&w=740',
     },
     {
-      'name': 'aron chupa',
+      'name': 'Aron chupa',
       'date': '28',
       'remain': '20',
       'price': '2000',
@@ -68,7 +72,7 @@ class _HomeState extends State<Home> {
           'https://img.freepik.com/free-photo/long-hair-guitar-guy-singing-low-view_23-2148751621.jpg?t=st=1651608075~exp=1651608675~hmac=590784e3a1ef7441c6bd3b757085ce0802e2b65c90d53ac776aecaa32ecf982c&w=740',
     },
     {
-      'name': 'dino',
+      'name': 'Neeraj',
       'date': '29',
       'remain': '100',
       'price': '900',
@@ -106,13 +110,15 @@ class _HomeState extends State<Home> {
   List Sort3 = [];
 
   PageController pageControl =
-      new PageController(viewportFraction: .80, initialPage: 0);
+      PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
 
   @override
   void initState() {
     super.initState();
-
+    notPressed = false;
+    start = false;
+    // catSelect = 10;
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -305,28 +311,31 @@ class _HomeState extends State<Home> {
                                   child: SizedBox(
                                     height: screenHeight * .05,
                                     width: screenWidth * .65,
-                                    child: TextFormField(
-                                      scrollPhysics:
-                                          const BouncingScrollPhysics(),
-                                      cursorColor: Constants.iconIn,
-                                      cursorRadius: const Radius.circular(10),
-                                      style: const TextStyle(
-                                        fontFamily: 'Helvetica',
-                                        color: Constants.iconAc,
-                                        fontSize: 16,
-                                      ),
-                                      decoration: InputDecoration(
-                                        hintText: "Discover new event",
-                                        hintStyle: TextStyle(
+                                    child: Center(
+                                      child: TextFormField(
+                                        scrollPhysics:
+                                            const BouncingScrollPhysics(),
+                                        cursorColor: Constants.iconIn,
+                                        cursorRadius: const Radius.circular(10),
+                                        style: const TextStyle(
                                           fontFamily: 'Helvetica',
-                                          color: Constants.iconIn,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w100,
+                                          color: Constants.iconAc,
+                                          fontSize: 16,
                                         ),
-                                        hoverColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        fillColor: Colors.transparent,
-                                        border: InputBorder.none,
+                                        textAlign: TextAlign.start,
+                                        decoration: InputDecoration(
+                                          hintText: "Discover new event",
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Helvetica',
+                                            color: Constants.iconIn,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                          hoverColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          fillColor: Colors.transparent,
+                                          border: InputBorder.none,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -369,7 +378,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
 
-                      //category section
+                      // category section
                       AnimatedPadding(
                         duration: const Duration(seconds: 1),
                         curve: Curves.fastLinearToSlowEaseIn,
@@ -379,7 +388,7 @@ class _HomeState extends State<Home> {
                         child: Container(
                           height: screenHeight * .1,
                           width: screenWidth,
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -400,7 +409,7 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: screenHeight * .045,
                                 width: screenWidth,
                                 child: ShaderMask(
@@ -410,11 +419,12 @@ class _HomeState extends State<Home> {
                                         Colors.white,
                                         Colors.white.withOpacity(0.05)
                                       ],
-                                      stops: [0.8, 1],
+                                      stops: const [0.8, 1],
                                       tileMode: TileMode.mirror,
                                     ).createShader(bounds);
                                   },
                                   child: ListView.builder(
+                                    padding: const EdgeInsets.only(right: 40),
                                       physics: const BouncingScrollPhysics(),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: category.length,
@@ -427,17 +437,22 @@ class _HomeState extends State<Home> {
                                             });
                                           },
                                           child: AnimatedOpacity(
-                                            duration: Duration(seconds: 1),
+                                            duration:
+                                                const Duration(seconds: 1),
                                             curve: Curves.decelerate,
                                             opacity: start ? 1 : 0,
                                             child: AnimatedPadding(
                                               padding: start
-                                                  ? EdgeInsets.only(right: 8)
-                                                  : EdgeInsets.only(right: 15),
+                                                  ? const EdgeInsets.only(
+                                                      right: 12)
+                                                  : const EdgeInsets.only(
+                                                      right: 20),
                                               curve: Curves.decelerate,
-                                              duration: Duration(seconds: 1),
+                                              duration:
+                                                  const Duration(seconds: 1),
                                               child: AnimatedContainer(
-                                                duration: Duration(seconds: 1),
+                                                duration:
+                                                    const Duration(seconds: 1),
                                                 curve: Curves.decelerate,
                                                 height: screenHeight * .02,
                                                 width: 100,
@@ -480,7 +495,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
 
-                      //event list
+
                       SizedBox(
                         height: screenHeight * .6,
                         width: screenWidth,
@@ -495,12 +510,12 @@ class _HomeState extends State<Home> {
                                 child: AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   padding: start
-                                      ? EdgeInsets.only(
+                                      ? const EdgeInsets.only(
                                           right: 20,
                                         )
-                                      : EdgeInsets.only(right: 25),
+                                      : const EdgeInsets.only(right: 25),
                                   child: AnimatedOpacity(
-                                    duration: Duration(milliseconds: 100),
+                                    duration: const Duration(milliseconds: 100),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     opacity: index == currentPage ? 1 : .50,
                                     child: AnimatedContainer(
@@ -528,7 +543,7 @@ class _HomeState extends State<Home> {
                                               fit: BoxFit.cover,
                                               image: NetworkImage(
                                                   show[index]['image'])),
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter,
                                             colors: [
@@ -575,8 +590,9 @@ class _HomeState extends State<Home> {
                                                             AnimatedContainer(
                                                           curve:
                                                               Curves.decelerate,
-                                                          duration: Duration(
-                                                              seconds: 1),
+                                                          duration:
+                                                              const Duration(
+                                                                  seconds: 1),
                                                           height: screenHeight *
                                                               .055,
                                                           width: screenHeight *
@@ -611,7 +627,7 @@ class _HomeState extends State<Home> {
                                                               Text(
                                                                 show[index]
                                                                     ['date'],
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontSize:
                                                                         20,
                                                                     color: Colors
@@ -620,7 +636,7 @@ class _HomeState extends State<Home> {
                                                                         FontWeight
                                                                             .bold),
                                                               ),
-                                                              Text(
+                                                              const Text(
                                                                 "May",
                                                                 style:
                                                                     TextStyle(
@@ -644,161 +660,173 @@ class _HomeState extends State<Home> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Container(
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                  child: BackdropFilter(
-                                                    filter: ImageFilter.blur(
-                                                        sigmaX: 2, sigmaY: 2),
-                                                    child: AnimatedOpacity(
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                child: BackdropFilter(
+                                                  filter: ImageFilter.blur(
+                                                      sigmaX: 2, sigmaY: 2),
+                                                  child: AnimatedOpacity(
+                                                    duration: const Duration(
+                                                        seconds: 1),
+                                                    curve: Curves.decelerate,
+                                                    opacity:
+                                                        index == currentPage
+                                                            ? 1
+                                                            : .5,
+                                                    child: AnimatedPadding(
                                                       duration: const Duration(
                                                           seconds: 1),
                                                       curve: Curves.decelerate,
-                                                      opacity:
+                                                      padding:
                                                           index == currentPage
-                                                              ? 1
-                                                              : .5,
-                                                      child: AnimatedPadding(
-                                                        duration: Duration(
-                                                            seconds: 1),
+                                                              ? const EdgeInsets
+                                                                  .all(5)
+                                                              : const EdgeInsets
+                                                                  .all(0),
+                                                      child: AnimatedContainer(
                                                         curve:
                                                             Curves.decelerate,
-                                                        padding: index ==
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 1),
+                                                        height:
+                                                            screenHeight * .15,
+                                                        width: index ==
                                                                 currentPage
-                                                            ? EdgeInsets.all(5)
-                                                            : EdgeInsets.all(0),
-                                                        child:
-                                                            AnimatedContainer(
-                                                          curve:
-                                                              Curves.decelerate,
-                                                          duration: Duration(
-                                                              seconds: 1),
-                                                          height: screenHeight *
-                                                              .15,
-                                                          width: index ==
-                                                                  currentPage
-                                                              ? screenWidth *
-                                                                  .67
-                                                              : screenWidth *
-                                                                  .64,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  gradient: LinearGradient(
-                                                                      begin: Alignment
-                                                                          .topCenter,
-                                                                      end: Alignment
-                                                                          .bottomCenter,
-                                                                      colors: [
-                                                                        Colors
-                                                                            .white
-                                                                            .withOpacity(.04),
-                                                                        Colors
-                                                                            .white
-                                                                            .withOpacity(.02),
-                                                                        Colors
-                                                                            .black
-                                                                            .withOpacity(.01)
-                                                                      ])),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceAround,
-                                                            children: [
-                                                              Text(
-                                                                show[index]
-                                                                    ['name'],
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        30,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontFamily:
-                                                                        "Helvetica",
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Container(
+                                                            ? screenWidth * .67
+                                                            : screenWidth * .64,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
+                                                                gradient: LinearGradient(
+                                                                    begin: Alignment
+                                                                        .topCenter,
+                                                                    end: Alignment
+                                                                        .bottomCenter,
+                                                                    colors: [
+                                                                      Colors
+                                                                          .white
+                                                                          .withOpacity(
+                                                                              .04),
+                                                                      Colors
+                                                                          .white
+                                                                          .withOpacity(
+                                                                              .02),
+                                                                      Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              .01)
+                                                                    ])),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              show[index]
+                                                                  ['name'],
+                                                              style: const TextStyle(
+                                                                  fontSize: 30,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      "Helvetica",
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            Container(
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
                                                                 child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              10),
+                                                                    BackdropFilter(
+                                                                  filter: ImageFilter
+                                                                      .blur(
+                                                                          sigmaX:
+                                                                              3,
+                                                                          sigmaY:
+                                                                              3),
                                                                   child:
-                                                                      BackdropFilter(
-                                                                    filter: ImageFilter.blur(
-                                                                        sigmaX:
-                                                                            3,
-                                                                        sigmaY:
-                                                                            3),
+                                                                      AnimatedOpacity(
+                                                                    duration: const Duration(
+                                                                        seconds:
+                                                                            1),
+                                                                    curve: Curves
+                                                                        .decelerate,
+                                                                    opacity: index ==
+                                                                            currentPage
+                                                                        ? 1
+                                                                        : .5,
                                                                     child:
-                                                                        AnimatedOpacity(
-                                                                      duration: const Duration(
-                                                                          seconds:
-                                                                              1),
+                                                                        AnimatedContainer(
                                                                       curve: Curves
                                                                           .decelerate,
-                                                                      opacity: index ==
-                                                                              currentPage
-                                                                          ? 1
-                                                                          : .5,
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              100),
+                                                                      height:
+                                                                          screenHeight *
+                                                                              .04,
+                                                                      width:
+                                                                          screenWidth *
+                                                                              .4,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        // border: Border.all(color: Colors.white,width: .1),
+                                                                        color: Colors
+                                                                            .white
+                                                                            .withOpacity(.1),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                      ),
                                                                       child:
-                                                                          AnimatedContainer(
-                                                                        curve: Curves
-                                                                            .decelerate,
-                                                                        duration:
-                                                                            Duration(milliseconds: 100),
-                                                                        height: screenHeight *
-                                                                            .04,
-                                                                        width: screenWidth *
-                                                                            .4,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          // border: Border.all(color: Colors.white,width: .1),
-                                                                          color: Colors
-                                                                              .white
-                                                                              .withOpacity(.1),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceAround,
-                                                                          children: [
-                                                                            Text(
-                                                                              '\u{20B9}' + show[index]['price'],
-                                                                              style: TextStyle(fontSize: 15, color: Colors.white.withOpacity(.4), fontFamily: 'Helvetica', fontWeight: FontWeight.bold),
-                                                                            ),
-                                                                            Container(
-                                                                              height: screenHeight * .02,
-                                                                              width: 2,
-                                                                              decoration: BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
-                                                                            ),
-                                                                            Text(
-                                                                              show[index]['remain'] + " 🎫",
-                                                                              style: TextStyle(
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceAround,
+                                                                        children: [
+                                                                          Text(
+                                                                            '\u{20B9}' +
+                                                                                show[index]['price'],
+                                                                            style: TextStyle(
                                                                                 fontSize: 15,
-                                                                                fontFamily: 'Helvetica',
-                                                                                fontWeight: FontWeight.bold,
                                                                                 color: Colors.white.withOpacity(.4),
-                                                                              ),
+                                                                                fontFamily: 'Helvetica',
+                                                                                fontWeight: FontWeight.bold),
+                                                                          ),
+                                                                          Container(
+                                                                            height:
+                                                                                screenHeight * .02,
+                                                                            width:
+                                                                                2,
+                                                                            decoration:
+                                                                                BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
+                                                                          ),
+                                                                          Text(
+                                                                            show[index]['remain'] +
+                                                                                " 🎫",
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontSize: 15,
+                                                                              fontFamily: 'Helvetica',
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.white.withOpacity(.4),
                                                                             ),
-                                                                          ],
-                                                                        ),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
@@ -828,176 +856,228 @@ class _HomeState extends State<Home> {
                       padding: EdgeInsets.only(bottom: screenHeight * .07),
                       child: Center(
                         child: AnimatedContainer(
-                          duration: const Duration(seconds: 2),
+                          duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          height: filPressed ? screenHeight * .4 : 0,
+                          height: filPressed ? screenHeight * .35 : 0,
                           width: screenWidth * .85,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Constants.color1),
-                          child: SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
-                            child: AnimatedPadding(
-                              duration: Duration(seconds: 3),
-                              curve: Curves.decelerate,
-                              padding: filPressed
-                                  ? EdgeInsets.all(15)
-                                  : EdgeInsets.all(0),
-                              child: AnimatedOpacity(
-                                duration: Duration(seconds: 2),
-                                curve: Curves.decelerate,
-                                opacity: filPressed ? 1 : 0,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: screenHeight * .05,
-                                      width: screenWidth * .85,
-                                      child: Row(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaY: 3, sigmaX: 3),
+                              child: AnimatedContainer(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                height: filPressed ? screenHeight * .4 : 0,
+                                width: screenWidth * .85,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.black.withOpacity(.8)),
+                                child: SingleChildScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  child: AnimatedPadding(
+                                    duration: const Duration(seconds: 1),
+                                    curve: Curves.decelerate,
+                                    padding: filPressed
+                                        ? EdgeInsets.all(screenHeight*.025)
+                                        : const EdgeInsets.all(0),
+                                    child: AnimatedOpacity(
+                                      duration: const Duration(seconds: 1),
+                                      curve: Curves.decelerate,
+                                      opacity: filPressed ? 1 : 0,
+                                      child: Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.center,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          AnimatedOpacity(
-                                            duration:
-                                                const Duration(seconds: 3),
-                                            curve: Curves.decelerate,
-                                            opacity: filPressed ? 1 : 0,
-                                            child: Container(
-                                                height: screenHeight * .04,
-                                                width: screenWidth * .34,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color:
-                                                            Constants.iconAc),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                child: ElevatedButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        filPressed = false;
-                                                      });
-                                                    },
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(Colors
-                                                                  .transparent),
-                                                    ),
-                                                    child: Text(
-                                                      "Clear",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Constants.color2,
-                                                          fontFamily:
-                                                              'Helvetica',
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ))),
+                                          SizedBox(
+                                            height: screenHeight * .05,
+                                            width: screenWidth * .85,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                AnimatedOpacity(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves.decelerate,
+                                                  opacity: filPressed ? 1 : 0,
+                                                  child: Container(
+                                                      height:
+                                                          screenHeight * .04,
+                                                      width: screenWidth * .34,
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Constants
+                                                                  .iconAc),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5)),
+                                                      child: ElevatedButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              filPressed =
+                                                                  false;
+                                                            });
+                                                          },
+                                                          style: ButtonStyle(
+                                                            backgroundColor:
+                                                                MaterialStateProperty
+                                                                    .all(Colors
+                                                                        .transparent),
+                                                          ),
+                                                          child: const Text(
+                                                            "Clear",
+                                                            style: TextStyle(
+                                                                color: Constants
+                                                                    .color2,
+                                                                fontFamily:
+                                                                    'Helvetica',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ))),
+                                                ),
+                                                AnimatedOpacity(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves.decelerate,
+                                                  opacity: filPressed ? 1 : 0,
+                                                  child: SizedBox(
+                                                      height:
+                                                          screenHeight * .04,
+                                                      width: screenWidth * .34,
+                                                      child: ElevatedButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              filPressed =
+                                                                  false;
+                                                              if (showIndex ==
+                                                                  0) {
+                                                                show.sort((a, b) => a[
+                                                                        'name']
+                                                                    .compareTo(b[
+                                                                        'name']));
+                                                              } else if (showIndex ==
+                                                                  1) {
+                                                                show.sort((a, b) => int
+                                                                        .parse(b[
+                                                                            'price'])
+                                                                    .compareTo(int
+                                                                        .parse(a[
+                                                                            'price'])));
+                                                              } else {
+                                                                show.sort((a, b) => int
+                                                                        .parse(a[
+                                                                            'date'])
+                                                                    .compareTo(int
+                                                                        .parse(b[
+                                                                            'date'])));
+                                                              }
+                                                            });
+                                                          },
+                                                          style: ButtonStyle(
+                                                              overlayColor:
+                                                                  MaterialStateProperty
+                                                                      .all(Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              .5)),
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all(Constants
+                                                                          .iconAc)),
+                                                          child: const Text(
+                                                            "Apply",
+                                                            style: TextStyle(
+                                                                color: Constants
+                                                                    .color2,
+                                                                fontFamily:
+                                                                    'Helvetica',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ))),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          AnimatedOpacity(
-                                            duration:
-                                                const Duration(seconds: 3),
-                                            curve: Curves.decelerate,
-                                            opacity: filPressed ? 1 : 0,
-                                            child: Container(
-                                                height: screenHeight * .04,
-                                                width: screenWidth * .34,
-                                                child: ElevatedButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        filPressed = false;
-                                                      });
-                                                    },
-                                                    style: ButtonStyle(
-                                                        overlayColor:
-                                                            MaterialStateProperty
-                                                                .all(Colors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        .5)),
-                                                        backgroundColor:
-                                                            MaterialStateProperty
-                                                                .all(Constants
-                                                                    .iconAc)),
-                                                    child: Text(
-                                                      "Apply",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Constants.color2,
-                                                          fontFamily:
-                                                              'Helvetica',
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ))),
+                                          SizedBox(
+                                            height: screenHeight * .25,
+                                            width: screenWidth * .85,
+                                            child: ListView.builder(
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                itemCount: Sort1.length,
+                                                scrollDirection: Axis.vertical,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        index) {
+                                                  return AnimatedPadding(
+                                                    duration: const Duration(
+                                                        seconds: 1),
+                                                    curve: Curves.decelerate,
+                                                    padding: EdgeInsets.only(
+                                                      top: filPressed
+                                                          ? (screenHeight * .01)
+                                                          : 0,
+                                                    ),
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          showIndex = index;
+                                                        });
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    700),
+                                                        curve:
+                                                            Curves.decelerate,
+                                                        height:
+                                                            screenHeight * .055,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          color: showIndex ==
+                                                                  index
+                                                              ? Constants.iconAc
+                                                              : Colors.grey
+                                                                  .withOpacity(
+                                                                      .1),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              Sort1[index],
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontFamily:
+                                                                      'Helvetica',
+                                                                  fontSize: 15
+                                                                  //fontWeight: FontWeight.bold
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      height: screenHeight * .3,
-                                      width: screenWidth * .85,
-                                      child: ListView.builder(
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          itemCount: Sort1.length,
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder:
-                                              (BuildContext context, index) {
-                                            return AnimatedPadding(
-                                              duration: Duration(seconds: 2),
-                                              curve: Curves.decelerate,
-                                              padding: EdgeInsets.only(
-                                                top: filPressed
-                                                    ? (screenHeight * .02)
-                                                    : 0,
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    showIndex = index;
-                                                  });
-                                                },
-                                                child: AnimatedContainer(
-                                                  duration:
-                                                      Duration(seconds: 1),
-                                                  curve: Curves.decelerate,
-                                                  height: screenHeight * .06,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    color: showIndex == index
-                                                        ? Constants.iconAc
-                                                        : Colors.grey
-                                                            .withOpacity(.1),
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        Sort1[index],
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily:
-                                                                'Helvetica',
-                                                            fontSize: 15
-                                                            //fontWeight: FontWeight.bold
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -1008,26 +1088,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
 
-                //notification page
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: screenHeight * .1,
-                      width: screenWidth,
-                    ),
-                    AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      height: notPressed ? screenHeight * .6 : 0,
-                      width: screenWidth * .91,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.black),
-                    ),
-                  ],
-                ),
+                notificationPage(context),
               ],
             ),
           ),

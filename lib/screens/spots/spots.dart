@@ -59,7 +59,7 @@ class SpotsState extends State<Spots> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 1000),
             opacity: _animate ? 0 : 1,
             child: Column(
               children: [
@@ -72,7 +72,7 @@ class SpotsState extends State<Spots> {
                           right: 20,
                         )
                       : EdgeInsets.zero,
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 1000),
                   child: Center(
                     child: Text(
                       "Explore",
@@ -155,7 +155,7 @@ class SpotsState extends State<Spots> {
                                       left: 15,
                                       right: 0,
                                     ),
-                              duration: const Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 800),
                               child: const Icon(
                                 CupertinoIcons.search,
                                 color: Colors.grey,
@@ -197,18 +197,7 @@ class SpotsState extends State<Spots> {
                 const SizedBox(
                   height: 30,
                 ),
-                AnimatedPadding(
-                  padding: !_animate
-                      ? const EdgeInsets.only(
-                          top: 20,
-                          left: 10,
-                        )
-                      : const EdgeInsets.only(
-                          top: 20,
-                        ),
-                  duration: const Duration(milliseconds: 500),
-                  child: const Cards(),
-                ),
+                const Cards(),
                 const SizedBox(
                   height: 30,
                 ),
