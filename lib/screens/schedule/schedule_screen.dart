@@ -63,11 +63,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         child: Text(
                           'May 26-29',
                           style: TextStyle(
-                              color: Colors.white70,
+                              color: Colors.white,
                               fontSize: 30,
                               fontWeight: FontWeight.w500,
                               fontFamily: 'helvetica',
-                              letterSpacing: 1.3),
+                              letterSpacing: 1.4),
                         ),
                       ),
                     ),
@@ -227,7 +227,7 @@ class _EventCardState extends State<EventCard> {
               width: size.width * 0.8,
               height: size.width * 0.22,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 226, 226, 226),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
@@ -239,12 +239,12 @@ class _EventCardState extends State<EventCard> {
                     children: [
                       Text(widget.eventName,
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20)),
+                              fontWeight: FontWeight.w500, fontSize: 20,)),
                       Text(widget.description,
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 15,
-                              color: Colors.grey[400]))
+                              color: Colors.grey[600]))
                     ]),
               ),
             ),
