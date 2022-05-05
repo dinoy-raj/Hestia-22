@@ -25,6 +25,7 @@ class _NavBarState extends State<NavBar> {
 
   double opaC = 0;
   bool start = false;
+  bool mode = false;
 
   @override
   void initState() {
@@ -42,6 +43,14 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
+    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      setState(() {
+        mode = true;
+      });
+    } else {
+      mode = false;
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Constants.bg,
@@ -67,7 +76,7 @@ class _NavBarState extends State<NavBar> {
               child: Stack(
                 children: [
                   SizedBox(
-                    height: screenHeight * .07,
+                    height: mode ? 70 : screenHeight * .07,
                     width: screenWidth * .85,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -83,7 +92,7 @@ class _NavBarState extends State<NavBar> {
                           child: AnimatedContainer(
                             duration: const Duration(seconds: 2),
                             curve: Curves.fastLinearToSlowEaseIn,
-                            height: screenHeight * .07,
+                            height: mode ? 70 : screenHeight * .07,
                             width: screenWidth * .85,
                             decoration: BoxDecoration(
                               // color: Colors.white.withOpacity(.05),
@@ -108,215 +117,219 @@ class _NavBarState extends State<NavBar> {
                                 end: Alignment.bottomRight,
                               ),
                             ),
-                            child: Stack(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () {
-                                        setState(() {
-                                          index = 0;
-                                          switchPage(index);
-                                        });
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: const Duration(seconds: 1),
-                                        curve: Curves.decelerate,
-                                        height: screenHeight * .07,
-                                        width: start
-                                            ? screenWidth * .21
-                                            : screenWidth * .05,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Icon(
-                                                FontAwesomeIcons.house,
-                                                size: 17,
-                                                color: index == 0
-                                                    ? Constants.iconAc
-                                                    : Constants.iconIn,
+                            child: Center(
+                              child: Stack(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () {
+                                          setState(() {
+                                            index = 0;
+                                            switchPage(index);
+                                          });
+                                        },
+                                        child: AnimatedContainer(
+                                          duration: const Duration(seconds: 1),
+                                          curve: Curves.decelerate,
+                                          height: screenHeight * .07,
+                                          width: start
+                                              ? screenWidth * .21
+                                              : screenWidth * .05,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Icon(
+                                                  FontAwesomeIcons.house,
+                                                  size: 17,
+                                                  color: index == 0
+                                                      ? Constants.iconAc
+                                                      : Constants.iconIn,
+                                                ),
                                               ),
-                                            ),
-                                            AnimatedContainer(
-                                              duration:
-                                                  const Duration(seconds: 2),
-                                              curve:
-                                                  Curves.fastLinearToSlowEaseIn,
-                                              height: index == 0
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              width: index == 0
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Constants.iconAc),
-                                            )
-                                          ],
+                                              AnimatedContainer(
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn,
+                                                height: index == 0
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                width: index == 0
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Constants.iconAc),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () {
-                                        setState(() {
-                                          index = 1;
-                                          switchPage(index);
-                                        });
-                                      },
-                                      child: SizedBox(
-                                        height: screenHeight * .07,
-                                        width: screenWidth * .21,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Icon(
-                                                FontAwesomeIcons.list,
-                                                size: 18,
-                                                color: index == 1
-                                                    ? Constants.iconAc
-                                                    : Constants.iconIn,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () {
+                                          setState(() {
+                                            index = 1;
+                                            switchPage(index);
+                                          });
+                                        },
+                                        child: SizedBox(
+                                          height: screenHeight * .07,
+                                          width: screenWidth * .21,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Icon(
+                                                  FontAwesomeIcons.list,
+                                                  size: 18,
+                                                  color: index == 1
+                                                      ? Constants.iconAc
+                                                      : Constants.iconIn,
+                                                ),
                                               ),
-                                            ),
-                                            AnimatedContainer(
-                                              duration:
-                                                  const Duration(seconds: 2),
-                                              curve:
-                                                  Curves.fastLinearToSlowEaseIn,
-                                              height: index == 1
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              width: index == 1
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Constants.iconAc),
-                                            )
-                                          ],
+                                              AnimatedContainer(
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn,
+                                                height: index == 1
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                width: index == 1
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Constants.iconAc),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () {
-                                        setState(() {
-                                          index = 2;
-                                          switchPage(index);
-                                        });
-                                      },
-                                      child: SizedBox(
-                                        height: screenHeight * .07,
-                                        width: screenWidth * .21,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Icon(
-                                                FontAwesomeIcons.signsPost,
-                                                size: 18,
-                                                color: index == 2
-                                                    ? Constants.iconAc
-                                                    : Constants.iconIn,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () {
+                                          setState(() {
+                                            index = 2;
+                                            switchPage(index);
+                                          });
+                                        },
+                                        child: SizedBox(
+                                          height: screenHeight * .07,
+                                          width: screenWidth * .21,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Icon(
+                                                  FontAwesomeIcons.signsPost,
+                                                  size: 18,
+                                                  color: index == 2
+                                                      ? Constants.iconAc
+                                                      : Constants.iconIn,
+                                                ),
                                               ),
-                                            ),
-                                            AnimatedContainer(
-                                              duration:
-                                                  const Duration(seconds: 2),
-                                              curve:
-                                                  Curves.fastLinearToSlowEaseIn,
-                                              height: index == 2
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              width: index == 2
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Constants.iconAc),
-                                            )
-                                          ],
+                                              AnimatedContainer(
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn,
+                                                height: index == 2
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                width: index == 2
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Constants.iconAc),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () {
-                                        setState(() {
-                                          index = 3;
-                                          switchPage(index);
-                                        });
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: const Duration(seconds: 1),
-                                        curve: Curves.decelerate,
-                                        height: screenHeight * .07,
-                                        width: start
-                                            ? screenWidth * .21
-                                            : screenWidth * .05,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Icon(
-                                                FontAwesomeIcons.user,
-                                                size: 18,
-                                                color: index == 3
-                                                    ? Constants.iconAc
-                                                    : Constants.iconIn,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () {
+                                          setState(() {
+                                            index = 3;
+                                            switchPage(index);
+                                          });
+                                        },
+                                        child: AnimatedContainer(
+                                          duration: const Duration(seconds: 1),
+                                          curve: Curves.decelerate,
+                                          height: screenHeight * .07,
+                                          width: start
+                                              ? screenWidth * .21
+                                              : screenWidth * .05,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Icon(
+                                                  FontAwesomeIcons.user,
+                                                  size: 18,
+                                                  color: index == 3
+                                                      ? Constants.iconAc
+                                                      : Constants.iconIn,
+                                                ),
                                               ),
-                                            ),
-                                            AnimatedContainer(
-                                              duration:
-                                                  const Duration(seconds: 2),
-                                              curve:
-                                                  Curves.fastLinearToSlowEaseIn,
-                                              height: index == 3
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              width: index == 3
-                                                  ? screenHeight * .0035
-                                                  : 0,
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Constants.iconAc),
-                                            )
-                                          ],
+                                              AnimatedContainer(
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn,
+                                                height: index == 3
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                width: index == 3
+                                                    ? screenHeight * .0035
+                                                    : 0,
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Constants.iconAc),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -333,8 +346,6 @@ class _NavBarState extends State<NavBar> {
   }
 
   void switchPage(int index) {
-    pageControl.animateToPage(index,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.fastLinearToSlowEaseIn);
+    pageControl.jumpToPage(index);
   }
 }
