@@ -35,7 +35,6 @@ class _EventDetailsState extends State<EventDetails> {
   final double start = 0;
   final double end = 0;
   bool _animate = true;
-  double _opacity = 0.75;
   Duration? duration;
   @override
   void initState() {
@@ -317,7 +316,7 @@ class _EventDetailsState extends State<EventDetails> {
             eventData['description'],
             style: TextStyle( overflow: TextOverflow.clip,
               fontSize: 16,
-
+              height: 1.2,
               fontFamily: fontfamily,
               color: Constants.lightWhite.withOpacity(0.6),
               inherit: true,
@@ -393,7 +392,7 @@ class _EventDetailsState extends State<EventDetails> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 4),
+                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -407,60 +406,28 @@ class _EventDetailsState extends State<EventDetails> {
                       ),
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.only(left: width*0.005,right:  width*0.005,top: height*0.01,bottom: height*0.003),
+                      padding:  EdgeInsets.only(left: width*0.008,right:  width*0.008,top: height*0.01,bottom: height*0.003),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children:  [
-                              Text(
-                                "Day",
-                                style: TextStyle(
-                                  letterSpacing: contentspace,
-                                    color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,
-                                    overflow: TextOverflow.clip,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: fontfamily),
-                              ),
-                              Text(
-                                "Hrs",
-                                style: TextStyle(
-                                    color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,letterSpacing: contentspace,
-                                    overflow: TextOverflow.clip,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: fontfamily),
-                              ),
-                              Text(
-                                "Min",
-                                style: TextStyle(
-                                    color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,letterSpacing: contentspace,
-                                    overflow: TextOverflow.clip,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: fontfamily),
-                              ),
-                              Text(
-                                "Sec",
-                                style: TextStyle(
-                                    color: Constants.pureWhite.withOpacity(0.7),
-                                    fontSize: 16,letterSpacing: contentspace,
-                                    overflow: TextOverflow.clip,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: fontfamily),
-                              ),
-                            ],
+                          Text(
+                            "Day  Hrs  Min  Sec",
+                            style: TextStyle(
+                              letterSpacing: contentspace,
+                                color: Constants.pureWhite.withOpacity(0.7),
+                                fontSize: 16,
+                                overflow: TextOverflow.clip,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: fontfamily),
                           ),
                           SlideCountdownSeparated(
                             width: width * .05,
                             separator: " : ",
-                            fade: true,
                             separatorStyle: const TextStyle(
                                 decoration: TextDecoration.none,
                                 letterSpacing: 2.5,
                                 fontSize: 16,
+                                fontWeight: FontWeight.bold,
                                 overflow: TextOverflow.clip,
                                 decorationStyle: TextDecorationStyle.double),
                             showZeroValue: false,
