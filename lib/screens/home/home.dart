@@ -494,7 +494,6 @@ class HomeState extends State<Home> {
                         ),
                       ),
 
-                   
                       SizedBox(
                         height: screenHeight * .6,
                         width: screenWidth,
