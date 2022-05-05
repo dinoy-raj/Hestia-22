@@ -424,6 +424,7 @@ class HomeState extends State<Home> {
                                     ).createShader(bounds);
                                   },
                                   child: ListView.builder(
+                                    padding: const EdgeInsets.only(right: 40),
                                       physics: const BouncingScrollPhysics(),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: category.length,
@@ -443,9 +444,9 @@ class HomeState extends State<Home> {
                                             child: AnimatedPadding(
                                               padding: start
                                                   ? const EdgeInsets.only(
-                                                      right: 8)
+                                                      right: 12)
                                                   : const EdgeInsets.only(
-                                                      right: 15),
+                                                      right: 20),
                                               curve: Curves.decelerate,
                                               duration:
                                                   const Duration(seconds: 1),
@@ -493,6 +494,7 @@ class HomeState extends State<Home> {
                           ),
                         ),
                       ),
+
 
                       SizedBox(
                         height: screenHeight * .6,
@@ -856,7 +858,7 @@ class HomeState extends State<Home> {
                         child: AnimatedContainer(
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          height: filPressed ? screenHeight * .4 : 0,
+                          height: filPressed ? screenHeight * .35 : 0,
                           width: screenWidth * .85,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
@@ -876,7 +878,7 @@ class HomeState extends State<Home> {
                                     duration: const Duration(seconds: 1),
                                     curve: Curves.decelerate,
                                     padding: filPressed
-                                        ? const EdgeInsets.all(15)
+                                        ? EdgeInsets.all(screenHeight*.025)
                                         : const EdgeInsets.all(0),
                                     child: AnimatedOpacity(
                                       duration: const Duration(seconds: 1),
@@ -1003,7 +1005,7 @@ class HomeState extends State<Home> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: screenHeight * .3,
+                                            height: screenHeight * .25,
                                             width: screenWidth * .85,
                                             child: ListView.builder(
                                                 physics:
@@ -1019,7 +1021,7 @@ class HomeState extends State<Home> {
                                                     curve: Curves.decelerate,
                                                     padding: EdgeInsets.only(
                                                       top: filPressed
-                                                          ? (screenHeight * .02)
+                                                          ? (screenHeight * .01)
                                                           : 0,
                                                     ),
                                                     child: GestureDetector(
@@ -1031,11 +1033,12 @@ class HomeState extends State<Home> {
                                                       child: AnimatedContainer(
                                                         duration:
                                                             const Duration(
-                                                                seconds: 1),
+                                                                milliseconds:
+                                                                    700),
                                                         curve:
                                                             Curves.decelerate,
                                                         height:
-                                                            screenHeight * .06,
+                                                            screenHeight * .055,
                                                         decoration:
                                                             BoxDecoration(
                                                           borderRadius:
