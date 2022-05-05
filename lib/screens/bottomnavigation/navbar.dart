@@ -135,46 +135,61 @@ class _NavBarState extends State<NavBar> {
                                             switchPage(index);
                                           });
                                         },
-                                        child: AnimatedContainer(
-                                          duration: const Duration(seconds: 1),
-                                          curve: Curves.decelerate,
-                                          height: screenHeight * .07,
-                                          width: start
-                                              ? screenWidth * .21
-                                              : screenWidth * .05,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: Icon(
-                                                  FontAwesomeIcons.house,
-                                                  size: 17,
-                                                  color: index == 0
-                                                      ? Constants.iconAc
-                                                      : Constants.iconIn,
+                                        child: Tooltip(
+                                          message: "Home",
+                                          textStyle: const TextStyle(
+                                            color: Constants.iconAc,
+                                            fontFamily: "Helvetica",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          ),
+                                          child: AnimatedContainer(
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            curve: Curves.decelerate,
+                                            height: screenHeight * .07,
+                                            width: start
+                                                ? screenWidth * .21
+                                                : screenWidth * .05,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.house,
+                                                    size: mode
+                                                        ? 17
+                                                        : screenHeight * .02,
+                                                    color: index == 0
+                                                        ? Constants.iconAc
+                                                        : Constants.iconIn,
+                                                  ),
                                                 ),
-                                              ),
-                                              AnimatedContainer(
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                curve: Curves
-                                                    .fastLinearToSlowEaseIn,
-                                                height: index == 0
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                width: index == 0
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Constants.iconAc),
-                                              )
-                                            ],
+                                                AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 2),
+                                                  curve: Curves
+                                                      .fastLinearToSlowEaseIn,
+                                                  height: index == 0
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  width: index == 0
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              Constants.iconAc),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -187,42 +202,56 @@ class _NavBarState extends State<NavBar> {
                                             switchPage(index);
                                           });
                                         },
-                                        child: SizedBox(
-                                          height: screenHeight * .07,
-                                          width: screenWidth * .21,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: Icon(
-                                                  FontAwesomeIcons.list,
-                                                  size: 18,
-                                                  color: index == 1
-                                                      ? Constants.iconAc
-                                                      : Constants.iconIn,
+                                        child: Tooltip(
+                                          message: "Schedule",
+                                          textStyle: const TextStyle(
+                                            color: Constants.iconAc,
+                                            fontFamily: "Helvetica",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          ),
+                                          child: SizedBox(
+                                            height: screenHeight * .07,
+                                            width: screenWidth * .21,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.list,
+                                                    size: mode
+                                                        ? 17
+                                                        : screenHeight * .02,
+                                                    color: index == 1
+                                                        ? Constants.iconAc
+                                                        : Constants.iconIn,
+                                                  ),
                                                 ),
-                                              ),
-                                              AnimatedContainer(
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                curve: Curves
-                                                    .fastLinearToSlowEaseIn,
-                                                height: index == 1
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                width: index == 1
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Constants.iconAc),
-                                              )
-                                            ],
+                                                AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 2),
+                                                  curve: Curves
+                                                      .fastLinearToSlowEaseIn,
+                                                  height: index == 1
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  width: index == 1
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              Constants.iconAc),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -235,42 +264,56 @@ class _NavBarState extends State<NavBar> {
                                             switchPage(index);
                                           });
                                         },
-                                        child: SizedBox(
-                                          height: screenHeight * .07,
-                                          width: screenWidth * .21,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: Icon(
-                                                  FontAwesomeIcons.signsPost,
-                                                  size: 18,
-                                                  color: index == 2
-                                                      ? Constants.iconAc
-                                                      : Constants.iconIn,
+                                        child: Tooltip(
+                                          message: "Map",
+                                          textStyle: const TextStyle(
+                                            color: Constants.iconAc,
+                                            fontFamily: "Helvetica",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          ),
+                                          child: SizedBox(
+                                            height: screenHeight * .07,
+                                            width: screenWidth * .21,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.signsPost,
+                                                    size: mode
+                                                        ? 17
+                                                        : screenHeight * .02,
+                                                    color: index == 2
+                                                        ? Constants.iconAc
+                                                        : Constants.iconIn,
+                                                  ),
                                                 ),
-                                              ),
-                                              AnimatedContainer(
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                curve: Curves
-                                                    .fastLinearToSlowEaseIn,
-                                                height: index == 2
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                width: index == 2
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Constants.iconAc),
-                                              )
-                                            ],
+                                                AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 2),
+                                                  curve: Curves
+                                                      .fastLinearToSlowEaseIn,
+                                                  height: index == 2
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  width: index == 2
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              Constants.iconAc),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -283,46 +326,61 @@ class _NavBarState extends State<NavBar> {
                                             switchPage(index);
                                           });
                                         },
-                                        child: AnimatedContainer(
-                                          duration: const Duration(seconds: 1),
-                                          curve: Curves.decelerate,
-                                          height: screenHeight * .07,
-                                          width: start
-                                              ? screenWidth * .21
-                                              : screenWidth * .05,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: Icon(
-                                                  FontAwesomeIcons.user,
-                                                  size: 18,
-                                                  color: index == 3
-                                                      ? Constants.iconAc
-                                                      : Constants.iconIn,
+                                        child: Tooltip(
+                                          message: "Profile",
+                                          textStyle: const TextStyle(
+                                            color: Constants.iconAc,
+                                            fontFamily: "Helvetica",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          ),
+                                          child: AnimatedContainer(
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            curve: Curves.decelerate,
+                                            height: screenHeight * .07,
+                                            width: start
+                                                ? screenWidth * .21
+                                                : screenWidth * .05,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.user,
+                                                    size: mode
+                                                        ? 17
+                                                        : screenHeight * .02,
+                                                    color: index == 3
+                                                        ? Constants.iconAc
+                                                        : Constants.iconIn,
+                                                  ),
                                                 ),
-                                              ),
-                                              AnimatedContainer(
-                                                duration:
-                                                    const Duration(seconds: 2),
-                                                curve: Curves
-                                                    .fastLinearToSlowEaseIn,
-                                                height: index == 3
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                width: index == 3
-                                                    ? screenHeight * .0035
-                                                    : 0,
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Constants.iconAc),
-                                              )
-                                            ],
+                                                AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 2),
+                                                  curve: Curves
+                                                      .fastLinearToSlowEaseIn,
+                                                  height: index == 3
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  width: index == 3
+                                                      ? screenHeight * .0035
+                                                      : 0,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              Constants.iconAc),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
