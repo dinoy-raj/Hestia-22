@@ -37,6 +37,27 @@ class _SpotPageState extends State<SpotPage> {
       'description':
           'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
     },
+    {
+      'name': 'Almanac',
+      'category': 'Quiz',
+      'datetime': DateTime.now(),
+      'description':
+          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
+    },
+    {
+      'name': 'Web Crawler',
+      'category': 'Competition',
+      'datetime': DateTime.now(),
+      'description':
+          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
+    },
+    {
+      'name': 'NFT and BlockChain',
+      'category': 'Workshop',
+      'datetime': DateTime.now(),
+      'description':
+          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
+    },
   ];
 
   Future<void> _goToCoordinates(Coords coordinates, String title) async {
@@ -81,7 +102,7 @@ class _SpotPageState extends State<SpotPage> {
                   Hero(
                     tag: widget.data['name'],
                     child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 800),
                       opacity: _opacity,
                       child: Image.network(
                         widget.data['image'],
@@ -113,7 +134,7 @@ class _SpotPageState extends State<SpotPage> {
                                   left: 10.0,
                                   right: 5.0,
                                 ),
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 800),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
@@ -151,7 +172,7 @@ class _SpotPageState extends State<SpotPage> {
                                   left: 12.0,
                                   right: 5.0,
                                 ),
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 800),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
@@ -192,7 +213,7 @@ class _SpotPageState extends State<SpotPage> {
                                   right: 20,
                                 )
                               : EdgeInsets.zero,
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 800),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: BackdropFilter(
@@ -214,7 +235,7 @@ class _SpotPageState extends State<SpotPage> {
                                 ),
                                 child: AnimatedOpacity(
                                   opacity: _animate ? 0 : 1,
-                                  duration: const Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 800),
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                       left: 20,
@@ -301,9 +322,9 @@ class _SpotPageState extends State<SpotPage> {
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) => AnimatedOpacity(
                             opacity: _animate ? 0 : 1,
-                            duration: const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 800),
                             child: AnimatedPadding(
-                              duration: const Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 800),
                               padding: _animate
                                   ? const EdgeInsets.only(
                                       left: 5,
@@ -361,7 +382,7 @@ class _SpotPageState extends State<SpotPage> {
                                     child: Divider(
                                       color: Constants.color2.withOpacity(.25),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -379,10 +400,10 @@ class _SpotPageState extends State<SpotPage> {
                         : const EdgeInsets.only(
                             top: 20,
                           ),
-                    duration: const Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 800),
                     child: AnimatedOpacity(
                       opacity: _animate ? 0 : 1,
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 800),
                       child: SizedBox(
                         height: 400,
                         child: RotatedBox(
