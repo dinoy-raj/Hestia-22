@@ -424,7 +424,7 @@ class HomeState extends State<Home> {
                                     ).createShader(bounds);
                                   },
                                   child: ListView.builder(
-                                    padding: const EdgeInsets.only(right: 40),
+                                      padding: const EdgeInsets.only(right: 40),
                                       physics: const BouncingScrollPhysics(),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: category.length,
@@ -494,7 +494,6 @@ class HomeState extends State<Home> {
                           ),
                         ),
                       ),
-
 
                       SizedBox(
                         height: screenHeight * .6,
@@ -878,7 +877,7 @@ class HomeState extends State<Home> {
                                     duration: const Duration(seconds: 1),
                                     curve: Curves.decelerate,
                                     padding: filPressed
-                                        ? EdgeInsets.all(screenHeight*.025)
+                                        ? EdgeInsets.all(screenHeight * .025)
                                         : const EdgeInsets.all(0),
                                     child: AnimatedOpacity(
                                       duration: const Duration(seconds: 1),
