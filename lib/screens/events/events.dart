@@ -460,7 +460,7 @@ class _EventDetailsState extends State<EventDetails> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(
-                        FontAwesomeIcons.locationPin,
+                        Icons.location_on_outlined,
                         color: Constants.lightWhite,
                         size: 16,
                       ),
