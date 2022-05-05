@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-String hostUrl =
-    "https://5995-2409-4073-2e8e-d4e-cac4-c6e2-72ca-8360.in.ngrok.io";
+String hostUrl = "https://api.hestiatkmce.live";
+
+Future<Map<String, dynamic>> login(String username, String password) async {
+  http.Response response = await http.get(Uri.parse(hostUrl));
+  return json.decode(response.body);
+}
 
 Future<List<dynamic>> getWorkshops() async {
   http.Response response =
@@ -36,7 +40,7 @@ Future<List<dynamic>> getProshows() async {
 
 Future<Map<String, dynamic>> getEventDetails(String slug) async {
   http.Response response =
-      await http.get(Uri.parse(hostUrl + "/api/v1/event/" + slug));
+      await http.get(
+          Uri.parse(hostUrl + "/api/v1/event/" + slug));
   return json.decode(response.body);
 }
-

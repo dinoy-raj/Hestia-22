@@ -39,63 +39,66 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       backgroundColor: Constants.sc,
       body: Column(
         children: [
-          Stack(children: [
-            AnimatedPadding(
-              duration: const Duration(seconds: 3),
-              curve: Curves.fastLinearToSlowEaseIn,
-              padding: start
-                  ? const EdgeInsets.symmetric(horizontal: 10)
-                  : const EdgeInsets.only(left: 0, right: 0),
-              child: SizedBox(
-                height: size.width*0.7,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: size.width * 0.17,
-                    ),
-                    AnimatedOpacity(
-                      duration: const Duration(seconds: 3),
-                      curve: Curves.decelerate,
-                      opacity: start ? 1 : 0.2,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Text(
-                          'May 26-29',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'helvetica',
-                              letterSpacing: 1.4),
+          SizedBox(
+            height: size.width*0.68,
+            child: Stack(children: [
+              AnimatedPadding(
+                duration: const Duration(seconds: 3),
+                curve: Curves.fastLinearToSlowEaseIn,
+                padding: start
+                    ? const EdgeInsets.symmetric(horizontal: 10)
+                    : const EdgeInsets.only(left: 0, right: 0),
+                child: SizedBox(
+                  height: size.width * 0.68,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: size.width * 0.17,
+                      ),
+                      AnimatedOpacity(
+                        duration: const Duration(seconds: 3),
+                        curve: Curves.decelerate,
+                        opacity: start ? 1 : 0.2,
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18.0),
+                          child: Text(
+                            'Schedule',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'helvetica',
+                                letterSpacing: 1.4),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: size.width * 0.1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: dateItems
-                          .map((currentMenuInfo) =>
-                              buildDateButton(currentMenuInfo))
-                          .toList(),
-                    ),
-                  ],
+                      SizedBox(
+                        height: size.width * 0.1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: dateItems
+                            .map((currentMenuInfo) =>
+                                buildDateButton(currentMenuInfo))
+                            .toList(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-                width: size.width,
-                height: 30,
-                margin: EdgeInsets.only(top: 250),
-                decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(.1),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)),
-                )),
-          ]),
+              Container(
+                  width: size.width,
+                  height: size.width * 0.1,
+                  margin: EdgeInsets.only(top: 250),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(.1),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)),
+                  )),
+            ]),
+          ),
           Expanded(
             child: Container(
               color: Colors.grey.withOpacity(.1),
@@ -121,50 +124,67 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget buildDateButton(DateInfo currentDateInfo) {
     return Consumer<DateInfo>(
       builder: (context, value, child) {
-        bool start = false;
         return InkWell(
           onTap: () {
             var dateInfo = Provider.of<DateInfo>(context, listen: false);
             dateInfo.updateDate(currentDateInfo);
           },
-          child: Container(
-            width: 75,
-            height: 90,
-            decoration: BoxDecoration(
-              color: currentDateInfo.dateType == value.dateType
-                  ? Colors.grey.withOpacity(0.4)
-                  : Constants.color1,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  currentDateInfo.date,
-                  style: TextStyle(
-                    fontWeight: currentDateInfo.dateType == value.dateType
-                        ? FontWeight.w800
-                        : FontWeight.w500,
-                    fontSize: 20,
-                    color: currentDateInfo.dateType == value.dateType
-                     ?Colors.grey.withOpacity(1)
-                     :Colors.grey.withOpacity(0.6),
-                  ),
+          child: AnimatedOpacity(
+            duration: const Duration(seconds: 1),
+            curve: Curves.decelerate,
+            opacity: start ? 1 : 0,
+            child: AnimatedPadding(
+              padding: start
+                  ? const EdgeInsets.only(right: 8)
+                  : const EdgeInsets.only(right: 15),
+              curve: Curves.decelerate,
+              duration: const Duration(seconds: 1),
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                curve: Curves.decelerate,
+                width: 75,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: Constants.color1,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                      color: currentDateInfo.dateType == value.dateType
+                          ? Constants.iconAc
+                          : Colors.transparent),
                 ),
-                const SizedBox(
-                  height: 10,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      currentDateInfo.date,
+                      style: TextStyle(
+                        fontWeight: currentDateInfo.dateType == value.dateType
+                            ? FontWeight.w800
+                            : FontWeight.w500,
+                        fontSize: 20,
+                        color: currentDateInfo.dateType == value.dateType
+                            ? Colors.white
+                            : Colors.grey.withOpacity(0.6),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      currentDateInfo.day,
+                      style: TextStyle(
+                        fontFamily: 'Helvetica',
+                        letterSpacing: 1,
+                        color: currentDateInfo.dateType == value.dateType
+                            ? Colors.white70
+                            : Colors.grey.withOpacity(0.5),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
                 ),
-                Text(
-                  currentDateInfo.day,
-                  style: TextStyle(
-                    fontFamily: 'Helvetica',
-                    letterSpacing: 1,
-                    color: Colors.grey.withOpacity(0.5),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         );
@@ -239,7 +259,9 @@ class _EventCardState extends State<EventCard> {
                     children: [
                       Text(widget.eventName,
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20,)),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                          )),
                       Text(widget.description,
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -273,14 +295,13 @@ class _TimeLineState extends State<TimeLine> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: size.width*.03,
-            height: size.width*0.03,
+            width: size.width * .03,
+            height: size.width * 0.03,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.grey),
+                borderRadius: BorderRadius.circular(50), color: Colors.grey),
           ),
           Container(
-            width: size.width*0.006,
+            width: size.width * 0.006,
             height: size.width * 0.359,
             color: Colors.grey,
           ),
