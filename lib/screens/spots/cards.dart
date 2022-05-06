@@ -85,8 +85,6 @@ class _CardsState extends State<Cards> {
       padding: _animate
           ? const EdgeInsets.only(
               top: 20,
-              right: 8,
-              left: 8,
             )
           : const EdgeInsets.only(
               top: 20,
@@ -114,8 +112,7 @@ class _CardsState extends State<Cards> {
                     child: AnimatedPadding(
                       padding: _animate
                           ? const EdgeInsets.only(
-                              top: 20,
-                              right: 20,
+                              top: 0,
                             )
                           : const EdgeInsets.only(
                               top: 20,
