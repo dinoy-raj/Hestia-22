@@ -125,7 +125,7 @@ class HomeState extends State<Home> {
       });
     });
 
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 150), () {
       setState(() {
         start = true;
         catSelect = 0;
@@ -278,7 +278,7 @@ class HomeState extends State<Home> {
                             : const EdgeInsets.only(left: 0, right: 0),
                         child: AnimatedOpacity(
                           duration: const Duration(seconds: 1),
-                          curve: Curves.decelerate,
+                          curve: Curves.fastLinearToSlowEaseIn,
                           opacity: start ? 1 : 0,
                           child: AnimatedContainer(
                             duration: const Duration(seconds: 1),
@@ -385,112 +385,123 @@ class HomeState extends State<Home> {
                         padding: start
                             ? const EdgeInsets.only(left: 20, right: 20)
                             : const EdgeInsets.only(left: 0, right: 0),
-                        child: Container(
-                          height: screenHeight * .1,
-                          width: screenWidth,
-                          decoration: const BoxDecoration(),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 13.0, bottom: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Categories",
-                                      style: TextStyle(
-                                        fontFamily: 'Helvetica',
-                                        fontWeight: FontWeight.bold,
-                                        color: Constants.iconIn,
+                        child: AnimatedOpacity(
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          opacity: start ? 1 : 0,
+                          child: Container(
+                            height: screenHeight * .1,
+                            width: screenWidth,
+                            decoration: const BoxDecoration(),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 13.0, bottom: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Categories",
+                                        style: TextStyle(
+                                          fontFamily: 'Helvetica',
+                                          fontWeight: FontWeight.bold,
+                                          color: Constants.iconIn,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: screenHeight * .045,
-                                width: screenWidth,
-                                child: ShaderMask(
-                                  shaderCallback: (Rect bounds) {
-                                    return LinearGradient(
-                                      colors: [
-                                        Colors.white,
-                                        Colors.white.withOpacity(0.05)
-                                      ],
-                                      stops: const [0.8, 1],
-                                      tileMode: TileMode.mirror,
-                                    ).createShader(bounds);
-                                  },
-                                  child: ListView.builder(
-                                      padding: const EdgeInsets.only(right: 40),
-                                      physics: const BouncingScrollPhysics(),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: category.length,
-                                      itemBuilder:
-                                          (BuildContext context, index) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              catSelect = index;
-                                            });
-                                          },
-                                          child: AnimatedOpacity(
-                                            duration:
-                                                const Duration(seconds: 1),
-                                            curve: Curves.decelerate,
-                                            opacity: start ? 1 : 0,
-                                            child: AnimatedPadding(
-                                              padding: start
-                                                  ? const EdgeInsets.only(
-                                                      right: 12)
-                                                  : const EdgeInsets.only(
-                                                      right: 20),
-                                              curve: Curves.decelerate,
+                                SizedBox(
+                                  height: screenHeight * .045,
+                                  width: screenWidth,
+                                  child: ShaderMask(
+                                    shaderCallback: (Rect bounds) {
+                                      return LinearGradient(
+                                        colors: [
+                                          Colors.white,
+                                          Colors.white.withOpacity(0.05)
+                                        ],
+                                        stops: const [0.8, 1],
+                                        tileMode: TileMode.mirror,
+                                      ).createShader(bounds);
+                                    },
+                                    child: ListView.builder(
+                                        padding:
+                                            const EdgeInsets.only(right: 40),
+                                        physics: const BouncingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: category.length,
+                                        itemBuilder:
+                                            (BuildContext context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                catSelect = index;
+                                              });
+                                            },
+                                            child: AnimatedOpacity(
                                               duration:
                                                   const Duration(seconds: 1),
-                                              child: AnimatedContainer(
+                                              curve:
+                                                  Curves.fastLinearToSlowEaseIn,
+                                              opacity: start ? 1 : 0,
+                                              child: AnimatedPadding(
+                                                padding: start
+                                                    ? const EdgeInsets.only(
+                                                        right: 12)
+                                                    : const EdgeInsets.only(
+                                                        right: 16),
+                                                curve: Curves.decelerate,
                                                 duration:
                                                     const Duration(seconds: 1),
-                                                curve: Curves.decelerate,
-                                                height: screenHeight * .02,
-                                                width: 100,
-                                                decoration: BoxDecoration(
-                                                  color: catSelect == index
-                                                      ? Constants.color1
-                                                      : Colors.grey
-                                                          .withOpacity(.1),
-                                                  border: Border.all(
-                                                      color: catSelect == index
-                                                          ? Constants.iconAc
-                                                          : Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    category[index],
-                                                    style: TextStyle(
-                                                      color: catSelect == index
-                                                          ? Colors.white
-                                                          : Constants.iconIn,
-                                                      fontFamily: 'Helvetica',
-                                                      fontWeight: catSelect ==
-                                                              index
-                                                          ? FontWeight.bold
-                                                          : FontWeight.normal,
+                                                child: AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves.decelerate,
+                                                  height: screenHeight * .02,
+                                                  width: 100,
+                                                  decoration: BoxDecoration(
+                                                    color: catSelect == index
+                                                        ? Constants.color1
+                                                        : Colors.grey
+                                                            .withOpacity(.1),
+                                                    border: Border.all(
+                                                        color: catSelect ==
+                                                                index
+                                                            ? Constants.iconAc
+                                                            : Colors
+                                                                .transparent),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      category[index],
+                                                      style: TextStyle(
+                                                        color: catSelect ==
+                                                                index
+                                                            ? Colors.white
+                                                            : Constants.iconIn,
+                                                        fontFamily: 'Helvetica',
+                                                        fontWeight: catSelect ==
+                                                                index
+                                                            ? FontWeight.bold
+                                                            : FontWeight.normal,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      }),
+                                          );
+                                        }),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -509,6 +520,7 @@ class HomeState extends State<Home> {
                               return Center(
                                 child: AnimatedPadding(
                                   duration: const Duration(seconds: 1),
+                                  curve: Curves.fastLinearToSlowEaseIn,
                                   padding: start
                                       ? const EdgeInsets.only(
                                           right: 20,
@@ -521,7 +533,7 @@ class HomeState extends State<Home> {
                                     child: AnimatedContainer(
                                       duration:
                                           const Duration(milliseconds: 100),
-                                      curve: Curves.easeInOut,
+                                      curve: Curves.fastLinearToSlowEaseIn,
                                       height: index == currentPage
                                           ? screenHeight * .46
                                           : screenHeight * .41,
