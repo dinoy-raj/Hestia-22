@@ -70,14 +70,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Container(
                   //color: Color(0xff121212),
-                  decoration: const BoxDecoration(color: Color(0xff121212), borderRadius: BorderRadius.all(Radius.circular(20))),
+                  decoration: const BoxDecoration(color: Color(0xff121212), borderRadius: BorderRadius.all(Radius.circular(25))),
                   height: 70,
                   width: 280,
                   
                   child: Center(
                     child: RoundedButton(
                       text: 'Continue with Google',
-                      
                       press: () {},
                     ),
                   ),
