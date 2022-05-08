@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hestia22/main.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double screenHeight = MediaQuery.of(context).size.height - 24;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Constants.sc,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(children: [
@@ -87,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            color: Color(0xff121212),
+                            color: Colors.white24,
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),
                             ),
@@ -125,7 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           decoration: const BoxDecoration(
-                            color: Color(0xff121212),
+                            color: Colors.white24,
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),
                             ),
