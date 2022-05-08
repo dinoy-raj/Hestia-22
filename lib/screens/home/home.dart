@@ -272,13 +272,13 @@ class HomeState extends State<Home> {
                       //search & sort part
                       AnimatedPadding(
                         duration: const Duration(seconds: 1),
-                        curve: Curves.fastLinearToSlowEaseIn,
+                        curve: Curves.decelerate,
                         padding: start
                             ? const EdgeInsets.only(left: 20, right: 20)
                             : const EdgeInsets.only(left: 0, right: 0),
                         child: AnimatedOpacity(
                           duration: const Duration(seconds: 1),
-                          curve: Curves.fastLinearToSlowEaseIn,
+                          curve: Curves.decelerate,
                           opacity: start ? 1 : 0,
                           child: AnimatedContainer(
                             duration: const Duration(seconds: 1),
@@ -293,6 +293,7 @@ class HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                //search icon
                                 SizedBox(
                                   height: screenHeight * .05,
                                   width: screenHeight * .05,
@@ -302,6 +303,8 @@ class HomeState extends State<Home> {
                                     color: Constants.iconIn,
                                   ),
                                 ),
+
+                                //
                                 AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.decelerate,
@@ -311,35 +314,34 @@ class HomeState extends State<Home> {
                                   child: SizedBox(
                                     height: screenHeight * .05,
                                     width: screenWidth * .65,
-                                    child: Center(
-                                      child: TextFormField(
-                                        scrollPhysics:
-                                            const BouncingScrollPhysics(),
-                                        cursorColor: Constants.iconIn,
-                                        cursorRadius: const Radius.circular(10),
-                                        style: const TextStyle(
+                                    child: TextFormField(
+                                      scrollPhysics:
+                                          const BouncingScrollPhysics(),
+                                      cursorColor: Constants.iconIn,
+                                      cursorRadius: const Radius.circular(10),
+                                      style: const TextStyle(
+                                        fontFamily: 'Helvetica',
+                                        color: Constants.iconAc,
+                                        fontSize: 16,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                      decoration: InputDecoration(
+                                        hintText: "Discover new event",
+                                        hintStyle: TextStyle(
                                           fontFamily: 'Helvetica',
-                                          color: Constants.iconAc,
-                                          fontSize: 16,
+                                          color: Constants.iconIn,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w100,
                                         ),
-                                        textAlign: TextAlign.start,
-                                        decoration: InputDecoration(
-                                          hintText: "Discover new event",
-                                          hintStyle: TextStyle(
-                                            fontFamily: 'Helvetica',
-                                            color: Constants.iconIn,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w100,
-                                          ),
-                                          hoverColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          fillColor: Colors.transparent,
-                                          border: InputBorder.none,
-                                        ),
+                                        hoverColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        fillColor: Colors.transparent,
+                                        border: InputBorder.none,
                                       ),
                                     ),
                                   ),
                                 ),
+
                                 AnimatedOpacity(
                                   duration: const Duration(milliseconds: 1800),
                                   curve: Curves.decelerate,
