@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
 
 import 'notification.dart';
@@ -275,7 +276,7 @@ class HomeState extends State<Home> {
                         curve: Curves.decelerate,
                         padding: start
                             ? const EdgeInsets.only(left: 20, right: 20)
-                            : const EdgeInsets.only(left: 0, right: 0),
+                            : const EdgeInsets.only(left: 10, right: 10),
                         child: AnimatedOpacity(
                           duration: const Duration(seconds: 1),
                           curve: Curves.decelerate,
@@ -310,11 +311,11 @@ class HomeState extends State<Home> {
                                   curve: Curves.decelerate,
                                   padding: start
                                       ? const EdgeInsets.only(left: 0)
-                                      : const EdgeInsets.only(left: 20),
+                                      : const EdgeInsets.only(left: 10),
                                   child: SizedBox(
-                                    height: screenHeight * .05,
+                                    height: screenHeight * .065,
                                     width: screenWidth * .65,
-                                    child: TextFormField(
+                                    child: TextField(
                                       scrollPhysics:
                                           const BouncingScrollPhysics(),
                                       cursorColor: Constants.iconIn,
@@ -335,8 +336,8 @@ class HomeState extends State<Home> {
                                         ),
                                         hoverColor: Colors.transparent,
                                         focusColor: Colors.transparent,
-                                        fillColor: Colors.transparent,
                                         border: InputBorder.none,
+                                        contentPadding: const EdgeInsets.all(0),
                                       ),
                                     ),
                                   ),
