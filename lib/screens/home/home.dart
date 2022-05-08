@@ -643,7 +643,8 @@ class HomeState extends State<Home> {
                                                                 show[index]
                                                                     ['date'],
                                                                 style: TextStyle(
-                                                                  fontFamily: 'Helvetica',
+                                                                    fontFamily:
+                                                                        'Helvetica',
                                                                     fontSize:
                                                                         screenHeight *
                                                                             .023,
@@ -653,12 +654,15 @@ class HomeState extends State<Home> {
                                                                         FontWeight
                                                                             .bold),
                                                               ),
-                                                               Text(
+                                                              Text(
                                                                 "May",
                                                                 style:
                                                                     TextStyle(
-                                                                      fontFamily: 'Helvetica',
-                                                                  fontSize:    screenHeight * .012,
+                                                                  fontFamily:
+                                                                      'Helvetica',
+                                                                  fontSize:
+                                                                      screenHeight *
+                                                                          .012,
                                                                   color: Colors
                                                                       .white,
                                                                 ),
@@ -674,34 +678,28 @@ class HomeState extends State<Home> {
                                             ),
                                           ),
 
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                child: BackdropFilter(
-                                                  filter: ImageFilter.blur(
-                                                      sigmaX: 2, sigmaY: 2),
-                                                  child: AnimatedOpacity(
-                                                    duration: const Duration(
-                                                        seconds: 1),
-                                                    curve: Curves.decelerate,
-                                                    opacity:
-                                                        index == currentPage
-                                                            ? 1
-                                                            : .5,
-                                                    child: AnimatedPadding(
+                                          //bottom (name+prize+)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 10.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: BackdropFilter(
+                                                    filter: ImageFilter.blur(
+                                                        sigmaX: 10, sigmaY: 10),
+                                                    child: AnimatedOpacity(
                                                       duration: const Duration(
                                                           seconds: 1),
                                                       curve: Curves.decelerate,
-                                                      padding:
+                                                      opacity:
                                                           index == currentPage
-                                                              ? const EdgeInsets
-                                                                  .all(5)
-                                                              : const EdgeInsets
-                                                                  .all(0),
+                                                              ? 1
+                                                              : .5,
                                                       child: AnimatedContainer(
                                                         curve:
                                                             Curves.decelerate,
@@ -709,137 +707,118 @@ class HomeState extends State<Home> {
                                                             const Duration(
                                                                 seconds: 1),
                                                         height:
-                                                            screenHeight * .15,
+                                                            screenHeight * .08,
                                                         width: index ==
                                                                 currentPage
-                                                            ? screenWidth * .67
-                                                            : screenWidth * .64,
+                                                            ? screenWidth * .6
+                                                            : screenWidth * .5,
                                                         decoration:
                                                             BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                                gradient: LinearGradient(
-                                                                    begin: Alignment
-                                                                        .topCenter,
-                                                                    end: Alignment
-                                                                        .bottomCenter,
-                                                                    colors: [
-                                                                      Colors
-                                                                          .white
-                                                                          .withOpacity(
-                                                                              .04),
-                                                                      Colors
-                                                                          .white
-                                                                          .withOpacity(
-                                                                              .02),
-                                                                      Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                              .01)
-                                                                    ])),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceAround,
-                                                          children: [
-                                                            Text(
-                                                              show[index]
-                                                                  ['name'],
-                                                              style: const TextStyle(
-                                                                  fontSize: 30,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontFamily:
-                                                                      "Helvetica",
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Container(
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                                child:
-                                                                    BackdropFilter(
-                                                                  filter: ImageFilter
-                                                                      .blur(
-                                                                          sigmaX:
-                                                                              3,
-                                                                          sigmaY:
-                                                                              3),
-                                                                  child:
-                                                                      AnimatedContainer(
-                                                                      curve: Curves
-                                                                        .decelerate,
-                                                                      duration: const Duration(
-                                                                        milliseconds:
-                                                                            100),
-                                                                      height:
-                                                                        screenHeight *
-                                                                            .04,
-                                                                      width:
-                                                                        screenWidth *
-                                                                            .4,
-                                                                      decoration:
-                                                                        BoxDecoration(
-                                                                      // border: Border.all(color: Colors.white,width: .1),
-                                                                      color: Colors
-                                                                          .white
-                                                                          .withOpacity(.1),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(10),
-                                                                      ),
-                                                                      child:
-                                                                        Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment.spaceAround,
-                                                                      children: [
-                                                                        Text(
-                                                                          '\u{20B9}' +
-                                                                              show[index]['price'],
-                                                                          style: TextStyle(
-                                                                              fontSize: 15,
-                                                                              color: Colors.white.withOpacity(.4),
-                                                                              fontFamily: 'Helvetica',
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                        Container(
-                                                                          height:
-                                                                              screenHeight * .02,
-                                                                          width:
-                                                                              2,
-                                                                          decoration:
-                                                                              BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
-                                                                        ),
-                                                                        Text(
-                                                                          show[index]['remain'] +
-                                                                              " 🎫",
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontSize: 15,
-                                                                            fontFamily: 'Helvetica',
-                                                                            fontWeight: FontWeight.bold,
-                                                                            color: Colors.white.withOpacity(.4),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                      ),
-                                                                    ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(15),
                                                         ),
+                                                        // child: Column(
+                                                        //   mainAxisAlignment:
+                                                        //       MainAxisAlignment
+                                                        //           .spaceAround,
+                                                        //   children: [
+                                                        //     Text(
+                                                        //       show[index]
+                                                        //           ['name'],
+                                                        //       style: const TextStyle(
+                                                        //           fontSize: 30,
+                                                        //           color: Colors
+                                                        //               .white,
+                                                        //           fontFamily:
+                                                        //               "Helvetica",
+                                                        //           fontWeight:
+                                                        //               FontWeight
+                                                        //                   .bold),
+                                                        //     ),
+                                                        //     Container(
+                                                        //       child: ClipRRect(
+                                                        //         borderRadius:
+                                                        //             BorderRadius
+                                                        //                 .circular(
+                                                        //                     10),
+                                                        //         child:
+                                                        //             BackdropFilter(
+                                                        //           filter: ImageFilter
+                                                        //               .blur(
+                                                        //                   sigmaX:
+                                                        //                       3,
+                                                        //                   sigmaY:
+                                                        //                       3),
+                                                        //           child:
+                                                        //               AnimatedContainer(
+                                                        //               curve: Curves
+                                                        //                 .decelerate,
+                                                        //               duration: const Duration(
+                                                        //                 milliseconds:
+                                                        //                     100),
+                                                        //               height:
+                                                        //                 screenHeight *
+                                                        //                     .04,
+                                                        //               width:
+                                                        //                 screenWidth *
+                                                        //                     .4,
+                                                        //               decoration:
+                                                        //                 BoxDecoration(
+                                                        //               // border: Border.all(color: Colors.white,width: .1),
+                                                        //               color: Colors
+                                                        //                   .white
+                                                        //                   .withOpacity(.1),
+                                                        //               borderRadius:
+                                                        //                   BorderRadius.circular(10),
+                                                        //               ),
+                                                        //               child:
+                                                        //                 Row(
+                                                        //               mainAxisAlignment:
+                                                        //                   MainAxisAlignment.spaceAround,
+                                                        //               children: [
+                                                        //                 Text(
+                                                        //                   '\u{20B9}' +
+                                                        //                       show[index]['price'],
+                                                        //                   style: TextStyle(
+                                                        //                       fontSize: 15,
+                                                        //                       color: Colors.white.withOpacity(.4),
+                                                        //                       fontFamily: 'Helvetica',
+                                                        //                       fontWeight: FontWeight.bold),
+                                                        //                 ),
+                                                        //                 Container(
+                                                        //                   height:
+                                                        //                       screenHeight * .02,
+                                                        //                   width:
+                                                        //                       2,
+                                                        //                   decoration:
+                                                        //                       BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
+                                                        //                 ),
+                                                        //                 Text(
+                                                        //                   show[index]['remain'] +
+                                                        //                       " 🎫",
+                                                        //                   style:
+                                                        //                       TextStyle(
+                                                        //                     fontSize: 15,
+                                                        //                     fontFamily: 'Helvetica',
+                                                        //                     fontWeight: FontWeight.bold,
+                                                        //                     color: Colors.white.withOpacity(.4),
+                                                        //                   ),
+                                                        //                 ),
+                                                        //               ],
+                                                        //               ),
+                                                        //             ),
+                                                        //         ),
+                                                        //       ),
+                                                        //     ),
+                                                        //   ],
+                                                        // ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
