@@ -530,12 +530,12 @@ class HomeState extends State<Home> {
                                         )
                                       : const EdgeInsets.only(right: 25),
                                   child: AnimatedOpacity(
-                                    duration: const Duration(milliseconds: 100),
+                                    duration: const Duration(milliseconds: 800),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     opacity: index == currentPage ? 1 : .50,
                                     child: AnimatedContainer(
                                       duration:
-                                          const Duration(milliseconds: 100),
+                                          const Duration(milliseconds: 800),
                                       curve: Curves.fastLinearToSlowEaseIn,
                                       height: index == currentPage
                                           ? screenHeight * .46
@@ -587,7 +587,7 @@ class HomeState extends State<Home> {
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            15),
+                                                            10),
                                                     child: BackdropFilter(
                                                       filter: ImageFilter.blur(
                                                           sigmaX: 3, sigmaY: 3),
@@ -617,7 +617,7 @@ class HomeState extends State<Home> {
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              15),
+                                                                              5),
                                                                   gradient: LinearGradient(
                                                                       begin: Alignment
                                                                           .bottomLeft,
@@ -642,20 +642,23 @@ class HomeState extends State<Home> {
                                                               Text(
                                                                 show[index]
                                                                     ['date'],
-                                                                style: const TextStyle(
+                                                                style: TextStyle(
+                                                                  fontFamily: 'Helvetica',
                                                                     fontSize:
-                                                                        20,
+                                                                        screenHeight *
+                                                                            .023,
                                                                     color: Colors
                                                                         .white,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
                                                               ),
-                                                              const Text(
+                                                               Text(
                                                                 "May",
                                                                 style:
                                                                     TextStyle(
-                                                                  fontSize: 10,
+                                                                      fontFamily: 'Helvetica',
+                                                                  fontSize:    screenHeight * .012,
                                                                   color: Colors
                                                                       .white,
                                                                 ),
@@ -769,75 +772,63 @@ class HomeState extends State<Home> {
                                                                           sigmaY:
                                                                               3),
                                                                   child:
-                                                                      AnimatedOpacity(
-                                                                    duration: const Duration(
-                                                                        seconds:
-                                                                            1),
-                                                                    curve: Curves
-                                                                        .decelerate,
-                                                                    opacity: index ==
-                                                                            currentPage
-                                                                        ? 1
-                                                                        : .5,
-                                                                    child:
-                                                                        AnimatedContainer(
+                                                                      AnimatedContainer(
                                                                       curve: Curves
-                                                                          .decelerate,
+                                                                        .decelerate,
                                                                       duration: const Duration(
-                                                                          milliseconds:
-                                                                              100),
+                                                                        milliseconds:
+                                                                            100),
                                                                       height:
-                                                                          screenHeight *
-                                                                              .04,
+                                                                        screenHeight *
+                                                                            .04,
                                                                       width:
-                                                                          screenWidth *
-                                                                              .4,
+                                                                        screenWidth *
+                                                                            .4,
                                                                       decoration:
-                                                                          BoxDecoration(
-                                                                        // border: Border.all(color: Colors.white,width: .1),
-                                                                        color: Colors
-                                                                            .white
-                                                                            .withOpacity(.1),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10),
+                                                                        BoxDecoration(
+                                                                      // border: Border.all(color: Colors.white,width: .1),
+                                                                      color: Colors
+                                                                          .white
+                                                                          .withOpacity(.1),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(10),
                                                                       ),
                                                                       child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceAround,
-                                                                        children: [
-                                                                          Text(
-                                                                            '\u{20B9}' +
-                                                                                show[index]['price'],
-                                                                            style: TextStyle(
-                                                                                fontSize: 15,
-                                                                                color: Colors.white.withOpacity(.4),
-                                                                                fontFamily: 'Helvetica',
-                                                                                fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                          Container(
-                                                                            height:
-                                                                                screenHeight * .02,
-                                                                            width:
-                                                                                2,
-                                                                            decoration:
-                                                                                BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
-                                                                          ),
-                                                                          Text(
-                                                                            show[index]['remain'] +
-                                                                                " 🎫",
-                                                                            style:
-                                                                                TextStyle(
+                                                                        Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment.spaceAround,
+                                                                      children: [
+                                                                        Text(
+                                                                          '\u{20B9}' +
+                                                                              show[index]['price'],
+                                                                          style: TextStyle(
                                                                               fontSize: 15,
-                                                                              fontFamily: 'Helvetica',
-                                                                              fontWeight: FontWeight.bold,
                                                                               color: Colors.white.withOpacity(.4),
-                                                                            ),
+                                                                              fontFamily: 'Helvetica',
+                                                                              fontWeight: FontWeight.bold),
+                                                                        ),
+                                                                        Container(
+                                                                          height:
+                                                                              screenHeight * .02,
+                                                                          width:
+                                                                              2,
+                                                                          decoration:
+                                                                              BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
+                                                                        ),
+                                                                        Text(
+                                                                          show[index]['remain'] +
+                                                                              " 🎫",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize: 15,
+                                                                            fontFamily: 'Helvetica',
+                                                                            fontWeight: FontWeight.bold,
+                                                                            color: Colors.white.withOpacity(.4),
                                                                           ),
-                                                                        ],
+                                                                        ),
+                                                                      ],
                                                                       ),
                                                                     ),
-                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
