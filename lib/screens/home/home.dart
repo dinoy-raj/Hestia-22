@@ -626,14 +626,15 @@ class HomeState extends State<Home> {
                                                                       colors: [
                                                                         Colors
                                                                             .white
-                                                                            .withOpacity(.1),
+                                                                            .withOpacity(.01),
                                                                         Colors
                                                                             .white
                                                                             .withOpacity(.03),
                                                                         Colors
                                                                             .black26
-                                                                            .withOpacity(.1)
-                                                                      ])),
+                                                                            .withOpacity(.01)
+                                                                      ])
+                                                              ),
                                                           child: Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
