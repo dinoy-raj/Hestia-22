@@ -531,12 +531,12 @@ class HomeState extends State<Home> {
                                       : const EdgeInsets.only(right: 25),
                                   child: AnimatedOpacity(
                                     duration: const Duration(seconds: 2),
-                                    opacity: start ? 1 : .20,
+                                    opacity: start ? 1 : .10,
                                     child: AnimatedOpacity(
                                       duration:
                                           const Duration(milliseconds: 800),
-                                      curve: Curves.fastLinearToSlowEaseIn,
-                                      opacity: index == currentPage ? 1 : .20,
+                                      // curve: Curves.fastLinearToSlowEaseIn,
+                                      opacity: index == currentPage ? 1 : .2,
                                       child: AnimatedContainer(
                                         duration:
                                             const Duration(milliseconds: 800),
