@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -59,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundImage: AssetImage('assets/icons/face.png'),
                       ),
                       decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Color(0xff444444)),
+                          shape: BoxShape.circle, color: Constants.iconAc ),
                     ),
                     const SizedBox(
                       height: 8,
@@ -81,14 +82,14 @@ class _ProfilePageState extends State<ProfilePage> {
               //color: Colors.yellow,
               child: Center(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                            color: Colors.white24,
+                            color: Constants.bg,
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),
                             ),
@@ -126,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           decoration: const BoxDecoration(
-                            color: Colors.white24,
+                            color: Constants.bg,
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),
                             ),
@@ -153,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Container(
-              height: screenHeight * 0.55,
+              height: screenHeight * 0.45,
               //color: Colors.green,
               child: Center(
                 child: Container(
@@ -186,16 +187,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 width: screenWidth * 0.1,
                                 height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xff444444),
+                                  color: Constants.bg,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
                                   ),
                                 ),
-                                child: Center(
-                                  child: IconButton(
-                                    icon:
-                                        Image.asset('assets/icons/person.png'),
-                                    onPressed: () {},
+                                child: const Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.user,
+                                    color: Colors.white,
+                                        // Image.asset('assets/icons/person.png'),
+                                    
                                   ),
                                 ),
                               ),
@@ -223,15 +225,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                 width: screenWidth * 0.1,
                                 height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xff444444),
+                                  color: Constants.bg,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
                                   ),
                                 ),
-                                child: Center(
-                                  child: IconButton(
-                                    icon: Image.asset('assets/icons/Mail.png'),
-                                    onPressed: () {},
+                                child: const Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.envelope,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -259,15 +261,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                 width: screenWidth * 0.1,
                                 height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xff444444),
+                                  color: Constants.bg,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
                                   ),
                                 ),
-                                child: Center(
-                                  child: IconButton(
-                                    icon: Image.asset('assets/icons/call.png'),
-                                    onPressed: () {},
+                                child: const Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.phone,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -307,16 +309,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                 width: screenWidth * 0.1,
                                 height: screenWidth * 0.1,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xff444444),
+                                  color: Constants.bg,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
                                   ),
                                 ),
-                                child: Center(
-                                  child: IconButton(
-                                    icon:
-                                        Image.asset('assets/icons/Logout.png'),
-                                    onPressed: () {},
+                                child: const Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.arrowRightFromBracket,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
