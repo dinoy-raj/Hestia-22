@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -109,7 +110,7 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        log((await django.getTrendingEvents()).toString());
+        log((show![0].toString()));
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -538,7 +539,7 @@ class HomeState extends State<Home> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: const [
                                   Text(
-                                    "Coming Soon....",
+                                    "Loading....",
                                     style: TextStyle(
                                       fontFamily: "Helvetica",
                                       color: Constants.iconAc,
@@ -592,8 +593,8 @@ class HomeState extends State<Home> {
                                               opacity:
                                                   index == currentPage ? 1 : .2,
                                               child: AnimatedContainer(
-                                                duration: const Duration(
-                                                    milliseconds: 800),
+                                                duration:
+                                                    const Duration(seconds: 1),
                                                 curve: Curves
                                                     .fastLinearToSlowEaseIn,
                                                 height: index == currentPage
@@ -624,10 +625,12 @@ class HomeState extends State<Home> {
                                                                   ['image'] ==
                                                               null
                                                           ? const NetworkImage(
-                                                              "https://github.com/Dinoy-Raj/Hestia22/blob/main/assets/logo/hestia%20logo22%20white%20logo%20only.png")
+                                                              "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                              scale: 1.0)
                                                           : NetworkImage(
                                                               show?[index]
-                                                                  ['image']),
+                                                                  ['image'],
+                                                            ),
                                                     ),
                                                     gradient:
                                                         const LinearGradient(
@@ -681,7 +684,7 @@ class HomeState extends State<Home> {
                                 width: screenWidth * .85,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: Colors.black.withOpacity(.8)),
+                                    color: Colors.black.withOpacity(.9)),
                                 child: SingleChildScrollView(
                                   physics: const BouncingScrollPhysics(),
                                   child: AnimatedPadding(
