@@ -16,8 +16,15 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool flag = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +40,18 @@ class MyApp extends StatelessWidget {
           stream: django.googleSignIn.onCurrentUserChanged,
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount?> snapshot) {
-            if (snapshot.connectionState.name == "waiting") {
+            if (snapshot.connectionState == ConnectionState.waiting && flag) {
+              flag = false;
               return const Scaffold(
                   backgroundColor: Constants.sc,
                   body: Center(
                       child: CupertinoActivityIndicator(
                     radius: 10,
                   )));
-            } else if (snapshot.connectionState.name == "active" &&
-                snapshot.data == null) {
-              return const LoginPage();
-            } else {
+            } else if (snapshot.hasData) {
               return const MyHomePage();
+            } else {
+              return const LoginPage();
             }
           }),
     );
