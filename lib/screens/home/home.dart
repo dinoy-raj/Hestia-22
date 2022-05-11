@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/services/django/django.dart' as django;
+import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
 
 import 'notification.dart';
@@ -28,6 +31,7 @@ class HomeState extends State<Home> {
   //category list
   static int catSelect = 10;
   static List category = [
+    "Trending",
     "Proshows",
     "Culturals",
     "Workshops",
@@ -37,49 +41,7 @@ class HomeState extends State<Home> {
   ];
 
   //Proshow list data
-
-  List<Map> show = [
-    {
-      'name': 'Diego miranda',
-      'date': '26',
-      'remain': '120',
-      'price': '1500',
-      'image':
-          'https://img.freepik.com/free-photo/vertical-picture-male-dj-working_181624-19913.jpg?t=st=1651607900~exp=1651608500~hmac=bd97bc8d7ad76584255bf9c1fddb4711059a1b5e8ab65d2ee73f13780e57ad1b&w=360',
-    },
-    {
-      'name': 'Club banditz',
-      'date': '27',
-      'remain': '10',
-      'price': '700',
-      'image':
-          'https://img.freepik.com/free-photo/young-caucasian-female-musician-performer-singing-dancing-neon-light-gradient_155003-44335.jpg?t=st=1651607959~exp=1651608559~hmac=f554832ef41c853ed8b05414ba9bbce9a93ee95a31d0201b3fd3daca6ebb186d&w=360',
-    },
-    {
-      'name': 'Pineapple express',
-      'date': '28',
-      'remain': '67',
-      'price': '1000',
-      'image':
-          'https://img.freepik.com/free-photo/front-view-young-female-dj-entertaining-crowd_23-2148325470.jpg?t=st=1651607959~exp=1651608559~hmac=aef81b2e61633c74b2a17941df04b3411b0aef93ffb75f052f7af2a298d29093&w=740',
-    },
-    {
-      'name': 'Aron chupa',
-      'date': '28',
-      'remain': '20',
-      'price': '2000',
-      'image':
-          'https://img.freepik.com/free-photo/long-hair-guitar-guy-singing-low-view_23-2148751621.jpg?t=st=1651608075~exp=1651608675~hmac=590784e3a1ef7441c6bd3b757085ce0802e2b65c90d53ac776aecaa32ecf982c&w=740',
-    },
-    {
-      'name': 'Neeraj',
-      'date': '29',
-      'remain': '100',
-      'price': '900',
-      'image':
-          'https://img.freepik.com/free-photo/silhouette-young-lady-crowd-during-concert_181624-27673.jpg?t=st=1651608300~exp=1651608900~hmac=9a52e83e60ea919dd09f93181dea28dd25657fa78845a1f5aacc7428b21efcc3&w=996',
-    }
-  ];
+  List<dynamic>? show;
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
@@ -116,6 +78,12 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+
+    django.getTrendingEvents().then((value) {
+      setState(() {
+        show = value;
+      });
+    });
     notPressed = false;
     start = false;
     // catSelect = 10;
@@ -139,7 +107,8 @@ class HomeState extends State<Home> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        log((await django.getTrendingEvents()).toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -272,13 +241,13 @@ class HomeState extends State<Home> {
                       //search & sort part
                       AnimatedPadding(
                         duration: const Duration(seconds: 1),
-                        curve: Curves.fastLinearToSlowEaseIn,
+                        curve: Curves.decelerate,
                         padding: start
                             ? const EdgeInsets.only(left: 20, right: 20)
-                            : const EdgeInsets.only(left: 0, right: 0),
+                            : const EdgeInsets.only(left: 10, right: 10),
                         child: AnimatedOpacity(
                           duration: const Duration(seconds: 1),
-                          curve: Curves.fastLinearToSlowEaseIn,
+                          curve: Curves.decelerate,
                           opacity: start ? 1 : 0,
                           child: AnimatedContainer(
                             duration: const Duration(seconds: 1),
@@ -293,6 +262,7 @@ class HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                //search icon
                                 SizedBox(
                                   height: screenHeight * .05,
                                   width: screenHeight * .05,
@@ -302,44 +272,45 @@ class HomeState extends State<Home> {
                                     color: Constants.iconIn,
                                   ),
                                 ),
+
+                                //
                                 AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.decelerate,
                                   padding: start
                                       ? const EdgeInsets.only(left: 0)
-                                      : const EdgeInsets.only(left: 20),
+                                      : const EdgeInsets.only(left: 10),
                                   child: SizedBox(
-                                    height: screenHeight * .05,
+                                    height: screenHeight * .065,
                                     width: screenWidth * .65,
-                                    child: Center(
-                                      child: TextFormField(
-                                        scrollPhysics:
-                                            const BouncingScrollPhysics(),
-                                        cursorColor: Constants.iconIn,
-                                        cursorRadius: const Radius.circular(10),
-                                        style: const TextStyle(
+                                    child: TextField(
+                                      scrollPhysics:
+                                          const BouncingScrollPhysics(),
+                                      cursorColor: Constants.iconIn,
+                                      cursorRadius: const Radius.circular(10),
+                                      style: const TextStyle(
+                                        fontFamily: 'Helvetica',
+                                        color: Constants.iconAc,
+                                        fontSize: 16,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                      decoration: InputDecoration(
+                                        hintText: "Discover new event",
+                                        hintStyle: TextStyle(
                                           fontFamily: 'Helvetica',
-                                          color: Constants.iconAc,
-                                          fontSize: 16,
+                                          color: Constants.iconIn,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w100,
                                         ),
-                                        textAlign: TextAlign.start,
-                                        decoration: InputDecoration(
-                                          hintText: "Discover new event",
-                                          hintStyle: TextStyle(
-                                            fontFamily: 'Helvetica',
-                                            color: Constants.iconIn,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w100,
-                                          ),
-                                          hoverColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          fillColor: Colors.transparent,
-                                          border: InputBorder.none,
-                                        ),
+                                        hoverColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        border: InputBorder.none,
+                                        contentPadding: const EdgeInsets.all(0),
                                       ),
                                     ),
                                   ),
                                 ),
+
                                 AnimatedOpacity(
                                   duration: const Duration(milliseconds: 1800),
                                   curve: Curves.decelerate,
@@ -511,349 +482,292 @@ class HomeState extends State<Home> {
                         height: screenHeight * .6,
                         width: screenWidth,
                         // decoration: BoxDecoration(),
-                        child: PageView.builder(
-                            controller: pageControl,
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: show.length,
-                            itemBuilder: (BuildContext context, index) {
-                              return Center(
-                                child: AnimatedPadding(
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  padding: start
-                                      ? const EdgeInsets.only(
-                                          right: 20,
-                                        )
-                                      : const EdgeInsets.only(right: 25),
-                                  child: AnimatedOpacity(
-                                    duration: const Duration(milliseconds: 100),
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                    opacity: index == currentPage ? 1 : .50,
-                                    child: AnimatedContainer(
-                                      duration:
-                                          const Duration(milliseconds: 100),
+                        child: show == null
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    "Coming Soon....",
+                                    style: TextStyle(
+                                      fontFamily: "Helvetica",
+                                      color: Constants.iconAc,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : PageView.builder(
+                                controller: pageControl,
+                                scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: show?.length,
+                                itemBuilder: (BuildContext context, index) {
+                                  return Center(
+                                    child: AnimatedPadding(
+                                      duration: const Duration(seconds: 1),
                                       curve: Curves.fastLinearToSlowEaseIn,
-                                      height: index == currentPage
-                                          ? screenHeight * .46
-                                          : screenHeight * .41,
-                                      width: index == currentPage
-                                          ? screenWidth * .9
-                                          : screenWidth * .8,
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: index == currentPage
-                                                  ? Constants.iconAc
-                                                      .withOpacity(.05)
-                                                  : Colors.transparent,
-                                              spreadRadius: 2,
-                                              blurRadius: 20,
+                                      padding: start
+                                          ? const EdgeInsets.only(
+                                              right: 20,
                                             )
-                                          ],
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  show[index]['image'])),
-                                          gradient: const LinearGradient(
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                            colors: [
-                                              Colors.black26,
-                                              Colors.transparent,
-                                              Colors.transparent
-                                            ],
-                                          ),
-                                          border:
-                                              Border.all(color: Constants.sc),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.grey),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          //date of event
-                                          Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: Row(
+                                          : const EdgeInsets.only(right: 25),
+                                      child: AnimatedOpacity(
+                                        duration: const Duration(seconds: 2),
+                                        opacity: start ? 1 : .10,
+                                        child: AnimatedOpacity(
+                                          duration:
+                                              const Duration(milliseconds: 800),
+                                          // curve: Curves.fastLinearToSlowEaseIn,
+                                          opacity:
+                                              index == currentPage ? 1 : .2,
+                                          child: AnimatedContainer(
+                                            duration: const Duration(
+                                                milliseconds: 800),
+                                            curve:
+                                                Curves.fastLinearToSlowEaseIn,
+                                            height: index == currentPage
+                                                ? screenHeight * .46
+                                                : screenHeight * .41,
+                                            width: index == currentPage
+                                                ? screenWidth * .9
+                                                : screenWidth * .8,
+                                            decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: index == currentPage
+                                                        ? Constants.iconAc
+                                                            .withOpacity(.05)
+                                                        : Colors.transparent,
+                                                    spreadRadius: 2,
+                                                    blurRadius: 20,
+                                                  )
+                                                ],
+                                                image: DecorationImage(
+                                                  fit: index == currentPage
+                                                      ? BoxFit.fill
+                                                      : BoxFit.cover,
+                                                  image: NetworkImage(
+                                                      show?[index]['image']),
+                                                ),
+                                                gradient: const LinearGradient(
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                  colors: [
+                                                    Colors.black26,
+                                                    Colors.transparent,
+                                                    Colors.transparent
+                                                  ],
+                                                ),
+                                                border: Border.all(
+                                                    color: Constants.sc),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color: Colors.grey),
+                                            child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Container(
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                    child: BackdropFilter(
-                                                      filter: ImageFilter.blur(
-                                                          sigmaX: 3, sigmaY: 3),
-                                                      child: AnimatedOpacity(
-                                                        duration:
-                                                            const Duration(
-                                                                seconds: 1),
-                                                        curve:
-                                                            Curves.decelerate,
-                                                        opacity:
-                                                            index == currentPage
-                                                                ? 1
-                                                                : .5,
-                                                        child:
-                                                            AnimatedContainer(
-                                                          curve:
-                                                              Curves.decelerate,
-                                                          duration:
-                                                              const Duration(
-                                                                  seconds: 1),
-                                                          height: screenHeight *
-                                                              .055,
-                                                          width: screenHeight *
-                                                              .055,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  gradient: LinearGradient(
-                                                                      begin: Alignment
-                                                                          .bottomLeft,
-                                                                      end: Alignment
-                                                                          .topRight,
-                                                                      colors: [
-                                                                        Colors
-                                                                            .white
-                                                                            .withOpacity(.1),
-                                                                        Colors
-                                                                            .white
-                                                                            .withOpacity(.03),
-                                                                        Colors
-                                                                            .black26
-                                                                            .withOpacity(.1)
-                                                                      ])),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                show[index]
-                                                                    ['date'],
-                                                                style: const TextStyle(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              const Text(
-                                                                "May",
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 10,
-                                                                  color: Colors
-                                                                      .white,
+                                                //date of event
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      15.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Container(
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          child: BackdropFilter(
+                                                            filter: ImageFilter
+                                                                .blur(
+                                                                    sigmaX: 3,
+                                                                    sigmaY: 3),
+                                                            child:
+                                                                AnimatedOpacity(
+                                                              duration:
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          1),
+                                                              curve: Curves
+                                                                  .decelerate,
+                                                              opacity: index ==
+                                                                      currentPage
+                                                                  ? 1
+                                                                  : .5,
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                curve: Curves
+                                                                    .decelerate,
+                                                                duration:
+                                                                    const Duration(
+                                                                        seconds:
+                                                                            1),
+                                                                height:
+                                                                    screenHeight *
+                                                                        .055,
+                                                                width:
+                                                                    screenHeight *
+                                                                        .055,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                5),
+                                                                        gradient: LinearGradient(
+                                                                            begin:
+                                                                                Alignment.bottomLeft,
+                                                                            end: Alignment.topRight,
+                                                                            colors: [
+                                                                              Colors.white.withOpacity(.01),
+                                                                              Colors.white.withOpacity(.03),
+                                                                              Colors.black26.withOpacity(.01)
+                                                                            ])),
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    // Text(
+                                                                    //   show[index]
+                                                                    //       ['date'],
+                                                                    //   style: TextStyle(
+                                                                    //       fontFamily:
+                                                                    //           'Helvetica',
+                                                                    //       fontSize:
+                                                                    //           screenHeight *
+                                                                    //               .023,
+                                                                    //       color: Colors
+                                                                    //           .white,
+                                                                    //       fontWeight:
+                                                                    //           FontWeight
+                                                                    //               .bold),
+                                                                    // ),
+                                                                    Text(
+                                                                      "May",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontFamily:
+                                                                            'Helvetica',
+                                                                        fontSize:
+                                                                            screenHeight *
+                                                                                .012,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
                                                 ),
+
+                                                //bottom (name+prize+)
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10.0),
+                                                //   child: Row(
+                                                //     mainAxisAlignment:
+                                                //         MainAxisAlignment
+                                                //             .center,
+                                                //     children: [
+                                                //       ClipRRect(
+                                                //         borderRadius:
+                                                //             BorderRadius
+                                                //                 .circular(10),
+                                                //         child: BackdropFilter(
+                                                //           filter:
+                                                //               ImageFilter.blur(
+                                                //                   sigmaX: 10,
+                                                //                   sigmaY: 10),
+                                                //           child:
+                                                //               AnimatedOpacity(
+                                                //             duration:
+                                                //                 const Duration(
+                                                //                     seconds: 1),
+                                                //             curve: Curves
+                                                //                 .decelerate,
+                                                //             opacity: index ==
+                                                //                     currentPage
+                                                //                 ? 1
+                                                //                 : .5,
+                                                //             child:
+                                                //                 AnimatedContainer(
+                                                //               curve: Curves
+                                                //                   .decelerate,
+                                                //               duration:
+                                                //                   const Duration(
+                                                //                       seconds:
+                                                //                           1),
+                                                //               height:
+                                                //                   screenHeight *
+                                                //                       .08,
+                                                //               width: index ==
+                                                //                       currentPage
+                                                //                   ? screenWidth *
+                                                //                       .6
+                                                //                   : screenWidth *
+                                                //                       .5,
+                                                //               decoration:
+                                                //                   BoxDecoration(
+                                                //                 borderRadius:
+                                                //                     BorderRadius
+                                                //                         .circular(
+                                                //                             15),
+                                                //               ),
+                                                //               child: Row(
+                                                //                 mainAxisAlignment:
+                                                //                     MainAxisAlignment
+                                                //                         .center,
+                                                //                 crossAxisAlignment:
+                                                //                     CrossAxisAlignment
+                                                //                         .center,
+                                                //                 children: [
+                                                //                   Text(
+                                                //                     show?[index]
+                                                //                         [
+                                                //                         'title'],
+                                                //                     style:
+                                                //                         const TextStyle(
+                                                //                       fontWeight:
+                                                //                           FontWeight
+                                                //                               .bold,
+                                                //                       fontFamily:
+                                                //                           "Helvetica",
+                                                //                       fontSize:
+                                                //                           18,
+                                                //                       color: Colors
+                                                //                           .white,
+                                                //                     ),
+                                                //                   ),
+                                                //                 ],
+                                                //               ),
+                                                //             ),
+                                                //           ),
+                                                //         ),
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ),
-
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                child: BackdropFilter(
-                                                  filter: ImageFilter.blur(
-                                                      sigmaX: 2, sigmaY: 2),
-                                                  child: AnimatedOpacity(
-                                                    duration: const Duration(
-                                                        seconds: 1),
-                                                    curve: Curves.decelerate,
-                                                    opacity:
-                                                        index == currentPage
-                                                            ? 1
-                                                            : .5,
-                                                    child: AnimatedPadding(
-                                                      duration: const Duration(
-                                                          seconds: 1),
-                                                      curve: Curves.decelerate,
-                                                      padding:
-                                                          index == currentPage
-                                                              ? const EdgeInsets
-                                                                  .all(5)
-                                                              : const EdgeInsets
-                                                                  .all(0),
-                                                      child: AnimatedContainer(
-                                                        curve:
-                                                            Curves.decelerate,
-                                                        duration:
-                                                            const Duration(
-                                                                seconds: 1),
-                                                        height:
-                                                            screenHeight * .15,
-                                                        width: index ==
-                                                                currentPage
-                                                            ? screenWidth * .67
-                                                            : screenWidth * .64,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                                gradient: LinearGradient(
-                                                                    begin: Alignment
-                                                                        .topCenter,
-                                                                    end: Alignment
-                                                                        .bottomCenter,
-                                                                    colors: [
-                                                                      Colors
-                                                                          .white
-                                                                          .withOpacity(
-                                                                              .04),
-                                                                      Colors
-                                                                          .white
-                                                                          .withOpacity(
-                                                                              .02),
-                                                                      Colors
-                                                                          .black
-                                                                          .withOpacity(
-                                                                              .01)
-                                                                    ])),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceAround,
-                                                          children: [
-                                                            Text(
-                                                              show[index]
-                                                                  ['name'],
-                                                              style: const TextStyle(
-                                                                  fontSize: 30,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontFamily:
-                                                                      "Helvetica",
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            Container(
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                                child:
-                                                                    BackdropFilter(
-                                                                  filter: ImageFilter
-                                                                      .blur(
-                                                                          sigmaX:
-                                                                              3,
-                                                                          sigmaY:
-                                                                              3),
-                                                                  child:
-                                                                      AnimatedOpacity(
-                                                                    duration: const Duration(
-                                                                        seconds:
-                                                                            1),
-                                                                    curve: Curves
-                                                                        .decelerate,
-                                                                    opacity: index ==
-                                                                            currentPage
-                                                                        ? 1
-                                                                        : .5,
-                                                                    child:
-                                                                        AnimatedContainer(
-                                                                      curve: Curves
-                                                                          .decelerate,
-                                                                      duration: const Duration(
-                                                                          milliseconds:
-                                                                              100),
-                                                                      height:
-                                                                          screenHeight *
-                                                                              .04,
-                                                                      width:
-                                                                          screenWidth *
-                                                                              .4,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        // border: Border.all(color: Colors.white,width: .1),
-                                                                        color: Colors
-                                                                            .white
-                                                                            .withOpacity(.1),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10),
-                                                                      ),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceAround,
-                                                                        children: [
-                                                                          Text(
-                                                                            '\u{20B9}' +
-                                                                                show[index]['price'],
-                                                                            style: TextStyle(
-                                                                                fontSize: 15,
-                                                                                color: Colors.white.withOpacity(.4),
-                                                                                fontFamily: 'Helvetica',
-                                                                                fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                          Container(
-                                                                            height:
-                                                                                screenHeight * .02,
-                                                                            width:
-                                                                                2,
-                                                                            decoration:
-                                                                                BoxDecoration(color: Constants.iconIn, borderRadius: BorderRadius.circular(10)),
-                                                                          ),
-                                                                          Text(
-                                                                            show[index]['remain'] +
-                                                                                " 🎫",
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontSize: 15,
-                                                                              fontFamily: 'Helvetica',
-                                                                              fontWeight: FontWeight.bold,
-                                                                              color: Colors.white.withOpacity(.4),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            }),
+                                  );
+                                }),
                       ),
                     ],
                   ),
@@ -968,25 +882,25 @@ class HomeState extends State<Home> {
                                                                   false;
                                                               if (showIndex ==
                                                                   0) {
-                                                                show.sort((a, b) => a[
-                                                                        'name']
-                                                                    .compareTo(b[
-                                                                        'name']));
+                                                                // show?.sort((a, b) => a[
+                                                                //         'name']
+                                                                //     .compareTo(b[
+                                                                //         'name']));
                                                               } else if (showIndex ==
                                                                   1) {
-                                                                show.sort((a, b) => int
-                                                                        .parse(b[
-                                                                            'price'])
-                                                                    .compareTo(int
-                                                                        .parse(a[
-                                                                            'price'])));
+                                                                // show?.sort((a, b) => int
+                                                                //         .parse(b[
+                                                                //             'price'])
+                                                                //     .compareTo(int
+                                                                //         .parse(a[
+                                                                //             'price'])));
                                                               } else {
-                                                                show.sort((a, b) => int
-                                                                        .parse(a[
-                                                                            'date'])
-                                                                    .compareTo(int
-                                                                        .parse(b[
-                                                                            'date'])));
+                                                                // show?.sort((a, b) => int
+                                                                //         .parse(a[
+                                                                //             'date'])
+                                                                //     .compareTo(int
+                                                                //         .parse(b[
+                                                                //             'date'])));
                                                               }
                                                             });
                                                           },
