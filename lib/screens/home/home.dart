@@ -29,6 +29,7 @@ class HomeState extends State<Home> {
   //category list
   static int catSelect = 10;
   static List category = [
+    "Trending",
     "Proshows",
     "Culturals",
     "Workshops",
