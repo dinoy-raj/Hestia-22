@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
-import 'package:map_launcher/map_launcher.dart';
 
 class SpotPage extends StatefulWidget {
   const SpotPage({Key? key, required this.data}) : super(key: key);
@@ -60,16 +59,6 @@ class _SpotPageState extends State<SpotPage> {
     },
   ];
 
-  Future<void> _goToCoordinates(Coords coordinates, String title) async {
-    if ((await MapLauncher.isMapAvailable(MapType.google))!) {
-      await MapLauncher.showMarker(
-        mapType: MapType.google,
-        coords: coordinates,
-        title: title,
-      );
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -100,194 +89,122 @@ class _SpotPageState extends State<SpotPage> {
               Stack(
                 children: [
                   Hero(
-                    tag: widget.data['name'],
+                    tag: widget.data['title'].toString(),
                     child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 800),
-                      opacity: _opacity,
-                      child: Image.network(
-                        widget.data['image'],
-                        height: 300,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        color: Constants.color3.withOpacity(.5),
-                        colorBlendMode: BlendMode.overlay,
+                        duration: const Duration(milliseconds: 800),
+                        opacity: _opacity,
+                        child: Image.network(
+                          widget.data['picture'] != null
+                              ? widget.data['picture'].toString()
+                              : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
+                          height: 270,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          color: Constants.color3.withOpacity(.5),
+                          colorBlendMode: BlendMode.overlay,
+                        )),
+                  ),
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 800),
+                    top: 70,
+                    left: _animate ? 15 : 25,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: LinearGradient(
+                              colors: [
+                                Constants.bg.withOpacity(.3),
+                                Constants.bg.withOpacity(.6),
+                              ],
+                              begin: AlignmentDirectional.topStart,
+                              end: AlignmentDirectional.bottomEnd,
+                            ),
+                          ),
+                          child: BackButton(
+                            color: Constants.color2.withOpacity(.5),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  Positioned(
-                    right: 30,
-                    top: 80,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        AnimatedPadding(
-                          padding: _animate
-                              ? const EdgeInsets.only(
-                                  top: 8.0,
-                                  bottom: 8.0,
-                                  left: 5.0,
-                                  right: 5.0,
-                                )
-                              : const EdgeInsets.only(
-                                  top: 8.0,
-                                  bottom: 8.0,
-                                  left: 10.0,
-                                  right: 5.0,
-                                ),
-                          duration: const Duration(milliseconds: 800),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Constants.bg.withOpacity(.3),
-                                      Constants.bg.withOpacity(.6),
-                                    ],
-                                    begin: AlignmentDirectional.topStart,
-                                    end: AlignmentDirectional.bottomEnd,
-                                  ),
-                                ),
-                                child: BackButton(
-                                  color: Constants.color2.withOpacity(.5),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        AnimatedPadding(
-                          padding: _animate
-                              ? const EdgeInsets.only(
-                                  top: 8.0,
-                                  bottom: 8.0,
-                                  left: 5.0,
-                                  right: 5.0,
-                                )
-                              : const EdgeInsets.only(
-                                  top: 8.0,
-                                  bottom: 8.0,
-                                  left: 12.0,
-                                  right: 5.0,
-                                ),
-                          duration: const Duration(milliseconds: 800),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Constants.bg.withOpacity(.3),
-                                      Constants.bg.withOpacity(.6),
-                                    ],
-                                    begin: AlignmentDirectional.topStart,
-                                    end: AlignmentDirectional.bottomEnd,
-                                  ),
-                                ),
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.location_on,
-                                    color: Constants.color2.withOpacity(.5),
-                                  ),
-                                  onPressed: () async {
-                                    await _goToCoordinates(
-                                        widget.data['coordinates'],
-                                        widget.data['name']);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        AnimatedPadding(
-                          padding: _animate
-                              ? const EdgeInsets.only(
-                                  right: 20,
-                                )
-                              : EdgeInsets.zero,
-                          duration: const Duration(milliseconds: 800),
-                          child: ClipRRect(
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 800),
+                    right: _animate ? 20 : 30,
+                    top: 50,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        child: Container(
+                          height: 200,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            color: Constants.bg,
                             borderRadius: BorderRadius.circular(20),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                              child: Container(
-                                height: 200,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Constants.bg.withOpacity(.8),
-                                      Constants.bg.withOpacity(.4),
-                                    ],
-                                    begin: AlignmentDirectional.topStart,
-                                    end: AlignmentDirectional.bottomEnd,
+                            gradient: LinearGradient(
+                              colors: [
+                                Constants.bg.withOpacity(.8),
+                                Constants.bg.withOpacity(.4),
+                              ],
+                              begin: AlignmentDirectional.topStart,
+                              end: AlignmentDirectional.bottomEnd,
+                            ),
+                          ),
+                          child: AnimatedOpacity(
+                            opacity: _animate ? 0 : 1,
+                            duration: const Duration(milliseconds: 800),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 20,
+                                right: 20,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                ),
-                                child: AnimatedOpacity(
-                                  opacity: _animate ? 0 : 1,
-                                  duration: const Duration(milliseconds: 800),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 20,
-                                      right: 20,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          widget.data['name'],
-                                          style: TextStyle(
-                                              overflow: TextOverflow.clip,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 25,
-                                              color: Constants.color2
-                                                  .withOpacity(.75)),
-                                        ),
-                                        Text(
-                                          widget.data['caption'],
-                                          style: TextStyle(
-                                              overflow: TextOverflow.clip,
-                                              fontSize: 18,
-                                              color: Constants.color2
-                                                  .withOpacity(.5)),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          widget.data['description'],
-                                          style: TextStyle(
-                                              overflow: TextOverflow.clip,
-                                              fontSize: 14,
-                                              color: Constants.color2
-                                                  .withOpacity(.25)),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                      ],
-                                    ),
+                                  Text(
+                                    widget.data['title'].toString(),
+                                    style: TextStyle(
+                                        overflow: TextOverflow.clip,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                        color:
+                                            Constants.color2.withOpacity(.75)),
                                   ),
-                                ),
+                                  Text(
+                                    widget.data['short_desc'].toString(),
+                                    style: TextStyle(
+                                        overflow: TextOverflow.clip,
+                                        fontSize: 18,
+                                        color:
+                                            Constants.color2.withOpacity(.5)),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    widget.data['desc'].toString(),
+                                    style: TextStyle(
+                                        overflow: TextOverflow.clip,
+                                        fontSize: 14,
+                                        color:
+                                            Constants.color2.withOpacity(.25)),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -409,7 +326,7 @@ class _SpotPageState extends State<SpotPage> {
                         child: RotatedBox(
                           quarterTurns: 1,
                           child: Text(
-                            "Events held at " + widget.data['name'],
+                            "Events held at " + widget.data['title'].toString(),
                             style: const TextStyle(
                               letterSpacing: 5,
                               fontWeight: FontWeight.bold,
