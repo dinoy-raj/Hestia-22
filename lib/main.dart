@@ -6,7 +6,7 @@ import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
 import 'screens/login/login.dart';
-import 'services/django/login.dart';
+import 'services/django/google_auth.dart';
 
 GoogleAuth auth = GoogleAuth();
 
