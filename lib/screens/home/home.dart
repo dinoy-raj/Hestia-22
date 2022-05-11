@@ -37,7 +37,6 @@ class HomeState extends State<Home> {
     "Workshops",
     "Technical",
     "Lectures",
-    "Informals",
   ];
 
   //Proshow list data
@@ -79,7 +78,7 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    django.getTrendingEvents().then((value) {
+    django.getTechnicals().then((value) {
       setState(() {
         show = value;
       });
@@ -409,6 +408,55 @@ class HomeState extends State<Home> {
                                           return GestureDetector(
                                             onTap: () {
                                               setState(() {
+                                                // if (index == 0) {
+                                                //   django
+                                                //       .getTrendingEvents()
+                                                //       .then((value) {
+                                                //     setState(() {
+                                                //       show = value;
+                                                //     });
+                                                //   });
+                                                // } else if (index == 1) {
+                                                //   django
+                                                //       .getProshows()
+                                                //       .then((value) {
+                                                //     setState(() {
+                                                //       show = value;
+                                                //     });
+                                                //   });
+                                                // } else if (index == 2) {
+                                                //   django
+                                                //       .getCulturals()
+                                                //       .then((value) {
+                                                //     setState(() {
+                                                //       show = value;
+                                                //     });
+                                                //   });
+                                                // } else if (index == 3) {
+                                                //   django
+                                                //       .getWorkshops()
+                                                //       .then((value) {
+                                                //     setState(() {
+                                                //       show = value;
+                                                //     });
+                                                //   });
+                                                // } else if (index == 4) {
+                                                //   django
+                                                //       .getTechnicals()
+                                                //       .then((value) {
+                                                //     setState(() {
+                                                //       show = value;
+                                                //     });
+                                                //   });
+                                                // } else if (index == 5) {
+                                                //   django
+                                                //       .getLectures()
+                                                //       .then((value) {
+                                                //     setState(() {
+                                                //       show = value;
+                                                //     });
+                                                //   });
+                                                // }
                                                 catSelect = index;
                                               });
                                             },
