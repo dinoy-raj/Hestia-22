@@ -78,10 +78,12 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    django.getTechnicals().then((value) {
-      setState(() {
-        show = value;
-      });
+    django.getTrendingEvents().then((value) {
+      if (mounted) {
+        setState(() {
+          show = value;
+        });
+      }
     });
     notPressed = false;
     start = false;
@@ -596,8 +598,14 @@ class HomeState extends State<Home> {
                                                   fit: index == currentPage
                                                       ? BoxFit.fill
                                                       : BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      show?[index]['image']),
+                                                  image: show?[index]
+                                                              ['image'] ==
+                                                          null
+                                                      ? const NetworkImage(
+                                                          "https://github.com/Dinoy-Raj/Hestia22/blob/main/assets/logo/hestia%20logo22%20white%20logo%20only.png")
+                                                      : NetworkImage(
+                                                          show?[index]
+                                                              ['image']),
                                                 ),
                                                 gradient: const LinearGradient(
                                                   begin: Alignment.bottomCenter,
