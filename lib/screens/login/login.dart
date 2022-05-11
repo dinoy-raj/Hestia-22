@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   height: screenHeight * 0.6,
                   child: Lottie.asset(
-                      'assets/animations/75705-welcome-animation.json'),
+                      'assets/animations/welcome.json'),
                 ),
                 Container(
                   //color: Color(0xff121212),
