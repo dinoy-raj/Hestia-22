@@ -410,55 +410,55 @@ class HomeState extends State<Home> {
                                           return GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                // if (index == 0) {
-                                                //   django
-                                                //       .getTrendingEvents()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 1) {
-                                                //   django
-                                                //       .getProshows()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 2) {
-                                                //   django
-                                                //       .getCulturals()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 3) {
-                                                //   django
-                                                //       .getWorkshops()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 4) {
-                                                //   django
-                                                //       .getTechnicals()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 5) {
-                                                //   django
-                                                //       .getLectures()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // }
+                                                if (index == 0) {
+                                                  django
+                                                      .getTrendingEvents()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 1) {
+                                                  django
+                                                      .getProshows()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 2) {
+                                                  django
+                                                      .getCulturals()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 3) {
+                                                  django
+                                                      .getWorkshops()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 4) {
+                                                  django
+                                                      .getTechnicals()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 5) {
+                                                  django
+                                                      .getLectures()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                }
                                                 catSelect = index;
                                               });
                                             },
@@ -545,88 +545,113 @@ class HomeState extends State<Home> {
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                     ),
-                                  )
+                                  ),
                                 ],
                               )
-                            : PageView.builder(
-                                controller: pageControl,
-                                scrollDirection: Axis.horizontal,
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: show?.length,
-                                itemBuilder: (BuildContext context, index) {
-                                  return Center(
-                                    child: AnimatedPadding(
-                                      duration: const Duration(seconds: 1),
-                                      curve: Curves.fastLinearToSlowEaseIn,
-                                      padding: start
-                                          ? const EdgeInsets.only(
-                                              right: 20,
-                                            )
-                                          : const EdgeInsets.only(right: 25),
-                                      child: AnimatedOpacity(
-                                        duration: const Duration(seconds: 2),
-                                        opacity: start ? 1 : .10,
-                                        child: AnimatedOpacity(
-                                          duration:
-                                              const Duration(milliseconds: 800),
-                                          // curve: Curves.fastLinearToSlowEaseIn,
-                                          opacity:
-                                              index == currentPage ? 1 : .2,
-                                          child: AnimatedContainer(
-                                            duration: const Duration(
-                                                milliseconds: 800),
-                                            curve:
-                                                Curves.fastLinearToSlowEaseIn,
-                                            height: index == currentPage
-                                                ? screenHeight * .46
-                                                : screenHeight * .41,
-                                            width: index == currentPage
-                                                ? screenWidth * .9
-                                                : screenWidth * .8,
-                                            decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: index == currentPage
-                                                        ? Constants.iconAc
-                                                            .withOpacity(.05)
-                                                        : Colors.transparent,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 20,
-                                                  )
-                                                ],
-                                                image: DecorationImage(
-                                                  fit: index == currentPage
-                                                      ? BoxFit.fill
-                                                      : BoxFit.cover,
-                                                  image: show?[index]
-                                                              ['image'] ==
-                                                          null
-                                                      ? const NetworkImage(
-                                                          "https://github.com/Dinoy-Raj/Hestia22/blob/main/assets/logo/hestia%20logo22%20white%20logo%20only.png")
-                                                      : NetworkImage(
-                                                          show?[index]
-                                                              ['image']),
-                                                ),
-                                                gradient: const LinearGradient(
-                                                  begin: Alignment.bottomCenter,
-                                                  end: Alignment.topCenter,
-                                                  colors: [
-                                                    Colors.black26,
-                                                    Colors.transparent,
-                                                    Colors.transparent
-                                                  ],
-                                                ),
-                                                border: Border.all(
-                                                    color: Constants.sc),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                color: Colors.grey),
-                                          ),
+                            : show!.isEmpty
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: const [
+                                      Text(
+                                        "Coming Soon....",
+                                        style: TextStyle(
+                                          fontFamily: "Helvetica",
+                                          color: Constants.iconAc,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                    ),
-                                  );
-                                }),
+                                    ],
+                                  )
+                                : PageView.builder(
+                                    controller: pageControl,
+                                    scrollDirection: Axis.horizontal,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemCount: show?.length,
+                                    itemBuilder: (BuildContext context, index) {
+                                      return Center(
+                                        child: AnimatedPadding(
+                                          duration: const Duration(seconds: 1),
+                                          curve: Curves.fastLinearToSlowEaseIn,
+                                          padding: start
+                                              ? const EdgeInsets.only(
+                                                  right: 20,
+                                                )
+                                              : const EdgeInsets.only(
+                                                  right: 25),
+                                          child: AnimatedOpacity(
+                                            duration:
+                                                const Duration(seconds: 2),
+                                            opacity: start ? 1 : .10,
+                                            child: AnimatedOpacity(
+                                              duration: const Duration(
+                                                  milliseconds: 800),
+                                              // curve: Curves.fastLinearToSlowEaseIn,
+                                              opacity:
+                                                  index == currentPage ? 1 : .2,
+                                              child: AnimatedContainer(
+                                                duration: const Duration(
+                                                    milliseconds: 800),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn,
+                                                height: index == currentPage
+                                                    ? screenHeight * .46
+                                                    : screenHeight * .41,
+                                                width: index == currentPage
+                                                    ? screenWidth * .9
+                                                    : screenWidth * .8,
+                                                decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: index ==
+                                                                currentPage
+                                                            ? Constants.iconAc
+                                                                .withOpacity(
+                                                                    .05)
+                                                            : Colors
+                                                                .transparent,
+                                                        spreadRadius: 2,
+                                                        blurRadius: 20,
+                                                      )
+                                                    ],
+                                                    image: DecorationImage(
+                                                      fit: index == currentPage
+                                                          ? BoxFit.fill
+                                                          : BoxFit.cover,
+                                                      image: show?[index]
+                                                                  ['image'] ==
+                                                              null
+                                                          ? const NetworkImage(
+                                                              "https://github.com/Dinoy-Raj/Hestia22/blob/main/assets/logo/hestia%20logo22%20white%20logo%20only.png")
+                                                          : NetworkImage(
+                                                              show?[index]
+                                                                  ['image']),
+                                                    ),
+                                                    gradient:
+                                                        const LinearGradient(
+                                                      begin: Alignment
+                                                          .bottomCenter,
+                                                      end: Alignment.topCenter,
+                                                      colors: [
+                                                        Colors.black26,
+                                                        Colors.transparent,
+                                                        Colors.transparent
+                                                      ],
+                                                    ),
+                                                    border: Border.all(
+                                                        color: Constants.sc),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
                       ),
                     ],
                   ),
