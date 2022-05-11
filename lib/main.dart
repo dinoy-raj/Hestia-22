@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
@@ -7,12 +6,14 @@ import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
 import 'screens/login/login.dart';
-import 'services/django/django.dart' as django;
+import 'services/django/login.dart';
+
+GoogleAuth auth = GoogleAuth();
 
 void main() async {
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
-  django.initLogin();
+  await auth.initLogin();
   runApp(const MyApp());
 }
 
@@ -24,7 +25,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool flag = true;
+  @override
+  void initState() {
+    super.initState();
+    auth.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    auth.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +50,10 @@ class _MyAppState extends State<MyApp> {
         splashColor: Colors.transparent,
       ),
       home: StreamBuilder(
-          stream: django.googleSignIn.onCurrentUserChanged,
+          stream: auth.googleSignIn.onCurrentUserChanged,
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting && flag) {
-              flag = false;
-              return const Scaffold(
-                  backgroundColor: Constants.sc,
-                  body: Center(
-                      child: CupertinoActivityIndicator(
-                    radius: 10,
-                  )));
-            } else if (snapshot.hasData) {
+            if (auth.token!.isNotEmpty) {
               return const MyHomePage();
             } else {
               return const LoginPage();
@@ -113,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  django.logOut();
+                  auth.logOut();
                 },
                 child: const Text("log out"),
               ),
