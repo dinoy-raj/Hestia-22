@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
 
@@ -39,49 +41,7 @@ class HomeState extends State<Home> {
   ];
 
   //Proshow list data
-
-  List<Map> show = [
-    {
-      'name': 'Diego miranda',
-      'date': '26',
-      'remain': '120',
-      'price': '1500',
-      'image':
-          'https://img.freepik.com/free-photo/vertical-picture-male-dj-working_181624-19913.jpg?t=st=1651607900~exp=1651608500~hmac=bd97bc8d7ad76584255bf9c1fddb4711059a1b5e8ab65d2ee73f13780e57ad1b&w=360',
-    },
-    {
-      'name': 'Club banditz',
-      'date': '27',
-      'remain': '10',
-      'price': '700',
-      'image':
-          'https://img.freepik.com/free-photo/young-caucasian-female-musician-performer-singing-dancing-neon-light-gradient_155003-44335.jpg?t=st=1651607959~exp=1651608559~hmac=f554832ef41c853ed8b05414ba9bbce9a93ee95a31d0201b3fd3daca6ebb186d&w=360',
-    },
-    {
-      'name': 'Pineapple express',
-      'date': '28',
-      'remain': '67',
-      'price': '1000',
-      'image':
-          'https://img.freepik.com/free-photo/front-view-young-female-dj-entertaining-crowd_23-2148325470.jpg?t=st=1651607959~exp=1651608559~hmac=aef81b2e61633c74b2a17941df04b3411b0aef93ffb75f052f7af2a298d29093&w=740',
-    },
-    {
-      'name': 'Aron chupa',
-      'date': '28',
-      'remain': '20',
-      'price': '2000',
-      'image':
-          'https://img.freepik.com/free-photo/long-hair-guitar-guy-singing-low-view_23-2148751621.jpg?t=st=1651608075~exp=1651608675~hmac=590784e3a1ef7441c6bd3b757085ce0802e2b65c90d53ac776aecaa32ecf982c&w=740',
-    },
-    {
-      'name': 'Neeraj',
-      'date': '29',
-      'remain': '100',
-      'price': '900',
-      'image':
-          'https://img.freepik.com/free-photo/silhouette-young-lady-crowd-during-concert_181624-27673.jpg?t=st=1651608300~exp=1651608900~hmac=9a52e83e60ea919dd09f93181dea28dd25657fa78845a1f5aacc7428b21efcc3&w=996',
-    }
-  ];
+  List<dynamic> show = [];
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
@@ -118,6 +78,10 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+
+    django.getTechnicals().then((value) {
+      show = value;
+    });
     notPressed = false;
     start = false;
     // catSelect = 10;
@@ -141,7 +105,8 @@ class HomeState extends State<Home> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        log((await django.getTechnicals()).toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
