@@ -1,5 +1,6 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
@@ -11,13 +12,13 @@ import 'services/django/django.dart' as django;
 void main() async {
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
+  django.initLogin();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +29,24 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
-      home: const MyHomePage(),
+      home: StreamBuilder(
+          stream: django.googleSignIn.onCurrentUserChanged,
+          builder: (BuildContext context,
+              AsyncSnapshot<GoogleSignInAccount?> snapshot) {
+            if (snapshot.connectionState.name == "waiting") {
+              return const Scaffold(
+                  backgroundColor: Constants.sc,
+                  body: Center(
+                      child: CupertinoActivityIndicator(
+                    radius: 10,
+                  )));
+            } else if (snapshot.connectionState.name == "active" &&
+                snapshot.data == null) {
+              return const LoginPage();
+            } else {
+              return const MyHomePage();
+            }
+          }),
     );
   }
 }
@@ -67,14 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const Text("home")),
               ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
-                  },
-                  child: const Text("login")),
-              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -93,6 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => ProfileRegistration()));
                 },
                 child: const Text("profile-reg"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  django.logOut();
+                },
+                child: const Text("log out"),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -125,7 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Constants {
-
   //colours for navbar
   static const Color bg = Color.fromRGBO(27, 28, 33, 100);
   static const Color sc = Color.fromRGBO(17, 17, 19, 100);
@@ -141,7 +156,7 @@ class Constants {
   static const pureBlack = Color(0x00000000);
   static const imageColor = Color(0x0031164a);
   static const detailsColor = Color(0x005a2d85);
-  static var pureWhite = Color(0xFFFFFFFF);
+  static var pureWhite = const Color(0xFFFFFFFF);
   static var buttonPink = Colors.pink[700];
   static const phoneIcon = Color.fromRGBO(7, 184, 13, 50);
   static const gradient1 = Colors.black;
@@ -151,3 +166,5 @@ class Constants {
   static const lightWhite = Colors.white70;
 }
 
+// TODO
+// REMOVE KEY.JKS FROM ANDROID/APP

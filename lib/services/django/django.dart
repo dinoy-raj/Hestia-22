@@ -1,11 +1,48 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
-String hostUrl = "https://api.hestiatkmce.live";
+String hostUrl = "https://backend.hestiatkmce.live";
 
-Future<Map<String, dynamic>> login(String username, String password) async {
-  http.Response response = await http.get(Uri.parse(hostUrl));
-  return json.decode(response.body);
+GoogleSignIn googleSignIn = GoogleSignIn();
+String? token;
+
+initLogin() {
+  googleSignIn.onCurrentUserChanged
+      .listen((GoogleSignInAccount? account) async {
+    if (account != null) {
+      const storage = FlutterSecureStorage();
+
+      token = await storage.read(key: 'token');
+    }
+  });
+
+  googleSignIn.signInSilently().whenComplete(() => () {});
+}
+
+doLogin() {
+  googleSignIn
+      .signIn()
+      .then((result) => result?.authentication.then((googleKey) {
+            http.post(
+              Uri.parse(hostUrl + "/users/google/"),
+              body: {
+                "access_token": googleKey.accessToken,
+                "code": "1",
+              },
+            ).then((response) async {
+              token = jsonDecode(response.body)['key'];
+
+              const storage = FlutterSecureStorage();
+
+              await storage.write(key: 'token', value: token);
+            });
+          }));
+}
+
+logOut() async {
+  await googleSignIn.signOut();
 }
 
 Future<List<dynamic>> getWorkshops() async {
@@ -40,7 +77,6 @@ Future<List<dynamic>> getProshows() async {
 
 Future<Map<String, dynamic>> getEventDetails(String slug) async {
   http.Response response =
-      await http.get(
-          Uri.parse(hostUrl + "/api/v1/event/" + slug));
+      await http.get(Uri.parse(hostUrl + "/api/v1/event/" + slug));
   return json.decode(response.body);
 }
