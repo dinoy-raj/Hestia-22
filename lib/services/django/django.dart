@@ -92,3 +92,9 @@ Future<Map<String, dynamic>> getEventDetails(String slug) async {
       await http.get(Uri.parse(hostUrl + "/api/v1/event/" + slug));
   return json.decode(response.body);
 }
+
+Future<Map<String, dynamic>> getProfile() async {
+  http.Response response =
+      await http.get(Uri.parse(hostUrl + "/api/v1/users/me"));
+  return json.decode(response.body);
+}
