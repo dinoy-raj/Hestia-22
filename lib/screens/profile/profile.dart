@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundImage: AssetImage('assets/icons/face.png'),
                       ),
                       decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Constants.iconAc ),
+                          shape: BoxShape.circle, color: Constants.iconAc),
                     ),
                     const SizedBox(
                       height: 8,
@@ -196,19 +196,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Icon(
                                     FontAwesomeIcons.user,
                                     color: Colors.white,
-                                        // Image.asset('assets/icons/person.png'),
-                                    
+                                    // Image.asset('assets/icons/person.png'),
                                   ),
                                 ),
                               ),
                             ),
-                            const Text(
-                              'Karthik Sunil',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Helvetica',
-                                  fontWeight: FontWeight.normal),
+                            const Flexible(
+                              child: Text(
+                                'Karthik Sunil',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'Helvetica',
+                                    fontWeight: FontWeight.normal),
+                              ),
                             ),
                           ],
                         ),
@@ -238,18 +239,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            const Text(
-                              'karthiksunil.me@gmail.com',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Helvetica',
-                                  fontWeight: FontWeight.normal),
+                            const Flexible(
+                              child: Text(
+                                'karthiksunilhhhhhhh.me@gmail.com',
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'Helvetica',
+                                    fontWeight: FontWeight.normal),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
+                      AnimatedContainer(
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.bounceIn,
                         height: 60,
                         child: Row(
                           children: [
@@ -330,18 +336,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fontFamily: 'Helvetica',
                                   fontWeight: FontWeight.normal),
                             ),
-                            // const Spacer(),
-                            // Container(
-                            //   alignment: Alignment.centerRight,
-                            //   width: screenWidth * 0.1,
-                            //   //color: Colors.green,
-                            //   child: Center(
-                            //     child: IconButton(
-                            //       icon: Image.asset('assets/icons/logout.png'),
-                            //       onPressed: () {},
-                            //     ),
-                            //   ),
-                            // ),
+                         
                           ],
                         ),
                       ),
