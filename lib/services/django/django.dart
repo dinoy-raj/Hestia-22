@@ -75,8 +75,26 @@ Future<List<dynamic>> getProshows() async {
   return json.decode(response.body)['results'];
 }
 
+Future<List<dynamic>> getCulturals() async {
+  http.Response response =
+      await http.get(Uri.parse(hostUrl + "/api/v1/event/?event_category=C"));
+  return json.decode(response.body)['results'];
+}
+
+Future<List<dynamic>> getTrendingEvents() async {
+  http.Response response =
+      await http.get(Uri.parse(hostUrl + "/api/v1/event/trending"));
+  return json.decode(response.body)['results'];
+}
+
 Future<Map<String, dynamic>> getEventDetails(String slug) async {
   http.Response response =
       await http.get(Uri.parse(hostUrl + "/api/v1/event/" + slug));
+  return json.decode(response.body);
+}
+
+Future<Map<String, dynamic>> getProfile() async {
+  http.Response response =
+      await http.get(Uri.parse(hostUrl + "/api/v1/users/me"));
   return json.decode(response.body);
 }

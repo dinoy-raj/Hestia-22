@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:hestia22/services/django/django.dart' as django;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   height: screenHeight * 0.6,
                   child: Lottie.asset(
-                      'assets/animations/75705-welcome-animation.json'),
+                      'assets/animations/welcome.json'),
                 ),
                 Container(
                   //color: Color(0xff121212),
@@ -77,7 +78,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Center(
                     child: RoundedButton(
                       text: 'Continue with Google',
-                      press: () {},
+                      press: () {
+                        django.doLogin();
+                      },
                     ),
                   ),
                 )
