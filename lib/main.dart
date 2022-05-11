@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/events/events.dart';
@@ -17,7 +16,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -125,7 +123,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Constants {
-
   //colours for navbar
   static const Color bg = Color.fromRGBO(27, 28, 33, 100);
   static const Color sc = Color.fromRGBO(17, 17, 19, 100);
@@ -150,4 +147,3 @@ class Constants {
   static const transaparent = Colors.transparent;
   static const lightWhite = Colors.white70;
 }
-
