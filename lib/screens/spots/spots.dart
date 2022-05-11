@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/cards.dart';
-import 'package:map_launcher/map_launcher.dart';
 
 class Spots extends StatefulWidget {
   const Spots({Key? key}) : super(key: key);
@@ -18,20 +17,7 @@ class Spots extends StatefulWidget {
 class SpotsState extends State<Spots> {
   bool _animate = true;
   Future<List<String>> _getSuggestions(String pattern) async {
-    return [pattern, pattern + 'aa', pattern + 'bb'];
-  }
-
-  Future<void> _goToCoordinates(String title) async {
-    // Get coordinates using title
-    Coords coordinates = Coords(1, 2);
-
-    if ((await MapLauncher.isMapAvailable(MapType.google))!) {
-      await MapLauncher.showMarker(
-        mapType: MapType.google,
-        coords: coordinates,
-        title: title,
-      );
-    }
+    return [];
   }
 
   @override
@@ -173,7 +159,7 @@ class SpotsState extends State<Spots> {
                       itemBuilder: (context, suggestion) {
                         return ListTile(
                           onTap: () {
-                            _goToCoordinates(suggestion.toString());
+
                           },
                           leading: Icon(
                             Icons.location_on_outlined,
