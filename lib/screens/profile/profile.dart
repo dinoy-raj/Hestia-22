@@ -10,6 +10,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  bool start=false;
+    @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      setState(() {
+        start = true;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height - 24;
@@ -153,194 +164,221 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            Container(
-              height: screenHeight * 0.45,
-              //color: Colors.green,
-              child: Center(
-                child: Container(
-                  height: 300,
-                  width: 350,
-                  decoration: const BoxDecoration(
-                    color: Color(0xff121212),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          //color: Color.fromARGB(255, 212, 23, 23),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
+            AnimatedOpacity(
+              duration: Duration(milliseconds: 500),
+              curve: Curves.decelerate,
+              opacity: start?1:0,
+              child: AnimatedPadding(
+                padding: start?const EdgeInsets.only(left: 20):const EdgeInsets.only(right: 20),
+                curve: Curves.decelerate,
+                duration: Duration(seconds: 5),
+                child: AnimatedContainer(
+                  duration: const Duration(seconds: 5),
+                  curve: Curves.decelerate,
+                  
+                  height: screenHeight * 0.45,
+                  //color: Colors.green,
+                  child: Center(
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 5),
+                      curve: Curves.decelerate,
+            
+                      height: 300,
+                      width: 350,
+                      decoration: const BoxDecoration(
+                        color: Color(0xff121212),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              //color: Color.fromARGB(255, 212, 23, 23),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                            ),
+                            height: 60,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 10),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    width: screenWidth * 0.1,
+                                    height: screenWidth * 0.1,
+                                    decoration: const BoxDecoration(
+                                      color: Constants.bg,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        FontAwesomeIcons.user,
+                                        color: Colors.white,
+                                        // Image.asset('assets/icons/person.png'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Flexible(
+                                  child: Text(
+                                    'Karthik Sunil K',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontFamily: 'Helvetica',
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        height: 60,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8, right: 10),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                width: screenWidth * 0.1,
-                                height: screenWidth * 0.1,
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
+                          Container(
+                            height: 60,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 10),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    width: screenWidth * 0.1,
+                                    height: screenWidth * 0.1,
+                                    decoration: const BoxDecoration(
+                                      color: Constants.bg,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        FontAwesomeIcons.school,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                child: const Center(
-                                  child: Icon(
-                                    FontAwesomeIcons.user,
-                                    color: Colors.white,
-                                    // Image.asset('assets/icons/person.png'),
+                                const Flexible(
+                                  child: Text(
+                                    'electronics and communication',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontFamily: 'Helvetica',
+                                        fontWeight: FontWeight.normal),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                            const Flexible(
-                              child: Text(
-                                'Karthik Sunil',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
+                          ),
+                          AnimatedContainer(
+                            duration: const Duration(seconds: 2),
+                            curve: Curves.decelerate,
+                            height: 60,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 10),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    width: screenWidth * 0.1,
+                                    height: screenWidth * 0.1,
+                                    decoration: const BoxDecoration(
+                                      color: Constants.bg,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        FontAwesomeIcons.phone,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Text(
+                                  'Contact Admin',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                // const Spacer(),
+                                // Container(
+                                //   alignment: Alignment.centerRight,
+                                //   width: screenWidth * 0.1,
+                                //   //color: Colors.green,
+                                //   child: Center(
+                                //     child: IconButton(
+                                //       icon: Image.asset('assets/icons/logout.png'),
+                                //       onPressed: () {},
+                                //     ),
+                                //   ),
+                                // ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            height: 60,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 10),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    width: screenWidth * 0.1,
+                                    height: screenWidth * 0.1,
+                                    decoration: const BoxDecoration(
+                                      color: Constants.bg,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        FontAwesomeIcons.arrowRightFromBracket,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Text(
+                                  'Logout',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                // const Spacer(),
+                                // Container(
+                                //   alignment: Alignment.centerRight,
+                                //   width: screenWidth * 0.1,
+                                //   //color: Colors.green,
+                                //   child: Center(
+                                //     child: IconButton(
+                                //       icon: Image.asset('assets/icons/logout.png'),
+                                //       onPressed: () {},
+                                //     ),
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        height: 60,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8, right: 10),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                width: screenWidth * 0.1,
-                                height: screenWidth * 0.1,
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    FontAwesomeIcons.envelope,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Flexible(
-                              child: Text(
-                                'karthiksunilhhhhhhh.me@gmail.com',
-                                style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(seconds: 2),
-                        curve: Curves.bounceIn,
-                        height: 60,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8, right: 10),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                width: screenWidth * 0.1,
-                                height: screenWidth * 0.1,
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    FontAwesomeIcons.phone,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Text(
-                              'Contact Admin',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Helvetica',
-                                  fontWeight: FontWeight.normal),
-                            ),
-                            // const Spacer(),
-                            // Container(
-                            //   alignment: Alignment.centerRight,
-                            //   width: screenWidth * 0.1,
-                            //   //color: Colors.green,
-                            //   child: Center(
-                            //     child: IconButton(
-                            //       icon: Image.asset('assets/icons/logout.png'),
-                            //       onPressed: () {},
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 60,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8, right: 10),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                width: screenWidth * 0.1,
-                                height: screenWidth * 0.1,
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    FontAwesomeIcons.arrowRightFromBracket,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Text(
-                              'Logout',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Helvetica',
-                                  fontWeight: FontWeight.normal),
-                            ),
-                         
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
