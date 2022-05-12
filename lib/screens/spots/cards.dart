@@ -38,15 +38,10 @@ class _CardsState extends State<Cards> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPadding(
-      padding: _animate
-          ? const EdgeInsets.only(
-              top: 20,
-            )
-          : const EdgeInsets.only(
-              top: 20,
-            ),
-      duration: const Duration(milliseconds: 800),
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 20,
+      ),
       child: SizedBox(
         height: 360,
         child: NotificationListener(
@@ -67,12 +62,12 @@ class _CardsState extends State<Cards> {
                   child: RotatedBox(
                     quarterTurns: -1,
                     child: AnimatedPadding(
-                      padding: _animate
+                      padding: !_animate
                           ? const EdgeInsets.only(
                               top: 0,
                             )
                           : const EdgeInsets.only(
-                              top: 20,
+                              top: 15,
                             ),
                       duration: const Duration(milliseconds: 800),
                       child: const Text(
@@ -125,7 +120,7 @@ class _CardsState extends State<Cards> {
                                   : const EdgeInsets.all(30),
                               decoration: BoxDecoration(
                                 color: Constants.color3.withOpacity(.25),
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                     opacity: 0.5,
                                     fit: BoxFit.cover,

@@ -49,14 +49,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   child: SizedBox(
                     height: screenHeight * 0.09,
-                    child: Text(
-                      'Profile',
-                      style: TextStyle(
-                          letterSpacing: 2.0,
-                          color: Colors.white.withOpacity(0.9),
-                          fontSize: 30,
-                          fontFamily: 'Helvetica',
-                          fontWeight: FontWeight.normal),
+                    child: AnimatedPadding(
+                      padding: start
+                          ? const EdgeInsets.only(left: 5)
+                          : const EdgeInsets.only(left: 0),
+                      duration: const Duration(milliseconds: 800),
+                      child: Text(
+                        'Profile',
+                        style: TextStyle(
+                            letterSpacing: 2.0,
+                            color: Colors.white.withOpacity(0.8),
+                            fontSize: 30,
+                            fontFamily: 'Helvetica',
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
@@ -68,8 +74,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         AnimatedPadding(
                           padding: start
-                              ? const EdgeInsets.only(right: 10)
-                              : const EdgeInsets.only(right: 20),
+                              ? const EdgeInsets.only(right: 5)
+                              : const EdgeInsets.only(right: 10),
                           duration: const Duration(milliseconds: 800),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 decoration: const BoxDecoration(
                                   color: Constants.bg,
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
+                                    Radius.circular(10),
                                   ),
                                 ),
                                 height: 70,
@@ -112,8 +118,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         AnimatedPadding(
                           padding: start
-                              ? const EdgeInsets.only(left: 10)
-                              : const EdgeInsets.only(left: 20),
+                              ? const EdgeInsets.only(left: 5)
+                              : const EdgeInsets.only(left: 10),
                           duration: const Duration(milliseconds: 800),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 decoration: const BoxDecoration(
                                   color: Constants.bg,
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
+                                    Radius.circular(10),
                                   ),
                                 ),
                                 height: 70,
@@ -159,9 +165,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 30,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  padding: const EdgeInsets.only(
+                    left: 30,
+                    right: 30,
+                  ),
                   child: Center(
                     child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                         child: AnimatedContainer(
@@ -169,7 +179,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(20),
+                              Radius.circular(10),
                             ),
                             gradient: LinearGradient(
                               colors: [
@@ -182,7 +192,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: AnimatedPadding(
                             padding: start
-                                ? const EdgeInsets.only(left: 10, right: 20)
+                                ? const EdgeInsets.only(
+                                    left: 10,
+                                  )
                                 : EdgeInsets.zero,
                             duration: const Duration(milliseconds: 800),
                             child: Column(
@@ -219,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontFamily: 'Helvetica',
                                                 fontWeight: FontWeight.normal),
                                           ),
@@ -254,7 +266,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontFamily: 'Helvetica',
                                                 fontWeight: FontWeight.normal),
                                           ),
@@ -292,7 +304,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 overflow: TextOverflow.clip,
                                                 color: Colors.white
                                                     .withOpacity(0.5),
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontFamily: 'Helvetica',
                                                 fontWeight: FontWeight.normal),
                                           ),
@@ -309,46 +321,52 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 70, right: 70, top: 50, bottom: 50),
-                    child: GestureDetector(
-                      onTap: () {
-                        Future.delayed(const Duration(milliseconds: 800),
-                            () async {
-                          await auth.logOut();
-                        });
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Constants.color3,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        height: 50,
-                        width: 150,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Center(
-                                  child: Icon(
-                                    FontAwesomeIcons.arrowRightFromBracket,
-                                    color: Colors.white.withOpacity(0.5),
-                                    size: 20,
+                AnimatedPadding(
+                  padding: start
+                      ? const EdgeInsets.only(right: 20)
+                      : EdgeInsets.zero,
+                  duration: const Duration(milliseconds: 800),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 70, right: 70, top: 50, bottom: 50),
+                      child: GestureDetector(
+                        onTap: () {
+                          Future.delayed(const Duration(milliseconds: 800),
+                              () async {
+                            await auth.logOut();
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Constants.color3,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          height: 40,
+                          width: 120,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: Center(
+                                    child: Icon(
+                                      FontAwesomeIcons.arrowRightFromBracket,
+                                      color: Colors.white.withOpacity(0.5),
+                                      size: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Text('Logout',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontSize: 20,
-                                      fontFamily: 'Helvetica',
-                                      fontWeight: FontWeight.normal)),
-                            ],
+                                Text('Logout',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.5),
+                                        fontSize: 16,
+                                        fontFamily: 'Helvetica',
+                                        fontWeight: FontWeight.normal)),
+                              ],
+                            ),
                           ),
                         ),
                       ),
