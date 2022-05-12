@@ -27,20 +27,20 @@ class _NavBarState extends State<NavBar> {
   double opaC = 0;
   bool start = false;
   bool mode = false;
-  List <dynamic>? show0;
-  List <dynamic>? show1;
-  List <dynamic>? show2;
-  List <dynamic>? show3;
-  List <dynamic>? show4;
-  List <dynamic>? show5;
-  List <dynamic>? show6;
+  List<dynamic>? show0;
+  List<dynamic>? show1;
+  List<dynamic>? show2;
+  List<dynamic>? show3;
+  List<dynamic>? show4;
+  List<dynamic>? show5;
+  List<dynamic>? show6;
+  List<dynamic>? spots;
 
   @override
   void initState() {
-
     django.getTrendingEvents().then((value) {
       if (mounted) {
-        setState(()  {
+        setState(() {
           show0 = value;
         });
       }
@@ -86,6 +86,13 @@ class _NavBarState extends State<NavBar> {
       }
     });
 
+    django.getSpots().then((value) {
+      if (mounted) {
+        setState(() {
+          spots = value;
+        });
+      }
+    });
 
     super.initState();
     Future.delayed(const Duration(milliseconds: 200), () {
@@ -119,12 +126,14 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Home(show0,show1,show2,show3,show4,show5),
+              Home(show0, show1, show2, show3, show4, show5),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),
-              const Spots(),
-              ProfilePage()
+              Spots(
+                data: spots,
+              ),
+              const ProfilePage()
             ],
           ),
           Align(
@@ -323,7 +332,7 @@ class _NavBarState extends State<NavBar> {
                                           });
                                         },
                                         child: Tooltip(
-                                          message: "Map",
+                                          message: "Hotspots",
                                           textStyle: const TextStyle(
                                             color: Constants.iconAc,
                                             fontFamily: "Helvetica",
