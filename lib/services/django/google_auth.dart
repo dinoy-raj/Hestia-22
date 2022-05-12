@@ -108,4 +108,22 @@ class GoogleAuth extends ChangeNotifier {
 
     return json.decode(response.body)['results'];
   }
+
+  Future<void> acceptNotification(String url) async {
+    http.Response response = await http.get(
+      Uri.parse(url),
+      headers: {'Authorization': "token " + token!},
+    );
+
+    print(json.decode(response.body));
+  }
+
+  Future<void> rejectNotification(String url) async {
+    http.Response response = await http.get(
+      Uri.parse(url),
+      headers: {'Authorization': "token " + token!},
+    );
+
+    print(json.decode(response.body));
+  }
 }
