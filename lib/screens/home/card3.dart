@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../events/events.dart';
 
-class EventCards extends StatefulWidget {
+class EventCards3 extends StatefulWidget {
   List<dynamic> show;
   int catSelect;
-  EventCards(this.show, this.catSelect, {Key? key}) : super(key: key);
+  EventCards3(this.show, this.catSelect, {Key? key}) : super(key: key);
 
   @override
-  State<EventCards> createState() => _EventCardsState();
+  State<EventCards3> createState() => _EventCardsState();
 }
 
-class _EventCardsState extends State<EventCards> {
+class _EventCardsState extends State<EventCards3> {
   PageController pageControl =
-      PageController(viewportFraction: .80, initialPage: 0);
+  PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
 
   bool start = false;
@@ -59,8 +59,8 @@ class _EventCardsState extends State<EventCards> {
               curve: Curves.fastLinearToSlowEaseIn,
               padding: start
                   ? const EdgeInsets.only(
-                      right: 20,
-                    )
+                right: 20,
+              )
                   : const EdgeInsets.only(right: 25),
               child: AnimatedOpacity(
                 duration: const Duration(seconds: 2),
@@ -102,19 +102,19 @@ class _EventCardsState extends State<EventCards> {
                                 : BoxFit.cover,
                             image: widget.catSelect == 0
                                 ? (widget.show[index]['event'] == null
-                                    ? const NetworkImage(
-                                        "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                        scale: 1.0)
-                                    : NetworkImage(
-                                        widget.show[index]['event']['image'],
-                                      ))
+                                ? const NetworkImage(
+                                "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                scale: 1.0)
+                                : NetworkImage(
+                              widget.show[index]['event']['image'],
+                            ))
                                 : (widget.show[index]['image'] == null
-                                    ? const NetworkImage(
-                                        "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                        scale: 1.0)
-                                    : NetworkImage(
-                                        widget.show[index]['image'],
-                                      )),
+                                ? const NetworkImage(
+                                "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                scale: 1.0)
+                                : NetworkImage(
+                              widget.show[index]['image'],
+                            )),
                           ),
                           gradient: const LinearGradient(
                             begin: Alignment.bottomCenter,
