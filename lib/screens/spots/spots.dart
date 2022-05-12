@@ -78,7 +78,8 @@ class SpotsState extends State<Spots> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.fastLinearToSlowEaseIn,
             opacity: _animate ? 0 : 1,
             child: Column(
               children: [
@@ -91,7 +92,8 @@ class SpotsState extends State<Spots> {
                           right: 20,
                         )
                       : EdgeInsets.zero,
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.fastLinearToSlowEaseIn,
                   child: Center(
                     child: Text(
                       "Explore",
