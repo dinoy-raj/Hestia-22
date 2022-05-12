@@ -102,7 +102,7 @@ class GoogleAuth extends ChangeNotifier {
 
   Future<List<dynamic>> getNotifications() async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live/api/v1/event/notification"),
+      Uri.parse("https://backend.hestiatkmce.live/api/v1/notification"),
       headers: {'Authorization': "token " + token!},
     );
 
