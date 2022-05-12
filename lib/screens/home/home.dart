@@ -8,11 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
-import 'package:hestia22/screens/home/cards.dart';
+import 'package:hestia22/screens/home/card2.dart';
+import 'package:hestia22/screens/home/cards1.dart';
 import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
 
+import 'card3.dart';
+import 'card4.dart';
+import 'card5.dart';
+import 'card6.dart';
 import 'notification.dart';
 
 class Home extends StatefulWidget {
@@ -22,8 +27,9 @@ class Home extends StatefulWidget {
   List<dynamic>? event3;
   List<dynamic>? event4;
   List<dynamic>? event5;
+  Map? profile;
   Home(this.event0, this.event1, this.event2, this.event3, this.event4,
-      this.event5,
+      this.event5, this.profile,
       {Key? key})
       : super(key: key);
 
@@ -122,13 +128,17 @@ class HomeState extends State<Home> {
                                     duration: const Duration(seconds: 3),
                                     curve: Curves.decelerate,
                                     opacity: start ? 1 : 0,
-                                    child: const Text(
-                                      "Hi, Dinoy Raj 👋",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          fontFamily: 'helvetica',
-                                          color: Colors.white),
+                                    child: SizedBox(
+                                      width: screenWidth * .7,
+                                      child: Text(
+                                        "Hi, ${widget.profile == null ? "" : widget.profile!['name']} 👋",
+                                        style: const TextStyle(
+                                            overflow: TextOverflow.fade,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            fontFamily: 'helvetica',
+                                            color: Colors.white),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -501,19 +511,21 @@ class HomeState extends State<Home> {
                                     ],
                                   )
                                 : catSelect == 0
-                                    ? EventCards(widget.event0!, catSelect)
+                                    ? EventCards1(widget.event0!, catSelect)
                                     : catSelect == 1
-                                        ? EventCards(widget.event1!, catSelect)
+                                        ? EventCards2(widget.event1!, catSelect)
                                         : catSelect == 2
-                                            ? EventCards(
+                                            ? EventCards3(
                                                 widget.event2!, catSelect)
                                             : catSelect == 3
-                                                ? EventCards(
+                                                ? EventCards4(
                                                     widget.event3!, catSelect)
                                                 : catSelect == 4
-                                                    ? EventCards(widget.event4!,
+                                                    ? EventCards5(
+                                                        widget.event4!,
                                                         catSelect)
-                                                    : EventCards(widget.event5!,
+                                                    : EventCards6(
+                                                        widget.event5!,
                                                         catSelect),
                       ),
                     ],

@@ -36,6 +36,8 @@ class _NavBarState extends State<NavBar> {
   List<dynamic>? show6;
   List<dynamic>? spots;
 
+  Map? profile;
+
   @override
   void initState() {
     django.getTrendingEvents().then((value) {
@@ -102,6 +104,12 @@ class _NavBarState extends State<NavBar> {
         index = 0;
       });
     });
+
+    auth.getProfile().then((value) {
+      setState(() {
+        profile = value;
+      });
+    });
   }
 
   @override
@@ -126,7 +134,7 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Home(show0, show1, show2, show3, show4, show5),
+              Home(show0, show1, show2, show3, show4, show5,profile),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),

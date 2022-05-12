@@ -73,8 +73,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/spotlight.png
-    - assets/images/img.png
     - assets/
     - assets/icons/
     - assets/animations/
