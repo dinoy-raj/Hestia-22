@@ -9,8 +9,8 @@ import 'package:slide_countdown/slide_countdown.dart';
 import '../../main.dart';
 
 class EventDetails extends StatefulWidget {
-  const EventDetails({Key? key}) : super(key: key);
-
+  Map eventData;
+  EventDetails(this.eventData, {Key? key}) : super(key: key);
   @override
   State<EventDetails> createState() => _EventDetailsState();
 }
@@ -220,7 +220,7 @@ class _EventDetailsState extends State<EventDetails> {
                     fontSize: 16,
                     fontStyle: FontStyle.normal,
                     fontFamily: fontfamily,
-                    color: Constants.color4,
+                    color: Constants.textColor,
                     overflow: TextOverflow.clip,
                     fontWeight: FontWeight.normal,
                   ),
@@ -258,30 +258,34 @@ class _EventDetailsState extends State<EventDetails> {
             ],
           ),
         ),*/
-        Container(
-          padding: EdgeInsets.fromLTRB(
-              width * 0.06, width * 0.04, width * 0.06, width * 0.01),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(
-                Icons.location_on_outlined,
-                color: Constants.lightWhite.withOpacity(0.4),
-                size: 24,
-              ),
-              Text(
-                "   " + eventData['location'],
-                style: TextStyle(
-                  letterSpacing: letterspace,
-                  decoration: TextDecoration.none,
-                  fontSize: 16,
-                  fontFamily: fontfamily,
-                  overflow: TextOverflow.clip,
-                  color: Constants.color4,
-                  fontWeight: FontWeight.normal,
+        AnimatedPadding(
+          duration: const Duration(seconds: 1),
+          curve: Curves.decelerate,
+          padding: start ? EdgeInsets.fromLTRB(
+              width * 0.06, width*0.04, 0, 0) :const EdgeInsets.only(left: 0),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.location_on_outlined,
+                  color: Constants.lightWhite.withOpacity(0.4),
+                  size: 24,
                 ),
-              )
-            ],
+                Text(
+                  "   " + eventData['location'],
+                  style: TextStyle(
+                    letterSpacing: letterspace,
+                    decoration: TextDecoration.none,
+                    fontSize: 16,
+                    fontFamily: fontfamily,
+                    overflow: TextOverflow.clip,
+                    color: Constants.textColor,
+                    fontWeight: FontWeight.normal,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         /*Container(
@@ -427,7 +431,7 @@ class _EventDetailsState extends State<EventDetails> {
               fontSize: 16,
               height: 1.5,
               fontFamily: fontfamily,
-              color: Constants.color4,
+              color: Constants.textColor,
               inherit: true,
               letterSpacing: 0.9,
               wordSpacing: 1.2,
@@ -463,31 +467,6 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   Widget appbar(double height, double width) {
-    /*bool isDayOver,isHrOver,isMinOver,isSecOver=false;
-    if(duration!.inDays<=0)
-      {
-        setState(() {
-          isDayOver=true;
-        });
-      }
-    else if(duration!.inHours<=0)
-      {
-        setState(() {
-          isHrOver=true;
-        });
-      }
-    else if(duration!.inMinutes<=0)
-      {
-        setState(() {
-          isMinOver=true;
-        });
-      }
-    else if(duration!.inSeconds<=0)
-      {
-        setState(() {
-          isSecOver=true;
-        });
-      }*/
     return SliverAppBar(
       leading: AnimatedPadding(
         padding: start
