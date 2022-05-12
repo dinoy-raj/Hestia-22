@@ -1,9 +1,13 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key, this.data}) : super(key: key);
+  final Map? data;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -14,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         start = true;
       });
@@ -25,366 +29,335 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height - 24;
     double screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Constants.sc,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(children: [
-            SizedBox(
-              height: screenHeight * 0.09,
-              //color: Colors.green,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Center(
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 800),
+      opacity: start ? 1 : 0,
+      child: Scaffold(
+        backgroundColor: Constants.sc,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 30,
+                    top: 20,
+                  ),
+                  child: SizedBox(
+                    height: screenHeight * 0.09,
                     child: Text(
                       'Profile',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                          letterSpacing: 2.0,
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 30,
                           fontFamily: 'Helvetica',
                           fontWeight: FontWeight.normal),
                     ),
                   ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.18,
-              //color: Colors.orange,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: 95,
-                      width: 95,
-                      //color: Colors.black,
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/icons/face.png'),
-                      ),
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Constants.iconAc),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      'Karthik',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'Helvetica',
-                          fontWeight: FontWeight.normal),
-                    ),
-                  ],
                 ),
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.18,
-              //color: Colors.yellow,
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Constants.bg,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          height: 70,
-                          width: 140,
-                          child: Center(
-                            child: IconButton(
-                              icon: Image.asset('assets/icons/Todayy.png'),
-                              onPressed: () {},
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Registred Events',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Center(
-                            child: IconButton(
-                              icon: Image.asset('assets/icons/Certificate.png'),
-                              onPressed: () {},
-                            ),
-                          ),
-                          decoration: const BoxDecoration(
-                            color: Constants.bg,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          height: 70,
-                          width: 140,
-                          //color: const Color(0xff121212)
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Certificates',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.decelerate,
-              opacity: start ? 1 : 0,
-              child: AnimatedPadding(
-                padding: start
-                    ? const EdgeInsets.only(left: 20)
-                    : const EdgeInsets.only(right: 20),
-                curve: Curves.decelerate,
-                duration: const Duration(seconds: 5),
-                child: AnimatedContainer(
-                  duration: const Duration(seconds: 5),
-                  curve: Curves.decelerate,
-
-                  height: screenHeight * 0.45,
-                  //color: Colors.green,
+                SizedBox(
+                  height: screenHeight * 0.18,
                   child: Center(
-                    child: AnimatedContainer(
-                      duration: const Duration(seconds: 5),
-                      curve: Curves.decelerate,
-                      height: 300,
-                      width: 350,
-                      decoration: const BoxDecoration(
-                        color: Color(0xff121212),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              //color: Color.fromARGB(255, 212, 23, 23),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnimatedPadding(
+                          padding: start
+                              ? const EdgeInsets.only(right: 10)
+                              : const EdgeInsets.only(right: 20),
+                          duration: const Duration(milliseconds: 800),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Constants.bg,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                height: 70,
+                                width: 140,
+                                child: Center(
+                                  child: IconButton(
+                                    icon: const Icon(
+                                        Icons.event_available_outlined),
+                                    color: Colors.white.withOpacity(0.5),
+                                    iconSize: 30,
+                                    onPressed: () {},
+                                  ),
+                                ),
                               ),
-                            ),
-                            height: 60,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 10),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    width: screenWidth * 0.1,
-                                    height: screenWidth * 0.1,
-                                    decoration: const BoxDecoration(
-                                      color: Constants.bg,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        FontAwesomeIcons.user,
-                                        color: Colors.white,
-                                        // Image.asset('assets/icons/person.png'),
-                                      ),
-                                    ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Registered Events',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 16,
+                                    fontFamily: 'Helvetica',
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        AnimatedPadding(
+                          padding: start
+                              ? const EdgeInsets.only(left: 10)
+                              : const EdgeInsets.only(left: 20),
+                          duration: const Duration(milliseconds: 800),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                child: Center(
+                                  child: IconButton(
+                                    icon: const Icon(Icons.badge_outlined),
+                                    iconSize: 30,
+                                    color: Colors.white.withOpacity(0.5),
+                                    onPressed: () {},
                                   ),
                                 ),
-                                const Flexible(
-                                  child: Text(
-                                    'Karthik Sunil K',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Helvetica',
-                                        fontWeight: FontWeight.normal),
+                                decoration: const BoxDecoration(
+                                  color: Constants.bg,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                height: 70,
+                                width: 140,
+                                //color: const Color(0xff121212)
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Certificates',
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 16,
+                                    fontFamily: 'Helvetica',
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Center(
+                    child: ClipRRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 800),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.brown.withOpacity(0.1),
+                                Colors.brown.withOpacity(0.2),
+                              ],
+                              begin: AlignmentDirectional.topStart,
+                              end: AlignmentDirectional.bottomEnd,
+                            ),
+                          ),
+                          child: AnimatedPadding(
+                            padding: start
+                                ? const EdgeInsets.only(left: 10, right: 20)
+                                : EdgeInsets.zero,
+                            duration: const Duration(milliseconds: 800),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  height: 60,
+                                  child: Row(
+                                    children: [
+                                      Center(
+                                        child: Icon(
+                                          Icons.person_outline,
+                                          color: Colors.white.withOpacity(.5),
+                                          size: 24,
+                                          // Image.asset('assets/icons/person.png'),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: AnimatedPadding(
+                                          padding: start
+                                              ? const EdgeInsets.only(left: 20)
+                                              : const EdgeInsets.only(left: 40),
+                                          duration:
+                                              const Duration(milliseconds: 800),
+                                          child: Text(
+                                            widget.data == null
+                                                ? ""
+                                                : widget.data!['name'],
+                                            style: TextStyle(
+                                                color: Colors.white
+                                                    .withOpacity(.5),
+                                                fontSize: 18,
+                                                fontFamily: 'Helvetica',
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                  child: Row(
+                                    children: [
+                                      Center(
+                                        child: Icon(
+                                          CupertinoIcons.phone,
+                                          color: Colors.white.withOpacity(0.5),
+                                          size: 20,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: AnimatedPadding(
+                                          padding: start
+                                              ? const EdgeInsets.only(left: 20)
+                                              : const EdgeInsets.only(left: 40),
+                                          duration:
+                                              const Duration(milliseconds: 800),
+                                          child: Text(
+                                            widget.data == null
+                                                ? ""
+                                                : widget.data!['phone_number']
+                                                    .substring(3),
+                                            style: TextStyle(
+                                                color: Colors.white
+                                                    .withOpacity(.5),
+                                                fontSize: 18,
+                                                fontFamily: 'Helvetica',
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                  child: Row(
+                                    children: [
+                                      Center(
+                                        child: Icon(
+                                          CupertinoIcons.building_2_fill,
+                                          color: Colors.white.withOpacity(.5),
+                                          size: 20,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: AnimatedPadding(
+                                          padding: start
+                                              ? const EdgeInsets.only(left: 20)
+                                              : const EdgeInsets.only(left: 40),
+                                          duration:
+                                              const Duration(milliseconds: 800),
+                                          child: Text(
+                                            widget.data == null
+                                                ? ""
+                                                : widget.data!['dept_name'] +
+                                                    ", " +
+                                                    widget
+                                                        .data!['college_name'],
+                                            style: TextStyle(
+                                                overflow: TextOverflow.clip,
+                                                color: Colors.white
+                                                    .withOpacity(0.5),
+                                                fontSize: 18,
+                                                fontFamily: 'Helvetica',
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 60,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 10),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    width: screenWidth * 0.1,
-                                    height: screenWidth * 0.1,
-                                    decoration: const BoxDecoration(
-                                      color: Constants.bg,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        FontAwesomeIcons.school,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const Flexible(
-                                  child: Text(
-                                    'electronics and communication',
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontFamily: 'Helvetica',
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          AnimatedContainer(
-                            duration: const Duration(seconds: 2),
-                            curve: Curves.decelerate,
-                            height: 60,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 10),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    width: screenWidth * 0.1,
-                                    height: screenWidth * 0.1,
-                                    decoration: const BoxDecoration(
-                                      color: Constants.bg,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        FontAwesomeIcons.phone,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const Text(
-                                  'Contact Admin',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily: 'Helvetica',
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                // const Spacer(),
-                                // Container(
-                                //   alignment: Alignment.centerRight,
-                                //   width: screenWidth * 0.1,
-                                //   //color: Colors.green,
-                                //   child: Center(
-                                //     child: IconButton(
-                                //       icon: Image.asset('assets/icons/logout.png'),
-                                //       onPressed: () {},
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 60,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, right: 10),
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    width: screenWidth * 0.1,
-                                    height: screenWidth * 0.1,
-                                    decoration: const BoxDecoration(
-                                      color: Constants.bg,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        FontAwesomeIcons.arrowRightFromBracket,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Future.delayed(
-                                        const Duration(milliseconds: 800),
-                                        () async {
-                                      await auth.logOut();
-                                    });
-                                  },
-                                  child: const Text('Logout',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontFamily: 'Helvetica',
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                                // const Spacer(),
-                                // Container(
-                                //   alignment: Alignment.centerRight,
-                                //   width: screenWidth * 0.1,
-                                //   //color: Colors.green,
-                                //   child: Center(
-                                //     child: IconButton(
-                                //       icon: Image.asset('assets/icons/logout.png'),
-                                //       onPressed: () {},
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 70, right: 70, top: 50, bottom: 50),
+                    child: GestureDetector(
+                      onTap: () {
+                        Future.delayed(const Duration(milliseconds: 800),
+                            () async {
+                          await auth.logOut();
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Constants.color3,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        height: 50,
+                        width: 150,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.arrowRightFromBracket,
+                                    color: Colors.white.withOpacity(0.5),
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              Text('Logout',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontSize: 20,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ]),
+          ),
         ),
       ),
     );

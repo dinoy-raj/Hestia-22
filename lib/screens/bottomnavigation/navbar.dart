@@ -145,6 +145,7 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
+
               Home(show0, show1, show2, show3, show4, show5,profile,all),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
@@ -152,7 +153,9 @@ class _NavBarState extends State<NavBar> {
               Spots(
                 data: spots,
               ),
-              const ProfilePage()
+              ProfilePage(
+                data: profile,
+              )
             ],
           ),
           Align(

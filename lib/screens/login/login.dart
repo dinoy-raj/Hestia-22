@@ -10,6 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _text = "Continue with Google";
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -22,8 +24,8 @@ class _LoginPageState extends State<LoginPage> {
         child: Stack(
           children: [
             SizedBox(
-              height: screenHeight*1.2,
-              width: screenWidth*1.3,
+              height: screenHeight * 1.2,
+              width: screenWidth * 1.3,
               child: Lottie.asset('assets/animations/welcome.json'),
             ),
             Column(
@@ -31,25 +33,44 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  //color: Color(0xff121212),
                   decoration: const BoxDecoration(
                       color: Color(0xff121212),
                       borderRadius: BorderRadius.all(Radius.circular(25))),
                   height: 70,
                   width: 280,
-
                   child: Center(
                     child: RoundedButton(
-                      text: 'Continue with Google',
-                      press: () {
-                        main.auth.login();
+                      text: _text,
+                      press: () async {
+                        setState(() {
+                          _text = 'Logging you in...';
+                        });
+                        if (await main.auth.login()) {
+                          setState(() {
+                            _text = 'Logged in';
+                          });
+                        } else {
+                          _text = 'Error logging in...';
+
+                          Future.delayed(const Duration(milliseconds: 1000),
+                              () {
+                            setState(() {
+                              _text = 'Try again...';
+                            });
+                          });
+
+                          Future.delayed(const Duration(milliseconds: 2500),
+                              () {
+                            setState(() {
+                              _text = 'Continue with Google';
+                            });
+                          });
+                        }
                       },
                     ),
                   ),
                 ),
                 Container(
-                  //color: Color(0xff121212),
-
                   height: screenHeight * 0.1,
                 ),
               ],
@@ -83,6 +104,9 @@ class RoundedButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          const SizedBox(
+            width: 10,
+          ),
           Container(
             //color: Colors.blue,
             child: Lottie.network(
@@ -91,14 +115,20 @@ class RoundedButton extends StatelessWidget {
               height: 80,
             ),
           ),
-          Text(
-            text,
-            style: TextStyle(
-              fontFamily: 'Helvetica',
-              color: textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Helvetica',
+                color: textColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
+          ),
+          const SizedBox(
+            width: 10,
           ),
         ],
       ),

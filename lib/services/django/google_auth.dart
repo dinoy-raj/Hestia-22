@@ -19,7 +19,7 @@ class GoogleAuth extends ChangeNotifier {
     notifyListeners();
   }
 
-  void login() async {
+  Future<bool> login() async {
     try {
       GoogleSignInAccount? result = await googleSignIn.signIn();
 
@@ -45,10 +45,12 @@ class GoogleAuth extends ChangeNotifier {
       isCompleted = jsonDecode(response1.body)['is_completed'];
 
       notifyListeners();
+
+      return true;
     } catch (e) {
-      print(e);
       token = "";
       notifyListeners();
+      return false;
     }
   }
 
@@ -67,14 +69,12 @@ class GoogleAuth extends ChangeNotifier {
     return json.decode(response.body);
   }
 
-  Future<void> updateProfile(
+  Future<int> updateProfile(
       String name, String phone, String college, String department) async {
     http.Response response = await http.get(
       Uri.parse("https://backend.hestiatkmce.live/api/v1/users/me/"),
       headers: {'Authorization': "token " + token!},
     );
-
-    print(jsonDecode(response.body));
 
     http.Response response1 =
         await http.put(Uri.parse(jsonDecode(response.body)['url']), headers: {
@@ -87,11 +87,16 @@ class GoogleAuth extends ChangeNotifier {
       "is_completed": "true",
     });
 
-    print(jsonDecode(response1.body));
+    if (response1.statusCode == 400 &&
+        jsonDecode(response1.body)['phone_number'] != null) {
+      return 2;
+    }
 
     await const FlutterSecureStorage()
         .write(key: 'is_completed', value: "true");
     isCompleted = true;
     notifyListeners();
+
+    return 0;
   }
 }

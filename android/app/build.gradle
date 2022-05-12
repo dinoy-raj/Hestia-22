@@ -44,21 +44,6 @@ android {
         multiDexEnabled true
     }
 
-    signingConfigs {
-        debug {
-            storeFile file('key.jks')
-            storePassword 'hestia22'
-            keyAlias 'androiddebugkey'
-            keyPassword 'hestia22'
-        }
-    }
-
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
-    }
-
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
