@@ -1,6 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../main.dart';
+import '../../services/django/google_auth.dart';
 import 'home.dart';
+
+import 'package:hestia22/services/django/google_auth.dart' as ga;
+
+GoogleAuth auth = GoogleAuth();
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -10,19 +17,38 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  List<dynamic> noti = [{}, {}];
+  bool start = false;
+  List<dynamic>? not;
+  @override
+  void initState() {
+    super.initState();
 
-  bool stan = false;
+    auth.getNotifications().then((value) {
+      setState(() {
+        not = value;
+      });
+    });
+
+    start = false;
+    Future.delayed(const Duration(milliseconds: 150), () {
+      if (mounted) {
+        setState(() {
+          start = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    log(not.toString());
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return ListView.builder(
         itemCount: 1,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, index) {
-          return stan
+          return true
               ? AnimatedPadding(
                   duration: const Duration(seconds: 1),
                   curve: Curves.decelerate,
