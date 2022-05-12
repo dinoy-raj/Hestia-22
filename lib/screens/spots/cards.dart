@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/spot_page.dart';
-import 'package:hestia22/services/django/django.dart' as django;
 
 class Cards extends StatefulWidget {
-  const Cards({Key? key}) : super(key: key);
+  final List<dynamic> data;
+
+  const Cards({Key? key, required this.data}) : super(key: key);
 
   @override
   _CardsState createState() => _CardsState();
@@ -19,18 +19,10 @@ class _CardsState extends State<Cards> {
   bool _animate = true;
   int _currentPage = 0;
   double _scroll = 0;
-  List<dynamic>? data;
 
   @override
   void initState() {
     super.initState();
-    django.getSpots().then((value) {
-      if (mounted) {
-        setState(() {
-          data = value;
-        });
-      }
-    });
     _pageController.addListener(() {
       setState(() {
         _scroll = _pageController.page!;
@@ -46,9 +38,7 @@ class _CardsState extends State<Cards> {
 
   @override
   Widget build(BuildContext context) {
-    return data == null
-        ? const CupertinoActivityIndicator()
-        : AnimatedPadding(
+    return AnimatedPadding(
             padding: _animate
                 ? const EdgeInsets.only(
                     top: 20,
@@ -108,11 +98,11 @@ class _CardsState extends State<Cards> {
                       child: PageView.builder(
                         controller: _pageController,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: data!.length,
+                        itemCount: widget.data.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Hero(
-                            tag: data![index]['title'].toString(),
+                            tag: widget.data[index]['title'].toString(),
                             child: Material(
                               color: Colors.transparent,
                               child: GestureDetector(
@@ -121,7 +111,7 @@ class _CardsState extends State<Cards> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => SpotPage(
-                                                data: data![index],
+                                                data: widget.data[index],
                                               )));
                                 },
                                 child: AnimatedOpacity(
@@ -139,7 +129,7 @@ class _CardsState extends State<Cards> {
                                       image: DecorationImage(
                                           opacity: 0.5,
                                           fit: BoxFit.cover,
-                                          image: NetworkImage(data![index]
+                                          image: NetworkImage(widget.data[index]
                                                   ['picture'] ??
                                               "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg")),
                                     ),
@@ -164,7 +154,7 @@ class _CardsState extends State<Cards> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              data![index]['title'].toString(),
+                                              widget.data[index]['title'].toString(),
                                               style: TextStyle(
                                                   overflow: TextOverflow.clip,
                                                   fontWeight: FontWeight.bold,
@@ -176,7 +166,7 @@ class _CardsState extends State<Cards> {
                                               height: 5,
                                             ),
                                             Text(
-                                              data![index]['desc'].toString(),
+                                              widget.data[index]['desc'].toString(),
                                               style: TextStyle(
                                                   overflow: TextOverflow.clip,
                                                   fontSize: 14,
@@ -187,7 +177,7 @@ class _CardsState extends State<Cards> {
                                               height: 10,
                                             ),
                                             Text(
-                                              data![index]['short_desc']
+                                              widget.data[index]['short_desc']
                                                   .toString(),
                                               style: TextStyle(
                                                   overflow: TextOverflow.clip,
