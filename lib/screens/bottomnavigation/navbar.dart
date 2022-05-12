@@ -40,7 +40,7 @@ class _NavBarState extends State<NavBar> {
 
     django.getTrendingEvents().then((value) {
       if (mounted) {
-        setState(() {
+        setState(()  {
           show0 = value;
         });
       }
