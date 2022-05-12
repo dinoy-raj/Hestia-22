@@ -51,10 +51,10 @@ class _MyAppState extends State<MyApp> {
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount?> snapshot) {
             if (auth.token == null || auth.token!.isEmpty) {
-              return const LoginPage();
+              return const NavBar();
             } else {
               if (auth.isCompleted == null || !auth.isCompleted!) {
-                return const ProfileRegistration();
+                return const NavBar();
               } else {
                 return const NavBar();
               }

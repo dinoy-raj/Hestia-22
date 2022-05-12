@@ -32,7 +32,7 @@ class Home extends StatefulWidget {
   List<dynamic>? a;
   Map? profile;
   Home(this.event0, this.event1, this.event2, this.event3, this.event4,
-      this.event5, this.profile, List? a,
+      this.event5, this.profile, this.a,
       {Key? key})
       : super(key: key);
 
@@ -99,12 +99,6 @@ class HomeState extends State<Home> {
     start = false;
     catSelect = 10;
     show = widget.event0;
-
-    setState(() {
-
-    });
-
-
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {
         setState(() {
@@ -122,7 +116,7 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        print(all.toString());
+        print(widget.a.toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -855,7 +849,26 @@ class HomeState extends State<Home> {
                   ],
                 ),
 
-                notificationPage(context),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: screenHeight * .1,
+                      width: screenWidth,
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      height: notPressed ? screenHeight * .7 : 0,
+                      width: screenWidth * .91,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.black),
+                      child: const NotificationPage(),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -90,6 +90,17 @@ class _NavBarState extends State<NavBar> {
       }
     });
 
+    setState(() {
+      django.getAllEvents().then((value) {
+        if(mounted)
+          {
+            setState(() {
+              all = value;
+            });
+          }
+      });
+    });
+
     django.getSpots().then((value) {
       if (mounted) {
         setState(() {
@@ -113,14 +124,7 @@ class _NavBarState extends State<NavBar> {
       });
     });
 
-    setState(() {
-      all?.add(show0);
-      all?.add(show1);
-      all?.add(show2);
-      all?.add(show3);
-      all?.add(show4);
-      all?.add(show5);
-    });
+
   }
 
   @override
