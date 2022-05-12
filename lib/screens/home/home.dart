@@ -43,6 +43,7 @@ class HomeState extends State<Home> {
 
   //Proshow list data
   List<dynamic>? show;
+  late Map eDetails;
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
@@ -111,7 +112,6 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        log((show![0]['event']['image'].toString()));
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -595,10 +595,23 @@ class HomeState extends State<Home> {
                                                   index == currentPage ? 1 : .2,
                                               child: GestureDetector(
                                                 onTap: () async {
+                                                  eDetails = catSelect == 0
+                                                      ? await django
+                                                          .getEventDetails(
+                                                              show![index]
+                                                                      ['event']
+                                                                  ['slug'])
+                                                      : await django
+                                                          .getEventDetails(
+                                                              show![index]
+                                                                  ['slug']);
+
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => EventDetails()));
+                                                          builder: (context) =>
+                                                              EventDetails(
+                                                                  eDetails)));
                                                 },
                                                 child: AnimatedContainer(
                                                   duration: const Duration(
@@ -631,9 +644,8 @@ class HomeState extends State<Home> {
                                                                 ? BoxFit.fill
                                                                 : BoxFit.cover,
                                                         image: catSelect == 0
-                                                            ? (show?[index]['event']
-                                                                        [
-                                                                        'image'] ==
+                                                            ? (show?[index][
+                                                                        'event'] ==
                                                                     null
                                                                 ? const NetworkImage(
                                                                     "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
