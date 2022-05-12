@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/profile/certificates.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -10,9 +11,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-  bool start=false;
-    @override
+  bool start = false;
+  @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 1000), () {
@@ -21,6 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height - 24;
@@ -56,69 +57,41 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            Container(
-              height: screenHeight * 0.18,
-              //color: Colors.orange,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: 95,
-                      width: 95,
-                      //color: Colors.black,
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/icons/face.png'),
-                      ),
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Constants.iconAc),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Text(
-                      'Karthik',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'Helvetica',
-                          fontWeight: FontWeight.normal),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: screenHeight * 0.18,
-              //color: Colors.yellow,
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+            AnimatedOpacity(
+              duration: Duration(milliseconds: 200),
+              curve: Curves.decelerate,
+              opacity: start ? 1 : 0,
+              child: AnimatedPadding(
+                padding: start
+                    ? const EdgeInsets.only(left: 20)
+                    : const EdgeInsets.only(right: 20),
+                curve: Curves.decelerate,
+                duration: Duration(seconds: 2),
+                child: AnimatedContainer(
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.decelerate,
+                  height: screenHeight * 0.18,
+                  //color: Colors.orange,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
+                          height: 95,
+                          width: 95,
+                          //color: Colors.black,
+                          child: const CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                'https://pbs.twimg.com/profile_images/1357908101198880769/HjvF0yWs_400x400.jpg'),
+                          ),
                           decoration: const BoxDecoration(
-                            color: Constants.bg,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          height: 70,
-                          width: 140,
-                          child: Center(
-                            child: IconButton(
-                              icon: Image.asset('assets/icons/Todayy.png'),
-                              onPressed: () {},
-                            ),
-                          ),
+                              shape: BoxShape.circle, color: Constants.iconAc),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         const Text(
-                          'Registred Events',
+                          'Karthik K',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -127,62 +100,122 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Center(
-                            child: IconButton(
-                              icon: Image.asset('assets/icons/Certificate.png'),
-                              onPressed: () {},
-                            ),
-                          ),
-                          decoration: const BoxDecoration(
-                            color: Constants.bg,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          height: 70,
-                          width: 140,
-                          //color: const Color(0xff121212)
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Certificates',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
             AnimatedOpacity(
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 200),
               curve: Curves.decelerate,
-              opacity: start?1:0,
-              child: AnimatedPadding(
-                padding: start?const EdgeInsets.only(left: 20):const EdgeInsets.only(right: 20),
+              opacity: start ? 1 : 0,
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 1),
                 curve: Curves.decelerate,
-                duration: Duration(seconds: 5),
+                height: screenHeight * 0.18,
+                //color: Colors.yellow,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Constants.bg,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: IconButton(
+                                icon: Image.asset('assets/icons/Todayy.png'),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Registred Events',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Helvetica',
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CertificatesPage()));
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: Center(
+                                child: IconButton(
+                                  icon: Image.asset(
+                                      'assets/icons/Certificate.png'),
+                                  onPressed: () {},
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Constants.bg,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                              ),
+                              height: 70,
+                              width: 140,
+                              //color: const Color(0xff121212)
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Certificates',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Helvetica',
+                                  fontWeight: FontWeight.normal),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            AnimatedOpacity(
+              duration: Duration(milliseconds: 1000),
+              curve: Curves.decelerate,
+              opacity: start ? 1 : 0,
+              child: AnimatedPadding(
+                padding: start
+                    ? const EdgeInsets.only(left: 40)
+                    : const EdgeInsets.only(right: 40),
+                curve: Curves.decelerate,
+                duration: Duration(seconds: 1),
                 child: AnimatedContainer(
-                  duration: const Duration(seconds: 5),
+                  duration: const Duration(seconds: 1),
                   curve: Curves.decelerate,
-                  
+
                   height: screenHeight * 0.45,
                   //color: Colors.green,
                   child: Center(
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 5),
                       curve: Curves.decelerate,
-            
                       height: 300,
                       width: 350,
                       decoration: const BoxDecoration(
@@ -306,7 +339,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 const Text(
-                                  'Contact Admin',
+                                  '8606683287',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,

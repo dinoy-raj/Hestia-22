@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/events/events.dart';
+import 'package:hestia22/screens/profile/certificates.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registration_failure.dart';
 import 'package:hestia22/screens/profile/registration_success.dart';
@@ -54,9 +55,9 @@ class _MyAppState extends State<MyApp> {
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount?> snapshot) {
             if (auth.token!.isNotEmpty) {
-              return const MyHomePage();
+              return  const MyHomePage();
             } else {
-              return const LoginPage();
+              return  const LoginPage();
             }
           }),
     );

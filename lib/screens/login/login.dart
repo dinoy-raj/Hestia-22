@@ -36,35 +36,35 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Container(
-                          child: const Text(
-                            'Hello Hestia',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 10),
-                        child: Container(
-                          child: const Text(
-                            'Hestia is the biggest south indian technocultural festival\nin Kerala India',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 20),
+                      //   child: Container(
+                      //     child: const Text(
+                      //       'Hello Hestia',
+                      //       style: TextStyle(
+                      //         fontFamily: 'Helvetica',
+                      //         fontSize: 35,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.white,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding:
+                      //       const EdgeInsets.only(left: 30, right: 30, top: 10),
+                      //   child: Container(
+                      //     child: const Text(
+                      //       'Hestia is the biggest south indian technocultural festival\nin Kerala India',
+                      //       style: TextStyle(
+                      //         fontFamily: 'Helvetica',
+                      //         fontSize: 25,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.white,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ],
