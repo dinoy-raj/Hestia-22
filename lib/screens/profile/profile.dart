@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/profile/registered_events.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -88,37 +89,42 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Constants.bg,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
+                    InkWell(
+                      onTap: () {
+                          Navigator.push(context,  MaterialPageRoute(builder: (context) => RegisteredEvents()));
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Constants.bg,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            height: 70,
+                            width: 140,
+                            child: Center(
+                              child: IconButton(
+                                icon: Image.asset('assets/icons/Todayy.png'),
+                                onPressed: () {},
+                              ),
                             ),
                           ),
-                          height: 70,
-                          width: 140,
-                          child: Center(
-                            child: IconButton(
-                              icon: Image.asset('assets/icons/Todayy.png'),
-                              onPressed: () {},
-                            ),
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Registred Events',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ],
+                          const Text(
+                            'Registered Events',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Helvetica',
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
