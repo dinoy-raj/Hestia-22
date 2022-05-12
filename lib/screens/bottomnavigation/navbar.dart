@@ -134,14 +134,16 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Home(show0, show1, show2, show3, show4, show5,profile),
+              Home(show0, show1, show2, show3, show4, show5, profile),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),
               Spots(
                 data: spots,
               ),
-              const ProfilePage()
+              ProfilePage(
+                data: profile,
+              )
             ],
           ),
           Align(

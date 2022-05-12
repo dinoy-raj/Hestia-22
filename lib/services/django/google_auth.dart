@@ -19,7 +19,7 @@ class GoogleAuth extends ChangeNotifier {
     notifyListeners();
   }
 
-  void login() async {
+  Future<bool> login() async {
     try {
       GoogleSignInAccount? result = await googleSignIn.signIn();
 
@@ -45,9 +45,12 @@ class GoogleAuth extends ChangeNotifier {
       isCompleted = jsonDecode(response1.body)['is_completed'];
 
       notifyListeners();
+
+      return true;
     } catch (e) {
       token = "";
       notifyListeners();
+      return false;
     }
   }
 
