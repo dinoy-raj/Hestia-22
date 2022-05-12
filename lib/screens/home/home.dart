@@ -66,7 +66,13 @@ class HomeState extends State<Home> {
     notPressed = false;
     start = false;
     catSelect = 10;
-    show = widget.event0;
+    django.getTrendingEvents().then((value) {
+      if (mounted) {
+        setState(() {
+          show = value;
+        });
+      }
+    });
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
