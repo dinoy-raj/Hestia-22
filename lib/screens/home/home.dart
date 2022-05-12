@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
@@ -110,7 +111,7 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        log((show![0].toString()));
+        log((show![0]['event']['image'].toString()));
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -592,63 +593,81 @@ class HomeState extends State<Home> {
                                               // curve: Curves.fastLinearToSlowEaseIn,
                                               opacity:
                                                   index == currentPage ? 1 : .2,
-                                              child: AnimatedContainer(
-                                                duration:
-                                                    const Duration(seconds: 1),
-                                                curve: Curves
-                                                    .fastLinearToSlowEaseIn,
-                                                height: index == currentPage
-                                                    ? screenHeight * .46
-                                                    : screenHeight * .41,
-                                                width: index == currentPage
-                                                    ? screenWidth * .9
-                                                    : screenWidth * .8,
-                                                decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: index ==
-                                                                currentPage
-                                                            ? Constants.iconAc
-                                                                .withOpacity(
-                                                                    .05)
-                                                            : Colors
-                                                                .transparent,
-                                                        spreadRadius: 2,
-                                                        blurRadius: 20,
-                                                      )
-                                                    ],
-                                                    image: DecorationImage(
-                                                      fit: index == currentPage
-                                                          ? BoxFit.fill
-                                                          : BoxFit.cover,
-                                                      image: show?[index]
-                                                                  ['image'] ==
-                                                              null
-                                                          ? const NetworkImage(
-                                                              "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                                              scale: 1.0)
-                                                          : NetworkImage(
-                                                              show?[index]
-                                                                  ['image'],
-                                                            ),
-                                                    ),
-                                                    gradient:
-                                                        const LinearGradient(
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end: Alignment.topCenter,
-                                                      colors: [
-                                                        Colors.black26,
-                                                        Colors.transparent,
-                                                        Colors.transparent
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const EventDetails()));
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves
+                                                      .fastLinearToSlowEaseIn,
+                                                  height: index == currentPage
+                                                      ? screenHeight * .46
+                                                      : screenHeight * .41,
+                                                  width: index == currentPage
+                                                      ? screenWidth * .9
+                                                      : screenWidth * .8,
+                                                  decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: index ==
+                                                                  currentPage
+                                                              ? Constants.iconAc
+                                                                  .withOpacity(
+                                                                      .05)
+                                                              : Colors
+                                                                  .transparent,
+                                                          spreadRadius: 2,
+                                                          blurRadius: 20,
+                                                        )
                                                       ],
-                                                    ),
-                                                    border: Border.all(
-                                                        color: Constants.sc),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                    color: Colors.grey),
+                                                      image: DecorationImage(
+                                                        fit:
+                                                            index == currentPage
+                                                                ? BoxFit.fill
+                                                                : BoxFit.cover,
+                                                        image: catSelect == 0
+                                                            ? (show?[index]['events'][
+                                                                        'image'] ==
+                                                                    null
+                                                                ? const NetworkImage(
+                                                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                                    scale: 1.0)
+                                                                : NetworkImage(
+                                                                    show?[index]['events']['image'],
+                                                                  ))
+                                                            : (show?[index][
+                                                                        'image'] ==
+                                                                    null
+                                                                ? const NetworkImage(
+                                                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                                    scale: 1.0)
+                                                                : NetworkImage(
+                                                                    show?[index]
+                                                                        [
+                                                                        'image'],
+                                                                  )),
+                                                      ),
+                                                      gradient:
+                                                          const LinearGradient(
+                                                        begin: Alignment
+                                                            .bottomCenter,
+                                                        end:
+                                                            Alignment.topCenter,
+                                                        colors: [
+                                                          Colors.black26,
+                                                          Colors.transparent,
+                                                          Colors.transparent
+                                                        ],
+                                                      ),
+                                                      border: Border.all(
+                                                          color: Constants.sc),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      color: Colors.grey),
+                                                ),
                                               ),
                                             ),
                                           ),
