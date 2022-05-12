@@ -75,7 +75,7 @@ class _EventCardsState extends State<EventCards1> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  EventDetails(widget.show[index])));
+                                  EventDetails(widget.show[index]['event'])));
                     },
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),

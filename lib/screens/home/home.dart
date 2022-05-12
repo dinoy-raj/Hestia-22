@@ -14,6 +14,10 @@ import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
 
+import 'card3.dart';
+import 'card4.dart';
+import 'card5.dart';
+import 'card6.dart';
 import 'notification.dart';
 
 class Home extends StatefulWidget {
@@ -124,11 +128,11 @@ class HomeState extends State<Home> {
                                     duration: const Duration(seconds: 3),
                                     curve: Curves.decelerate,
                                     opacity: start ? 1 : 0,
-                                    child: Container(
+                                    child: SizedBox(
                                       width: screenWidth * .7,
                                       child: Text(
                                         "Hi, ${widget.profile == null ? "" : widget.profile!['name']} 👋",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             overflow: TextOverflow.fade,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
