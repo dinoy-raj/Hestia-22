@@ -503,20 +503,17 @@ class HomeState extends State<Home> {
                                 : catSelect == 0
                                     ? EventCards(widget.event0!, catSelect)
                                     : catSelect == 1
-                                        ? EventCards(
-                                            widget.event1!, catSelect)
+                                        ? EventCards(widget.event1!, catSelect)
                                         : catSelect == 2
                                             ? EventCards(
                                                 widget.event2!, catSelect)
                                             : catSelect == 3
-                                                ? EventCards(widget.event3!,
-                                                    catSelect)
+                                                ? EventCards(
+                                                    widget.event3!, catSelect)
                                                 : catSelect == 4
-                                                    ? EventCards(
-                                                        widget.event4!,
+                                                    ? EventCards(widget.event4!,
                                                         catSelect)
-                                                    : EventCards(
-                                                        widget.event5!,
+                                                    : EventCards(widget.event5!,
                                                         catSelect),
                       ),
                     ],
