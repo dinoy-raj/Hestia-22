@@ -14,7 +14,7 @@ class EventCards3 extends StatefulWidget {
 
 class _EventCardsState extends State<EventCards3> {
   PageController pageControl =
-  PageController(viewportFraction: .80, initialPage: 0);
+      PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
 
   bool start = false;
@@ -59,8 +59,8 @@ class _EventCardsState extends State<EventCards3> {
               curve: Curves.fastLinearToSlowEaseIn,
               padding: start
                   ? const EdgeInsets.only(
-                right: 20,
-              )
+                      right: 20,
+                    )
                   : const EdgeInsets.only(right: 25),
               child: AnimatedOpacity(
                 duration: const Duration(seconds: 2),
@@ -100,21 +100,13 @@ class _EventCardsState extends State<EventCards3> {
                             fit: index == currentPage
                                 ? BoxFit.fill
                                 : BoxFit.cover,
-                            image: widget.catSelect == 0
-                                ? (widget.show[index]['event'] == null
+                            image: (widget.show[index]['image'] == null
                                 ? const NetworkImage(
-                                "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                scale: 1.0)
+                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                    scale: 1.0)
                                 : NetworkImage(
-                              widget.show[index]['event']['image'],
-                            ))
-                                : (widget.show[index]['image'] == null
-                                ? const NetworkImage(
-                                "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                scale: 1.0)
-                                : NetworkImage(
-                              widget.show[index]['image'],
-                            )),
+                                    widget.show[index]['image'],
+                                  )),
                           ),
                           gradient: const LinearGradient(
                             begin: Alignment.bottomCenter,

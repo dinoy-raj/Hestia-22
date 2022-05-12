@@ -36,6 +36,8 @@ class _NavBarState extends State<NavBar> {
   List<dynamic>? show6;
   List<dynamic>? spots;
 
+  List<dynamic>? all;
+
   Map? profile;
 
   @override
@@ -110,6 +112,15 @@ class _NavBarState extends State<NavBar> {
         profile = value;
       });
     });
+
+    setState(() {
+      all?.add(show0);
+      all?.add(show1);
+      all?.add(show2);
+      all?.add(show3);
+      all?.add(show4);
+      all?.add(show5);
+    });
   }
 
   @override
@@ -134,7 +145,7 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Home(show0, show1, show2, show3, show4, show5,profile),
+              Home(show0, show1, show2, show3, show4, show5,profile,all),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),

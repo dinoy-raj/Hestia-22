@@ -3,8 +3,10 @@ import 'dart:ui';
 
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
@@ -27,9 +29,10 @@ class Home extends StatefulWidget {
   List<dynamic>? event3;
   List<dynamic>? event4;
   List<dynamic>? event5;
+  List<dynamic>? a;
   Map? profile;
   Home(this.event0, this.event1, this.event2, this.event3, this.event4,
-      this.event5, this.profile,
+      this.event5, this.profile, List? a,
       {Key? key})
       : super(key: key);
 
@@ -61,8 +64,32 @@ class HomeState extends State<Home> {
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
+  List<dynamic>? all;
 
   List<dynamic>? show;
+
+  List<String> _getSuggestions(String pattern) {
+    List<String> list = [];
+
+    if (all != null) {
+      for (var index in all!) {
+        if (list.length < 4) {
+          if (all![index]['title']
+              .toLowerCase()
+              .contains(pattern.toLowerCase())) {
+            list.add("%l%" + all![index]['title']);
+            if (list.length == 4) {
+              break;
+            }
+          }
+        }
+      }
+
+      return list;
+    } else {
+      return list;
+    }
+  }
 
   @override
   void initState() {
@@ -72,11 +99,20 @@ class HomeState extends State<Home> {
     catSelect = 10;
     show = widget.event0;
 
+    all?.add(widget.event0);
+    all?.add(widget.event1);
+    all?.add(widget.event2);
+    all?.add(widget.event3);
+    all?.add(widget.event4);
+    all?.add(widget.event5);
+
     Future.delayed(const Duration(milliseconds: 150), () {
-      setState(() {
-        start = true;
-        catSelect = 0;
-      });
+      if (mounted) {
+        setState(() {
+          start = true;
+          catSelect = 0;
+        });
+      }
     });
   }
 
@@ -142,7 +178,7 @@ class HomeState extends State<Home> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: screenHeight * .005,
+                                    height: screenHeight * .009,
                                   ),
                                   AnimatedOpacity(
                                     duration: const Duration(seconds: 3),
@@ -255,7 +291,6 @@ class HomeState extends State<Home> {
                                   ),
                                 ),
 
-                                //
                                 AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.decelerate,
@@ -265,30 +300,77 @@ class HomeState extends State<Home> {
                                   child: SizedBox(
                                     height: screenHeight * .065,
                                     width: screenWidth * .65,
-                                    child: TextField(
-                                      scrollPhysics:
-                                          const BouncingScrollPhysics(),
-                                      cursorColor: Constants.iconIn,
-                                      cursorRadius: const Radius.circular(10),
-                                      style: const TextStyle(
-                                        fontFamily: 'Helvetica',
-                                        color: Constants.iconAc,
-                                        fontSize: 16,
-                                      ),
-                                      textAlign: TextAlign.start,
-                                      decoration: InputDecoration(
-                                        hintText: "Discover new event",
-                                        hintStyle: TextStyle(
-                                          fontFamily: 'Helvetica',
-                                          color: Constants.iconIn,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w100,
+                                    child: TypeAheadField(
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                        cursorColor: Constants.iconIn,
+                                        cursorRadius: const Radius.circular(10),
+                                        textCapitalization:
+                                            TextCapitalization.sentences,
+                                        // style: const TextStyle(
+                                        //   fontFamily: 'Helvetica',
+                                        //   color: Constants.iconAc,
+                                        //   fontSize: 16,
+                                        // ),
+                                        decoration: InputDecoration(
+                                          hintText: "Discover new event",
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Helvetica',
+                                            color: Constants.iconIn,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                          hoverColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          border: InputBorder.none,
+                                          contentPadding:
+                                              const EdgeInsets.all(0),
                                         ),
-                                        hoverColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        border: InputBorder.none,
-                                        contentPadding: const EdgeInsets.all(0),
                                       ),
+                                      itemBuilder:
+                                          (BuildContext context, suggestion) {
+                                        return ListTile(
+                                          onTap: () {
+                                            for (var element in all!) {
+                                              if (element['title'] ==
+                                                  suggestion.toString()) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            EventDetails(
+                                                                element)));
+                                              }
+                                            }
+                                          },
+                                          leading: Icon(
+                                            CupertinoIcons.location,
+                                            color: Constants.color2
+                                                .withOpacity(.40),
+                                          ),
+                                          title: Text(
+                                            suggestion
+                                                .toString()
+                                                .replaceAll("%l%", "")
+                                                .replaceAll("%e%", ""),
+                                            style: TextStyle(
+                                                color: Constants.color2
+                                                    .withOpacity(.40)),
+                                          ),
+                                        );
+                                      },
+                                      suggestionsCallback:
+                                          (String pattern) async {
+                                        return _getSuggestions(pattern);
+                                      },
+                                      hideOnError: true,
+                                      hideOnEmpty: true,
+                                      hideOnLoading: true,
+                                      hideSuggestionsOnKeyboardHide: true,
+                                      onSuggestionSelected:
+                                          (String suggestion) {},
                                     ),
                                   ),
                                 ),
