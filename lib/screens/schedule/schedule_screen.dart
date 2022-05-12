@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
-import 'package:hestia22/screens/schedule/custompage_route.dart';
 import 'package:hestia22/screens/schedule/data.dart';
 import 'package:hestia22/screens/schedule/date_info.dart';
 import 'package:hestia22/screens/schedule/dates/first.dart';
@@ -79,8 +78,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: dateItems
-                            .map((currentMenuInfo) =>
-                                buildDateButton(currentMenuInfo))
+                            .map((currentDateInfo) =>
+                                buildDateButton(currentDateInfo))
                             .toList(),
                       ),
                     ],
@@ -90,10 +89,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               Container(
                   width: size.width,
                   height: size.width * 0.1,
-                  margin: EdgeInsets.only(top: 250),
+                  margin: const EdgeInsets.only(top: 250),
                   decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(.1),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30)),
                   )),
