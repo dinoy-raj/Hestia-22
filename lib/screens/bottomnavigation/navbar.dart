@@ -9,6 +9,7 @@ import 'package:hestia22/screens/schedule/schedule_screen.dart';
 import 'package:hestia22/screens/spots/spots.dart';
 import 'package:provider/provider.dart';
 import 'package:hestia22/screens/profile/profile.dart';
+import 'package:hestia22/services/django/django.dart' as django;
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -26,9 +27,66 @@ class _NavBarState extends State<NavBar> {
   double opaC = 0;
   bool start = false;
   bool mode = false;
+  List <dynamic>? show0;
+  List <dynamic>? show1;
+  List <dynamic>? show2;
+  List <dynamic>? show3;
+  List <dynamic>? show4;
+  List <dynamic>? show5;
+  List <dynamic>? show6;
 
   @override
   void initState() {
+
+    django.getTrendingEvents().then((value) {
+      if (mounted) {
+        setState(()  {
+          show0 = value;
+        });
+      }
+    });
+
+    django.getProshows().then((value) {
+      if (mounted) {
+        setState(() {
+          show1 = value;
+        });
+      }
+    });
+
+    django.getCulturals().then((value) {
+      if (mounted) {
+        setState(() {
+          show2 = value;
+        });
+      }
+    });
+
+    django.getWorkshops().then((value) {
+      if (mounted) {
+        setState(() {
+          show3 = value;
+        });
+      }
+    });
+
+    django.getTechnicals().then((value) {
+      if (mounted) {
+        setState(() {
+          show4 = value;
+        });
+      }
+    });
+
+    django.getLectures().then((value) {
+      if (mounted) {
+        setState(() {
+          show5 = value;
+        });
+      }
+    });
+
+
     super.initState();
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
@@ -61,7 +119,7 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              const Home(),
+              Home(show0,show1,show2,show3,show4,show5),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),

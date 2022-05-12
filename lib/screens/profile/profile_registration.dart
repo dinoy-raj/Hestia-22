@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:hestia22/providers/profile_provider.dart';
-
 import '../../main.dart';
 
 class ProfileRegistration extends StatelessWidget {
@@ -28,32 +26,34 @@ class ProfileRegistration extends StatelessWidget {
         create: (context) => ProfileProvider(),
         child: Builder(builder: (context) {
           return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  if (controller.page!.toInt() <= 0) {
-                    Navigator.pop(context);
-                  }
-                  prevPage();
-                  context.read<ProfileProvider>().page =
-                      controller.page!.toInt() - 1;
-                },
-              ),
-              title: Text(
-                  'Step ${context.watch<ProfileProvider>().page + 1} of 3'),
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-            ),
             backgroundColor: Constants.sc,
-            body: PageView(
+            body: Column(
               children: [
-                accountInfo(context),
-                personalDetails(context),
-                collegeDetails(context),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Step ${context.watch<ProfileProvider>().page + 1} of 2',
+                  style: const TextStyle(
+                    color: Constants.color2,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      accountInfo(context),
+                      collegeDetails(context),
+                    ],
+                    controller: controller,
+                    // physics: const NeverScrollableScrollPhysics(),
+                  ),
+                ),
               ],
-              controller: controller,
-              // physics: const NeverScrollableScrollPhysics(),
             ),
           );
         }),
@@ -84,17 +84,9 @@ class ProfileRegistration extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          // Text(
-          //   'So that we can contact you.',
-          //   style: TextStyle(
-          //     fontFamily: 'Helvetica',
-          //     fontWeight: FontWeight.normal,
-          //     fontSize: 20,
-          //   ),
-          // ),
           const Spacer(),
           _TextField(
-            hintText: 'college',
+            hintText: 'College',
             initialValue: context.read<ProfileProvider>().profile.college,
             errorText: context.watch<ProfileProvider>().collegeError,
             valueChanged: (val) =>
@@ -104,7 +96,7 @@ class ProfileRegistration extends StatelessWidget {
             height: 20,
           ),
           _TextField(
-            hintText: 'department',
+            hintText: 'Department',
             initialValue: context.read<ProfileProvider>().profile.department,
             errorText: context.watch<ProfileProvider>().departmentError,
             valueChanged: (val) =>
@@ -115,74 +107,8 @@ class ProfileRegistration extends StatelessWidget {
           ),
           ContinueButton(
             onPressed: () {
-              if (context.read<ProfileProvider>().validateStep3()) {
-                context.read<ProfileProvider>().post();
-              }
-            },
-          ),
-          const Spacer(),
-          const Spacer(),
-        ],
-      ),
-    );
-  }
-
-  personalDetails(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          const Text(
-            'PERSONAL DETAILS',
-            style: TextStyle(
-              color: Constants.color2,
-              fontFamily: 'Helvetica',
-              fontWeight: FontWeight.w700,
-              fontSize: 30,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          // Text(
-          //   'So that you connect with people easier.',
-          //   style: TextStyle(
-          //     fontFamily: 'Helvetica',
-          //     fontWeight: FontWeight.normal,
-          //     fontSize: 20,
-          //   ),
-          // ),
-          const Spacer(),
-          _TextField(
-            hintText: 'full name',
-            initialValue: context.read<ProfileProvider>().profile.name,
-            errorText: context.watch<ProfileProvider>().nameError,
-            valueChanged: (val) =>
-                context.read<ProfileProvider>().setName('$val'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _TextField(
-            initialValue: context.read<ProfileProvider>().profile.address,
-            errorText: context.watch<ProfileProvider>().addressError,
-            hintText: 'address',
-            valueChanged: (val) =>
-                context.read<ProfileProvider>().setAddress('$val'),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          ContinueButton(
-            onPressed: () {
               if (context.read<ProfileProvider>().validateStep2()) {
-                context.read<ProfileProvider>().page =
-                    controller.page!.toInt() + 1;
-                nextPage();
+                context.read<ProfileProvider>().post();
               }
             },
           ),
@@ -214,19 +140,11 @@ class ProfileRegistration extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          // Text(
-          //   'So that we know how to call you.',
-          //   style: TextStyle(
-          //     fontFamily: 'Helvetica',
-          //     fontWeight: FontWeight.normal,
-          //     fontSize: 20,
-          //   ),
-          // ),
           const Spacer(),
           _TextField(
-            initialValue: context.read<ProfileProvider>().profile.username,
-            hintText: 'username',
-            errorText: context.watch<ProfileProvider>().userNameError,
+            initialValue: context.read<ProfileProvider>().profile.name,
+            hintText: 'Full name',
+            errorText: context.watch<ProfileProvider>().nameError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setUsername('$val'),
           ),
@@ -234,9 +152,10 @@ class ProfileRegistration extends StatelessWidget {
             height: 20,
           ),
           _TextField(
-            initialValue: context.read<ProfileProvider>().profile.email,
-            hintText: 'email',
-            errorText: context.watch<ProfileProvider>().emailError,
+            initialValue: context.read<ProfileProvider>().profile.phone,
+            hintText: 'Phone number',
+            keyboard: TextInputType.phone,
+            errorText: context.watch<ProfileProvider>().phoneError,
             valueChanged: (val) =>
                 context.read<ProfileProvider>().setEmail('$val'),
           ),
@@ -266,12 +185,14 @@ class _TextField extends StatefulWidget {
   final Function(String?) valueChanged;
   final String? errorText;
   final String? initialValue;
+  final TextInputType? keyboard;
   const _TextField({
     Key? key,
     required this.hintText,
     required this.valueChanged,
     this.errorText,
     this.initialValue,
+    this.keyboard,
   }) : super(key: key);
 
   @override
@@ -310,6 +231,8 @@ class _TextFieldState extends State<_TextField> {
           color: Constants.iconAc,
           fontSize: 20,
         ),
+        textCapitalization: TextCapitalization.words,
+        keyboardType: widget.keyboard,
         decoration: InputDecoration(
           errorText: widget.errorText,
           hintText: 'type here',

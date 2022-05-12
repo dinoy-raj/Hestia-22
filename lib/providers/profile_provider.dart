@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:hestia22/main.dart';
 
 class ProfileProvider with ChangeNotifier {
   Profile profile = Profile();
@@ -6,11 +7,8 @@ class ProfileProvider with ChangeNotifier {
   int _page = 0;
 
   void setUsername(String username) =>
-      profile = profile.copyWith(username: username);
-  void setEmail(String email) => profile = profile.copyWith(email: email);
-  void setName(String name) => profile = profile.copyWith(name: name);
-  void setAddress(String address) =>
-      profile = profile.copyWith(address: address);
+      profile = profile.copyWith(name: username);
+  void setEmail(String email) => profile = profile.copyWith(phone: email);
   void setCollege(String college) =>
       profile = profile.copyWith(college: college);
   void setDepartment(String department) =>
@@ -23,64 +21,46 @@ class ProfileProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  String? userNameError;
-  String? emailError;
   String? nameError;
-  String? addressError;
+  String? phoneError;
   String? collegeError;
   String? departmentError;
 
   bool validateStep1() {
-    if (profile.username == null || profile.username!.isEmpty) {
-      userNameError = 'username can not be empty';
-      notifyListeners();
-      return false;
-    } else {
-      userNameError = null;
-      notifyListeners();
-    }
-    if (profile.email == null || profile.email!.isEmpty) {
-      emailError = 'email can not be empty';
-      notifyListeners();
-      return false;
-    } else {
-      bool emailValid = RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(profile.email!);
-      if (!emailValid) {
-        emailError = 'invalid email fomat';
-        notifyListeners();
-        return false;
-      }
-      emailError = null;
-      notifyListeners();
-    }
-    return true;
-  }
-
-  bool validateStep2() {
     if (profile.name == null || profile.name!.isEmpty) {
-      nameError = 'name can not be empty';
+      nameError = 'Full name can not be empty';
       notifyListeners();
       return false;
     } else {
       nameError = null;
       notifyListeners();
     }
-    if (profile.address == null || profile.address!.isEmpty) {
-      addressError = 'address can not be empty';
+    if (profile.phone == null || profile.phone!.isEmpty) {
+      phoneError = 'Phone number cannot be empty';
       notifyListeners();
       return false;
-    } else {
-      addressError = null;
+    } else if (profile.phone!.length != 10) {
+      phoneError = 'Invalid phone number (Do not add 0 or +91)';
+      notifyListeners();
+      return false;
+    }
+    {
+      bool emailValid = RegExp(r"^[0-9]").hasMatch(profile.phone!);
+      if (!emailValid) {
+        phoneError = 'Invalid phone number';
+        notifyListeners();
+        return false;
+      }
+      phoneError = null;
       notifyListeners();
     }
+    profile.phone = "+91" + profile.phone!;
     return true;
   }
 
-  bool validateStep3() {
+  bool validateStep2() {
     if (profile.college == null || profile.college!.isEmpty) {
-      collegeError = 'college can not be empty';
+      collegeError = 'College cannot be empty';
       notifyListeners();
       return false;
     } else {
@@ -88,7 +68,7 @@ class ProfileProvider with ChangeNotifier {
       notifyListeners();
     }
     if (profile.department == null || profile.department!.isEmpty) {
-      departmentError = 'department can not be empty';
+      departmentError = 'Department cannot be empty';
       notifyListeners();
       return false;
     } else {
@@ -98,41 +78,34 @@ class ProfileProvider with ChangeNotifier {
     return true;
   }
 
-  void post() {
-    print(profile.toString());
+  void post() async {
+    await auth.updateProfile(
+        profile.name!, profile.phone!, profile.college!, profile.department!);
   }
 }
 
 class Profile {
-  String? username;
-  String? email;
   String? name;
-  String? address;
+  String? phone;
   String? college;
   String? department;
 
   Profile({
-    this.username,
-    this.email,
     this.name,
-    this.address,
+    this.phone,
     this.college,
     this.department,
   });
 
   Profile copyWith({
-    String? username,
-    String? email,
     String? name,
-    String? address,
+    String? phone,
     String? college,
     String? department,
   }) {
     return Profile(
-      username: username ?? this.username,
-      email: email ?? this.email,
       name: name ?? this.name,
-      address: address ?? this.address,
+      phone: phone ?? this.phone,
       college: college ?? this.college,
       department: department ?? this.department,
     );
@@ -140,6 +113,6 @@ class Profile {
 
   @override
   String toString() {
-    return 'Profile(username: $username, email: $email, name: $name, address: $address, college: $college, department: $department)';
+    return 'Profile(name: $name, email: $phone,  college: $college, department: $department)';
   }
 }
