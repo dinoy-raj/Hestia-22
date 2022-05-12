@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
             } else if (auth.isCompleted == null || !auth.isCompleted!) {
               return ProfileRegistration();
             } else {
-              return const LoginPage();
+              return const MyHomePage();
             }
           }),
     );
@@ -105,7 +105,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const EventDetails(),
+                      builder: (context) => EventDetails({
+                        'image':
+                        'https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/dyn.jpeg',
+                        'name': 'SPOTLIGHT',
+                        'description':
+                        "Lights, camera, ACTION!Are you ready to be in the limelight and instigate the true actor in you? Do you think you have the power to influence the crowd, and weave magic on screen? If yes, wait not! Act your heart out as the spotlight shines bright and all eyes veer to you.Hestia'22 presents SPOTLIGHT, to unravel the performer in you. Enter the showbiz with your prowess in fine blending emotions and art. Unleash your flair by revitalising characters on screen.",
+                        'date': "2021-05-12 23:59",
+                        'registrationfee': "₹150",
+                        'prize': "₹70000",
+                        'coordinator1': "Ajay",
+                        "phone_no_cord1": "8301916909",
+                        'coordinator2': "Jyothi",
+                        "phone_no_cord2": "9447480943",
+                        'location': "APJ Park"
+                      }),
                     ),
                   );
                 },
@@ -172,6 +186,7 @@ class Constants {
   static const pureBlack = Color(0x00000000);
   static const imageColor = Color(0x0031164a);
   static const detailsColor = Color(0x005a2d85);
+  static const textColor=Colors.grey;
   static var pureWhite = const Color(0xFFFFFFFF);
   static var buttonPink = Colors.pink[700];
   static const phoneIcon = Color.fromRGBO(7, 184, 13, 50);

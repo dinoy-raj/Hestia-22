@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
@@ -14,7 +15,16 @@ import 'package:hestia22/screens/home/tab.dart';
 import 'notification.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  List<dynamic>? event0;
+  List<dynamic>? event1;
+  List<dynamic>? event2;
+  List<dynamic>? event3;
+  List<dynamic>? event4;
+  List<dynamic>? event5;
+  Home(this.event0, this.event1, this.event2, this.event3, this.event4,
+      this.event5,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<Home> createState() => HomeState();
@@ -40,55 +50,23 @@ class HomeState extends State<Home> {
     "Lectures",
   ];
 
-  //Proshow list data
-  List<dynamic>? show;
+  late Map eDetails;
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
 
-  //workshop list data
-
-  List<Map> workshop = [
-    {
-      'name': '',
-      'date': '',
-      'remain': '',
-      'price': '',
-    }
-  ];
-
-  List Sort2 = ["name", "price", "date"];
-
-  //culturals list data
-
-  List<Map> cultural = [
-    {
-      'name': '',
-      'short': '',
-      'date': '',
-      'prize': '',
-    }
-  ];
-  List Sort3 = [];
-
   PageController pageControl =
       PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
+  List<dynamic>? show;
 
   @override
   void initState() {
     super.initState();
-
-    django.getTrendingEvents().then((value) {
-      if (mounted) {
-        setState(() {
-          show = value;
-        });
-      }
-    });
     notPressed = false;
     start = false;
-    // catSelect = 10;
+    catSelect = 10;
+    show = widget.event0;
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -110,7 +88,6 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        log((show![0].toString()));
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -412,54 +389,23 @@ class HomeState extends State<Home> {
                                             onTap: () {
                                               setState(() {
                                                 if (index == 0) {
-                                                  django
-                                                      .getTrendingEvents()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event0;
                                                 } else if (index == 1) {
-                                                  django
-                                                      .getProshows()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event1;
                                                 } else if (index == 2) {
-                                                  django
-                                                      .getCulturals()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event2;
                                                 } else if (index == 3) {
-                                                  django
-                                                      .getWorkshops()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event3;
                                                 } else if (index == 4) {
-                                                  django
-                                                      .getTechnicals()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event4;
                                                 } else if (index == 5) {
-                                                  django
-                                                      .getLectures()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event5;
                                                 }
+                                                // if (show!.isEmpty) {
+                                                //   pageControl.jumpTo(0);
+                                                // }
+
+                                                currentPage = 0;
                                                 catSelect = index;
                                               });
                                             },
@@ -592,63 +538,101 @@ class HomeState extends State<Home> {
                                               // curve: Curves.fastLinearToSlowEaseIn,
                                               opacity:
                                                   index == currentPage ? 1 : .2,
-                                              child: AnimatedContainer(
-                                                duration:
-                                                    const Duration(seconds: 1),
-                                                curve: Curves
-                                                    .fastLinearToSlowEaseIn,
-                                                height: index == currentPage
-                                                    ? screenHeight * .46
-                                                    : screenHeight * .41,
-                                                width: index == currentPage
-                                                    ? screenWidth * .9
-                                                    : screenWidth * .8,
-                                                decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: index ==
-                                                                currentPage
-                                                            ? Constants.iconAc
-                                                                .withOpacity(
-                                                                    .05)
-                                                            : Colors
-                                                                .transparent,
-                                                        spreadRadius: 2,
-                                                        blurRadius: 20,
-                                                      )
-                                                    ],
-                                                    image: DecorationImage(
-                                                      fit: index == currentPage
-                                                          ? BoxFit.fill
-                                                          : BoxFit.cover,
-                                                      image: show?[index]
-                                                                  ['image'] ==
-                                                              null
-                                                          ? const NetworkImage(
-                                                              "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                                              scale: 1.0)
-                                                          : NetworkImage(
-                                                              show?[index]
-                                                                  ['image'],
-                                                            ),
-                                                    ),
-                                                    gradient:
-                                                        const LinearGradient(
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end: Alignment.topCenter,
-                                                      colors: [
-                                                        Colors.black26,
-                                                        Colors.transparent,
-                                                        Colors.transparent
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  eDetails = catSelect == 0
+                                                      ? await django
+                                                          .getEventDetails(
+                                                              show![index]
+                                                                      ['event']
+                                                                  ['slug'])
+                                                      : await django
+                                                          .getEventDetails(
+                                                              show![index]
+                                                                  ['slug']);
+
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EventDetails(
+                                                                  eDetails)));
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves
+                                                      .fastLinearToSlowEaseIn,
+                                                  height: index == currentPage
+                                                      ? screenHeight * .46
+                                                      : screenHeight * .41,
+                                                  width: index == currentPage
+                                                      ? screenWidth * .9
+                                                      : screenWidth * .8,
+                                                  decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: index ==
+                                                                  currentPage
+                                                              ? Constants.iconAc
+                                                                  .withOpacity(
+                                                                      .05)
+                                                              : Colors
+                                                                  .transparent,
+                                                          spreadRadius: 2,
+                                                          blurRadius: 20,
+                                                        )
                                                       ],
-                                                    ),
-                                                    border: Border.all(
-                                                        color: Constants.sc),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                    color: Colors.grey),
+                                                      image: DecorationImage(
+                                                        fit:
+                                                            index == currentPage
+                                                                ? BoxFit.fill
+                                                                : BoxFit.cover,
+                                                        image: catSelect == 0
+                                                            ? (show?[index][
+                                                                        'event'] ==
+                                                                    null
+                                                                ? const NetworkImage(
+                                                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                                    scale: 1.0)
+                                                                : NetworkImage(
+                                                                    show?[index]
+                                                                            [
+                                                                            'event']
+                                                                        [
+                                                                        'image'],
+                                                                  ))
+                                                            : (show?[index][
+                                                                        'image'] ==
+                                                                    null
+                                                                ? const NetworkImage(
+                                                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                                    scale: 1.0)
+                                                                : NetworkImage(
+                                                                    show?[index]
+                                                                        [
+                                                                        'image'],
+                                                                  )),
+                                                      ),
+                                                      gradient:
+                                                          const LinearGradient(
+                                                        begin: Alignment
+                                                            .bottomCenter,
+                                                        end:
+                                                            Alignment.topCenter,
+                                                        colors: [
+                                                          Colors.black26,
+                                                          Colors.transparent,
+                                                          Colors.transparent
+                                                        ],
+                                                      ),
+                                                      border: Border.all(
+                                                          color: Constants.sc),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      color: Colors.grey),
+                                                ),
                                               ),
                                             ),
                                           ),
