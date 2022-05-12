@@ -18,10 +18,10 @@ class _EventDetailsState extends State<EventDetails> {
   double letterspace = 0.8;
   double contentspace = 1.2;
   bool modeLandscape = false;
-  String imageUrl="";
+  String imageUrl = "";
   Map eventData = {
     'image':
-        'https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/dyn.jpeg',
+        'https://ieeesbtkmce-asets.s3.amazonaws.com/media/events/posters/dyn.jpeg',
     'name': 'SPOTLIGHT',
     'description':
         "Lights, camera, ACTION!Are you ready to be in the limelight and instigate the true actor in you? Do you think you have the power to influence the crowd, and weave magic on screen? If yes, wait not! Act your heart out as the spotlight shines bright and all eyes veer to you.Hestia'22 presents SPOTLIGHT, to unravel the performer in you. Enter the showbiz with your prowess in fine blending emotions and art. Unleash your flair by revitalising characters on screen.",
@@ -37,7 +37,7 @@ class _EventDetailsState extends State<EventDetails> {
   Duration? duration;
   bool isReadmore = false;
   int lines = 4;
-  bool start=false;
+  bool start = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -49,10 +49,10 @@ class _EventDetailsState extends State<EventDetails> {
         seconds: endDate.second - DateTime.now().second);
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
-        start=true;
+        start = true;
       });
     });
-    imageUrl=eventData['image'];
+    imageUrl = eventData['image'];
     super.initState();
   }
 
@@ -94,7 +94,171 @@ class _EventDetailsState extends State<EventDetails> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-
+  Widget appbar(double height, double width) {
+    return SliverAppBar(
+      leading: AnimatedPadding(
+        padding: start
+            ? const EdgeInsets.only(
+          top: 10.0,
+          bottom: 10.0,
+          left: 10.0,
+          right: 10.0,
+        )
+            : const EdgeInsets.all(8.0),
+        duration: const Duration(milliseconds: 500),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                gradient: LinearGradient(
+                  colors: [
+                    Constants.bg.withOpacity(.3),
+                    Constants.bg.withOpacity(.6),
+                  ],
+                  begin: AlignmentDirectional.topStart,
+                  end: AlignmentDirectional.bottomEnd,
+                ),
+              ),
+              child: BackButton(
+                color: Constants.color2.withOpacity(.5),
+              ),
+            ),
+          ),
+        ),
+      ),
+      floating: false,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30))),
+      expandedHeight: height * .5,
+      backgroundColor: Constants.pureBlack,
+      flexibleSpace: FlexibleSpaceBar(
+        background: AnimatedOpacity(
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.easeInOutCubicEmphasized,
+          opacity: start ? 1 : 0,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.easeOutQuad,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30)),
+                image: DecorationImage(
+                    image: NetworkImage(imageUrl),
+                    onError: (Object exception, StackTrace? stackTrace) {
+                      setState(() {
+                        imageUrl =
+                        "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
+                      });
+                    },
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.8), BlendMode.dstIn),
+                    fit: BoxFit.cover)),
+          ),
+        ),
+        title: duration!.inSeconds <= 0
+            ? Text("")
+            : AnimatedOpacity(
+          duration: const Duration(seconds: 2),
+          curve: Curves.decelerate,
+          opacity: start ? 1 : 0,
+          child: Container(
+            padding:
+            EdgeInsets.only(left: width * 0.1, right: width * 0.1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Container(
+                      width: width * 0.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        gradient: LinearGradient(
+                          colors: [
+                            Constants.bg.withOpacity(.8),
+                            Constants.bg.withOpacity(.8),
+                          ],
+                          begin: AlignmentDirectional.topStart,
+                          end: AlignmentDirectional.bottomEnd,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: width * 0.025,
+                            right: width * 0.025,
+                            top: height * 0.015,
+                            bottom: height * 0.006),
+                        child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Day   Hr   Min   Sec",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: contentspace,
+                                  color: Constants.pureWhite
+                                      .withOpacity(0.7),
+                                  fontSize: 14,
+                                  overflow: TextOverflow.clip,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: fontfamily),
+                            ),
+                            SlideCountdownSeparated(
+                              width: width * .05,
+                              separator: " : ",
+                              separatorStyle: const TextStyle(
+                                  decoration: TextDecoration.none,
+                                  letterSpacing: 2,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.clip,
+                                  decorationStyle:
+                                  TextDecorationStyle.double),
+                              showZeroValue: true,
+                              textStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w200,
+                                decoration: TextDecoration.none,
+                                decorationColor: Constants.transaparent,
+                                overflow: TextOverflow.clip,
+                                color:
+                                Constants.pureWhite.withOpacity(0.9),
+                                fontFamily: fontfamily,
+                              ),
+                              decoration: const BoxDecoration(
+                                  color: Constants.transaparent),
+                              slideDirection: SlideDirection.down,
+                              duration: duration == null
+                                  ? const Duration(
+                                  seconds: 0,
+                                  minutes: 0,
+                                  hours: 0,
+                                  days: 0)
+                                  : duration!,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        centerTitle: true,
+      ),
+    );
+  }
   Widget eventDetails(double height, double width) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -112,17 +276,17 @@ class _EventDetailsState extends State<EventDetails> {
                   opacity: start ? 1 : 0.3,
                   child: Text(
                     eventData['name'],
-                    overflow:TextOverflow.ellipsis,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: fontfamily,
                       letterSpacing: letterspace,
                       fontSize: 26,
-                      color: Constants.pureWhite.withOpacity(0.8),
+                      color: Constants.pureWhite.withOpacity(1),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                width: width*0.5,
+                width: width * 0.5,
               ),
               AnimatedOpacity(
                 duration: const Duration(seconds: 1),
@@ -149,7 +313,7 @@ class _EventDetailsState extends State<EventDetails> {
                         style: TextStyle(
                             letterSpacing: contentspace,
                             overflow: TextOverflow.clip,
-                            color: Constants.lightWhite,
+                            color: Constants.textColor.shade100,
                             fontFamily: fontfamily,
                             fontSize: 16),
                       ),
@@ -199,8 +363,9 @@ class _EventDetailsState extends State<EventDetails> {
         AnimatedPadding(
           duration: const Duration(seconds: 1),
           curve: Curves.decelerate,
-          padding: start ? EdgeInsets.fromLTRB(
-              width * 0.06, 0, 0, 0) :const EdgeInsets.only(left: 0),
+          padding: start
+              ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
+              : const EdgeInsets.only(left: 0),
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -208,10 +373,9 @@ class _EventDetailsState extends State<EventDetails> {
                 Icon(
                   Icons.schedule,
                   color: Constants.lightWhite.withOpacity(0.4),
-
                 ),
                 Text(
-                  "   " + eventData['date']+"     ",
+                  "   " + eventData['date'] + "     ",
                   overflow: TextOverflow.clip,
                   style: TextStyle(
                     letterSpacing: letterspace,
@@ -219,7 +383,7 @@ class _EventDetailsState extends State<EventDetails> {
                     fontSize: 16,
                     fontStyle: FontStyle.normal,
                     fontFamily: fontfamily,
-                    color: Constants.textColor,
+                    color: Constants.textColor.shade50,
                     overflow: TextOverflow.clip,
                     fontWeight: FontWeight.normal,
                   ),
@@ -261,8 +425,9 @@ class _EventDetailsState extends State<EventDetails> {
         AnimatedPadding(
           duration: const Duration(seconds: 1),
           curve: Curves.decelerate,
-          padding: start ? EdgeInsets.fromLTRB(
-              width * 0.06, 0, 0, 0) :const EdgeInsets.only(left: 0),
+          padding: start
+              ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
+              : const EdgeInsets.only(left: 0),
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -280,7 +445,7 @@ class _EventDetailsState extends State<EventDetails> {
                     fontSize: 16,
                     fontFamily: fontfamily,
                     overflow: TextOverflow.clip,
-                    color: Constants.textColor,
+                    color: Constants.textColor.shade50,
                     fontWeight: FontWeight.normal,
                   ),
                 )
@@ -314,7 +479,83 @@ class _EventDetailsState extends State<EventDetails> {
       ],
     );
   }
-
+  Widget aboutEvent(double height, double width) {
+    final lines = isReadmore ? null : 4;
+    return AnimatedPadding(
+      duration: const Duration(seconds: 1),
+      curve: Curves.decelerate,
+      padding: start
+          ? EdgeInsets.fromLTRB(width * 0.06, 0, width * 0.06, 0)
+          : const EdgeInsets.only(left: 0),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(""),
+            Text(
+              'About Event',
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                fontSize: 18,
+                letterSpacing: 0.8,
+                fontFamily: fontfamily,
+                overflow: TextOverflow.clip,
+                color: Constants.pureWhite.withOpacity(0.75),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(""),
+            Text(
+              eventData['description'],
+              overflow:
+              isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
+              maxLines: lines,
+              style: const TextStyle(
+                overflow: TextOverflow.clip,
+                fontSize: 16,
+                height: 1.5,
+                fontFamily: fontfamily,
+                color: Constants.textColor,
+                inherit: true,
+                letterSpacing: 0.9,
+                wordSpacing: 1.2,
+              ),
+            ),
+            MaterialButton(
+              padding: const EdgeInsets.all(0),
+              animationDuration: const Duration(seconds: 0),
+              onPressed: () {
+                setState(() {
+                  // toggle the bool variable true or false
+                  isReadmore = !isReadmore;
+                });
+              },
+              child: Row(
+                children: [
+                  Text(
+                    (isReadmore ? 'Read Less' : 'Read More'),
+                    overflow: TextOverflow.clip,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      overflow: TextOverflow.clip,
+                      fontSize: 14,
+                      fontFamily: fontfamily,
+                      color: Constants.lightWhite.withOpacity(0.3),
+                      inherit: true,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  const Text(""),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   Widget contactDetails(double height, double width) {
     return Container(
       decoration: BoxDecoration(
@@ -399,258 +640,21 @@ class _EventDetailsState extends State<EventDetails> {
       ),
     );
   }
-
-  Widget aboutEvent(double height, double width) {
-    final lines = isReadmore ? null : 4;
-    return AnimatedPadding(
-      duration: const Duration(seconds: 1),
-      curve: Curves.decelerate,
-      padding: start ? EdgeInsets.fromLTRB(
-          width * 0.06, 0, width * 0.06, 0) :const EdgeInsets.only(left: 0),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(""),
-            Text(
-              'About Event',
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 18,
-                letterSpacing: 0.8,
-                fontFamily: fontfamily,
-                overflow: TextOverflow.clip,
-                color: Constants.pureWhite.withOpacity(0.75),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(""),
-            Text(
-              eventData['description'],
-              overflow: isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
-              maxLines: lines,
-              style: const TextStyle(
-                overflow: TextOverflow.clip,
-                fontSize: 16,
-                height: 1.5,
-                fontFamily: fontfamily,
-                color: Constants.textColor,
-                inherit: true,
-                letterSpacing: 0.9,
-                wordSpacing: 1.2,
-              ),
-            ),
-            MaterialButton(
-              padding:const EdgeInsets.all(0),
-              animationDuration:const Duration(seconds: 0),
-              onPressed: () {
-                setState(() {
-                  // toggle the bool variable true or false
-                  isReadmore = !isReadmore;
-                });
-              },
-              child: Text(
-                (isReadmore ? 'Read Less' : 'Read More'),
-                overflow: TextOverflow.clip,
-                textDirection: TextDirection.ltr,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  overflow: TextOverflow.clip,
-                  fontSize: 14,
-                  fontFamily: fontfamily,
-                  color: Constants.iconIn,
-                  inherit: true,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget appbar(double height, double width) {
-    return SliverAppBar(
-      leading: AnimatedPadding(
-        padding: start
-            ? const EdgeInsets.only(
-                top: 10.0,
-                bottom: 10.0,
-                left: 10.0,
-                right: 10.0,
-              )
-            : const EdgeInsets.all(8.0),
-        duration: const Duration(milliseconds: 500),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                gradient: LinearGradient(
-                  colors: [
-                    Constants.bg.withOpacity(.3),
-                    Constants.bg.withOpacity(.6),
-                  ],
-                  begin: AlignmentDirectional.topStart,
-                  end: AlignmentDirectional.bottomEnd,
-                ),
-              ),
-              child: BackButton(
-                color: Constants.color2.withOpacity(.5),
-              ),
-            ),
-          ),
-        ),
-      ),
-      floating: false,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30))),
-      expandedHeight: height * .5,
-      backgroundColor: Constants.pureBlack,
-      flexibleSpace: FlexibleSpaceBar(
-        background: AnimatedOpacity(
-          duration: const Duration(milliseconds: 100),
-          curve: Curves.easeInOutCubicEmphasized,
-          opacity: start? 1:0,
-          child: AnimatedContainer(
-            duration:
-            const Duration(milliseconds: 100),
-            curve: Curves.easeOutQuad,
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30)),
-                image: DecorationImage(
-                    image: NetworkImage(imageUrl),
-                    onError: (Object exception, StackTrace? stackTrace) {
-                     setState(() {
-                       imageUrl="https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
-                     });
-                    },
-                    colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.8), BlendMode.dstIn),
-                    fit: BoxFit.cover)),
-          ),
-        ),
-        title: duration!.inSeconds <= 0
-            ? Text("")
-            : AnimatedOpacity(
-          duration: const Duration(seconds: 2),
-          curve: Curves.decelerate,
-          opacity: start ? 1 : 0,
-            child: Container(
-                    padding: EdgeInsets.only(left: width * 0.1, right: width * 0.1),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                            child: Container(
-                              width: width * 0.5,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Constants.bg.withOpacity(.8),
-                                    Constants.bg.withOpacity(.8),
-                                  ],
-                                  begin: AlignmentDirectional.topStart,
-                                  end: AlignmentDirectional.bottomEnd,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: width * 0.025,
-                                    right: width * 0.025,
-                                    top: height * 0.015,
-                                    bottom: height * 0.006),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      "Day   Hr    Min    Sec",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          letterSpacing: contentspace,
-                                          color:
-                                              Constants.pureWhite.withOpacity(0.7),
-                                          fontSize: 14,
-                                          overflow: TextOverflow.clip,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: fontfamily),
-                                    ),
-                                    SlideCountdownSeparated(
-                                      width: width * .05,
-                                      separator: " : ",
-                                      separatorStyle: const TextStyle(
-                                          decoration: TextDecoration.none,
-                                          letterSpacing: 2,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          overflow: TextOverflow.clip,
-                                          decorationStyle:
-                                              TextDecorationStyle.double),
-                                      showZeroValue: true,
-                                      textStyle: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w200,
-                                        decoration: TextDecoration.none,
-                                        decorationColor: Constants.transaparent,
-                                        overflow: TextOverflow.clip,
-                                        color: Constants.pureWhite.withOpacity(0.9),
-                                        fontFamily: fontfamily,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                          color: Constants.transaparent),
-                                      slideDirection: SlideDirection.down,
-                                      duration: duration == null
-                                          ? const Duration(
-                                              seconds: 0,
-                                              minutes: 0,
-                                              hours: 0,
-                                              days: 0)
-                                          : duration!,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-            ),
-        centerTitle: true,
-      ),
-    );
-  }
-
   Widget floatButton(double height, double width) {
     return MaterialButton(
-      elevation: 4,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
       padding: EdgeInsets.fromLTRB(
           width * .06, width * .03, width * .06, width * .03),
       onPressed: () {},
-      color: Constants.iconAc,
+      color: Constants.iconAc.withOpacity(0.5),
       child: Text(
         "Book Now",
         style: TextStyle(
             letterSpacing: contentspace,
             overflow: TextOverflow.clip,
-            color: Constants.lightWhite,
+            color: Constants.pureWhite,
             fontFamily: fontfamily,
             fontSize: 16),
       ),

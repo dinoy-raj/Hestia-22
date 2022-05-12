@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
             if (auth.token!.isNotEmpty) {
               return const MyHomePage();
             } else {
-              return const LoginPage();
+              return const MyHomePage();
             }
           }),
     );
