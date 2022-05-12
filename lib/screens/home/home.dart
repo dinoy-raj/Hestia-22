@@ -15,7 +15,16 @@ import 'package:hestia22/screens/home/tab.dart';
 import 'notification.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  List<dynamic>? event0;
+  List<dynamic>? event1;
+  List<dynamic>? event2;
+  List<dynamic>? event3;
+  List<dynamic>? event4;
+  List<dynamic>? event5;
+  Home(this.event0, this.event1, this.event2, this.event3, this.event4,
+      this.event5,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<Home> createState() => HomeState();
@@ -41,56 +50,23 @@ class HomeState extends State<Home> {
     "Lectures",
   ];
 
-  //Proshow list data
-  List<dynamic>? show;
   late Map eDetails;
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
 
-  //workshop list data
-
-  List<Map> workshop = [
-    {
-      'name': '',
-      'date': '',
-      'remain': '',
-      'price': '',
-    }
-  ];
-
-  List Sort2 = ["name", "price", "date"];
-
-  //culturals list data
-
-  List<Map> cultural = [
-    {
-      'name': '',
-      'short': '',
-      'date': '',
-      'prize': '',
-    }
-  ];
-  List Sort3 = [];
-
   PageController pageControl =
       PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
+  List<dynamic>? show;
 
   @override
   void initState() {
     super.initState();
-
-    django.getTrendingEvents().then((value) {
-      if (mounted) {
-        setState(() {
-          show = value;
-        });
-      }
-    });
     notPressed = false;
     start = false;
-    // catSelect = 10;
+    catSelect = 10;
+    show = widget.event0;
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -413,54 +389,23 @@ class HomeState extends State<Home> {
                                             onTap: () {
                                               setState(() {
                                                 if (index == 0) {
-                                                  django
-                                                      .getTrendingEvents()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event0;
                                                 } else if (index == 1) {
-                                                  django
-                                                      .getProshows()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event1;
                                                 } else if (index == 2) {
-                                                  django
-                                                      .getCulturals()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event2;
                                                 } else if (index == 3) {
-                                                  django
-                                                      .getWorkshops()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event3;
                                                 } else if (index == 4) {
-                                                  django
-                                                      .getTechnicals()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event4;
                                                 } else if (index == 5) {
-                                                  django
-                                                      .getLectures()
-                                                      .then((value) {
-                                                    setState(() {
-                                                      show = value;
-                                                    });
-                                                  });
+                                                  show = widget.event5;
                                                 }
+                                                // if (show!.isEmpty) {
+                                                //   pageControl.jumpTo(0);
+                                                // }
+
+                                                currentPage = 0;
                                                 catSelect = index;
                                               });
                                             },
