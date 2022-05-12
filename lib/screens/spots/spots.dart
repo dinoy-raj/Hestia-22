@@ -5,10 +5,10 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/cards.dart';
 import 'package:hestia22/screens/spots/spot_page.dart';
-import 'package:hestia22/services/django/django.dart' as django;
 
 class Spots extends StatefulWidget {
-  const Spots({Key? key}) : super(key: key);
+  const Spots({Key? key, required this.data}) : super(key: key);
+  final List<dynamic>? data;
 
   @override
   State<StatefulWidget> createState() {
@@ -18,13 +18,12 @@ class Spots extends StatefulWidget {
 
 class SpotsState extends State<Spots> {
   bool _animate = true;
-  List<dynamic>? data;
 
   List<String> _getSuggestions(String pattern) {
     List<String> list = [];
 
-    if (data != null) {
-      for (var element in data!) {
+    if (widget.data != null) {
+      for (var element in widget.data!) {
         if (list.length < 4) {
           if (element['title'].toLowerCase().contains(pattern.toLowerCase())) {
             list.add("%l%" + element['title']);
@@ -61,13 +60,6 @@ class SpotsState extends State<Spots> {
       setState(() {
         _animate = false;
       });
-    });
-    django.getSpots().then((value) {
-      if (mounted) {
-        setState(() {
-          data = value;
-        });
-      }
     });
   }
 
@@ -201,7 +193,7 @@ class SpotsState extends State<Spots> {
                       itemBuilder: (context, suggestion) {
                         return ListTile(
                           onTap: () {
-                            for (var element in data!) {
+                            for (var element in widget.data!) {
                               if (element['title'] ==
                                   suggestion.toString().replaceAll("%l%", "")) {
                                 Navigator.push(
@@ -252,10 +244,12 @@ class SpotsState extends State<Spots> {
                 const SizedBox(
                   height: 30,
                 ),
-                data == null
-                    ? const CupertinoActivityIndicator()
+                widget.data == null
+                    ? const SizedBox(
+                        height: 300,
+                        child: Center(child: CupertinoActivityIndicator()))
                     : Cards(
-                        data: data!,
+                        data: widget.data!,
                       ),
                 const SizedBox(
                   height: 30,
