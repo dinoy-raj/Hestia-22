@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/events/events.dart';
 
 class SpotPage extends StatefulWidget {
   const SpotPage({Key? key, required this.data}) : super(key: key);
@@ -212,6 +213,14 @@ class _SpotPageState extends State<SpotPage> {
                               child: Column(
                                 children: [
                                   ListTile(
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetails(widget
+                                                      .data['events'][index])));
+                                    },
                                     title: Text(
                                       widget.data['events'][index]
                                               ['short_title']
