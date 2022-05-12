@@ -1,131 +1,70 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
-import 'package:hestia22/screens/events/events.dart';
+import 'package:hestia22/screens/login/login.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
-import 'package:hestia22/screens/profile/registration_failure.dart';
-import 'package:hestia22/screens/profile/registration_success.dart';
-import 'screens/login/login.dart';
-import 'services/django/django.dart' as django;
+import 'services/django/google_auth.dart';
+
+GoogleAuth auth = GoogleAuth();
 
 void main() async {
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
+  await auth.initLogin();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    auth.addListener(() {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    auth.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hestia22',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.brown,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    // ignore: todo
-    // TODO: Replace with provider once backend is up
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: SizedBox(
-          height: screenHeight,
-          width: screenWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const NavBar()));
-                  },
-                  child: const Text("home")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
-                  },
-                  child: const Text("login")),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EventDetails(),
-                    ),
-                  );
-                },
-                child: const Text("event-details"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileRegistration()));
-                },
-                child: const Text("profile-reg"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegistrationSuccess(),
-                    ),
-                  );
-                },
-                child: const Text("profile-success"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegistrationFailure(),
-                    ),
-                  );
-                },
-                child: const Text("profile-failure"),
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: StreamBuilder(
+          stream: auth.googleSignIn.onCurrentUserChanged,
+          builder: (BuildContext context,
+              AsyncSnapshot<GoogleSignInAccount?> snapshot) {
+            if (auth.token == null || auth.token!.isEmpty) {
+              return const LoginPage();
+            } else {
+              if (auth.isCompleted == null || !auth.isCompleted!) {
+                return ProfileRegistration();
+              } else {
+                return const NavBar();
+              }
+            }
+          }),
     );
   }
 }
 
 class Constants {
-
   //colours for navbar
   static const Color bg = Color.fromRGBO(27, 28, 33, 100);
   static const Color sc = Color.fromRGBO(17, 17, 19, 100);
@@ -141,7 +80,8 @@ class Constants {
   static const pureBlack = Color(0x00000000);
   static const imageColor = Color(0x0031164a);
   static const detailsColor = Color(0x005a2d85);
-  static var pureWhite = Color(0xFFFFFFFF);
+  static const textColor = Colors.grey;
+  static var pureWhite = const Color(0xFFFFFFFF);
   static var buttonPink = Colors.pink[700];
   static const phoneIcon = Color.fromRGBO(7, 184, 13, 50);
   static const gradient1 = Colors.black;
@@ -151,3 +91,5 @@ class Constants {
   static const lightWhite = Colors.white70;
 }
 
+// TODO
+// REMOVE KEY.JKS FROM ANDROID/APP

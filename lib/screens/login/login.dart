@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:hestia22/main.dart' as main;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,70 +19,39 @@ class _LoginPageState extends State<LoginPage> {
       body: SizedBox(
         height: screenHeight,
         width: screenWidth,
-        child: PageView(
+        child: Stack(
           children: [
+            SizedBox(
+              height: screenHeight*1.2,
+              width: screenWidth*1.3,
+              child: Lottie.asset('assets/animations/welcome.json'),
+            ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: screenHeight * 0.6,
-                  child: Lottie.asset(
-                      'assets/animations/75705-welcome-animation.json'),
+                  //color: Color(0xff121212),
+                  decoration: const BoxDecoration(
+                      color: Color(0xff121212),
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                  height: 70,
+                  width: 280,
+
+                  child: Center(
+                    child: RoundedButton(
+                      text: 'Continue with Google',
+                      press: () {
+                        main.auth.login();
+                      },
+                    ),
+                  ),
                 ),
                 Container(
                   //color: Color(0xff121212),
 
-                  height: screenHeight * 0.2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Container(
-                          child: const Text(
-                            'Hello Hestia',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 30, right: 30, top: 10),
-                        child: Container(
-                          child: const Text(
-                            'Hestia is the biggest south indian technocultural festival\nin Kerala India',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  height: screenHeight * 0.1,
                 ),
-                Container(
-                  //color: Color(0xff121212),
-                  decoration: const BoxDecoration(color: Color(0xff121212), borderRadius: BorderRadius.all(Radius.circular(20))),
-                  height: 70,
-                  width: 280,
-                  
-                  child: Center(
-                    child: RoundedButton(
-                      text: 'Continue with Google',
-                      
-                      press: () {},
-                    ),
-                  ),
-                )
               ],
             ),
           ],
@@ -109,31 +79,28 @@ class RoundedButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return TextButton(
       onPressed: press,
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              //color: Colors.blue,
-              child: Lottie.network(
-                'https://assets6.lottiefiles.com/private_files/lf30_3nvqj06a.json',
-                width: 70,
-                height: 80,
-              ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            //color: Colors.blue,
+            child: Lottie.network(
+              'https://assets6.lottiefiles.com/private_files/lf30_3nvqj06a.json',
+              width: 50,
+              height: 80,
             ),
-            Container(
-              //color: Colors.green,
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: textColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                ),
-              ),
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              fontFamily: 'Helvetica',
+              color: textColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

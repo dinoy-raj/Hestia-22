@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/spot_page.dart';
-import 'package:map_launcher/map_launcher.dart';
 
 class Cards extends StatefulWidget {
-  const Cards({Key? key}) : super(key: key);
+  final List<dynamic> data;
+
+  const Cards({Key? key, required this.data}) : super(key: key);
 
   @override
   _CardsState createState() => _CardsState();
@@ -18,50 +19,6 @@ class _CardsState extends State<Cards> {
   bool _animate = true;
   int _currentPage = 0;
   double _scroll = 0;
-  List<Map> data = [
-    {
-      'name': 'APJ Park',
-      'caption': 'A place to rejoice',
-      'image':
-          'https://lh5.googleusercontent.com/p/AF1QipPvmyaURyUViNzksGMeVfIvvwfPDGnT__M5HVzq=w400-h300-k-no',
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-      'coordinates': Coords(8.91529279156957, 76.63208092627158),
-    },
-    {
-      'name': 'Auditorium',
-      'caption': 'Those damn big ceiling fans',
-      'image': 'https://www.frametechsteels.com/admin/pic/tkm.jpg',
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-      'coordinates': Coords(8.913917697612797, 76.63223907846609),
-    },
-    {
-      'name': 'Central Portico',
-      'caption': 'The heart of TKM',
-      'image':
-          'https://fastly.4sqi.net/img/general/600x600/zbqkILofkVpcC8tzgeUeUmHciyBbhFa65jLzdpu2tdo.jpg',
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-      'coordinates': Coords(8.91422034502311, 76.63194505582268),
-    },
-    {
-      'name': 'Central Library',
-      'caption': 'The place for nerds and couples',
-      'image': 'https://www.tkmce.ac.in/images/arch/lib.png',
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-      'coordinates': Coords(8.914290104514944, 76.63293813972732),
-    },
-    {
-      'name': 'College Ground',
-      'caption': 'Where things get fierce',
-      'image': 'https://www.tkmce.ac.in/images/pe/FOOTBALL%20COURT.jpg',
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-      'coordinates': Coords(8.913235656865478, 76.63269614956816),
-    },
-  ];
 
   @override
   void initState() {
@@ -85,13 +42,11 @@ class _CardsState extends State<Cards> {
       padding: _animate
           ? const EdgeInsets.only(
               top: 20,
-              right: 8,
-              left: 8,
             )
           : const EdgeInsets.only(
               top: 20,
             ),
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 800),
       child: SizedBox(
         height: 360,
         child: NotificationListener(
@@ -114,13 +69,12 @@ class _CardsState extends State<Cards> {
                     child: AnimatedPadding(
                       padding: _animate
                           ? const EdgeInsets.only(
-                              top: 20,
-                              right: 20,
+                              top: 0,
                             )
                           : const EdgeInsets.only(
                               top: 20,
                             ),
-                      duration: const Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 800),
                       child: const Text(
                         "The Hotspots",
                         style: TextStyle(
@@ -144,11 +98,11 @@ class _CardsState extends State<Cards> {
                 child: PageView.builder(
                   controller: _pageController,
                   physics: const BouncingScrollPhysics(),
-                  itemCount: data.length,
+                  itemCount: widget.data.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return Hero(
-                      tag: data[index]['name'],
+                      tag: widget.data[index]['title'].toString(),
                       child: Material(
                         color: Colors.transparent,
                         child: GestureDetector(
@@ -157,7 +111,7 @@ class _CardsState extends State<Cards> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SpotPage(
-                                          data: data[index],
+                                          data: widget.data[index],
                                         )));
                           },
                           child: AnimatedOpacity(
@@ -175,7 +129,9 @@ class _CardsState extends State<Cards> {
                                 image: DecorationImage(
                                     opacity: 0.5,
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(data[index]['image'])),
+                                    image: NetworkImage(widget.data[index]
+                                            ['picture'] ??
+                                        "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg")),
                               ),
                               child: Column(
                                 mainAxisAlignment:
@@ -197,7 +153,7 @@ class _CardsState extends State<Cards> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        data[index]['name'],
+                                        widget.data[index]['title'].toString(),
                                         style: TextStyle(
                                             overflow: TextOverflow.clip,
                                             fontWeight: FontWeight.bold,
@@ -205,8 +161,11 @@ class _CardsState extends State<Cards> {
                                             color: Constants.color2
                                                 .withOpacity(.9)),
                                       ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
                                       Text(
-                                        data[index]['caption'],
+                                        widget.data[index]['desc'].toString(),
                                         style: TextStyle(
                                             overflow: TextOverflow.clip,
                                             fontSize: 14,
@@ -217,7 +176,8 @@ class _CardsState extends State<Cards> {
                                         height: 10,
                                       ),
                                       Text(
-                                        data[index]['description'],
+                                        widget.data[index]['short_desc']
+                                            .toString(),
                                         style: TextStyle(
                                             overflow: TextOverflow.clip,
                                             fontSize: 12,

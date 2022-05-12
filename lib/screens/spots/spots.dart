@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/cards.dart';
-import 'package:map_launcher/map_launcher.dart';
+import 'package:hestia22/screens/spots/spot_page.dart';
 
 class Spots extends StatefulWidget {
-  const Spots({Key? key}) : super(key: key);
+  const Spots({Key? key, required this.data}) : super(key: key);
+  final List<dynamic>? data;
 
   @override
   State<StatefulWidget> createState() {
@@ -17,20 +18,38 @@ class Spots extends StatefulWidget {
 
 class SpotsState extends State<Spots> {
   bool _animate = true;
-  Future<List<String>> _getSuggestions(String pattern) async {
-    return [pattern, pattern + 'aa', pattern + 'bb'];
-  }
 
-  Future<void> _goToCoordinates(String title) async {
-    // Get coordinates using title
-    Coords coordinates = Coords(1, 2);
+  List<String> _getSuggestions(String pattern) {
+    List<String> list = [];
 
-    if ((await MapLauncher.isMapAvailable(MapType.google))!) {
-      await MapLauncher.showMarker(
-        mapType: MapType.google,
-        coords: coordinates,
-        title: title,
-      );
+    if (widget.data != null) {
+      for (var element in widget.data!) {
+        if (list.length < 4) {
+          if (element['title'].toLowerCase().contains(pattern.toLowerCase())) {
+            list.add("%l%" + element['title']);
+
+            if (list.length == 4) {
+              break;
+            }
+          }
+        }
+
+        if (list.length < 4) {
+          for (var event in element['events']) {
+            if (event['title'].toLowerCase().contains(pattern.toLowerCase())) {
+              list.add("%e%" + event['title']);
+
+              if (list.length == 4) {
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      return list;
+    } else {
+      return list;
     }
   }
 
@@ -140,7 +159,7 @@ class SpotsState extends State<Spots> {
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Where do you wanna go?",
+                          hintText: "Search for an event or hotspot",
                           hintStyle: const TextStyle(
                             color: Colors.white24,
                             fontSize: 15,
@@ -163,8 +182,9 @@ class SpotsState extends State<Spots> {
                         ),
                       ),
                       suggestionsCallback: (pattern) async {
-                        return await _getSuggestions(pattern);
+                        return _getSuggestions(pattern);
                       },
+                      minCharsForSuggestions: 1,
                       suggestionsBoxDecoration: SuggestionsBoxDecoration(
                           color: Colors.black,
                           shape: RoundedRectangleBorder(
@@ -173,14 +193,41 @@ class SpotsState extends State<Spots> {
                       itemBuilder: (context, suggestion) {
                         return ListTile(
                           onTap: () {
-                            _goToCoordinates(suggestion.toString());
+                            for (var element in widget.data!) {
+                              if (element['title'] ==
+                                  suggestion.toString().replaceAll("%l%", "")) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SpotPage(data: element)));
+                              }
+
+                              for (var event in element['events']) {
+                                if (event['title'] ==
+                                    suggestion
+                                        .toString()
+                                        .replaceAll("%e%", "")) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SpotPage(data: element)));
+                                }
+                              }
+                            }
                           },
                           leading: Icon(
-                            Icons.location_on_outlined,
+                            suggestion.toString().contains("%e%")
+                                ? CupertinoIcons.star
+                                : CupertinoIcons.location,
                             color: Constants.color2.withOpacity(.40),
                           ),
                           title: Text(
-                            suggestion.toString(),
+                            suggestion
+                                .toString()
+                                .replaceAll("%l%", "")
+                                .replaceAll("%e%", ""),
                             style: TextStyle(
                                 color: Constants.color2.withOpacity(.40)),
                           ),
@@ -197,7 +244,13 @@ class SpotsState extends State<Spots> {
                 const SizedBox(
                   height: 30,
                 ),
-                const Cards(),
+                widget.data == null
+                    ? const SizedBox(
+                        height: 300,
+                        child: Center(child: CupertinoActivityIndicator()))
+                    : Cards(
+                        data: widget.data!,
+                      ),
                 const SizedBox(
                   height: 30,
                 ),
