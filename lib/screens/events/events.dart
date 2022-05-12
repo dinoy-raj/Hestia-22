@@ -1,6 +1,4 @@
-import 'dart:math';
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
@@ -136,8 +134,9 @@ class _EventDetailsState extends State<EventDetails> {
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                   onPressed: () {},
-                  color: Constants.iconAc.withOpacity(0.8),
+                  color: Constants.iconAc.withOpacity(0.5),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Icon(
                         FontAwesomeIcons.ticket,
@@ -258,11 +257,12 @@ class _EventDetailsState extends State<EventDetails> {
             ],
           ),
         ),*/
+        const Text(""),
         AnimatedPadding(
           duration: const Duration(seconds: 1),
           curve: Curves.decelerate,
           padding: start ? EdgeInsets.fromLTRB(
-              width * 0.06, width*0.04, 0, 0) :const EdgeInsets.only(left: 0),
+              width * 0.06, 0, 0, 0) :const EdgeInsets.only(left: 0),
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -402,66 +402,71 @@ class _EventDetailsState extends State<EventDetails> {
 
   Widget aboutEvent(double height, double width) {
     final lines = isReadmore ? null : 4;
-    return Container(
-      padding: EdgeInsets.fromLTRB(
-          width * 0.06, width * 0.04, width * 0.06, width * 0.02),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'About Event',
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              fontSize: 18,
-              letterSpacing: 0.8,
-              fontFamily: fontfamily,
-              overflow: TextOverflow.clip,
-              color: Constants.pureWhite.withOpacity(0.75),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(""),
-          Text(
-            eventData['description'],
-            overflow: isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
-            maxLines: lines,
-            style: const TextStyle(
-              overflow: TextOverflow.clip,
-              fontSize: 16,
-              height: 1.5,
-              fontFamily: fontfamily,
-              color: Constants.textColor,
-              inherit: true,
-              letterSpacing: 0.9,
-              wordSpacing: 1.2,
-            ),
-          ),
-          MaterialButton(
-            padding:const EdgeInsets.all(0),
-            animationDuration:const Duration(seconds: 0),
-            onPressed: () {
-              setState(() {
-                // toggle the bool variable true or false
-                isReadmore = !isReadmore;
-              });
-            },
-            child: Text(
-              (isReadmore ? 'Read Less' : 'Read More'),
-              overflow: TextOverflow.clip,
-              textDirection: TextDirection.ltr,
-              textAlign: TextAlign.left,
+    return AnimatedPadding(
+      duration: const Duration(seconds: 1),
+      curve: Curves.decelerate,
+      padding: start ? EdgeInsets.fromLTRB(
+          width * 0.06, 0, width * 0.06, 0) :const EdgeInsets.only(left: 0),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(""),
+            Text(
+              'About Event',
               style: TextStyle(
-                overflow: TextOverflow.clip,
-                fontSize: 14,
+                decoration: TextDecoration.none,
+                fontSize: 18,
+                letterSpacing: 0.8,
                 fontFamily: fontfamily,
-                color: Constants.iconIn,
-                inherit: true,
-                fontWeight: FontWeight.normal,
+                overflow: TextOverflow.clip,
+                color: Constants.pureWhite.withOpacity(0.75),
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-        ],
+            Text(""),
+            Text(
+              eventData['description'],
+              overflow: isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
+              maxLines: lines,
+              style: const TextStyle(
+                overflow: TextOverflow.clip,
+                fontSize: 16,
+                height: 1.5,
+                fontFamily: fontfamily,
+                color: Constants.textColor,
+                inherit: true,
+                letterSpacing: 0.9,
+                wordSpacing: 1.2,
+              ),
+            ),
+            MaterialButton(
+              padding:const EdgeInsets.all(0),
+              animationDuration:const Duration(seconds: 0),
+              onPressed: () {
+                setState(() {
+                  // toggle the bool variable true or false
+                  isReadmore = !isReadmore;
+                });
+              },
+              child: Text(
+                (isReadmore ? 'Read Less' : 'Read More'),
+                overflow: TextOverflow.clip,
+                textDirection: TextDirection.ltr,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  overflow: TextOverflow.clip,
+                  fontSize: 14,
+                  fontFamily: fontfamily,
+                  color: Constants.iconIn,
+                  inherit: true,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
