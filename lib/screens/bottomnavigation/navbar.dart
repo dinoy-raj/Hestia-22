@@ -36,6 +36,8 @@ class _NavBarState extends State<NavBar> {
   List<dynamic>? show6;
   List<dynamic>? spots;
 
+  List<dynamic>? all;
+
   Map? profile;
 
   @override
@@ -88,6 +90,17 @@ class _NavBarState extends State<NavBar> {
       }
     });
 
+    setState(() {
+      django.getAllEvents().then((value) {
+        if(mounted)
+          {
+            setState(() {
+              all = value;
+            });
+          }
+      });
+    });
+
     django.getSpots().then((value) {
       if (mounted) {
         setState(() {
@@ -134,14 +147,17 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Home(show0, show1, show2, show3, show4, show5,profile),
+
+              Home(show0, show1, show2, show3, show4, show5,profile,all),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),
               Spots(
                 data: spots,
               ),
-              const ProfilePage()
+              ProfilePage(
+                data: profile,
+              )
             ],
           ),
           Align(
