@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
               return const LoginPage();
             } else {
               if (auth.isCompleted == null || !auth.isCompleted!) {
-                return ProfileRegistration();
+                return const ProfileRegistration();
               } else {
                 return const NavBar();
               }
