@@ -46,7 +46,7 @@ class _CardsState extends State<Cards> {
           : const EdgeInsets.only(
               top: 20,
             ),
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 800),
       child: SizedBox(
         height: 360,
         child: NotificationListener(
@@ -74,7 +74,7 @@ class _CardsState extends State<Cards> {
                           : const EdgeInsets.only(
                               top: 20,
                             ),
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 800),
                       child: const Text(
                         "The Hotspots",
                         style: TextStyle(
