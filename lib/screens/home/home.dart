@@ -540,23 +540,12 @@ class HomeState extends State<Home> {
                                                   index == currentPage ? 1 : .2,
                                               child: GestureDetector(
                                                 onTap: () async {
-                                                  eDetails = catSelect == 0
-                                                      ? await django
-                                                          .getEventDetails(
-                                                              show![index]
-                                                                      ['event']
-                                                                  ['slug'])
-                                                      : await django
-                                                          .getEventDetails(
-                                                              show![index]
-                                                                  ['slug']);
-
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               EventDetails(
-                                                                  eDetails)));
+                                                                  show![index])));
                                                 },
                                                 child: AnimatedContainer(
                                                   duration: const Duration(

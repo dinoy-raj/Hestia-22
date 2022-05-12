@@ -3,16 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-  bool start=false;
-    @override
+  bool start = false;
+  @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 1000), () {
@@ -21,6 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height - 24;
@@ -30,33 +30,26 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(children: [
-            Container(
+            SizedBox(
               height: screenHeight * 0.09,
               //color: Colors.green,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Container(
-                  //   alignment: Alignment.topLeft,
-
-                  Container(
-                    //color: Colors.red,
-                    // width: screenWidth * 0.8,
-                    child: const Center(
-                      child: Text(
-                        'Profile',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Helvetica',
-                            fontWeight: FontWeight.normal),
-                      ),
+                children: const [
+                  Center(
+                    child: Text(
+                      'Profile',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Helvetica',
+                          fontWeight: FontWeight.normal),
                     ),
                   ),
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               height: screenHeight * 0.18,
               //color: Colors.orange,
               child: Center(
@@ -88,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: screenHeight * 0.18,
               //color: Colors.yellow,
               child: Center(
@@ -165,24 +158,25 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             AnimatedOpacity(
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.decelerate,
-              opacity: start?1:0,
+              opacity: start ? 1 : 0,
               child: AnimatedPadding(
-                padding: start?const EdgeInsets.only(left: 20):const EdgeInsets.only(right: 20),
+                padding: start
+                    ? const EdgeInsets.only(left: 20)
+                    : const EdgeInsets.only(right: 20),
                 curve: Curves.decelerate,
-                duration: Duration(seconds: 5),
+                duration: const Duration(seconds: 5),
                 child: AnimatedContainer(
                   duration: const Duration(seconds: 5),
                   curve: Curves.decelerate,
-                  
+
                   height: screenHeight * 0.45,
                   //color: Colors.green,
                   child: Center(
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 5),
                       curve: Curves.decelerate,
-            
                       height: 300,
                       width: 350,
                       decoration: const BoxDecoration(
@@ -239,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 60,
                             child: Row(
                               children: [
@@ -328,7 +322,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 60,
                             child: Row(
                               children: [
@@ -353,13 +347,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-                                const Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily: 'Helvetica',
-                                      fontWeight: FontWeight.normal),
+                                TextButton(
+                                  onPressed: () async {
+                                    await auth.logOut();
+                                  },
+                                  child: const Text('Logout',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontFamily: 'Helvetica',
+                                          fontWeight: FontWeight.normal)),
                                 ),
                                 // const Spacer(),
                                 // Container(

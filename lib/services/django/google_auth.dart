@@ -3,7 +3,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:hestia22/services/django/django.dart' as django;
 
 class GoogleAuth extends ChangeNotifier {
   String? token;
@@ -53,9 +52,9 @@ class GoogleAuth extends ChangeNotifier {
     }
   }
 
-  void logOut() {
-    googleSignIn.signOut();
-    const FlutterSecureStorage().delete(key: 'token');
+  Future<void> logOut() async {
+    await googleSignIn.signOut();
+    await const FlutterSecureStorage().delete(key: 'token');
     token = "";
     notifyListeners();
   }

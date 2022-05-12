@@ -45,12 +45,6 @@ Future<List<dynamic>> getTrendingEvents() async {
   return json.decode(response.body)['results'];
 }
 
-Future<Map<String, dynamic>> getEventDetails(String slug) async {
-  http.Response response =
-      await http.get(Uri.parse(hostUrl + "/api/v1/event/" + slug));
-  return json.decode(response.body);
-}
-
 Future<List<dynamic>> getSpots() async {
   http.Response response =
       await http.get(Uri.parse(hostUrl + "/api/v1/event/location/all"));

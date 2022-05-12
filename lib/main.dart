@@ -134,34 +134,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text("profile-reg"),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  auth.logOut();
-                },
-                child: const Text("log out"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegistrationSuccess(),
-                    ),
-                  );
-                },
-                child: const Text("profile-success"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegistrationFailure(),
-                    ),
-                  );
-                },
-                child: const Text("profile-failure"),
-              ),
             ],
           ),
         ),
