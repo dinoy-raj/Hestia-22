@@ -60,7 +60,7 @@ class _EventDetailsState extends State<EventDetails> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Constants.sc,
-      body: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+      body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
         appbar(height, width),
         SliverList(
             delegate: SliverChildListDelegate([
@@ -79,47 +79,61 @@ class _EventDetailsState extends State<EventDetails> {
               : const SizedBox(
                   height: 0,
                 ),
+          widget.eventData['is_file_upload']
+              ? guidelines(height, width)
+              : const SizedBox(
+                  height: 0,
+                ),
+          contact(height, width),
 
           //contactDetails(height, width)
         ]))
       ]),
-      floatingActionButton:
-          duration!.inSeconds <= 0 ? const Text("") : floatButton(height, width),
-
+      floatingActionButton: duration!.inSeconds <= 0
+          ? const Text("")
+          : floatButton(height, width),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
   Widget appbar(double height, double width) {
     return SliverAppBar(
-      leading: AnimatedPadding(
-        padding: start
-            ? const EdgeInsets.only(
-                top: 10.0,
-                bottom: 6.0,
-                left: 10.0,
-                right: 6.0,
-              )
-            : const EdgeInsets.all(10.0),
-        duration: const Duration(milliseconds: 500),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                gradient: LinearGradient(
-                  colors: [
-                    Constants.bg.withOpacity(.3),
-                    Constants.bg.withOpacity(.6),
-                  ],
-                  begin: AlignmentDirectional.topStart,
-                  end: AlignmentDirectional.bottomEnd,
+      backgroundColor: Constants.sc,
+      leading: AnimatedOpacity(
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.decelerate,
+        opacity: start ? 1 : 0,
+        child: AnimatedPadding(
+          padding: start
+              ? const EdgeInsets.only(
+                  top: 10.0,
+                  bottom: 6.0,
+                  left: 10.0,
+                  right: 6.0,
+                )
+              : const EdgeInsets.all(10.0),
+          duration: const Duration(milliseconds: 500),
+          child: Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    gradient: LinearGradient(
+                      colors: [
+                        Constants.bg.withOpacity(.6),
+                        Constants.bg.withOpacity(.6),
+                      ],
+                      begin: AlignmentDirectional.topStart,
+                      end: AlignmentDirectional.bottomEnd,
+                    ),
+                  ),
+                  child: BackButton(
+                    color: Constants.color2.withOpacity(.5),
+                  ),
                 ),
-              ),
-              child: BackButton(
-                color: Constants.color2.withOpacity(.5),
               ),
             ),
           ),
@@ -155,7 +169,7 @@ class _EventDetailsState extends State<EventDetails> {
           ),
         ),
         title: duration!.inSeconds <= 0
-            ?const Text("")
+            ? const Text("")
             : AnimatedOpacity(
                 duration: const Duration(seconds: 2),
                 curve: Curves.decelerate,
@@ -254,430 +268,585 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   Widget eventDetails(double height, double width) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.fromLTRB(
-              width * 0.06, width * 0.04, width * 0.06, width * 0.01),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: AnimatedOpacity(
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.decelerate,
+      opacity: start ? 1 : 0.5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(
+                width * 0.06, width * 0.04, width * 0.06, 0),
+            child: Stack(
+              children: [
+                AnimatedOpacity(
                   duration: const Duration(seconds: 1),
                   curve: Curves.slowMiddle,
                   opacity: start ? 1 : 0.3,
-                  child: Text(
-                    widget.eventData['short_title'],
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(
-                      fontFamily: fontfamily,
-                      letterSpacing: letterspace,
-                      height: 1.4,
-                      fontSize: 26,
-                      color: Constants.pureWhite.withOpacity(1),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                width: width * 0.5,
-              ),
-              widget.eventData["prize"] == null
-                  ? const SizedBox(
-                      height: 0,
-                    )
-                  : AnimatedOpacity(
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.linear,
-                      opacity: start ? 1 : 0.3,
-                      child: MaterialButton(
-                        elevation: 4,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                        ),
-                        onPressed: () {},
-                        color: Constants.iconAc.withOpacity(0.5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.ticket,
-                              size: 20,
-                              color: Constants.pureWhite,
-                            ),
-                            Text(
-                              "  " + widget.eventData["prize"].toString(),
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  letterSpacing: contentspace,
-                                  overflow: TextOverflow.clip,
-                                  color: Constants.textColor.shade100,
-                                  fontFamily: fontfamily,
-                                  fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-            ],
-          ),
-        ),
-        const Text(""),
-
-        /*Container(
-            padding: EdgeInsets.fromLTRB(
-                width * 0.06, width * 0.04, width * 0.06, width * 0.01),
-
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-            ),
-            child: MaterialButton(
-              elevation: 4,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              onPressed: () {},
-              color: Constants.iconAc,
-              child: Row(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.ticket,
-                    size: 20,
-                    color: Constants.pureWhite,
-                  ),
-                  Text(
-                    "  " + eventData["prize"],
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        letterSpacing: contentspace,
-                        overflow: TextOverflow.clip,
-                        color: Constants.lightWhite,
-                        fontFamily: fontfamily,
-                        fontSize: 16),
-                  ),
-                ],
-              ),
-            )),*/
-        dateFormat != null
-            ? AnimatedPadding(
-                duration: const Duration(seconds: 1),
-                curve: Curves.decelerate,
-                padding: start
-                    ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
-                    : const EdgeInsets.only(left: 0),
-                child: Container(
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.schedule,
-                        color: Constants.lightWhite.withOpacity(0.4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.eventData['short_title'],
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(
+                              fontFamily: fontfamily,
+                              letterSpacing: letterspace,
+                              height: 1.4,
+                              fontSize: 26,
+                              color: Constants.pureWhite.withOpacity(1),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        "   " +
-                            dateFormat!.day.toString() +
-                            ' / ' +
-                            dateFormat!.month.toString() +
-                            ' / ' +
-                            dateFormat!.year.toString() +
-                            "     ",
-                        overflow: TextOverflow.clip,
-                        style: TextStyle(
-                          letterSpacing: letterspace,
-                          decoration: TextDecoration.none,
-                          fontSize: 16,
-                          fontStyle: FontStyle.normal,
-                          fontFamily: fontfamily,
-                          color: Constants.textColor.shade50,
-                          overflow: TextOverflow.clip,
-                          fontWeight: FontWeight.normal,
-                        ),
+                      Text(""),
+                      widget.eventData['venue']['title'] != null
+                          ? AnimatedOpacity(
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.slowMiddle,
+                        opacity: start ? 1 : 0.3,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.location_on_outlined,
+                                  color: Constants.lightWhite.withOpacity(0.4),
+                                  size: 24,
+                                ),
+                                Text(
+                                  "   " +
+                                      widget.eventData['venue']['title']
+                                          .toString()
+                                          .toUpperCase(),
+                                  style: TextStyle(
+                                    letterSpacing: letterspace,
+                                    decoration: TextDecoration.none,
+                                    fontSize: 16,
+                                    fontFamily: fontfamily,
+                                    overflow: TextOverflow.clip,
+                                    color: Constants.textColor.shade50,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                          : const SizedBox(
+                        height: 0,
                       ),
                     ],
                   ),
                 ),
-              )
-            :const SizedBox(
-                height: 0,
+                widget.eventData["prize"] == null
+                    ? const SizedBox(
+                        height: 0,
+                      )
+                    : Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        AnimatedOpacity(
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.linear,
+                            opacity: start ? 1 : 0.3,
+                            child: MaterialButton(
+                              elevation: 4,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
+                              ),
+                              onPressed: () {},
+                              color: Constants.iconAc.withOpacity(0.5),
+                              child: Container(
+                                padding: EdgeInsets.all(12),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "  " + widget.eventData["prize"].toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          letterSpacing: contentspace,
+                                          overflow: TextOverflow.clip,
+                                          color: Constants.textColor.shade100,
+                                          fontFamily: fontfamily,
+                                          fontSize: 16),
+                                    ),
+                                    Text(dateFormat!.day.toString()+"\nMAY"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+              ],
+            ),
+          ),
+          const Text(""),
+
+          /*Container(
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.06, width * 0.04, width * 0.06, width * 0.01),
+
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
               ),
-        /*Container(
-          padding: EdgeInsets.fromLTRB(
-              width * 0.06, width * 0.02, width * 0.06, width * 0.01),
-          child: Row(
+              child: MaterialButton(
+                elevation: 4,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                onPressed: () {},
+                color: Constants.iconAc,
+                child: Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.ticket,
+                      size: 20,
+                      color: Constants.pureWhite,
+                    ),
+                    Text(
+                      "  " + eventData["prize"],
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          letterSpacing: contentspace,
+                          overflow: TextOverflow.clip,
+                          color: Constants.lightWhite,
+                          fontFamily: fontfamily,
+                          fontSize: 16),
+                    ),
+                  ],
+                ),
+              )),
+              dateFormat != null
+              ? AnimatedPadding(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.decelerate,
+                  padding: start
+                      ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
+                      : const EdgeInsets.only(left: 0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.schedule,
+                          color: Constants.lightWhite.withOpacity(0.4),
+                        ),
+                        Text(
+                          "   " +
+                              dateFormat!.day.toString() +
+                              ' / ' +
+                              dateFormat!.month.toString() +
+                              ' / ' +
+                              dateFormat!.year.toString() +
+                              "     ",
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            letterSpacing: letterspace,
+                            decoration: TextDecoration.none,
+                            fontSize: 16,
+                            fontStyle: FontStyle.normal,
+                            fontFamily: fontfamily,
+                            color: Constants.textColor.shade50,
+                            overflow: TextOverflow.clip,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : const SizedBox(
+                  height: 0,
+                ),
+          Container(
+            padding: EdgeInsets.fromLTRB(
+                width * 0.06, width * 0.02, width * 0.06, width * 0.01),
+            child: Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.ticket,
+                  size: 20,
+                  color: Constants.lightWhite.withOpacity(0.4),
+                ),
+                Text(
+                  "   " +
+                      eventData['registrationfee'] +
+                      " Reg. Fee /  " +
+                      eventData['prize'] +
+                      " Prize",
+                  style: TextStyle(
+                    letterSpacing: letterspace,
+                    decoration: TextDecoration.none,
+                    fontSize: 16,
+                    fontFamily: fontfamily,
+                    overflow: TextOverflow.clip,
+                    color: Constants.textColor,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Text(""),
+          widget.eventData['venue']['title'] != null
+              ? AnimatedPadding(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.decelerate,
+                  padding: start
+                      ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
+                      : const EdgeInsets.only(left: 0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Constants.lightWhite.withOpacity(0.4),
+                          size: 24,
+                        ),
+                        Text(
+                          "   " +
+                              widget.eventData['venue']['title']
+                                  .toString()
+                                  .toUpperCase(),
+                          style: TextStyle(
+                            letterSpacing: letterspace,
+                            decoration: TextDecoration.none,
+                            fontSize: 16,
+                            fontFamily: fontfamily,
+                            overflow: TextOverflow.clip,
+                            color: Constants.textColor.shade50,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              : const SizedBox(
+                  height: 0,
+                ),
+          Container(
+            padding: EdgeInsets.fromLTRB(
+                width * 0.04, width * 0.02, width * 0.04, width * 0.01),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.currency_rupee_outlined,
+                  color: AppColors.pureWhite,
+                ),
+                Text(
+                  '  Prize : ' + eventData['prize'],
+                  style: const TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 18,
+                    fontFamily: 'Helvetica',
+                    color: AppColors.pureWhite,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
+          ),*/
+        ],
+      ),
+    );
+  }
+
+  Widget aboutEvent(double height, double width) {
+    final lines = isReadmore ? null : 4;
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.decelerate,
+      opacity: start ? 1 : 0.5,
+      child: AnimatedPadding(
+        duration: const Duration(seconds: 1),
+        curve: Curves.decelerate,
+        padding: start
+            ? EdgeInsets.fromLTRB(width * 0.06, 0, width * 0.06, 0)
+            : const EdgeInsets.only(left: 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(""),
+            Text(
+              'About Event',
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                fontSize: 18,
+                letterSpacing: 0.8,
+                fontFamily: fontfamily,
+                overflow: TextOverflow.clip,
+                color: Constants.pureWhite.withOpacity(0.75),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(""),
+            Text(
+              widget.eventData['desc'],
+              overflow:
+                  isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
+              maxLines: lines,
+              style: const TextStyle(
+                overflow: TextOverflow.clip,
+                fontSize: 16,
+                height: 1.5,
+                fontFamily: fontfamily,
+                color: Constants.textColor,
+                inherit: true,
+                letterSpacing: 0.9,
+                wordSpacing: 1.2,
+              ),
+            ),
+            MaterialButton(
+              padding: const EdgeInsets.all(0),
+              animationDuration: const Duration(seconds: 0),
+              onPressed: () {
+                setState(() {
+                  // toggle the bool variable true or false
+                  isReadmore = !isReadmore;
+                });
+              },
+              child: Row(
+                children: [
+                  Text(
+                    (isReadmore ? 'Read Less\n' : 'Read More\n'),
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      overflow: TextOverflow.clip,
+                      fontSize: 14,
+                      fontFamily: fontfamily,
+                      color: Constants.lightWhite.withOpacity(0.3),
+                      inherit: true,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  const Text(""),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget guidelines(double height, double width) {
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.decelerate,
+      opacity: start ? 1 : 0.5,
+      child: AnimatedPadding(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+        padding: start
+            ? EdgeInsets.fromLTRB(width * 0.06, 0, width * 0.06, 0)
+            : const EdgeInsets.only(left: 0),
+        child: Text(widget.eventData['guideline_file']),
+      ),
+    );
+  }
+
+  Widget contactDetails(double height, double width) {
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.decelerate,
+      opacity: start ? 1 : 0.5,
+      child: AnimatedPadding(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+        padding: start
+            ? EdgeInsets.fromLTRB(width * 0.06, 0, width * 0.06, 0)
+            : const EdgeInsets.only(left: 0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Constants.pureWhite.withOpacity(0.2),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          margin:
+              EdgeInsets.fromLTRB(width * 0.06, width * 0.02, width * 0.06, 0),
+          padding:
+              EdgeInsets.fromLTRB(width * 0.06, width * 0.02, width * 0.06, 0),
+          child: Column(
             children: [
-              Icon(
-                FontAwesomeIcons.ticket,
-                size: 20,
-                color: Constants.lightWhite.withOpacity(0.4),
+              Row(
+                children: [
+                  widget.eventData['coordinator_1']['name'] == null
+                      ? const SizedBox(
+                          height: 0,
+                        )
+                      : Text(
+                          "  " +
+                              widget.eventData['coordinator_1']['name']
+                                  .toString(),
+                          style: TextStyle(
+                            letterSpacing: letterspace,
+                            decoration: TextDecoration.none,
+                            fontSize: 16,
+                            fontFamily: fontfamily,
+                            overflow: TextOverflow.clip,
+                            color: Constants.lightWhite.withOpacity(0.8),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                  widget.eventData['coordinator_1']['phone_number'] == null
+                      ? const SizedBox(
+                          height: 0,
+                        )
+                      : TextButton(
+                          onPressed: () async {
+                            if (await canLaunchUrl(Uri(
+                                scheme: 'tel',
+                                path: widget.eventData['coordinator_1']
+                                    ['phone_number']))) {
+                              await launchUrl(Uri(
+                                  scheme: 'tel',
+                                  path: widget.eventData['coordinator_1']
+                                      ['phone_number']));
+                            }
+                          },
+                          child: Text(
+                            "     " +
+                                widget.eventData['coordinator_1']
+                                    ['phone_number'],
+                            style: TextStyle(
+                                letterSpacing: letterspace,
+                                color: Constants.pureWhite.withOpacity(0.8),
+                                fontSize: 16,
+                                overflow: TextOverflow.clip,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: fontfamily),
+                          ),
+                        )
+                ],
               ),
+              Row(
+                children: [
+                  widget.eventData['coordinator_2']['name'] == null
+                      ? const SizedBox(
+                          height: 0,
+                        )
+                      : Text(
+                          "  " + widget.eventData['coordinator_2']['name'],
+                          style: TextStyle(
+                            letterSpacing: letterspace,
+                            decoration: TextDecoration.none,
+                            fontSize: 16,
+                            fontFamily: fontfamily,
+                            overflow: TextOverflow.clip,
+                            color: Constants.lightWhite.withOpacity(0.8),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                  widget.eventData['coordinator_2']['phone_number'] == null
+                      ? const SizedBox(
+                          height: 0,
+                        )
+                      : TextButton(
+                          onPressed: () async {
+                            if (await canLaunchUrl(Uri(
+                                scheme: 'tel',
+                                path: widget.eventData['coordinator_2']
+                                    ['phone_number']))) {
+                              await launchUrl(Uri(
+                                  scheme: 'tel',
+                                  path: widget.eventData['coordinator_2']
+                                      ['phone_number']));
+                            }
+                          },
+                          child: Text(
+                            "   " +
+                                widget.eventData['coordinator_2']
+                                    ['phone_number'],
+                            style: TextStyle(
+                                letterSpacing: letterspace,
+                                color: Constants.pureWhite.withOpacity(0.8),
+                                fontSize: 16,
+                                overflow: TextOverflow.clip,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: fontfamily),
+                          ),
+                        )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget contact(double height, double width) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(width * 0.06, width * 0.02, width * 0.06, 0),
+      child: Column(
+        children: [
+          Row(
+            children: [
               Text(
-                "   " +
-                    eventData['registrationfee'] +
-                    " Reg. Fee /  " +
-                    eventData['prize'] +
-                    " Prize",
+                "dffddf",
                 style: TextStyle(
                   letterSpacing: letterspace,
                   decoration: TextDecoration.none,
                   fontSize: 16,
                   fontFamily: fontfamily,
                   overflow: TextOverflow.clip,
-                  color: Constants.textColor,
+                  color: Constants.lightWhite.withOpacity(0.8),
                   fontWeight: FontWeight.normal,
                 ),
               ),
-            ],
-          ),
-        ),*/
-        const Text(""),
-        widget.eventData['venue']['title'] != null
-            ? AnimatedPadding(
-                duration: const Duration(seconds: 1),
-                curve: Curves.decelerate,
-                padding: start
-                    ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
-                    : const EdgeInsets.only(left: 0),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.location_on_outlined,
-                        color: Constants.lightWhite.withOpacity(0.4),
-                        size: 24,
-                      ),
-                      Text(
-                        "   " +
-                            widget.eventData['venue']['title']
-                                .toString()
-                                .toUpperCase(),
-                        style: TextStyle(
-                          letterSpacing: letterspace,
-                          decoration: TextDecoration.none,
-                          fontSize: 16,
-                          fontFamily: fontfamily,
-                          overflow: TextOverflow.clip,
-                          color: Constants.textColor.shade50,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      )
-                    ],
-                  ),
+              TextButton(
+                onPressed: () async {},
+                child: Text(
+                  "     " + "554545457",
+                  style: TextStyle(
+                      letterSpacing: letterspace,
+                      color: Constants.pureWhite.withOpacity(0.8),
+                      fontSize: 16,
+                      overflow: TextOverflow.clip,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: fontfamily),
                 ),
               )
-            :const SizedBox(
-                height: 0,
-              ),
-        /*Container(
-          padding: EdgeInsets.fromLTRB(
-              width * 0.04, width * 0.02, width * 0.04, width * 0.01),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            ],
+          ),
+          Row(
             children: [
-              const Icon(
-                Icons.currency_rupee_outlined,
-                color: AppColors.pureWhite,
-              ),
               Text(
-                '  Prize : ' + eventData['prize'],
-                style: const TextStyle(
+                "dffddf",
+                style: TextStyle(
+                  letterSpacing: letterspace,
                   decoration: TextDecoration.none,
-                  fontSize: 18,
-                  fontFamily: 'Helvetica',
-                  color: AppColors.pureWhite,
+                  fontSize: 16,
+                  fontFamily: fontfamily,
+                  overflow: TextOverflow.clip,
+                  color: Constants.lightWhite.withOpacity(0.8),
                   fontWeight: FontWeight.normal,
                 ),
               ),
-            ],
-          ),
-        ),*/
-      ],
-    );
-  }
-
-  Widget aboutEvent(double height, double width) {
-    final lines = isReadmore ? null : 4;
-    return AnimatedPadding(
-      duration: const Duration(seconds: 1),
-      curve: Curves.decelerate,
-      padding: start
-          ? EdgeInsets.fromLTRB(width * 0.06, 0, width * 0.06, 0)
-          : const EdgeInsets.only(left: 0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(""),
-          Text(
-            'About Event',
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              fontSize: 18,
-              letterSpacing: 0.8,
-              fontFamily: fontfamily,
-              overflow: TextOverflow.clip,
-              color: Constants.pureWhite.withOpacity(0.75),
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const Text(""),
-          Text(
-            widget.eventData['desc'],
-            overflow:
-                isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
-            maxLines: lines,
-            style: const TextStyle(
-              overflow: TextOverflow.clip,
-              fontSize: 16,
-              height: 1.5,
-              fontFamily: fontfamily,
-              color: Constants.textColor,
-              inherit: true,
-              letterSpacing: 0.9,
-              wordSpacing: 1.2,
-            ),
-          ),
-          MaterialButton(
-            padding: const EdgeInsets.all(0),
-            animationDuration: const Duration(seconds: 0),
-            onPressed: () {
-              setState(() {
-                // toggle the bool variable true or false
-                isReadmore = !isReadmore;
-              });
-            },
-            child: Row(
-              children: [
-                Text(
-                  (isReadmore ? 'Read Less\n' : 'Read More\n'),
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.start,
+              TextButton(
+                onPressed: () async {},
+                child: Text(
+                  "   " + "4545454554",
                   style: TextStyle(
-                    overflow: TextOverflow.clip,
-                    fontSize: 14,
-                    fontFamily: fontfamily,
-                    color: Constants.lightWhite.withOpacity(0.3),
-                    inherit: true,
-                    fontWeight: FontWeight.normal,
-                  ),
+                      letterSpacing: letterspace,
+                      color: Constants.pureWhite.withOpacity(0.8),
+                      fontSize: 16,
+                      overflow: TextOverflow.clip,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: fontfamily),
                 ),
-                const Text(""),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget contactDetails(double height, double width) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Constants.pureWhite.withOpacity(0.2),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      margin: EdgeInsets.fromLTRB(width * 0.06, width * 0.02, width * 0.06, 0),
-      padding: EdgeInsets.fromLTRB(width * 0.06, width * 0.02, width * 0.06, 0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              widget.eventData['coordinator_1']['name'] == null
-                  ? const SizedBox(
-                      height: 0,
-                    )
-                  : Text(
-                      "  " +
-                          widget.eventData['coordinator_1']['name'].toString(),
-                      style: TextStyle(
-                        letterSpacing: letterspace,
-                        decoration: TextDecoration.none,
-                        fontSize: 16,
-                        fontFamily: fontfamily,
-                        overflow: TextOverflow.clip,
-                        color: Constants.lightWhite.withOpacity(0.8),
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-              widget.eventData['coordinator_1']['phone_number'] == null
-                  ? const SizedBox(
-                      height: 0,
-                    )
-                  : TextButton(
-                      onPressed: () async {
-                        if (await canLaunchUrl(Uri(
-                            scheme: 'tel',
-                            path: widget.eventData['coordinator_1']
-                                ['phone_number']))) {
-                          await launchUrl(Uri(
-                              scheme: 'tel',
-                              path: widget.eventData['coordinator_1']
-                                  ['phone_number']));
-                        }
-                      },
-                      child: Text(
-                        "     " +
-                            widget.eventData['coordinator_1']['phone_number'],
-                        style: TextStyle(
-                            letterSpacing: letterspace,
-                            color: Constants.pureWhite.withOpacity(0.8),
-                            fontSize: 16,
-                            overflow: TextOverflow.clip,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: fontfamily),
-                      ),
-                    )
-            ],
-          ),
-          Row(
-            children: [
-              widget.eventData['coordinator_2']['name'] == null
-                  ? const SizedBox(
-                      height: 0,
-                    )
-                  : Text(
-                      "  " + widget.eventData['coordinator_2']['name'],
-                      style: TextStyle(
-                        letterSpacing: letterspace,
-                        decoration: TextDecoration.none,
-                        fontSize: 16,
-                        fontFamily: fontfamily,
-                        overflow: TextOverflow.clip,
-                        color: Constants.lightWhite.withOpacity(0.8),
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-              widget.eventData['coordinator_2']['phone_number'] == null
-                  ? const SizedBox(
-                      height: 0,
-                    )
-                  : TextButton(
-                      onPressed: () async {
-                        if (await canLaunchUrl(Uri(
-                            scheme: 'tel',
-                            path: widget.eventData['coordinator_2']
-                                ['phone_number']))) {
-                          await launchUrl(Uri(
-                              scheme: 'tel',
-                              path: widget.eventData['coordinator_2']
-                                  ['phone_number']));
-                        }
-                      },
-                      child: Text(
-                        "   " +
-                            widget.eventData['coordinator_2']['phone_number'],
-                        style: TextStyle(
-                            letterSpacing: letterspace,
-                            color: Constants.pureWhite.withOpacity(0.8),
-                            fontSize: 16,
-                            overflow: TextOverflow.clip,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: fontfamily),
-                      ),
-                    )
+              )
             ],
           )
         ],
