@@ -594,8 +594,11 @@ class HomeState extends State<Home> {
                                               opacity:
                                                   index == currentPage ? 1 : .2,
                                               child: GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const EventDetails()));
+                                                onTap: () async {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => EventDetails()));
                                                 },
                                                 child: AnimatedContainer(
                                                   duration: const Duration(
@@ -628,14 +631,19 @@ class HomeState extends State<Home> {
                                                                 ? BoxFit.fill
                                                                 : BoxFit.cover,
                                                         image: catSelect == 0
-                                                            ? (show?[index]['events'][
+                                                            ? (show?[index]['event']
+                                                                        [
                                                                         'image'] ==
                                                                     null
                                                                 ? const NetworkImage(
                                                                     "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
                                                                     scale: 1.0)
                                                                 : NetworkImage(
-                                                                    show?[index]['events']['image'],
+                                                                    show?[index]
+                                                                            [
+                                                                            'event']
+                                                                        [
+                                                                        'image'],
                                                                   ))
                                                             : (show?[index][
                                                                         'image'] ==
