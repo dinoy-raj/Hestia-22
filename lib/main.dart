@@ -53,8 +53,12 @@ class _MyAppState extends State<MyApp> {
           stream: auth.googleSignIn.onCurrentUserChanged,
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount?> snapshot) {
-            if (auth.token!.isNotEmpty) {
+            if (auth.token!.isNotEmpty &&
+                auth.isCompleted != null &&
+                auth.isCompleted!) {
               return const MyHomePage();
+            } else if (auth.isCompleted == null || !auth.isCompleted!) {
+              return ProfileRegistration();
             } else {
               return const LoginPage();
             }
