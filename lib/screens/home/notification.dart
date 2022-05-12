@@ -19,6 +19,12 @@ Widget notificationPage(BuildContext context) {
         width: screenWidth * .91,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15), color: Colors.black),
+        child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context,index){
+              return AnimatedContainer(duration: const Duration(seconds: 1));
+            }
+        ),
       ),
     ],
   );

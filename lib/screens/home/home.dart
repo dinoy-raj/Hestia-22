@@ -65,6 +65,7 @@ class HomeState extends State<Home> {
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
   List<dynamic>? all;
+  late List name;
 
   List<dynamic>? show;
 
@@ -99,12 +100,10 @@ class HomeState extends State<Home> {
     catSelect = 10;
     show = widget.event0;
 
-    all?.add(widget.event0);
-    all?.add(widget.event1);
-    all?.add(widget.event2);
-    all?.add(widget.event3);
-    all?.add(widget.event4);
-    all?.add(widget.event5);
+    setState(() {
+
+    });
+
 
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {
@@ -123,6 +122,7 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
+        print(all.toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
