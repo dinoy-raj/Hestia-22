@@ -70,6 +70,7 @@ class _CardsState extends State<Cards> {
                               top: 15,
                             ),
                       duration: const Duration(milliseconds: 800),
+                      curve: Curves.decelerate,
                       child: const Text(
                         "The Hotspots",
                         style: TextStyle(

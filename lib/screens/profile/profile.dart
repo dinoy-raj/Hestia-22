@@ -31,6 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 800),
+      curve: Curves.decelerate,
       opacity: start ? 1 : 0,
       child: Scaffold(
         backgroundColor: Constants.sc,
@@ -53,6 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: start
                           ? const EdgeInsets.only(left: 5)
                           : const EdgeInsets.only(left: 0),
+                      curve: Curves.decelerate,
                       duration: const Duration(milliseconds: 800),
                       child: Text(
                         'Profile',
@@ -77,6 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? const EdgeInsets.only(right: 5)
                               : const EdgeInsets.only(right: 10),
                           duration: const Duration(milliseconds: 800),
+                          curve: Curves.decelerate,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -121,6 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? const EdgeInsets.only(left: 5)
                               : const EdgeInsets.only(left: 10),
                           duration: const Duration(milliseconds: 800),
+                          curve: Curves.decelerate,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -197,6 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   )
                                 : EdgeInsets.zero,
                             duration: const Duration(milliseconds: 800),
+                            curve: Curves.decelerate,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -224,6 +229,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : const EdgeInsets.only(left: 40),
                                           duration:
                                               const Duration(milliseconds: 800),
+                                          curve: Curves.decelerate,
                                           child: Text(
                                             widget.data == null
                                                 ? ""
@@ -258,6 +264,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : const EdgeInsets.only(left: 40),
                                           duration:
                                               const Duration(milliseconds: 800),
+                                          curve: Curves.decelerate,
                                           child: Text(
                                             widget.data == null
                                                 ? ""
@@ -293,6 +300,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : const EdgeInsets.only(left: 40),
                                           duration:
                                               const Duration(milliseconds: 800),
+                                          curve: Curves.decelerate,
                                           child: Text(
                                             widget.data == null
                                                 ? ""
@@ -326,6 +334,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ? const EdgeInsets.only(right: 20)
                       : EdgeInsets.zero,
                   duration: const Duration(milliseconds: 800),
+                  curve: Curves.decelerate,
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(
