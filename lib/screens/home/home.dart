@@ -66,13 +66,8 @@ class HomeState extends State<Home> {
     notPressed = false;
     start = false;
     catSelect = 10;
-    django.getTrendingEvents().then((value) {
-      if (mounted) {
-        setState(() {
-          show = value;
-        });
-      }
-    });
+    show = widget.event0;
+
     pageControl.addListener(() {
       setState(() {
         currentPage = pageControl.page!.round();
@@ -136,7 +131,7 @@ class HomeState extends State<Home> {
                                     curve: Curves.decelerate,
                                     opacity: start ? 1 : 0,
                                     child: const Text(
-                                      "Hi, Dinoy Raj 👋",
+                          "Hi, Dinoy Raj 👋",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
@@ -407,11 +402,10 @@ class HomeState extends State<Home> {
                                                 } else if (index == 5) {
                                                   show = widget.event5;
                                                 }
-                                                // if (show!.isEmpty) {
-                                                //   pageControl.jumpTo(0);
-                                                // }
-
                                                 currentPage = 0;
+                                                if (show!.isEmpty) {
+                                                  pageControl.initialPage;
+                                                }
                                                 catSelect = index;
                                               });
                                             },
@@ -518,133 +512,136 @@ class HomeState extends State<Home> {
                                       ),
                                     ],
                                   )
-                                : PageView.builder(
-                                    controller: pageControl,
-                                    scrollDirection: Axis.horizontal,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: show?.length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      return Center(
-                                        child: AnimatedPadding(
-                                          duration: const Duration(seconds: 1),
-                                          curve: Curves.fastLinearToSlowEaseIn,
-                                          padding: start
-                                              ? const EdgeInsets.only(
-                                                  right: 20,
-                                                )
-                                              : const EdgeInsets.only(
-                                                  right: 25),
-                                          child: AnimatedOpacity(
-                                            duration:
-                                                const Duration(seconds: 2),
-                                            opacity: start ? 1 : .10,
+                                : AnimatedSwitcher(
+                                  duration: const Duration(seconds: 1),
+                                  child: PageView.builder(
+                                      controller: pageControl,
+                                      scrollDirection: Axis.horizontal,
+                                      physics: const BouncingScrollPhysics(),
+                                      itemCount: show?.length,
+                                      itemBuilder: (BuildContext context, index) {
+                                        return Center(
+                                          child: AnimatedPadding(
+                                            duration: const Duration(seconds: 1),
+                                            curve: Curves.fastLinearToSlowEaseIn,
+                                            padding: start
+                                                ? const EdgeInsets.only(
+                                                    right: 20,
+                                                  )
+                                                : const EdgeInsets.only(
+                                                    right: 25),
                                             child: AnimatedOpacity(
-                                              duration: const Duration(
-                                                  milliseconds: 800),
-                                              // curve: Curves.fastLinearToSlowEaseIn,
-                                              opacity:
-                                                  index == currentPage ? 1 : .2,
-                                              child: GestureDetector(
-                                                onTap: () async {
-                                                  eDetails = catSelect == 0
-                                                      ? await django
-                                                          .getEventDetails(
-                                                              show![index]
-                                                                      ['event']
-                                                                  ['slug'])
-                                                      : await django
-                                                          .getEventDetails(
-                                                              show![index]
-                                                                  ['slug']);
+                                              duration:
+                                                  const Duration(seconds: 2),
+                                              opacity: start ? 1 : .10,
+                                              child: AnimatedOpacity(
+                                                duration: const Duration(
+                                                    milliseconds: 800),
+                                                // curve: Curves.fastLinearToSlowEaseIn,
+                                                opacity:
+                                                    index == currentPage ? 1 : .2,
+                                                child: GestureDetector(
+                                                  onTap: () async {
+                                                    eDetails = catSelect == 0
+                                                        ? await django
+                                                            .getEventDetails(
+                                                                show![index]
+                                                                        ['event']
+                                                                    ['slug'])
+                                                        : await django
+                                                            .getEventDetails(
+                                                                show![index]
+                                                                    ['slug']);
 
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              EventDetails(
-                                                                  eDetails)));
-                                                },
-                                                child: AnimatedContainer(
-                                                  duration: const Duration(
-                                                      seconds: 1),
-                                                  curve: Curves
-                                                      .fastLinearToSlowEaseIn,
-                                                  height: index == currentPage
-                                                      ? screenHeight * .46
-                                                      : screenHeight * .41,
-                                                  width: index == currentPage
-                                                      ? screenWidth * .9
-                                                      : screenWidth * .8,
-                                                  decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: index ==
-                                                                  currentPage
-                                                              ? Constants.iconAc
-                                                                  .withOpacity(
-                                                                      .05)
-                                                              : Colors
-                                                                  .transparent,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 20,
-                                                        )
-                                                      ],
-                                                      image: DecorationImage(
-                                                        fit:
-                                                            index == currentPage
-                                                                ? BoxFit.fill
-                                                                : BoxFit.cover,
-                                                        image: catSelect == 0
-                                                            ? (show?[index][
-                                                                        'event'] ==
-                                                                    null
-                                                                ? const NetworkImage(
-                                                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                                                    scale: 1.0)
-                                                                : NetworkImage(
-                                                                    show?[index]
-                                                                            [
-                                                                            'event']
-                                                                        [
-                                                                        'image'],
-                                                                  ))
-                                                            : (show?[index][
-                                                                        'image'] ==
-                                                                    null
-                                                                ? const NetworkImage(
-                                                                    "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                                                    scale: 1.0)
-                                                                : NetworkImage(
-                                                                    show?[index]
-                                                                        [
-                                                                        'image'],
-                                                                  )),
-                                                      ),
-                                                      gradient:
-                                                          const LinearGradient(
-                                                        begin: Alignment
-                                                            .bottomCenter,
-                                                        end:
-                                                            Alignment.topCenter,
-                                                        colors: [
-                                                          Colors.black26,
-                                                          Colors.transparent,
-                                                          Colors.transparent
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EventDetails(
+                                                                    eDetails)));
+                                                  },
+                                                  child: AnimatedContainer(
+                                                    duration: const Duration(
+                                                        seconds: 1),
+                                                    curve: Curves
+                                                        .fastLinearToSlowEaseIn,
+                                                    height: index == currentPage
+                                                        ? screenHeight * .46
+                                                        : screenHeight * .41,
+                                                    width: index == currentPage
+                                                        ? screenWidth * .9
+                                                        : screenWidth * .8,
+                                                    decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: index ==
+                                                                    currentPage
+                                                                ? Constants.iconAc
+                                                                    .withOpacity(
+                                                                        .05)
+                                                                : Colors
+                                                                    .transparent,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 20,
+                                                          )
                                                         ],
-                                                      ),
-                                                      border: Border.all(
-                                                          color: Constants.sc),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      color: Colors.grey),
+                                                        image: DecorationImage(
+                                                          fit:
+                                                              index == currentPage
+                                                                  ? BoxFit.fill
+                                                                  : BoxFit.cover,
+                                                          image: catSelect == 0
+                                                              ? (show?[index][
+                                                                          'event'] ==
+                                                                      null
+                                                                  ? const NetworkImage(
+                                                                      "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                                      scale: 1.0)
+                                                                  : NetworkImage(
+                                                                      show?[index]
+                                                                              [
+                                                                              'event']
+                                                                          [
+                                                                          'image'],
+                                                                    ))
+                                                              : (show?[index][
+                                                                          'image'] ==
+                                                                      null
+                                                                  ? const NetworkImage(
+                                                                      "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                                      scale: 1.0)
+                                                                  : NetworkImage(
+                                                                      show?[index]
+                                                                          [
+                                                                          'image'],
+                                                                    )),
+                                                        ),
+                                                        gradient:
+                                                            const LinearGradient(
+                                                          begin: Alignment
+                                                              .bottomCenter,
+                                                          end:
+                                                              Alignment.topCenter,
+                                                          colors: [
+                                                            Colors.black26,
+                                                            Colors.transparent,
+                                                            Colors.transparent
+                                                          ],
+                                                        ),
+                                                        border: Border.all(
+                                                            color: Constants.sc),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                        color: Colors.grey),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }),
+                                        );
+                                      }),
+                                ),
                       ),
                     ],
                   ),
