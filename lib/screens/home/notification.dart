@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../main.dart';
 import 'home.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -147,28 +148,76 @@ class _NotificationPageState extends State<NotificationPage> {
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                  height: screenHeight * .04,
-                                  width: screenWidth * .32,
-                                  child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text(
-                                        "Decline",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12,
-                                            fontFamily: "Helvetica",
-                                            color: Colors.black),
-                                      ))),
-                              Container(
-                                  height: screenHeight * .04,
-                                  width: screenWidth * .32,
-                                  child: ElevatedButton(
-                                      onPressed: () {}, child: Text("Accept"))),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black, width: 1),
+                                      borderRadius: BorderRadius.circular(7),
+                                    ),
+                                    height: screenHeight * .04,
+                                    width: screenWidth * .32,
+                                    child: ElevatedButton(
+                                        onPressed: () {},
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.transparent),
+                                          elevation:
+                                              MaterialStateProperty.all(0),
+                                          shadowColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.transparent),
+                                          overlayColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.black.withOpacity(.2)),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            "Decline",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12,
+                                                fontFamily: "Helvetica",
+                                                color: Colors.black),
+                                          ),
+                                        ))),
+                                Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black, width: 1),
+                                      borderRadius: BorderRadius.circular(7),
+                                    ),
+                                    height: screenHeight * .04,
+                                    width: screenWidth * .32,
+                                    child: ElevatedButton(
+                                        onPressed: () {},
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.black),
+                                          elevation:
+                                              MaterialStateProperty.all(5),
+                                          overlayColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.grey.withOpacity(.5)),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            "Accept",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12,
+                                                fontFamily: "Helvetica",
+                                                color: Colors.white),
+                                          ),
+                                        ))),
+                              ],
+                            ),
                           )
                         ],
                       ),
