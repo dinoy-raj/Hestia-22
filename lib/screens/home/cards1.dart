@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../events/events.dart';
 
-class EventCards extends StatefulWidget {
+class EventCards1 extends StatefulWidget {
   List<dynamic> show;
   int catSelect;
-  EventCards(this.show, this.catSelect, {Key? key}) : super(key: key);
+  EventCards1(this.show, this.catSelect, {Key? key}) : super(key: key);
 
   @override
-  State<EventCards> createState() => _EventCardsState();
+  State<EventCards1> createState() => _EventCardsState();
 }
 
-class _EventCardsState extends State<EventCards> {
+class _EventCardsState extends State<EventCards1> {
   PageController pageControl =
       PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;

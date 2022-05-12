@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
-import 'package:hestia22/screens/home/cards.dart';
+import 'package:hestia22/screens/home/cards1.dart';
 import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/home/tab.dart';
@@ -22,8 +22,9 @@ class Home extends StatefulWidget {
   List<dynamic>? event3;
   List<dynamic>? event4;
   List<dynamic>? event5;
+  Map? profile;
   Home(this.event0, this.event1, this.event2, this.event3, this.event4,
-      this.event5,
+      this.event5, this.profile,
       {Key? key})
       : super(key: key);
 
@@ -122,13 +123,17 @@ class HomeState extends State<Home> {
                                     duration: const Duration(seconds: 3),
                                     curve: Curves.decelerate,
                                     opacity: start ? 1 : 0,
-                                    child: const Text(
-                                      "Hi, Dinoy Raj 👋",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          fontFamily: 'helvetica',
-                                          color: Colors.white),
+                                    child:  Container(
+                                      width: screenWidth*.7,
+                                      child: Text(
+                                        "Hi, ${widget.profile==null?"":widget.profile!['name']} 👋",
+                                        style: TextStyle(
+                                          overflow: TextOverflow.fade,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            fontFamily: 'helvetica',
+                                            color: Colors.white),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
