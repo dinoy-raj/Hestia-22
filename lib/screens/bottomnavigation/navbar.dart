@@ -112,15 +112,6 @@ class _NavBarState extends State<NavBar> {
         profile = value;
       });
     });
-
-    setState(() {
-      all?.add(show0);
-      all?.add(show1);
-      all?.add(show2);
-      all?.add(show3);
-      all?.add(show4);
-      all?.add(show5);
-    });
   }
 
   @override

@@ -855,7 +855,7 @@ class HomeState extends State<Home> {
                   ],
                 ),
 
-                notificationPage(context),
+                //notificationPage(context),
               ],
             ),
           ),
