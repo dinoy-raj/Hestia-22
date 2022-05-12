@@ -123,8 +123,6 @@ class _NavBarState extends State<NavBar> {
         profile = value;
       });
     });
-
-
   }
 
   @override
