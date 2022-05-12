@@ -348,8 +348,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: () async {
-                                    await auth.logOut();
+                                  onPressed: () {
+                                    Future.delayed(
+                                        const Duration(milliseconds: 800),
+                                        () async {
+                                      await auth.logOut();
+                                    });
                                   },
                                   child: const Text('Logout',
                                       style: TextStyle(

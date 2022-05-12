@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
-import 'package:hestia22/screens/events/events.dart';
+import 'package:hestia22/screens/login/login.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
-import 'package:hestia22/screens/profile/registration_failure.dart';
-import 'package:hestia22/screens/profile/registration_success.dart';
-import 'screens/login/login.dart';
 import 'services/django/google_auth.dart';
 
 GoogleAuth auth = GoogleAuth();
@@ -56,88 +53,13 @@ class _MyAppState extends State<MyApp> {
             if (auth.token!.isNotEmpty &&
                 auth.isCompleted != null &&
                 auth.isCompleted!) {
-              return const MyHomePage();
+              return const NavBar();
             } else if (auth.isCompleted == null || !auth.isCompleted!) {
               return ProfileRegistration();
             } else {
-              return const MyHomePage();
+              return const LoginPage();
             }
           }),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    // ignore: todo
-    // TODO: Replace with provider once backend is up
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: SizedBox(
-          height: screenHeight,
-          width: screenWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const NavBar()));
-                  },
-                  child: const Text("home")),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EventDetails({
-                        'image':
-                            'https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/dyn.jpeg',
-                        'name': 'SPOTLIGHT',
-                        'description':
-                            "Lights, camera, ACTION!Are you ready to be in the limelight and instigate the true actor in you? Do you think you have the power to influence the crowd, and weave magic on screen? If yes, wait not! Act your heart out as the spotlight shines bright and all eyes veer to you.Hestia'22 presents SPOTLIGHT, to unravel the performer in you. Enter the showbiz with your prowess in fine blending emotions and art. Unleash your flair by revitalising characters on screen.",
-                        'date': "2021-05-12 23:59",
-                        'registrationfee': "₹150",
-                        'prize': "₹70000",
-                        'coordinator1': "Ajay",
-                        "phone_no_cord1": "8301916909",
-                        'coordinator2': "Jyothi",
-                        "phone_no_cord2": "9447480943",
-                        'location': "APJ Park"
-                      }),
-                    ),
-                  );
-                },
-                child: const Text("event-details"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileRegistration()));
-                },
-                child: const Text("profile-reg"),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
