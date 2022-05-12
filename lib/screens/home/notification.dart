@@ -16,9 +16,10 @@ class _NotificationPageState extends State<NotificationPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return ListView.builder(
+        itemCount: 5,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, index) {
-          return AnimatedContainer(duration: const Duration(seconds: 1));
+          return AnimatedContainer(duration: const Duration(seconds: 1),);
         });
   }
 }
