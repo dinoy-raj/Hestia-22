@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -78,10 +79,12 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    django.getTechnicals().then((value) {
-      setState(() {
-        show = value;
-      });
+    django.getTrendingEvents().then((value) {
+      if (mounted) {
+        setState(() {
+          show = value;
+        });
+      }
     });
     notPressed = false;
     start = false;
@@ -107,7 +110,7 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        log((await django.getTrendingEvents()).toString());
+        log((show![0].toString()));
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -408,55 +411,55 @@ class HomeState extends State<Home> {
                                           return GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                // if (index == 0) {
-                                                //   django
-                                                //       .getTrendingEvents()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 1) {
-                                                //   django
-                                                //       .getProshows()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 2) {
-                                                //   django
-                                                //       .getCulturals()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 3) {
-                                                //   django
-                                                //       .getWorkshops()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 4) {
-                                                //   django
-                                                //       .getTechnicals()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // } else if (index == 5) {
-                                                //   django
-                                                //       .getLectures()
-                                                //       .then((value) {
-                                                //     setState(() {
-                                                //       show = value;
-                                                //     });
-                                                //   });
-                                                // }
+                                                if (index == 0) {
+                                                  django
+                                                      .getTrendingEvents()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 1) {
+                                                  django
+                                                      .getProshows()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 2) {
+                                                  django
+                                                      .getCulturals()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 3) {
+                                                  django
+                                                      .getWorkshops()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 4) {
+                                                  django
+                                                      .getTechnicals()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                } else if (index == 5) {
+                                                  django
+                                                      .getLectures()
+                                                      .then((value) {
+                                                    setState(() {
+                                                      show = value;
+                                                    });
+                                                  });
+                                                }
                                                 catSelect = index;
                                               });
                                             },
@@ -536,286 +539,122 @@ class HomeState extends State<Home> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: const [
                                   Text(
-                                    "Coming Soon....",
+                                    "Loading....",
                                     style: TextStyle(
                                       fontFamily: "Helvetica",
                                       color: Constants.iconAc,
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                     ),
-                                  )
+                                  ),
                                 ],
                               )
-                            : PageView.builder(
-                                controller: pageControl,
-                                scrollDirection: Axis.horizontal,
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: show?.length,
-                                itemBuilder: (BuildContext context, index) {
-                                  return Center(
-                                    child: AnimatedPadding(
-                                      duration: const Duration(seconds: 1),
-                                      curve: Curves.fastLinearToSlowEaseIn,
-                                      padding: start
-                                          ? const EdgeInsets.only(
-                                              right: 20,
-                                            )
-                                          : const EdgeInsets.only(right: 25),
-                                      child: AnimatedOpacity(
-                                        duration: const Duration(seconds: 2),
-                                        opacity: start ? 1 : .10,
-                                        child: AnimatedOpacity(
-                                          duration:
-                                              const Duration(milliseconds: 800),
-                                          // curve: Curves.fastLinearToSlowEaseIn,
-                                          opacity:
-                                              index == currentPage ? 1 : .2,
-                                          child: AnimatedContainer(
-                                            duration: const Duration(
-                                                milliseconds: 800),
-                                            curve:
-                                                Curves.fastLinearToSlowEaseIn,
-                                            height: index == currentPage
-                                                ? screenHeight * .46
-                                                : screenHeight * .41,
-                                            width: index == currentPage
-                                                ? screenWidth * .9
-                                                : screenWidth * .8,
-                                            decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: index == currentPage
-                                                        ? Constants.iconAc
-                                                            .withOpacity(.05)
-                                                        : Colors.transparent,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 20,
-                                                  )
-                                                ],
-                                                image: DecorationImage(
-                                                  fit: index == currentPage
-                                                      ? BoxFit.fill
-                                                      : BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      show?[index]['image']),
-                                                ),
-                                                gradient: const LinearGradient(
-                                                  begin: Alignment.bottomCenter,
-                                                  end: Alignment.topCenter,
-                                                  colors: [
-                                                    Colors.black26,
-                                                    Colors.transparent,
-                                                    Colors.transparent
-                                                  ],
-                                                ),
-                                                border: Border.all(
-                                                    color: Constants.sc),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                color: Colors.grey),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                //date of event
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      15.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Container(
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          child: BackdropFilter(
-                                                            filter: ImageFilter
-                                                                .blur(
-                                                                    sigmaX: 3,
-                                                                    sigmaY: 3),
-                                                            child:
-                                                                AnimatedOpacity(
-                                                              duration:
-                                                                  const Duration(
-                                                                      seconds:
-                                                                          1),
-                                                              curve: Curves
-                                                                  .decelerate,
-                                                              opacity: index ==
-                                                                      currentPage
-                                                                  ? 1
-                                                                  : .5,
-                                                              child:
-                                                                  AnimatedContainer(
-                                                                curve: Curves
-                                                                    .decelerate,
-                                                                duration:
-                                                                    const Duration(
-                                                                        seconds:
-                                                                            1),
-                                                                height:
-                                                                    screenHeight *
-                                                                        .055,
-                                                                width:
-                                                                    screenHeight *
-                                                                        .055,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                5),
-                                                                        gradient: LinearGradient(
-                                                                            begin:
-                                                                                Alignment.bottomLeft,
-                                                                            end: Alignment.topRight,
-                                                                            colors: [
-                                                                              Colors.white.withOpacity(.01),
-                                                                              Colors.white.withOpacity(.03),
-                                                                              Colors.black26.withOpacity(.01)
-                                                                            ])),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    // Text(
-                                                                    //   show[index]
-                                                                    //       ['date'],
-                                                                    //   style: TextStyle(
-                                                                    //       fontFamily:
-                                                                    //           'Helvetica',
-                                                                    //       fontSize:
-                                                                    //           screenHeight *
-                                                                    //               .023,
-                                                                    //       color: Colors
-                                                                    //           .white,
-                                                                    //       fontWeight:
-                                                                    //           FontWeight
-                                                                    //               .bold),
-                                                                    // ),
-                                                                    Text(
-                                                                      "May",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontFamily:
-                                                                            'Helvetica',
-                                                                        fontSize:
-                                                                            screenHeight *
-                                                                                .012,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
+                            : show!.isEmpty
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: const [
+                                      Text(
+                                        "Coming Soon....",
+                                        style: TextStyle(
+                                          fontFamily: "Helvetica",
+                                          color: Constants.iconAc,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : PageView.builder(
+                                    controller: pageControl,
+                                    scrollDirection: Axis.horizontal,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemCount: show?.length,
+                                    itemBuilder: (BuildContext context, index) {
+                                      return Center(
+                                        child: AnimatedPadding(
+                                          duration: const Duration(seconds: 1),
+                                          curve: Curves.fastLinearToSlowEaseIn,
+                                          padding: start
+                                              ? const EdgeInsets.only(
+                                                  right: 20,
+                                                )
+                                              : const EdgeInsets.only(
+                                                  right: 25),
+                                          child: AnimatedOpacity(
+                                            duration:
+                                                const Duration(seconds: 2),
+                                            opacity: start ? 1 : .10,
+                                            child: AnimatedOpacity(
+                                              duration: const Duration(
+                                                  milliseconds: 800),
+                                              // curve: Curves.fastLinearToSlowEaseIn,
+                                              opacity:
+                                                  index == currentPage ? 1 : .2,
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    const Duration(seconds: 1),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn,
+                                                height: index == currentPage
+                                                    ? screenHeight * .46
+                                                    : screenHeight * .41,
+                                                width: index == currentPage
+                                                    ? screenWidth * .9
+                                                    : screenWidth * .8,
+                                                decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: index ==
+                                                                currentPage
+                                                            ? Constants.iconAc
+                                                                .withOpacity(
+                                                                    .05)
+                                                            : Colors
+                                                                .transparent,
+                                                        spreadRadius: 2,
+                                                        blurRadius: 20,
+                                                      )
                                                     ],
-                                                  ),
-                                                ),
-
-                                                //bottom (name+prize+)
-                                                // Padding(
-                                                //   padding:
-                                                //       const EdgeInsets.only(
-                                                //           bottom: 10.0),
-                                                //   child: Row(
-                                                //     mainAxisAlignment:
-                                                //         MainAxisAlignment
-                                                //             .center,
-                                                //     children: [
-                                                //       ClipRRect(
-                                                //         borderRadius:
-                                                //             BorderRadius
-                                                //                 .circular(10),
-                                                //         child: BackdropFilter(
-                                                //           filter:
-                                                //               ImageFilter.blur(
-                                                //                   sigmaX: 10,
-                                                //                   sigmaY: 10),
-                                                //           child:
-                                                //               AnimatedOpacity(
-                                                //             duration:
-                                                //                 const Duration(
-                                                //                     seconds: 1),
-                                                //             curve: Curves
-                                                //                 .decelerate,
-                                                //             opacity: index ==
-                                                //                     currentPage
-                                                //                 ? 1
-                                                //                 : .5,
-                                                //             child:
-                                                //                 AnimatedContainer(
-                                                //               curve: Curves
-                                                //                   .decelerate,
-                                                //               duration:
-                                                //                   const Duration(
-                                                //                       seconds:
-                                                //                           1),
-                                                //               height:
-                                                //                   screenHeight *
-                                                //                       .08,
-                                                //               width: index ==
-                                                //                       currentPage
-                                                //                   ? screenWidth *
-                                                //                       .6
-                                                //                   : screenWidth *
-                                                //                       .5,
-                                                //               decoration:
-                                                //                   BoxDecoration(
-                                                //                 borderRadius:
-                                                //                     BorderRadius
-                                                //                         .circular(
-                                                //                             15),
-                                                //               ),
-                                                //               child: Row(
-                                                //                 mainAxisAlignment:
-                                                //                     MainAxisAlignment
-                                                //                         .center,
-                                                //                 crossAxisAlignment:
-                                                //                     CrossAxisAlignment
-                                                //                         .center,
-                                                //                 children: [
-                                                //                   Text(
-                                                //                     show?[index]
-                                                //                         [
-                                                //                         'title'],
-                                                //                     style:
-                                                //                         const TextStyle(
-                                                //                       fontWeight:
-                                                //                           FontWeight
-                                                //                               .bold,
-                                                //                       fontFamily:
-                                                //                           "Helvetica",
-                                                //                       fontSize:
-                                                //                           18,
-                                                //                       color: Colors
-                                                //                           .white,
-                                                //                     ),
-                                                //                   ),
-                                                //                 ],
-                                                //               ),
-                                                //             ),
-                                                //           ),
-                                                //         ),
-                                                //       ),
-                                                //     ],
-                                                //   ),
-                                                // ),
-                                              ],
+                                                    image: DecorationImage(
+                                                      fit: index == currentPage
+                                                          ? BoxFit.fill
+                                                          : BoxFit.cover,
+                                                      image: show?[index]
+                                                                  ['image'] ==
+                                                              null
+                                                          ? const NetworkImage(
+                                                              "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
+                                                              scale: 1.0)
+                                                          : NetworkImage(
+                                                              show?[index]
+                                                                  ['image'],
+                                                            ),
+                                                    ),
+                                                    gradient:
+                                                        const LinearGradient(
+                                                      begin: Alignment
+                                                          .bottomCenter,
+                                                      end: Alignment.topCenter,
+                                                      colors: [
+                                                        Colors.black26,
+                                                        Colors.transparent,
+                                                        Colors.transparent
+                                                      ],
+                                                    ),
+                                                    border: Border.all(
+                                                        color: Constants.sc),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    color: Colors.grey),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                }),
+                                      );
+                                    }),
                       ),
                     ],
                   ),
@@ -845,7 +684,7 @@ class HomeState extends State<Home> {
                                 width: screenWidth * .85,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: Colors.black.withOpacity(.8)),
+                                    color: Colors.black.withOpacity(.9)),
                                 child: SingleChildScrollView(
                                   physics: const BouncingScrollPhysics(),
                                   child: AnimatedPadding(
