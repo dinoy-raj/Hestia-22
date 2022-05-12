@@ -60,5 +60,15 @@ Future<Map<String, dynamic>> getProfile() async {
 Future<List<dynamic>> getSpots() async {
   http.Response response =
       await http.get(Uri.parse(hostUrl + "/api/v1/event/location/all"));
-  return json.decode(response.body)['results'];
+
+  List<dynamic> list = json.decode(response.body)['results'];
+
+  for (dynamic result in list) {
+    http.Response response1 = await http.get(
+        Uri.parse(hostUrl + "/api/v1/event/?venue__title=" + result['title']));
+
+    result['events'] = json.decode(response1.body)['results'];
+  }
+
+  return list;
 }

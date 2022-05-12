@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 
@@ -14,50 +13,6 @@ class SpotPage extends StatefulWidget {
 class _SpotPageState extends State<SpotPage> {
   bool _animate = true;
   double _opacity = 0.75;
-  List<Map> data1 = [
-    {
-      'name': 'Almanac',
-      'category': 'Quiz',
-      'datetime': DateTime.now(),
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-    },
-    {
-      'name': 'Web Crawler',
-      'category': 'Competition',
-      'datetime': DateTime.now(),
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-    },
-    {
-      'name': 'NFT and BlockChain',
-      'category': 'Workshop',
-      'datetime': DateTime.now(),
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-    },
-    {
-      'name': 'Almanac',
-      'category': 'Quiz',
-      'datetime': DateTime.now(),
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-    },
-    {
-      'name': 'Web Crawler',
-      'category': 'Competition',
-      'datetime': DateTime.now(),
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-    },
-    {
-      'name': 'NFT and BlockChain',
-      'category': 'Workshop',
-      'datetime': DateTime.now(),
-      'description':
-          'Loo ooo oooo ooo oooooo ooooooo ong description goes here',
-    },
-  ];
 
   @override
   void initState() {
@@ -97,7 +52,7 @@ class _SpotPageState extends State<SpotPage> {
                           widget.data['picture'] != null
                               ? widget.data['picture'].toString()
                               : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
-                          height: 270,
+                          height: 300,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           color: Constants.color3.withOpacity(.5),
@@ -134,7 +89,7 @@ class _SpotPageState extends State<SpotPage> {
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
                     right: _animate ? 20 : 30,
-                    top: 50,
+                    top: 70,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: BackdropFilter(
@@ -235,7 +190,7 @@ class _SpotPageState extends State<SpotPage> {
                           ),
                         ),
                         child: ListView.builder(
-                          itemCount: data1.length,
+                          itemCount: widget.data['events'].length,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) => AnimatedOpacity(
                             opacity: _animate ? 0 : 1,
@@ -256,13 +211,17 @@ class _SpotPageState extends State<SpotPage> {
                                 children: [
                                   ListTile(
                                     title: Text(
-                                      data1[index]['name'],
+                                      widget.data['events'][index]
+                                              ['short_title']
+                                          .toString(),
                                       style: const TextStyle(
                                         color: Constants.color2,
                                       ),
                                     ),
                                     subtitle: Text(
-                                      data1[index]['category'],
+                                      widget.data['events'][index]['desc']
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: Constants.color2.withOpacity(.5),
                                       ),
@@ -270,13 +229,18 @@ class _SpotPageState extends State<SpotPage> {
                                     trailing: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
-                                          DateFormat.MMMMEEEEd().format(
-                                              (data1[index]['datetime'])),
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Constants.color2
-                                                .withOpacity(.25),
+                                        SizedBox(
+                                          width: 70,
+                                          child: Text(
+                                            widget.data['events'][index]
+                                                    ['short_desc']
+                                                .toString(),
+                                            overflow: TextOverflow.clip,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Constants.color2
+                                                  .withOpacity(.25),
+                                            ),
                                           ),
                                         ),
                                         const SizedBox(
