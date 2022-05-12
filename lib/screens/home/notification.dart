@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hestia22/main.dart';
 import 'home.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -13,13 +14,19 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
+    auth.getNotifications().then((value) {
+      print(value.toString());
+    });
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return ListView.builder(
         itemCount: 5,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, index) {
-          return AnimatedContainer(duration: const Duration(seconds: 1),);
+          return AnimatedContainer(
+            duration: const Duration(seconds: 1),
+          );
         });
   }
 }

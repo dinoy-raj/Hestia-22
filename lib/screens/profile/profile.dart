@@ -233,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['name'],
+                                                : widget.data!['name'].toString(),
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
@@ -268,7 +268,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['phone_number']
+                                                : widget.data!['phone_number'].toString()
                                                     .substring(3),
                                             style: TextStyle(
                                                 color: Colors.white
@@ -304,10 +304,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['dept_name'] +
+                                                : widget.data!['dept_name'].toString() +
                                                     ", " +
                                                     widget
-                                                        .data!['college_name'],
+                                                        .data!['college_name'].toString(),
                                             style: TextStyle(
                                                 overflow: TextOverflow.clip,
                                                 color: Colors.white

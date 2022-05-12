@@ -5,7 +5,7 @@ String hostUrl = "https://backend.hestiatkmce.live";
 
 Future<List<dynamic>> getAllEvents() async {
   http.Response response =
-  await http.get(Uri.parse(hostUrl + "/api/v1/event/"));
+      await http.get(Uri.parse(hostUrl + "/api/v1/event/"));
   return json.decode(response.body)['results'];
 }
 
