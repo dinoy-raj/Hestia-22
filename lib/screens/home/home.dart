@@ -100,10 +100,7 @@ class HomeState extends State<Home> {
     catSelect = 10;
     show = widget.event0;
 
-    setState(() {
-
-    });
-
+    setState(() {});
 
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {

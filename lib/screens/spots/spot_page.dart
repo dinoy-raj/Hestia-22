@@ -195,10 +195,10 @@ class _SpotPageState extends State<SpotPage> {
                           itemBuilder: (context, index) => AnimatedOpacity(
                             opacity: _animate ? 0 : 1,
                             duration: const Duration(milliseconds: 800),
-                            curve: Curves.fastLinearToSlowEaseIn,
+                            curve: Curves.decelerate,
                             child: AnimatedPadding(
                               duration: const Duration(milliseconds: 800),
-                              curve: Curves.fastLinearToSlowEaseIn,
+                              curve: Curves.decelerate,
                               padding: _animate
                                   ? const EdgeInsets.only(
                                       left: 5,
