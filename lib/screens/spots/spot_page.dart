@@ -61,10 +61,9 @@ class _SpotPageState extends State<SpotPage> {
                           ),
                         )),
                   ),
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 800),
+                  Positioned(
                     top: 50,
-                    left: _animate ? 15 : 20,
+                    left: 20,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: BackdropFilter(
@@ -88,9 +87,8 @@ class _SpotPageState extends State<SpotPage> {
                       ),
                     ),
                   ),
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 800),
-                    right: _animate ? 20 : 30,
+                  Positioned(
+                    right: 30,
                     top: 80,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
@@ -113,11 +111,16 @@ class _SpotPageState extends State<SpotPage> {
                           child: AnimatedOpacity(
                             opacity: _animate ? 0 : 1,
                             duration: const Duration(milliseconds: 800),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20,
-                                right: 20,
-                              ),
+                            child: AnimatedPadding(
+                              duration: const Duration(milliseconds: 1000),
+                              padding: _animate
+                                  ? const EdgeInsets.only(
+                                      left: 10,
+                                    )
+                                  : const EdgeInsets.only(
+                                      left: 20,
+                                      right: 20,
+                                    ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -137,9 +140,9 @@ class _SpotPageState extends State<SpotPage> {
                                     widget.data['short_desc'].toString(),
                                     style: TextStyle(
                                         overflow: TextOverflow.clip,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         color:
-                                            Constants.color2.withOpacity(.65)),
+                                            Constants.color2.withOpacity(.55)),
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -150,7 +153,7 @@ class _SpotPageState extends State<SpotPage> {
                                         overflow: TextOverflow.clip,
                                         fontSize: 14,
                                         color:
-                                            Constants.color2.withOpacity(.4)),
+                                            Constants.color2.withOpacity(.3)),
                                   ),
                                   const SizedBox(
                                     height: 10,

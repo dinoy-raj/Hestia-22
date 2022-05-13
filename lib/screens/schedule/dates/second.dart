@@ -42,10 +42,11 @@ class _SecondPageState extends State<SecondPage> {
           child: widget.data == null
               ? const Center(child: CupertinoActivityIndicator())
               : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   itemCount: widget.data!.length,
                   itemBuilder: ((context, index) {
                     return SizedBox(
-                      height: size.width * 0.39,
+                      height: size.width * 0.4,
                       child: Row(
                         children: [
                           const TimeLine(),
@@ -54,7 +55,9 @@ class _SecondPageState extends State<SecondPage> {
                             time: DateFormat('hh:mm a').format(
                                 DateTime.parse(widget.data![0]['event_start'])),
                             eventName: widget.data![index]['title'].toString(),
-                            description: widget.data![index]['venue']['title']
+                            description:
+                                widget.data![index]['short_desc'].toString(),
+                            venue: widget.data![index]['venue']['title']
                                 .toString(),
                             route: EventDetails(widget.data![index]),
                           )

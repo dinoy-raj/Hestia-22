@@ -52,7 +52,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         body: Column(
           children: [
             SizedBox(
-              height: size.width * 0.68,
+              height: size.width * 0.6,
               child: Stack(children: [
                 AnimatedPadding(
                   duration: const Duration(seconds: 3),
@@ -63,25 +63,34 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   child: SizedBox(
                     height: size.width * 0.68,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: size.width * 0.17,
+                          height: size.width * 0.2,
                         ),
-                        AnimatedOpacity(
-                          duration: const Duration(seconds: 3),
+                        AnimatedPadding(
+                          duration: const Duration(seconds: 1),
                           curve: Curves.decelerate,
-                          opacity: start ? 1 : 0.2,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 18.0),
-                            child: Text(
-                              'Schedule',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'helvetica',
-                                  letterSpacing: 1.4),
+                          padding: start
+                              ? EdgeInsets.zero
+                              : const EdgeInsets.only(
+                                  left: 20,
+                                ),
+                          child: AnimatedOpacity(
+                            duration: const Duration(seconds: 3),
+                            curve: Curves.decelerate,
+                            opacity: start ? 1 : 0.2,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 18.0),
+                              child: Text(
+                                'Schedule',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'helvetica',
+                                    letterSpacing: 1.4),
+                              ),
                             ),
                           ),
                         ),
@@ -99,20 +108,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                   ),
                 ),
-                Container(
-                    width: size.width,
-                    height: size.width * 0.1,
-                    margin: const EdgeInsets.only(top: 250),
-                    decoration: const BoxDecoration(
-                      color: Constants.sc,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30)),
-                    )),
               ]),
             ),
             Container(
-              height: size.height * 0.55,
+              height: size.height * 0.6,
               color: Constants.sc,
               child: Consumer<DateInfo>(
                   builder: (context, value, child) {
@@ -169,11 +168,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               child: AnimatedContainer(
                 duration: const Duration(seconds: 1),
                 curve: Curves.decelerate,
-                width: 75,
-                height: 90,
+                width: 60,
+                height: 70,
                 decoration: BoxDecoration(
                   color: Constants.color1,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                       color: currentDateInfo.dateType == value.dateType
                           ? Constants.iconAc
@@ -188,7 +187,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         fontWeight: currentDateInfo.dateType == value.dateType
                             ? FontWeight.w800
                             : FontWeight.w500,
-                        fontSize: 20,
+                        fontSize: 14,
                         color: currentDateInfo.dateType == value.dateType
                             ? Colors.white
                             : Colors.grey.withOpacity(0.6),
@@ -206,7 +205,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             ? Colors.white70
                             : Colors.grey.withOpacity(0.5),
                         fontWeight: FontWeight.w400,
-                        fontSize: 20,
+                        fontSize: 14,
                       ),
                     )
                   ],
@@ -224,13 +223,16 @@ class EventCard extends StatefulWidget {
   final String time;
   final String eventName;
   final String description;
+  final String venue;
   final Widget route;
+
   const EventCard({
     Key? key,
     required this.eventName,
     required this.description,
     required this.time,
     required this.route,
+    required this.venue,
   }) : super(key: key);
 
   @override
@@ -261,7 +263,7 @@ class _EventCardState extends State<EventCard> {
           Text(
             widget.time,
             style: const TextStyle(
-                fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 15),
+                fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 12),
           ),
           const SizedBox(
             height: 16,
@@ -295,16 +297,34 @@ class _EventCardState extends State<EventCard> {
                         widget.eventName,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 18,
+                          fontSize: 16,
                           color: Colors.white.withOpacity(0.9),
                         ),
                       ),
-                      Text(
-                        widget.description,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: Colors.white.withOpacity(0.55),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 5.0,
+                        ),
+                        child: Text(
+                          widget.description,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Colors.white.withOpacity(0.35),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 5.0,
+                        ),
+                        child: Text(
+                          widget.venue,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: Colors.white.withOpacity(0.55),
+                          ),
                         ),
                       ),
                     ],
@@ -344,7 +364,7 @@ class _TimeLineState extends State<TimeLine> {
           ),
           Container(
             width: size.width * 0.006,
-            height: size.width * 0.359,
+            height: size.width * 0.3,
             color: Colors.grey,
           ),
         ],
