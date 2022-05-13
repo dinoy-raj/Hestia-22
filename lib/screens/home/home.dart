@@ -74,12 +74,10 @@ class HomeState extends State<Home> {
     List<String> list = [];
 
     if (widget.a != null) {
-      for (var index in all!) {
+      for (var map in widget.a!) {
         if (list.length < 4) {
-          if (widget.a![index]['title']
-              .toLowerCase()
-              .contains(pattern.toLowerCase())) {
-            list.add(widget.a![index]['title']);
+          if (map['title'].toLowerCase().contains(pattern.toLowerCase())) {
+            list.add(map['title']);
             if (list.length == 4) {
               break;
             }
@@ -283,139 +281,149 @@ class HomeState extends State<Home> {
                               color: Colors.grey.withOpacity(.05),
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                //search icon
-                                SizedBox(
-                                  height: screenHeight * .05,
-                                  width: screenHeight * .05,
-                                  child: Icon(
-                                    FontAwesomeIcons.magnifyingGlass,
-                                    size: 17,
-                                    color: Constants.iconIn,
-                                  ),
-                                ),
-
-                                AnimatedPadding(
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.decelerate,
-                                  padding: start
-                                      ? const EdgeInsets.only(left: 0)
-                                      : const EdgeInsets.only(left: 10),
-                                  child: SizedBox(
-                                    height: screenHeight * .065,
-                                    width: screenWidth * .65,
-                                    child: TypeAheadField(
-                                      textFieldConfiguration:
-                                          TextFieldConfiguration(
-                                        style:
-                                            const TextStyle(color: Colors.grey),
-                                        cursorColor: Constants.iconIn,
-                                        cursorRadius: const Radius.circular(10),
-                                        textCapitalization:
-                                            TextCapitalization.sentences,
-                                        decoration: InputDecoration(
-                                          hintText: "Discover new event",
-                                          hintStyle: TextStyle(
-                                            fontFamily: 'Helvetica',
-                                            color: Constants.iconIn,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w100,
-                                          ),
-                                          hoverColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          border: InputBorder.none,
-                                          contentPadding:
-                                              const EdgeInsets.all(0),
-                                        ),
-                                      ),
-                                      itemBuilder:
-                                          (BuildContext context, suggestion) {
-                                        return ListTile(
-                                          onTap: () {
-                                            for (var element in widget.a!) {
-                                              if (element['title'] ==
-                                                  suggestion.toString()) {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            EventDetails(
-                                                                element)));
-                                              }
-                                            }
-                                          },
-                                          leading: Icon(
-                                            CupertinoIcons.location,
-                                            color: Constants.color2
-                                                .withOpacity(.40),
-                                          ),
-                                          title: Text(
-                                            suggestion
-                                                .toString()
-                                                .replaceAll("%l%", "")
-                                                .replaceAll("%e%", ""),
-                                            style: TextStyle(
-                                                color: Constants.color2
-                                                    .withOpacity(.40)),
-                                          ),
-                                        );
-                                      },
-                                      suggestionsCallback:
-                                          (String pattern) async {
-                                        return _getSuggestions(pattern);
-                                      },
-                                      hideOnError: true,
-                                      hideOnEmpty: true,
-                                      hideOnLoading: true,
-                                      hideSuggestionsOnKeyboardHide: true,
-                                      onSuggestionSelected:
-                                          (String suggestion) {},
-                                    ),
-                                  ),
-                                ),
-
-                                AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 1800),
-                                  curve: Curves.decelerate,
-                                  opacity: start ? 1 : 0,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      FocusScopeNode currentFocus =
-                                          FocusScope.of(context);
-                                      if (currentFocus.hasPrimaryFocus) {
-                                        if (mounted) {
-                                          setState(() {
-                                            filPressed = !filPressed;
-                                          });
-                                        }
-                                      }
-                                    },
-                                    child: AnimatedContainer(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: AnimatedPadding(
                                       duration: const Duration(seconds: 1),
                                       curve: Curves.decelerate,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                            color: filPressed
-                                                ? Constants.iconAc
-                                                : Colors.transparent),
-                                      ),
-                                      height: screenHeight * .05,
-                                      width: screenHeight * .05,
-                                      child: Icon(
-                                        FontAwesomeIcons.sliders,
-                                        color: filPressed
-                                            ? Colors.grey
-                                            : Constants.iconIn,
-                                        size: 18,
+                                      padding: start
+                                          ? const EdgeInsets.only(left: 0)
+                                          : const EdgeInsets.only(left: 10),
+                                      child: TypeAheadField(
+                                        textFieldConfiguration:
+                                            TextFieldConfiguration(
+                                          style: const TextStyle(
+                                              color: Colors.grey),
+                                          cursorColor: Constants.iconIn,
+                                          cursorRadius:
+                                              const Radius.circular(10),
+                                          textCapitalization:
+                                              TextCapitalization.sentences,
+                                          decoration: InputDecoration(
+                                            icon: AnimatedPadding(
+                                              duration:
+                                                  const Duration(seconds: 1),
+                                              curve: Curves.decelerate,
+                                              padding: start
+                                                  ? const EdgeInsets.only(
+                                                      left: 0)
+                                                  : const EdgeInsets.only(
+                                                      left: 20),
+                                              child: Icon(
+                                                FontAwesomeIcons
+                                                    .magnifyingGlass,
+                                                size: 17,
+                                                color: Constants.iconIn,
+                                              ),
+                                            ),
+                                            hintText: "Discover new event",
+                                            hintStyle: TextStyle(
+                                              fontFamily: 'Helvetica',
+                                              color: Constants.iconIn,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w100,
+                                            ),
+                                            hoverColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            border: InputBorder.none,
+                                            contentPadding:
+                                                const EdgeInsets.all(0),
+                                          ),
+                                        ),
+                                        suggestionsBoxDecoration:
+                                            SuggestionsBoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        itemBuilder:
+                                            (BuildContext context, suggestion) {
+                                          return ListTile(
+                                            onTap: () {
+                                              for (var map in widget.a!) {
+                                                if (map['title'] ==
+                                                    suggestion.toString()) {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EventDetails(
+                                                                  map)));
+                                                }
+                                              }
+                                            },
+                                            title: Text(
+                                              suggestion.toString(),
+                                              style: const TextStyle(
+                                                color: Constants.iconAc,
+                                                fontFamily: "Helvetica",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        suggestionsCallback:
+                                            (String pattern) async {
+                                          return _getSuggestions(pattern);
+                                        },
+                                        hideOnError: true,
+                                        hideOnEmpty: true,
+                                        hideOnLoading: true,
+                                        hideSuggestionsOnKeyboardHide: true,
+                                        onSuggestionSelected:
+                                            (String suggestion) {},
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  AnimatedOpacity(
+                                    duration:
+                                        const Duration(milliseconds: 1800),
+                                    curve: Curves.decelerate,
+                                    opacity: start ? 1 : 0,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        FocusScopeNode currentFocus =
+                                            FocusScope.of(context);
+                                        if (currentFocus.hasPrimaryFocus) {
+                                          if (mounted) {
+                                            setState(() {
+                                              filPressed = !filPressed;
+                                            });
+                                          }
+                                        }
+                                      },
+                                      child: AnimatedContainer(
+                                        duration: const Duration(seconds: 1),
+                                        curve: Curves.decelerate,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color: filPressed
+                                                  ? Constants.iconAc
+                                                  : Colors.transparent),
+                                        ),
+                                        height: screenHeight * .05,
+                                        width: screenHeight * .05,
+                                        child: Icon(
+                                          FontAwesomeIcons.sliders,
+                                          color: filPressed
+                                              ? Colors.grey
+                                              : Constants.iconIn,
+                                          size: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
