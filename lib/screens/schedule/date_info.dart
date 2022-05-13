@@ -9,9 +9,9 @@ class DateInfo extends ChangeNotifier{
   DateInfo(this.dateType, this.date, this.day);
 
   updateDate(DateInfo dateInfo){
-    this.dateType = dateInfo.dateType;
-    this.date = dateInfo.date;
-    this.day = dateInfo.day;
+    dateType = dateInfo.dateType;
+    date = dateInfo.date;
+    day = dateInfo.day;
 
     notifyListeners();
   }
