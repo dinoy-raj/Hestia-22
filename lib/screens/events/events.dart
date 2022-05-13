@@ -42,19 +42,24 @@ class _EventDetailsState extends State<EventDetails> {
         start = true;
       });
     });
-    imageUrl = widget.eventData['image'];
+    if (widget.eventData['image'] != null) {
+      imageUrl = widget.eventData['image'];
+    } else {
+      imageUrl =
+          "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (duration!.inSeconds <= 0) {
+      setState(() {});
+    }
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    if (duration!.inSeconds <= 0) {
-      setState(() {});
-    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
