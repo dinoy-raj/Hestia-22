@@ -263,7 +263,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                               onPressed: () {
                                                 setState(() {
                                                   auth.rejectNotification(
-                                                      not?[index]['link2']);
+                                                      not?[index]['link2'],(not?[index]['id']).toString());
                                                   not?.removeAt(index);
                                                 });
                                               },
@@ -306,7 +306,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                               onPressed: () async {
                                                 if (await auth
                                                     .acceptNotification(
-                                                        not?[index]['link1'])) {
+                                                        not?[index]['link1'],(not?[index]['id']).toString())) {
                                                   setState(() {
                                                     print("YES");
                                                     not?.removeAt(index);
