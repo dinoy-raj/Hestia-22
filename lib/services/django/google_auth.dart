@@ -8,6 +8,7 @@ class GoogleAuth extends ChangeNotifier {
   String? token;
   bool? isCompleted;
   GoogleSignIn googleSignIn = GoogleSignIn();
+  String hostUrl = "https://backend.hestiatkmce.live";
 
   Future<void> initLogin() async {
     token = await const FlutterSecureStorage().read(key: 'token');
@@ -38,7 +39,7 @@ class GoogleAuth extends ChangeNotifier {
       await const FlutterSecureStorage().write(key: 'token', value: token);
 
       http.Response response1 = await http.get(
-        Uri.parse("https://backend.hestiatkmce.live/api/v1/users/me"),
+        Uri.parse("$hostUrl/api/v1/users/me"),
         headers: {'Authorization': "token " + token!},
       );
 
@@ -66,7 +67,7 @@ class GoogleAuth extends ChangeNotifier {
 
   Future<Map<String, dynamic>> getProfile() async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live/api/v1/users/me"),
+      Uri.parse("$hostUrl/api/v1/users/me"),
       headers: {'Authorization': "token " + token!},
     );
     return json.decode(response.body);
@@ -75,7 +76,7 @@ class GoogleAuth extends ChangeNotifier {
   Future<int> updateProfile(
       String name, String phone, String college, String department) async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live/api/v1/users/me/"),
+      Uri.parse("$hostUrl/api/v1/users/me/"),
       headers: {'Authorization': "token " + token!},
     );
 
@@ -106,7 +107,7 @@ class GoogleAuth extends ChangeNotifier {
 
   Future<List<dynamic>> getNotifications() async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live/api/v1/notification"),
+      Uri.parse("$hostUrl/api/v1/notification"),
       headers: {'Authorization': "token " + token!},
     );
 
@@ -115,7 +116,7 @@ class GoogleAuth extends ChangeNotifier {
 
   Future<bool> acceptNotification(String url, String id) async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live" + url + "&id=$id"),
+      Uri.parse(hostUrl + url + "&id=$id"),
       headers: {'Authorization': "token " + token!},
     );
 
@@ -128,7 +129,7 @@ class GoogleAuth extends ChangeNotifier {
 
   Future<bool> rejectNotification(String url, String id) async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live" + url + "&id=$id"),
+      Uri.parse(hostUrl + url + "&id=$id"),
       headers: {'Authorization': "token " + token!},
     );
 
@@ -137,5 +138,29 @@ class GoogleAuth extends ChangeNotifier {
     }
 
     return false;
+  }
+
+  Future<List<Map>> getRegisteredEvents() async {
+    http.Response response = await http.get(
+      Uri.parse("$hostUrl/api/v1/users/event"),
+      headers: {'Authorization': "token " + token!},
+    );
+
+    List<Map> list = [];
+
+    json.decode(response.body).forEach((key, value) {
+      list.add(value);
+    });
+
+    return list;
+  }
+
+  Future<List<dynamic>> getCertificates() async {
+    http.Response response = await http.get(
+      Uri.parse("$hostUrl/api/v1/users/certificates"),
+      headers: {'Authorization': "token " + token!},
+    );
+
+    return json.decode(response.body);
   }
 }
