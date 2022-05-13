@@ -376,20 +376,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: 70, right: 70, top: 5, bottom: 50),
-                      child: GestureDetector(
-                        onTap: () {
-                          Future.delayed(const Duration(milliseconds: 800),
-                              () async {
-                            await auth.logOut();
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Constants.iconAc.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          height: 40,
-                          width: 120,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Constants.iconAc.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        height: 40,
+                        width: 120,
+                        child: MaterialButton(
+                          splashColor: Constants.color1,
+                          highlightColor: Constants.color1,
+                          onPressed: () {
+                            Future.delayed(const Duration(milliseconds: 800),
+                                () async {
+                              await auth.logOut();
+                            });
+                          },
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
