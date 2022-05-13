@@ -75,46 +75,53 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        AnimatedPadding(
-                          padding: start
-                              ? const EdgeInsets.only(right: 5)
-                              : const EdgeInsets.only(right: 10),
-                          duration: const Duration(milliseconds: 800),
-                          curve: Curves.decelerate,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisteredEvents()));
+                          },
+                          child: AnimatedPadding(
+                            padding: start
+                                ? const EdgeInsets.only(right: 5)
+                                : const EdgeInsets.only(right: 10),
+                            duration: const Duration(milliseconds: 800),
+                            curve: Curves.decelerate,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: Constants.bg,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  height: 70,
+                                  width: 140,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.event_available_outlined,
+                                      color: Colors.white.withOpacity(0.5),
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
-                                height: 70,
-                                width: 140,
-                                child: Center(
-                                  child: IconButton(
-                                    icon: const Icon(
-                                        Icons.event_available_outlined),
-                                    color: Colors.white.withOpacity(0.5),
-                                    iconSize: 30,
-                                    onPressed: () {},
-                                  ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Registered Events',
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.5),
-                                    fontSize: 16,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
+                                Text(
+                                  'Registered Events',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontSize: 16,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
