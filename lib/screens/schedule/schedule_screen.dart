@@ -78,7 +78,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               'Schedule',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'helvetica',
                                   letterSpacing: 1.4),
