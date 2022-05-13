@@ -28,17 +28,17 @@ class _LoginPageState extends State<LoginPage> {
               width: screenWidth * 1.3,
               child: Lottie.asset('assets/animations/welcome.json'),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xff121212),
-                      borderRadius: BorderRadius.all(Radius.circular(25))),
-                  height: 70,
-                  width: 280,
-                  child: Center(
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: Color(0xff121212),
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    height: 70,
+                    width: 280,
                     child: RoundedButton(
                       text: _text,
                       press: () async {
@@ -69,8 +69,11 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -97,6 +100,9 @@ class RoundedButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return TextButton(
       onPressed: press,
+      style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all(Colors.transparent),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

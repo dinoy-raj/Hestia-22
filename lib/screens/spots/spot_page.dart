@@ -65,8 +65,8 @@ class _SpotPageState extends State<SpotPage> {
                   ),
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
-                    top: 70,
-                    left: _animate ? 15 : 25,
+                    top: 50,
+                    left: _animate ? 15 : 20,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: BackdropFilter(
@@ -76,8 +76,8 @@ class _SpotPageState extends State<SpotPage> {
                             borderRadius: BorderRadius.circular(8),
                             gradient: LinearGradient(
                               colors: [
+                                Colors.black.withOpacity(.4),
                                 Colors.black.withOpacity(.3),
-                                Colors.black.withOpacity(.6),
                               ],
                               begin: AlignmentDirectional.topStart,
                               end: AlignmentDirectional.bottomEnd,
@@ -93,7 +93,7 @@ class _SpotPageState extends State<SpotPage> {
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
                     right: _animate ? 20 : 30,
-                    top: 70,
+                    top: 80,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: BackdropFilter(
@@ -105,8 +105,8 @@ class _SpotPageState extends State<SpotPage> {
                             borderRadius: BorderRadius.circular(20),
                             gradient: LinearGradient(
                               colors: [
-                                Colors.black.withOpacity(.6),
                                 Colors.black.withOpacity(.3),
+                                Colors.black.withOpacity(.2),
                               ],
                               begin: AlignmentDirectional.topStart,
                               end: AlignmentDirectional.bottomEnd,
