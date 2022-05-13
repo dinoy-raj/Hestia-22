@@ -113,9 +113,9 @@ class GoogleAuth extends ChangeNotifier {
     return json.decode(response.body)['results'];
   }
 
-  Future<bool> acceptNotification(String url) async {
+  Future<bool> acceptNotification(String url, String id) async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live" + url),
+      Uri.parse("https://backend.hestiatkmce.live" + url + "&id=$id"),
       headers: {'Authorization': "token " + token!},
     );
 
@@ -126,9 +126,9 @@ class GoogleAuth extends ChangeNotifier {
     return false;
   }
 
-  Future<bool> rejectNotification(String url) async {
+  Future<bool> rejectNotification(String url, String id) async {
     http.Response response = await http.get(
-      Uri.parse("https://backend.hestiatkmce.live" + url),
+      Uri.parse("https://backend.hestiatkmce.live" + url + "&id=$id"),
       headers: {'Authorization': "token " + token!},
     );
 
