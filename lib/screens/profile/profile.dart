@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/profile/certificates.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registered_events.dart';
 
@@ -126,46 +127,54 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedPadding(
-                          padding: start
-                              ? const EdgeInsets.only(left: 5)
-                              : const EdgeInsets.only(left: 10),
-                          duration: const Duration(milliseconds: 800),
-                          curve: Curves.decelerate,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Center(
-                                  child: IconButton(
-                                    icon: const Icon(Icons.badge_outlined),
-                                    iconSize: 30,
-                                    color: Colors.white.withOpacity(0.5),
-                                    onPressed: () {},
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CertificatesPage()));
+                          },
+                          child: AnimatedPadding(
+                            padding: start
+                                ? const EdgeInsets.only(left: 5)
+                                : const EdgeInsets.only(left: 10),
+                            duration: const Duration(milliseconds: 800),
+                            curve: Curves.decelerate,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.badge_outlined,
+                                      size: 30,
+                                      color: Colors.white.withOpacity(0.5),
+                                    ),
                                   ),
-                                ),
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
+                                  decoration: const BoxDecoration(
+                                    color: Constants.bg,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
                                   ),
+                                  height: 70,
+                                  width: 140,
+                                  //color: const Color(0xff121212)
                                 ),
-                                height: 70,
-                                width: 140,
-                                //color: const Color(0xff121212)
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Certificates',
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.5),
-                                    fontSize: 16,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  'Certificates',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontSize: 16,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
