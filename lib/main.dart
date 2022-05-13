@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Hestia22',
       theme: ThemeData(
+        primarySwatch: Colors.grey,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),

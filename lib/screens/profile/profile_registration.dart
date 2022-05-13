@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hestia22/providers/profile_provider.dart';
 import '../../main.dart';
+import '../bottomnavigation/navbar.dart';
 
 class ProfileRegistration extends StatelessWidget {
   const ProfileRegistration({Key? key}) : super(key: key);
@@ -113,13 +114,25 @@ class ProfileRegistration extends StatelessWidget {
                           ),
                           ContinueButton(
                             onPressed: () async {
-                              if (context.read<ProfileProvider>().validate()) {
-                                await context.read<ProfileProvider>().post();
+                              if (context.read<ProfileProvider>().validate() &&
+                                  await context
+                                      .read<ProfileProvider>()
+                                      .post()) {
+                                NavBarState.buildFlag = true;
+
+                                Future.delayed(
+                                    const Duration(milliseconds: 500), () {
+                                  while (Navigator.canPop(context)) {
+                                    Navigator.pop(context);
+                                  }
+                                });
                               }
                             },
                             child: context.read<ProfileProvider>().result == 0
-                                ? const Icon(
-                                    CupertinoIcons.checkmark_alt_circle)
+                                ? Icon(
+                                    CupertinoIcons.checkmark_alt_circle,
+                                    color: Colors.white.withOpacity(0.75),
+                                  )
                                 : context.read<ProfileProvider>().result == 1
                                     ? const Center(
                                         child: CupertinoActivityIndicator(

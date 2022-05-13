@@ -15,11 +15,12 @@ class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
 
   @override
-  State<NavBar> createState() => _NavBarState();
+  State<NavBar> createState() => NavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class NavBarState extends State<NavBar> {
   PageController pageControl = PageController();
+  static bool buildFlag = true;
 
   //index of page selected
   int index = 8;
@@ -35,13 +36,13 @@ class _NavBarState extends State<NavBar> {
   List<dynamic>? show5;
   List<dynamic>? show6;
   List<dynamic>? spots;
-
   List<dynamic>? all;
-
   Map? profile;
 
   @override
   void initState() {
+    super.initState();
+
     django.getTrendingEvents().then((value) {
       if (mounted) {
         setState(() {
@@ -92,12 +93,11 @@ class _NavBarState extends State<NavBar> {
 
     setState(() {
       django.getAllEvents().then((value) {
-        if(mounted)
-          {
-            setState(() {
-              all = value;
-            });
-          }
+        if (mounted) {
+          setState(() {
+            all = value;
+          });
+        }
       });
     });
 
@@ -109,18 +109,11 @@ class _NavBarState extends State<NavBar> {
       }
     });
 
-    super.initState();
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
         opaC = 1;
         start = true;
         index = 0;
-      });
-    });
-
-    auth.getProfile().then((value) {
-      setState(() {
-        profile = value;
       });
     });
   }
@@ -129,6 +122,16 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
+    if(buildFlag) {
+      print("A");
+      buildFlag = false;
+      auth.getProfile().then((value) {
+        setState(() {
+          profile = value;
+        });
+      });
+    }
 
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
       setState(() {
@@ -147,8 +150,7 @@ class _NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-
-              Home(show0, show1, show2, show3, show4, show5,profile,all),
+              Home(show0, show1, show2, show3, show4, show5, profile, all),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: const ScheduleScreen()),

@@ -1,9 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registered_events.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -29,7 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height - 24;
-    double screenWidth = MediaQuery.of(context).size.width;
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 800),
       curve: Curves.decelerate,
@@ -205,6 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             curve: Curves.decelerate,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   decoration: const BoxDecoration(
@@ -219,7 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Icon(
                                           Icons.person_outline,
                                           color: Colors.white.withOpacity(.5),
-                                          size: 24,
+                                          size: 20,
                                           // Image.asset('assets/icons/person.png'),
                                         ),
                                       ),
@@ -270,9 +270,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['phone_number']
-                                                    .toString()
-                                                    .substring(3),
+                                                : "+91 " +
+                                                    widget.data!['phone_number']
+                                                        .toString()
+                                                        .substring(3),
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
@@ -333,16 +334,39 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                    ),
+                    child: TextButton(
+                        style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProfileRegistration()));
+                        },
+                        child: const Text(
+                          "Update profile",
+                          style: TextStyle(
+                            color: Constants.iconAc,
+                          ),
+                        )),
+                  ),
+                ),
                 AnimatedPadding(
-                  padding: start
-                      ? const EdgeInsets.only(right: 20)
-                      : EdgeInsets.zero,
+                  padding:
+                      start ? EdgeInsets.zero : const EdgeInsets.only(left: 20),
                   duration: const Duration(milliseconds: 800),
                   curve: Curves.decelerate,
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          left: 70, right: 70, top: 50, bottom: 50),
+                          left: 70, right: 70, top: 5, bottom: 50),
                       child: GestureDetector(
                         onTap: () {
                           Future.delayed(const Duration(milliseconds: 800),
