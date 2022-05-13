@@ -317,7 +317,7 @@ class _EventDetailsState extends State<EventDetails> {
                             ? AnimatedOpacity(
                                 duration: const Duration(seconds: 1),
                                 curve: Curves.slowMiddle,
-                                opacity: start ? 1 : 0.3,
+                                opacity: start ? 1 : 0.5,
                                 child: Padding(
                                   padding: EdgeInsets.only(top: width * 0.06),
                                   child: Row(
@@ -358,7 +358,7 @@ class _EventDetailsState extends State<EventDetails> {
                             ? AnimatedOpacity(
                           duration: const Duration(seconds: 1),
                           curve: Curves.slowMiddle,
-                          opacity: start ? 1 : 0.3,
+                          opacity: start ? 1 : 0.5,
                           child: Padding(
                             padding: EdgeInsets.only(top: width * 0.06),
                             child: Row(
