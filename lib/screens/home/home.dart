@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
@@ -68,7 +69,8 @@ class HomeState extends State<Home> {
   late List name;
 
   List<dynamic>? show;
-  List<dynamic>? not;
+  List<dynamic>? unreadNotifications;
+  List<dynamic>? allNotifications;
 
   List<String> _getSuggestions(String pattern) {
     List<String> list = [];
@@ -98,13 +100,32 @@ class HomeState extends State<Home> {
     catSelect = 10;
     show = widget.event0;
 
-    auth.getNotifications().then((value) {
+    auth.getNotifications().then((value) async {
+      allNotifications = List<dynamic>.from(value);
+
+      List toRemove = [];
+
+      for (Map notification in value) {
+        if (await const FlutterSecureStorage().read(
+                key: 'read_notification' + notification['id'].toString()) !=
+            null) {
+          for (var element in value) {
+            if (element['id'] == notification['id']) {
+              toRemove.add(element);
+            }
+          }
+        }
+      }
+
+      value.removeWhere((element) => toRemove.contains(element));
+
       if (mounted) {
         setState(() {
-          not = value;
+          unreadNotifications = value;
         });
       }
     });
+
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {
         setState(() {
@@ -198,8 +219,19 @@ class HomeState extends State<Home> {
                               //notification bell
                               GestureDetector(
                                 onTap: () {
+                                  if (unreadNotifications != null) {
+                                    for (Map notification
+                                        in unreadNotifications!) {
+                                      const FlutterSecureStorage().write(
+                                          key: 'read_notification' +
+                                              notification['id'].toString(),
+                                          value: 'true');
+                                    }
+                                  }
+
                                   if (mounted) {
                                     setState(() {
+                                      unreadNotifications = [];
                                       notPressed = !notPressed;
                                       FocusManager.instance.primaryFocus
                                           ?.unfocus();
@@ -212,13 +244,15 @@ class HomeState extends State<Home> {
                                   opacity: start ? 1 : 0,
                                   child: Badge(
                                     position: BadgePosition.topEnd(end: -5),
-                                    badgeColor: not == null
+                                    badgeColor: unreadNotifications == null ||
+                                            unreadNotifications!.isEmpty
                                         ? Colors.transparent
                                         : Constants.iconAc,
                                     badgeContent: Text(
-                                      not == null
+                                      unreadNotifications != null
                                           ? " "
-                                          : (not?.length).toString(),
+                                          : (unreadNotifications?.length)
+                                              .toString(),
                                       style: const TextStyle(
                                           fontSize: 9,
                                           color: Colors.transparent,
@@ -846,7 +880,9 @@ class HomeState extends State<Home> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.black),
-                      child: const NotificationPage(),
+                      child: NotificationPage(
+                        notifications: allNotifications,
+                      ),
                     ),
                   ],
                 ),
