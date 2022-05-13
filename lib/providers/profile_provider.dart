@@ -81,15 +81,20 @@ class ProfileProvider with ChangeNotifier {
     return true;
   }
 
-  Future<void> post() async {
+  Future<bool> post() async {
     result = 1;
     notifyListeners();
 
     result = await auth.updateProfile(profile.name!, "+91" + profile.phone!,
         profile.college!, profile.department!);
 
-    if (result == 2) validate();
+    if (result == 2 && !validate()) {
+      return false;
+    }
+
     notifyListeners();
+
+    return true;
   }
 }
 

@@ -70,9 +70,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Container(
-                  height: screenHeight * 0.1,
-                ),
               ],
             ),
           ],

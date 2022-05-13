@@ -44,6 +44,9 @@ class GoogleAuth extends ChangeNotifier {
 
       isCompleted = jsonDecode(response1.body)['is_completed'];
 
+      await const FlutterSecureStorage()
+          .write(key: 'is_completed', value: isCompleted.toString());
+
       notifyListeners();
 
       return true;
@@ -93,7 +96,8 @@ class GoogleAuth extends ChangeNotifier {
     }
 
     await const FlutterSecureStorage()
-        .write(key: 'is_completed', value: "true");
+        .write(key: 'is_completed', value: 'true');
+
     isCompleted = true;
     notifyListeners();
 
@@ -109,21 +113,29 @@ class GoogleAuth extends ChangeNotifier {
     return json.decode(response.body)['results'];
   }
 
-  Future<void> acceptNotification(String url) async {
+  Future<bool> acceptNotification(String url, String id) async {
     http.Response response = await http.get(
-      Uri.parse(url),
+      Uri.parse("https://backend.hestiatkmce.live" + url + "&id=$id"),
       headers: {'Authorization': "token " + token!},
     );
 
-    print(json.decode(response.body));
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
   }
 
-  Future<void> rejectNotification(String url) async {
+  Future<bool> rejectNotification(String url, String id) async {
     http.Response response = await http.get(
-      Uri.parse(url),
+      Uri.parse("https://backend.hestiatkmce.live" + url + "&id=$id"),
       headers: {'Authorization': "token " + token!},
     );
 
-    print(json.decode(response.body));
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
   }
 }

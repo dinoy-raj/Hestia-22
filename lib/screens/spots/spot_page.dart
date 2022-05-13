@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/events/events.dart';
 
 class SpotPage extends StatefulWidget {
   const SpotPage({Key? key, required this.data}) : super(key: key);
@@ -48,15 +49,18 @@ class _SpotPageState extends State<SpotPage> {
                     child: AnimatedOpacity(
                         duration: const Duration(milliseconds: 800),
                         opacity: _opacity,
-                        child: Image.network(
-                          widget.data['picture'] != null
-                              ? widget.data['picture'].toString()
-                              : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
-                          height: 300,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          color: Constants.color3.withOpacity(.5),
-                          colorBlendMode: BlendMode.overlay,
+                        child: Container(
+                          color: Constants.iconAc.withOpacity(.1),
+                          child: Image.network(
+                            widget.data['picture'] != null
+                                ? widget.data['picture'].toString()
+                                : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
+                            height: 300,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            color: Constants.iconAc.withOpacity(.1),
+                            colorBlendMode: BlendMode.overlay,
+                          ),
                         )),
                   ),
                   AnimatedPositioned(
@@ -72,8 +76,8 @@ class _SpotPageState extends State<SpotPage> {
                             borderRadius: BorderRadius.circular(8),
                             gradient: LinearGradient(
                               colors: [
-                                Constants.bg.withOpacity(.3),
-                                Constants.bg.withOpacity(.6),
+                                Colors.black.withOpacity(.3),
+                                Colors.black.withOpacity(.6),
                               ],
                               begin: AlignmentDirectional.topStart,
                               end: AlignmentDirectional.bottomEnd,
@@ -98,12 +102,11 @@ class _SpotPageState extends State<SpotPage> {
                           height: 200,
                           width: 200,
                           decoration: BoxDecoration(
-                            color: Constants.bg,
                             borderRadius: BorderRadius.circular(20),
                             gradient: LinearGradient(
                               colors: [
-                                Constants.bg.withOpacity(.8),
-                                Constants.bg.withOpacity(.4),
+                                Colors.black.withOpacity(.6),
+                                Colors.black.withOpacity(.3),
                               ],
                               begin: AlignmentDirectional.topStart,
                               end: AlignmentDirectional.bottomEnd,
@@ -180,14 +183,7 @@ class _SpotPageState extends State<SpotPage> {
                         width: 270,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            colors: [
-                              Constants.color3.withOpacity(.1),
-                              Constants.color3.withOpacity(.3),
-                            ],
-                            begin: AlignmentDirectional.topStart,
-                            end: AlignmentDirectional.bottomEnd,
-                          ),
+                          color: Constants.iconAc.withOpacity(.1),
                         ),
                         child: ListView.builder(
                           itemCount: widget.data['events'].length,
@@ -212,6 +208,14 @@ class _SpotPageState extends State<SpotPage> {
                               child: Column(
                                 children: [
                                   ListTile(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetails(widget
+                                                      .data['events'][index])));
+                                    },
                                     title: Text(
                                       widget.data['events'][index]
                                               ['short_title']
