@@ -38,9 +38,9 @@ class _CertificatesPageState extends State<CertificatesPage> {
               duration: const Duration(seconds: 3),
               curve: Curves.decelerate,
               opacity: start ? 1 : 0,
-              child: Text(
+              child: const Text(
                 'Certificates',
-                style: const TextStyle(
+                style: TextStyle(
                     overflow: TextOverflow.fade,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -66,9 +66,9 @@ class _CertificatesPageState extends State<CertificatesPage> {
                       margin:
                           start ? EdgeInsets.zero : const EdgeInsets.all(30),
                       decoration: BoxDecoration(
-                        color: Constants.color3.withOpacity(.25),
+                        color: Constants.iconAc.withOpacity(.25),
                         borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           opacity: 0.5,
                           fit: BoxFit.cover,
                           image: NetworkImage(
