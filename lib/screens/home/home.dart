@@ -1,10 +1,5 @@
-import 'dart:developer';
 import 'dart:ui';
-
 import 'package:badges/badges.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -13,10 +8,6 @@ import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/home/card2.dart';
 import 'package:hestia22/screens/home/cards1.dart';
-import 'package:hestia22/services/django/django.dart' as django;
-import 'package:flutter/material.dart';
-import 'package:hestia22/screens/home/tab.dart';
-
 import 'card3.dart';
 import 'card4.dart';
 import 'card5.dart';
@@ -24,15 +15,16 @@ import 'card6.dart';
 import 'notification.dart';
 
 class Home extends StatefulWidget {
-  List<dynamic>? event0;
-  List<dynamic>? event1;
-  List<dynamic>? event2;
-  List<dynamic>? event3;
-  List<dynamic>? event4;
-  List<dynamic>? event5;
-  List<dynamic>? a;
-  Map? profile;
-  Home(this.event0, this.event1, this.event2, this.event3, this.event4,
+  final List<dynamic>? event0;
+  final List<dynamic>? event1;
+  final List<dynamic>? event2;
+  final List<dynamic>? event3;
+  final List<dynamic>? event4;
+  final List<dynamic>? event5;
+  final List<dynamic>? a;
+  final Map? profile;
+
+  const Home(this.event0, this.event1, this.event2, this.event3, this.event4,
       this.event5, this.profile, this.a,
       {Key? key})
       : super(key: key);
@@ -63,7 +55,7 @@ class HomeState extends State<Home> {
 
   late Map eDetails;
 
-  List Sort1 = ["name", "price", "date"];
+  List sortFields = ["Title", "Prize", "Date"];
   int showIndex = 0;
   List<dynamic>? all;
   late List name;
@@ -132,6 +124,70 @@ class HomeState extends State<Home> {
           start = true;
           catSelect = 0;
         });
+      }
+    });
+  }
+
+  void sort(String field, bool reverse) {
+    setState(() {
+      filPressed = false;
+      switch (catSelect) {
+        case 0:
+          widget.event0?.sort((a, b) {
+            if (a['event'][field] == null || b['event'][field] == null) {
+              return 0;
+            }
+
+            return reverse
+                ? -a['event'][field].compareTo(b['event'][field])
+                : a['event'][field].compareTo(b['event'][field]);
+          });
+          break;
+        case 1:
+          widget.event1?.sort((a, b) {
+            if (a[field] == null || b[field] == null) return 0;
+
+            return reverse
+                ? -a[field].compareTo(b[field])
+                : a[field].compareTo(b[field]);
+          });
+          break;
+        case 2:
+          widget.event2?.sort((a, b) {
+            if (a[field] == null || b[field] == null) return 0;
+
+            return reverse
+                ? -a[field].compareTo(b[field])
+                : a[field].compareTo(b[field]);
+          });
+          break;
+        case 3:
+          widget.event3?.sort((a, b) {
+            if (a[field] == null || b[field] == null) return 0;
+
+            return reverse
+                ? -a[field].compareTo(b[field])
+                : a[field].compareTo(b[field]);
+          });
+          break;
+        case 4:
+          widget.event4?.sort((a, b) {
+            if (a[field] == null || b[field] == null) return 0;
+
+            return reverse
+                ? -a[field].compareTo(b[field])
+                : a[field].compareTo(b[field]);
+          });
+          break;
+        case 5:
+          widget.event5?.sort((a, b) {
+            if (a[field] == null || b[field] == null) return 0;
+
+            return reverse
+                ? -a[field].compareTo(b[field])
+                : a[field].compareTo(b[field]);
+          });
+          break;
       }
     });
   }
@@ -696,6 +752,9 @@ class HomeState extends State<Home> {
                                                             setState(() {
                                                               filPressed =
                                                                   false;
+
+                                                              sort('prize',
+                                                                  true);
                                                             });
                                                           },
                                                           style: ButtonStyle(
@@ -727,32 +786,19 @@ class HomeState extends State<Home> {
                                                       width: screenWidth * .34,
                                                       child: ElevatedButton(
                                                           onPressed: () {
-                                                            setState(() {
-                                                              filPressed =
-                                                                  false;
-                                                              if (showIndex ==
-                                                                  0) {
-                                                                // show?.sort((a, b) => a[
-                                                                //         'name']
-                                                                //     .compareTo(b[
-                                                                //         'name']));
-                                                              } else if (showIndex ==
-                                                                  1) {
-                                                                // show?.sort((a, b) => int
-                                                                //         .parse(b[
-                                                                //             'price'])
-                                                                //     .compareTo(int
-                                                                //         .parse(a[
-                                                                //             'price'])));
-                                                              } else {
-                                                                // show?.sort((a, b) => int
-                                                                //         .parse(a[
-                                                                //             'date'])
-                                                                //     .compareTo(int
-                                                                //         .parse(b[
-                                                                //             'date'])));
-                                                              }
-                                                            });
+                                                            if (showIndex ==
+                                                                0) {
+                                                              sort('title',
+                                                                  false);
+                                                            } else if (showIndex ==
+                                                                1) {
+                                                              sort('prize',
+                                                                  true);
+                                                            } else if (showIndex ==
+                                                                2) {
+                                                              sort('event_date',
+                                                                  true);
+                                                            }
                                                           },
                                                           style: ButtonStyle(
                                                               overlayColor:
@@ -786,7 +832,7 @@ class HomeState extends State<Home> {
                                             child: ListView.builder(
                                                 physics:
                                                     const BouncingScrollPhysics(),
-                                                itemCount: Sort1.length,
+                                                itemCount: sortFields.length,
                                                 scrollDirection: Axis.vertical,
                                                 itemBuilder:
                                                     (BuildContext context,
@@ -833,7 +879,7 @@ class HomeState extends State<Home> {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              Sort1[index],
+                                                              sortFields[index],
                                                               style: const TextStyle(
                                                                   color: Colors
                                                                       .white,
