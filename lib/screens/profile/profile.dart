@@ -84,7 +84,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(
               height: screenHeight * 0.18,
-              //color: Colors.yellow,
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
