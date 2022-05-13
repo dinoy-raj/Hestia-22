@@ -60,7 +60,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                       padding: const EdgeInsets.all(20),
                       margin: start ? EdgeInsets.zero : const EdgeInsets.all(30),
                       decoration: BoxDecoration(
-                        color: Constants.color3.withOpacity(.25),
+                        color: Constants.iconAc.withOpacity(.25),
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
                           opacity: 0.5,

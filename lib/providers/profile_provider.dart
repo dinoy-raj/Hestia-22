@@ -5,6 +5,7 @@ class ProfileProvider with ChangeNotifier {
   Profile profile = Profile();
 
   int _page = 0;
+  int result = -1;
 
   void setUsername(String username) =>
       profile = profile.copyWith(name: username);
@@ -26,7 +27,7 @@ class ProfileProvider with ChangeNotifier {
   String? collegeError;
   String? departmentError;
 
-  bool validateStep1() {
+  bool validate() {
     if (profile.name == null || profile.name!.isEmpty) {
       nameError = 'Full name can not be empty';
       notifyListeners();
@@ -35,30 +36,30 @@ class ProfileProvider with ChangeNotifier {
       nameError = null;
       notifyListeners();
     }
+
+    bool phoneValid = RegExp(r"^[0-9]").hasMatch(profile.phone!);
     if (profile.phone == null || profile.phone!.isEmpty) {
       phoneError = 'Phone number cannot be empty';
+      notifyListeners();
+      return false;
+    } else if (!phoneValid) {
+      phoneError = 'Invalid phone number';
       notifyListeners();
       return false;
     } else if (profile.phone!.length != 10) {
       phoneError = 'Invalid phone number (Do not add 0 or +91)';
       notifyListeners();
       return false;
-    }
-    {
-      bool emailValid = RegExp(r"^[0-9]").hasMatch(profile.phone!);
-      if (!emailValid) {
-        phoneError = 'Invalid phone number';
-        notifyListeners();
-        return false;
-      }
-      phoneError = null;
+    } else if (result == 2) {
+      result = -1;
+      phoneError = 'Phone number already registered';
       notifyListeners();
+      return false;
     }
-    profile.phone = "+91" + profile.phone!;
-    return true;
-  }
 
-  bool validateStep2() {
+    phoneError = null;
+    notifyListeners();
+
     if (profile.college == null || profile.college!.isEmpty) {
       collegeError = 'College cannot be empty';
       notifyListeners();
@@ -67,6 +68,7 @@ class ProfileProvider with ChangeNotifier {
       collegeError = null;
       notifyListeners();
     }
+
     if (profile.department == null || profile.department!.isEmpty) {
       departmentError = 'Department cannot be empty';
       notifyListeners();
@@ -75,12 +77,19 @@ class ProfileProvider with ChangeNotifier {
       departmentError = null;
       notifyListeners();
     }
+
     return true;
   }
 
-  void post() async {
-    await auth.updateProfile(
-        profile.name!, profile.phone!, profile.college!, profile.department!);
+  Future<void> post() async {
+    result = 1;
+    notifyListeners();
+
+    result = await auth.updateProfile(profile.name!, "+91" + profile.phone!,
+        profile.college!, profile.department!);
+
+    if (result == 2) validate();
+    notifyListeners();
   }
 }
 

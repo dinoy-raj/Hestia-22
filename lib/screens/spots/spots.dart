@@ -78,7 +78,8 @@ class SpotsState extends State<Spots> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.decelerate,
             opacity: _animate ? 0 : 1,
             child: Column(
               children: [
@@ -91,7 +92,8 @@ class SpotsState extends State<Spots> {
                           right: 20,
                         )
                       : EdgeInsets.zero,
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.decelerate,
                   child: Center(
                     child: Text(
                       "Explore",
@@ -112,8 +114,8 @@ class SpotsState extends State<Spots> {
                     animatedTexts: [
                       RotateAnimatedText(
                         "TKMCE",
-                        textStyle: TextStyle(
-                          color: Constants.color3,
+                        textStyle: const TextStyle(
+                          color: Constants.iconAc,
                           letterSpacing: 3,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -121,19 +123,19 @@ class SpotsState extends State<Spots> {
                       ),
                       RotateAnimatedText(
                         "HESTIA'22",
-                        textStyle: TextStyle(
-                          color: Constants.color3,
+                        textStyle: const TextStyle(
+                          color: Constants.iconAc,
                           letterSpacing: 1,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       RotateAnimatedText(
-                        "UTOPIA",
-                        textStyle: TextStyle(
-                          color: Constants.color3,
+                        "SPIRIT OF TOMORROW",
+                        textStyle: const TextStyle(
+                          color: Constants.iconAc,
                           letterSpacing: 1,
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
