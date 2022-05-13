@@ -227,7 +227,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: AnimatedPadding(
                                           padding: start
                                               ? const EdgeInsets.only(left: 20)
-                                              : const EdgeInsets.only(left: 40),
+                                              : const EdgeInsets.only(left: 35),
                                           duration:
                                               const Duration(milliseconds: 800),
                                           curve: Curves.decelerate,
@@ -263,7 +263,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: AnimatedPadding(
                                           padding: start
                                               ? const EdgeInsets.only(left: 20)
-                                              : const EdgeInsets.only(left: 40),
+                                              : const EdgeInsets.only(left: 35),
                                           duration:
                                               const Duration(milliseconds: 800),
                                           curve: Curves.decelerate,
@@ -301,7 +301,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: AnimatedPadding(
                                           padding: start
                                               ? const EdgeInsets.only(left: 20)
-                                              : const EdgeInsets.only(left: 40),
+                                              : const EdgeInsets.only(left: 35),
                                           duration:
                                               const Duration(milliseconds: 800),
                                           curve: Curves.decelerate,
