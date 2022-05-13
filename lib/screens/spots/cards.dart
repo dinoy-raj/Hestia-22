@@ -147,8 +147,8 @@ class _CardsState extends State<Cards> {
                                           overflow: TextOverflow.clip,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
-                                          color:
-                                              Constants.color2.withOpacity(.9)),
+                                          color: Constants.color2
+                                              .withOpacity(.75)),
                                     ),
                                     const SizedBox(
                                       height: 5,
@@ -159,8 +159,8 @@ class _CardsState extends State<Cards> {
                                       style: TextStyle(
                                           overflow: TextOverflow.clip,
                                           fontSize: 14,
-                                          color: Constants.color2
-                                              .withOpacity(.65)),
+                                          color:
+                                              Constants.color2.withOpacity(.6)),
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -170,8 +170,8 @@ class _CardsState extends State<Cards> {
                                       style: TextStyle(
                                           overflow: TextOverflow.clip,
                                           fontSize: 12,
-                                          color: Constants.color2
-                                              .withOpacity(.35)),
+                                          color:
+                                              Constants.color2.withOpacity(.4)),
                                     ),
                                     const SizedBox(
                                       height: 10,
