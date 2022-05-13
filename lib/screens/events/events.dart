@@ -57,9 +57,6 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
-    if (duration!.inSeconds <= 0) {
-      setState(() {});
-    }
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -138,12 +135,13 @@ class _EventDetailsState extends State<EventDetails> {
           ),
         ),
       ),
-      floating: false,
+      floating: true,
+      stretch: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30))),
-      expandedHeight: height * .5,
+      expandedHeight: height * .65,
       flexibleSpace: FlexibleSpaceBar(
         background: AnimatedOpacity(
           duration: const Duration(milliseconds: 800),
@@ -153,9 +151,6 @@ class _EventDetailsState extends State<EventDetails> {
             duration: const Duration(milliseconds: 100),
             curve: Curves.easeOutQuad,
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30)),
                 image: DecorationImage(
                     image: NetworkImage(imageUrl),
                     onError: (Object exception, StackTrace? stackTrace) {
@@ -164,111 +159,9 @@ class _EventDetailsState extends State<EventDetails> {
                             "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
                       });
                     },
-                    fit: BoxFit.cover)),
+                    fit: BoxFit.contain)),
           ),
         ),
-        title: widget.eventData['reg_end'] == null
-            ? const SizedBox(
-                height: 0,
-              )
-            : duration!.inSeconds <= 0
-                ? const SizedBox(
-                    height: 0,
-                  )
-                : AnimatedOpacity(
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.decelerate,
-                    opacity: start ? 1 : 0,
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          left: width * 0.1, right: width * 0.1),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                              child: Container(
-                                width: width * 0.5,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Constants.bg.withOpacity(.6),
-                                      Constants.bg.withOpacity(.6),
-                                    ],
-                                    begin: AlignmentDirectional.topStart,
-                                    end: AlignmentDirectional.bottomEnd,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: width * 0.025,
-                                      right: width * 0.025,
-                                      top: height * 0.015,
-                                      bottom: height * 0.006),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        "Day   Hr   Min   Sec",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            letterSpacing: contentspace,
-                                            color: Constants.pureWhite
-                                                .withOpacity(0.7),
-                                            fontSize: 14,
-                                            overflow: TextOverflow.clip,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: fontfamily),
-                                      ),
-                                      SlideCountdownSeparated(
-                                        width: width * .05,
-                                        separator: " : ",
-                                        separatorStyle: const TextStyle(
-                                            decoration: TextDecoration.none,
-                                            letterSpacing: 2,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            overflow: TextOverflow.clip,
-                                            decorationStyle:
-                                                TextDecorationStyle.double),
-                                        showZeroValue: true,
-                                        textStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w200,
-                                          decoration: TextDecoration.none,
-                                          decorationColor:
-                                              Constants.transparent,
-                                          overflow: TextOverflow.clip,
-                                          color: Constants.pureWhite
-                                              .withOpacity(0.9),
-                                          fontFamily: fontfamily,
-                                        ),
-                                        decoration: const BoxDecoration(
-                                            color: Constants.transparent),
-                                        slideDirection: SlideDirection.down,
-                                        duration: duration == null
-                                            ? const Duration(
-                                                seconds: 0,
-                                                minutes: 0,
-                                                hours: 0,
-                                                days: 0)
-                                            : duration!,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-        centerTitle: true,
       ),
     );
   }
