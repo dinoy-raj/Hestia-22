@@ -86,11 +86,8 @@ class HomeState extends State<Home> {
           }
         }
       }
-
-      print(list);
       return list;
     } else {
-      print(list);
       return list;
     }
   }
