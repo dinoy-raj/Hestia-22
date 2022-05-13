@@ -209,7 +209,7 @@ class _SpotPageState extends State<SpotPage> {
                                 children: [
                                   ListTile(
                                     onTap: () {
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
