@@ -303,12 +303,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                           height: screenHeight * .04,
                                           width: screenWidth * .32,
                                           child: ElevatedButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  auth.acceptNotification(
-                                                      not?[index]['link1']);
-                                                  not?.removeAt(index);
-                                                });
+                                              onPressed: () async {
+                                                if (await auth
+                                                    .acceptNotification(
+                                                        not?[index]['link1'])) {
+                                                  setState(() {
+                                                    print("YES");
+                                                    not?.removeAt(index);
+                                                  });
+                                                } else print("NO");
                                               },
                                               style: ButtonStyle(
                                                 backgroundColor:
