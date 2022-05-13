@@ -47,13 +47,51 @@ class _ProfilePageState extends State<ProfilePage> {
                   left: 15, right: 15, top: 30, bottom: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: screenHeight * .13,
-                    width: screenWidth,
-                    decoration: BoxDecoration(
-                      color: Constants.iconIn,
-                      borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: screenHeight * .2,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: screenHeight * .13,
+                          width: screenWidth,
+                          decoration: BoxDecoration(
+                            color: Constants.iconIn,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: screenHeight * .06),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: screenHeight * .12,
+                                width: screenHeight * .13,
+                                decoration: BoxDecoration(
+                                  color: Constants.iconAc,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(auth
+                                        .googleSignIn.currentUser!.photoUrl!),
+                                  ),
+                                  border: Border.all(color: Constants.iconAc),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    widget.data == null ? "" : widget.data!['name'].toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(
