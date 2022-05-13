@@ -97,14 +97,14 @@ class _EventDetailsState extends State<EventDetails> {
     return SliverAppBar(
       backgroundColor: Constants.sc,
       leading: AnimatedOpacity(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(seconds: 1),
         curve: Curves.decelerate,
-        opacity: start ? 1 : 0,
+        opacity: start ? 1 : 0.5,
         child: AnimatedPadding(
           padding: start
               ? EdgeInsets.all(width * 0.02)
               : EdgeInsets.all(width * 0.012),
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 1000),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: BackdropFilter(
@@ -167,7 +167,7 @@ class _EventDetailsState extends State<EventDetails> {
                     height: 0,
                   )
                 : AnimatedOpacity(
-                    duration: const Duration(seconds: 2),
+                    duration: const Duration(milliseconds: 800),
                     curve: Curves.decelerate,
                     opacity: start ? 1 : 0,
                     child: Container(
@@ -179,15 +179,15 @@ class _EventDetailsState extends State<EventDetails> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                               child: Container(
                                 width: width * 0.5,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.bg.withOpacity(.8),
-                                      Constants.bg.withOpacity(.8),
+                                      Constants.bg.withOpacity(.6),
+                                      Constants.bg.withOpacity(.6),
                                     ],
                                     begin: AlignmentDirectional.topStart,
                                     end: AlignmentDirectional.bottomEnd,
