@@ -67,8 +67,9 @@ Future<List<dynamic>> getSpots() async {
   return list;
 }
 
-Future<List<dynamic>> getSchedule(String start) async {
+Future<List<dynamic>> getSchedule(String start, String end) async {
   http.Response response = await http.get(
-      Uri.parse(hostUrl + "/api/v1/event/?event_start=$start"));
+      Uri.parse(hostUrl + "/api/v1/event/?event_start=$start&event_end=$end"));
+
   return jsonDecode(response.body)['results'];
 }

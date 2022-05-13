@@ -36,6 +36,10 @@ class NavBarState extends State<NavBar> {
   List<dynamic>? show5;
   List<dynamic>? show6;
   List<dynamic>? spots;
+  List<dynamic>? schedule1;
+  List<dynamic>? schedule2;
+  List<dynamic>? schedule3;
+  List<dynamic>? schedule4;
   List<dynamic>? all;
   Map? profile;
 
@@ -103,6 +107,38 @@ class NavBarState extends State<NavBar> {
       });
     });
 
+    django.getSchedule("2022-05-26", "2022-05-26").then((value) {
+      if (mounted) {
+        setState(() {
+          schedule1 = value;
+        });
+      }
+    });
+
+    django.getSchedule("2022-05-27", "2022-05-27").then((value) {
+      if (mounted) {
+        setState(() {
+          schedule2 = value;
+        });
+      }
+    });
+
+    django.getSchedule("2022-05-28", "2022-05-28").then((value) {
+      if (mounted) {
+        setState(() {
+          schedule3 = value;
+        });
+      }
+    });
+
+    django.getSchedule("2022-05-29", "2022-05-29").then((value) {
+      if (mounted) {
+        setState(() {
+          schedule4 = value;
+        });
+      }
+    });
+
     django.getSpots().then((value) {
       if (mounted) {
         setState(() {
@@ -154,7 +190,12 @@ class NavBarState extends State<NavBar> {
               Home(show0, show1, show2, show3, show4, show5, profile, all),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
-                  child: const ScheduleScreen()),
+                  child: ScheduleScreen(
+                    data1: schedule1,
+                    data2: schedule2,
+                    data3: schedule3,
+                    data4: schedule4,
+                  )),
               Spots(
                 data: spots,
               ),
