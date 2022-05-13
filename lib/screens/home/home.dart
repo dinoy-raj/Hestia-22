@@ -53,11 +53,11 @@ class HomeState extends State<Home> {
   static int catSelect = 10;
   static List category = [
     "Trending",
-    "Proshows",
     "Culturals",
-    "Workshops",
     "Technical",
+    "Workshops",
     "Lectures",
+    "Proshows",
   ];
 
   late Map eDetails;
@@ -198,9 +198,13 @@ class HomeState extends State<Home> {
                               //notification bell
                               GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    notPressed = !notPressed;
-                                  });
+                                  FocusScopeNode currentFocus =
+                                      FocusScope.of(context);
+                                  if (currentFocus.hasPrimaryFocus) {
+                                    setState(() {
+                                      notPressed = !notPressed;
+                                    });
+                                  }
                                 },
                                 child: AnimatedOpacity(
                                   duration: const Duration(seconds: 1),
@@ -209,13 +213,13 @@ class HomeState extends State<Home> {
                                   child: Badge(
                                     badgeColor: Constants.iconAc,
                                     badgeContent: Text(
-                                      not==null?" ":
-                                      (not?.length).toString(),
+                                      not == null
+                                          ? " "
+                                          : (not?.length).toString(),
                                       style: const TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: 'Helvetica',
-                                        fontWeight: FontWeight.bold
-                                      ),
+                                          fontSize: 10,
+                                          fontFamily: 'Helvetica',
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     animationDuration:
                                         const Duration(milliseconds: 800),
@@ -867,12 +871,10 @@ class HomeState extends State<Home> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.black),
-                      child:  const NotificationPage(),
+                      child: const NotificationPage(),
                     ),
                   ],
                 ),
-
-
               ],
             ),
           ),
