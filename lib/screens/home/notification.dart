@@ -35,9 +35,11 @@ class _NotificationPageState extends State<NotificationPage> {
   void initState() {
     super.initState();
     auth.getNotifications().then((value) {
-      setState(() {
-        not = value;
-      });
+      if (mounted) {
+        setState(() {
+          not = value;
+        });
+      }
     });
 
     start = false;
@@ -319,13 +321,16 @@ class _NotificationPageState extends State<NotificationPage> {
                                               width: screenWidth * .32,
                                               child: ElevatedButton(
                                                   onPressed: () {
-                                                    setState(() {
-                                                      auth.rejectNotification(
-                                                          not?[index]['link2'],
-                                                          (not?[index]['id'])
-                                                              .toString());
-                                                      not?.removeAt(index);
-                                                    });
+                                                    if (mounted) {
+                                                      setState(() {
+                                                        auth.rejectNotification(
+                                                            not?[index]
+                                                                ['link2'],
+                                                            (not?[index]['id'])
+                                                                .toString());
+                                                        not?.removeAt(index);
+                                                      });
+                                                    }
                                                   },
                                                   style: ButtonStyle(
                                                     backgroundColor:
@@ -375,12 +380,12 @@ class _NotificationPageState extends State<NotificationPage> {
                                                                 ['link1'],
                                                             (not?[index]['id'])
                                                                 .toString())) {
-                                                      setState(() {
-                                                        print("YES");
-                                                        not?.removeAt(index);
-                                                      });
-                                                    } else
-                                                      print("NO");
+                                                      if (mounted) {
+                                                        setState(() {
+                                                          not?.removeAt(index);
+                                                        });
+                                                      }
+                                                    }
                                                   },
                                                   style: ButtonStyle(
                                                     backgroundColor:
