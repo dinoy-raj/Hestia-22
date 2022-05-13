@@ -63,25 +63,34 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   child: SizedBox(
                     height: size.width * 0.68,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: size.width * 0.17,
+                          height: size.width * 0.2,
                         ),
-                        AnimatedOpacity(
-                          duration: const Duration(seconds: 3),
+                        AnimatedPadding(
+                          duration: const Duration(seconds: 1),
                           curve: Curves.decelerate,
-                          opacity: start ? 1 : 0.2,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 18.0),
-                            child: Text(
-                              'Schedule',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'helvetica',
-                                  letterSpacing: 1.4),
+                          padding: start
+                              ? EdgeInsets.zero
+                              : const EdgeInsets.only(
+                                  left: 20,
+                                ),
+                          child: AnimatedOpacity(
+                            duration: const Duration(seconds: 3),
+                            curve: Curves.decelerate,
+                            opacity: start ? 1 : 0.2,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 18.0),
+                              child: Text(
+                                'Schedule',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'helvetica',
+                                    letterSpacing: 1.4),
+                              ),
                             ),
                           ),
                         ),

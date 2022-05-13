@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +80,7 @@ class SpotsState extends State<Spots> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 1000),
             curve: Curves.decelerate,
             opacity: _animate ? 0 : 1,
             child: Column(
@@ -89,10 +91,10 @@ class SpotsState extends State<Spots> {
                 AnimatedPadding(
                   padding: _animate
                       ? const EdgeInsets.only(
-                          right: 20,
+                          left: 20,
                         )
-                      : EdgeInsets.zero,
-                  duration: const Duration(milliseconds: 800),
+                      : const EdgeInsets.only(left: 0),
+                  duration: const Duration(milliseconds: 1000),
                   curve: Curves.decelerate,
                   child: Center(
                     child: Text(
@@ -100,7 +102,7 @@ class SpotsState extends State<Spots> {
                       style: TextStyle(
                         letterSpacing: 7,
                         color: Constants.color2.withOpacity(.75),
-                        fontSize: 28,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -117,7 +119,7 @@ class SpotsState extends State<Spots> {
                         textStyle: const TextStyle(
                           color: Constants.iconAc,
                           letterSpacing: 3,
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -126,7 +128,7 @@ class SpotsState extends State<Spots> {
                         textStyle: const TextStyle(
                           color: Constants.iconAc,
                           letterSpacing: 1,
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -135,7 +137,7 @@ class SpotsState extends State<Spots> {
                         textStyle: const TextStyle(
                           color: Constants.iconAc,
                           letterSpacing: 1,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -176,7 +178,7 @@ class SpotsState extends State<Spots> {
                                       left: 15,
                                       right: 0,
                                     ),
-                              duration: const Duration(milliseconds: 800),
+                              duration: const Duration(milliseconds: 1000),
                               child: const Icon(
                                 CupertinoIcons.search,
                                 color: Colors.grey,
