@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/login/login.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
-import 'package:hestia22/screens/profile/registered_events.dart';
 import 'services/django/google_auth.dart';
 
 GoogleAuth auth = GoogleAuth();
