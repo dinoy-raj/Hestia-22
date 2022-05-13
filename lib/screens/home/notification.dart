@@ -37,6 +37,7 @@ class _NotificationPageState extends State<NotificationPage> {
     auth.getNotifications().then((value) {
       setState(() {
         not = value;
+        log(not.toString());
       });
     });
 
@@ -131,7 +132,6 @@ class _NotificationPageState extends State<NotificationPage> {
                                         ],
                                       ),
                                     ),
-
                                     //time
                                     Text(
                                       (Months[(DateTime.parse(
