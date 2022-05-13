@@ -50,7 +50,7 @@ class _SpotPageState extends State<SpotPage> {
                         duration: const Duration(milliseconds: 800),
                         opacity: _opacity,
                         child: Container(
-                          color: Constants.iconAc.withOpacity(.1),
+                          color: Constants.iconAc.withOpacity(.01),
                           child: Image.network(
                             widget.data['picture'] != null
                                 ? widget.data['picture'].toString()
@@ -58,8 +58,6 @@ class _SpotPageState extends State<SpotPage> {
                             height: 300,
                             width: double.infinity,
                             fit: BoxFit.cover,
-                            color: Constants.iconAc.withOpacity(.1),
-                            colorBlendMode: BlendMode.overlay,
                           ),
                         )),
                   ),

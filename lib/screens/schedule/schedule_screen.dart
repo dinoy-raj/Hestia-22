@@ -10,7 +10,17 @@ import 'package:hestia22/screens/schedule/enums.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleScreen extends StatefulWidget {
-  const ScheduleScreen({Key? key}) : super(key: key);
+  const ScheduleScreen(
+      {Key? key,
+      required this.data1,
+      required this.data2,
+      required this.data3,
+      required this.data4})
+      : super(key: key);
+  final List<dynamic>? data1;
+  final List<dynamic>? data2;
+  final List<dynamic>? data3;
+  final List<dynamic>? data4;
 
   @override
   State<ScheduleScreen> createState() => _ScheduleScreenState();
@@ -93,32 +103,45 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     width: size.width,
                     height: size.width * 0.1,
                     margin: const EdgeInsets.only(top: 250),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Constants.sc,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30)),
                     )),
               ]),
             ),
             Container(
-              height: size.height*0.55,
+              height: size.height * 0.55,
               color: Constants.sc,
               child: Consumer<DateInfo>(
                   builder: (context, value, child) {
                     if (value.dateType == DateType.a) {
-                      return FirstPage();
+                      return FirstPage(
+                        data: widget.data1,
+                      );
                     } else if (value.dateType == DateType.b) {
-                      return const SecondPage();
+                      return SecondPage(
+                        data: widget.data2,
+                      );
                     } else if (value.dateType == DateType.c) {
-                      return const ThirdPage();
+                      return ThirdPage(
+                        data: widget.data3,
+                      );
                     } else {
-                      return const FourthPage();
+                      return FourthPage(
+                        data: widget.data4,
+                      );
                     }
                   },
-                  child: FirstPage()),
+                  child: FirstPage(
+                    data: widget.data1,
+                  )),
             ),
-            Expanded(child: Container(color: Constants.sc,)) 
+            Expanded(
+                child: Container(
+              color: Constants.sc,
+            ))
           ],
         ),
       ),
@@ -251,7 +274,7 @@ class _EventCardState extends State<EventCard> {
               width: size.width * 0.8,
               height: size.width * 0.22,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 226, 226, 226),
+                color: Constants.iconAc,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
@@ -270,7 +293,7 @@ class _EventCardState extends State<EventCard> {
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 15,
-                              color: Colors.grey[600]))
+                              color: Colors.black.withOpacity(0.5)))
                     ]),
               ),
             ),

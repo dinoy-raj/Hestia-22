@@ -116,7 +116,7 @@ class _CardsState extends State<Cards> {
                                 ? EdgeInsets.zero
                                 : const EdgeInsets.all(30),
                             decoration: BoxDecoration(
-                              color: Constants.iconAc.withOpacity(.1),
+                              color: Constants.iconAc.withOpacity(.01),
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
                                   opacity: 0.5,
