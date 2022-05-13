@@ -43,6 +43,8 @@ class NavBarState extends State<NavBar> {
   void initState() {
     super.initState();
 
+    buildFlag = true;
+
     django.getTrendingEvents().then((value) {
       if (mounted) {
         setState(() {
@@ -54,7 +56,7 @@ class NavBarState extends State<NavBar> {
     django.getProshows().then((value) {
       if (mounted) {
         setState(() {
-          show1 = value;
+          show5 = value;
         });
       }
     });
@@ -62,7 +64,7 @@ class NavBarState extends State<NavBar> {
     django.getCulturals().then((value) {
       if (mounted) {
         setState(() {
-          show2 = value;
+          show1 = value;
         });
       }
     });
@@ -78,7 +80,7 @@ class NavBarState extends State<NavBar> {
     django.getTechnicals().then((value) {
       if (mounted) {
         setState(() {
-          show4 = value;
+          show2 = value;
         });
       }
     });
@@ -86,7 +88,7 @@ class NavBarState extends State<NavBar> {
     django.getLectures().then((value) {
       if (mounted) {
         setState(() {
-          show5 = value;
+          show4 = value;
         });
       }
     });

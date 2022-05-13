@@ -99,9 +99,11 @@ class HomeState extends State<Home> {
     show = widget.event0;
 
     auth.getNotifications().then((value) {
-      setState(() {
-        not = value;
-      });
+      if (mounted) {
+        setState(() {
+          not = value;
+        });
+      }
     });
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {
@@ -196,14 +198,12 @@ class HomeState extends State<Home> {
                               //notification bell
                               GestureDetector(
                                 onTap: () {
-                                  FocusScopeNode currentFocus =
-                                      FocusScope.of(context);
-                                  if (currentFocus.hasPrimaryFocus) {
-                                    if (mounted) {
-                                      setState(() {
-                                        notPressed = !notPressed;
-                                      });
-                                    }
+                                  if (mounted) {
+                                    setState(() {
+                                      notPressed = !notPressed;
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    });
                                   }
                                 },
                                 child: AnimatedOpacity(
@@ -298,6 +298,13 @@ class HomeState extends State<Home> {
                                       child: TypeAheadField(
                                         textFieldConfiguration:
                                             TextFieldConfiguration(
+                                          onTap: () {
+                                            if (mounted) {
+                                              setState(() {
+                                                filPressed = false;
+                                              });
+                                            }
+                                          },
                                           style: const TextStyle(
                                               color: Colors.grey),
                                           cursorColor: Constants.iconIn,
@@ -389,14 +396,12 @@ class HomeState extends State<Home> {
                                     opacity: start ? 1 : 0,
                                     child: GestureDetector(
                                       onTap: () {
-                                        FocusScopeNode currentFocus =
-                                            FocusScope.of(context);
-                                        if (currentFocus.hasPrimaryFocus) {
-                                          if (mounted) {
-                                            setState(() {
-                                              filPressed = !filPressed;
-                                            });
-                                          }
+                                        if (mounted) {
+                                          setState(() {
+                                            filPressed = !filPressed;
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          });
                                         }
                                       },
                                       child: AnimatedContainer(
@@ -489,19 +494,6 @@ class HomeState extends State<Home> {
                                           return GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                if (index == 0) {
-                                                  show = widget.event0;
-                                                } else if (index == 1) {
-                                                  show = widget.event1;
-                                                } else if (index == 2) {
-                                                  show = widget.event2;
-                                                } else if (index == 3) {
-                                                  show = widget.event3;
-                                                } else if (index == 4) {
-                                                  show = widget.event4;
-                                                } else if (index == 5) {
-                                                  show = widget.event5;
-                                                }
                                                 catSelect = index;
                                               });
                                             },
@@ -575,56 +567,19 @@ class HomeState extends State<Home> {
                         height: screenHeight * .6,
                         width: screenWidth,
                         // decoration: BoxDecoration(),
-                        child: show == null
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Text(
-                                    "Loading....",
-                                    style: TextStyle(
-                                      fontFamily: "Helvetica",
-                                      color: Constants.iconAc,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : show!.isEmpty
-                                ? Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: const [
-                                      Text(
-                                        "Coming Soon....",
-                                        style: TextStyle(
-                                          fontFamily: "Helvetica",
-                                          color: Constants.iconAc,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : catSelect == 0
-                                    ? EventCards1(widget.event0!, catSelect)
-                                    : catSelect == 1
-                                        ? EventCards2(widget.event1!, catSelect)
-                                        : catSelect == 2
-                                            ? EventCards3(
-                                                widget.event2!, catSelect)
-                                            : catSelect == 3
-                                                ? EventCards4(
-                                                    widget.event3!, catSelect)
-                                                : catSelect == 4
-                                                    ? EventCards5(
-                                                        widget.event4!,
-                                                        catSelect)
-                                                    : EventCards6(
-                                                        widget.event5!,
-                                                        catSelect),
+                        child: catSelect == 0
+                            ? EventCards1(widget.event0, catSelect)
+                            : catSelect == 1
+                                ? EventCards2(widget.event1, catSelect)
+                                : catSelect == 2
+                                    ? EventCards3(widget.event2, catSelect)
+                                    : catSelect == 3
+                                        ? EventCards4(widget.event3, catSelect)
+                                        : catSelect == 4
+                                            ? EventCards5(
+                                                widget.event4, catSelect)
+                                            : EventCards6(
+                                                widget.event5, catSelect),
                       ),
                     ],
                   ),

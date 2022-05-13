@@ -186,7 +186,6 @@ class SpotsState extends State<Spots> {
                       suggestionsCallback: (pattern) async {
                         return _getSuggestions(pattern);
                       },
-                      minCharsForSuggestions: 1,
                       suggestionsBoxDecoration: SuggestionsBoxDecoration(
                           color: Colors.black,
                           shape: RoundedRectangleBorder(
