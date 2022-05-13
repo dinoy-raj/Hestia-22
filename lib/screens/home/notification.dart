@@ -37,7 +37,6 @@ class _NotificationPageState extends State<NotificationPage> {
     auth.getNotifications().then((value) {
       setState(() {
         not = value;
-        log(not.toString());
       });
     });
 
@@ -200,36 +199,72 @@ class _NotificationPageState extends State<NotificationPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                AnimatedContainer(
-                                  duration: const Duration(seconds: 1),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Constants.pureBlack,
-                                          blurRadius: 100,
-                                          spreadRadius: 20,
-                                        ),
-                                      ],
-                                      color: Colors.black),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Text(
-                                          not?[index]['title'],
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: "Helvetica",
-                                              color: Constants.pureWhite,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    //title
+                                    AnimatedContainer(
+                                      duration: const Duration(seconds: 1),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Constants.pureBlack,
+                                              blurRadius: 100,
+                                              spreadRadius: 20,
+                                            ),
+                                          ],
+                                          color: Colors.black),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Text(
+                                              not?[index]['title'],
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: "Helvetica",
+                                                  color: Constants.pureWhite,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    //time
+                                    Text(
+                                      (Months[(DateTime.parse(
+                                                      not![0]["created_at"])
+                                                  .month) -
+                                              1]) +
+                                          " " +
+                                          (DateTime.parse(
+                                                      not![0]["created_at"])
+                                                  .day)
+                                              .toString() +
+                                          "   " +
+                                          (DateTime.parse(not![0]["created_at"])
+                                                  .toLocal()
+                                                  .hour)
+                                              .toString() +
+                                          ":" +
+                                          (DateTime.parse(not![0]["created_at"])
+                                                  .toLocal()
+                                                  .minute)
+                                              .toString(),
+                                      style: const TextStyle(
+                                        fontSize: 8,
+                                        fontFamily: "Helvetica",
+                                        color: Constants.pureBlack,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -263,7 +298,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                               onPressed: () {
                                                 setState(() {
                                                   auth.rejectNotification(
-                                                      not?[index]['link2'],(not?[index]['id']).toString());
+                                                      not?[index]['link2'],
+                                                      (not?[index]['id'])
+                                                          .toString());
                                                   not?.removeAt(index);
                                                 });
                                               },
@@ -306,12 +343,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                               onPressed: () async {
                                                 if (await auth
                                                     .acceptNotification(
-                                                        not?[index]['link1'],(not?[index]['id']).toString())) {
+                                                        not?[index]['link1'],
+                                                        (not?[index]['id'])
+                                                            .toString())) {
                                                   setState(() {
                                                     print("YES");
                                                     not?.removeAt(index);
                                                   });
-                                                } else print("NO");
+                                                } else
+                                                  print("NO");
                                               },
                                               style: ButtonStyle(
                                                 backgroundColor:
