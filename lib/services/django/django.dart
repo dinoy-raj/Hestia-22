@@ -3,6 +3,12 @@ import 'package:http/http.dart' as http;
 
 String hostUrl = "https://backend.hestiatkmce.live";
 
+Future<List<dynamic>> getAllEvents() async {
+  http.Response response =
+      await http.get(Uri.parse(hostUrl + "/api/v1/event/"));
+  return json.decode(response.body)['results'];
+}
+
 Future<List<dynamic>> getWorkshops() async {
   http.Response response =
       await http.get(Uri.parse(hostUrl + "/api/v1/event/?event_category=W"));
@@ -59,4 +65,11 @@ Future<List<dynamic>> getSpots() async {
   }
 
   return list;
+}
+
+Future<List<dynamic>> getSchedule(String start) async {
+  http.Response response = await http.get(
+      Uri.parse(hostUrl + "/api/v1/event/??event_start=$start"));
+
+  return jsonDecode(response.body)['results'];
 }

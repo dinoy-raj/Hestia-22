@@ -1,13 +1,11 @@
+import 'dart:developer';
+import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 
 class FirstPage extends StatefulWidget {
 
-  // final List<dynamic> data;
-
-
-  const FirstPage({Key? key, 
-  // required this.data
+   FirstPage({Key? key, 
   }) : super(key: key);
 
   @override
@@ -16,10 +14,17 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
   bool start = false;
+  List<dynamic>? data;
+  List<dynamic>? eventTitle;
 
   @override
   void initState() {
     super.initState();
+    django.getSchedule("2022-05-27").then((value) {
+      setState(() {
+        
+      data = value;
+      });});
 
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
@@ -39,9 +44,8 @@ class _FirstPageState extends State<FirstPage> {
       
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: ListView.builder(
-          itemCount: 2,
-          // widget.data.length,
+        child: data==null? Center(child: CircularProgressIndicator()): ListView.builder(
+          itemCount: data!.length,
           itemBuilder: ((context, index) {
           return SizedBox(
               height: size.width * 0.39,
@@ -53,8 +57,8 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                   EventCard(
                     time: '08:00 - 10:00',
-                    eventName: 'Team Event',
-                    description: 'f',
+                    eventName: data![index]['title'].toString(),
+                    description: data![index]['venue']['title'].toString(),
                   ),
                 ],
               ),

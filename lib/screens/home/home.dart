@@ -3,8 +3,10 @@ import 'dart:ui';
 
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
@@ -27,9 +29,10 @@ class Home extends StatefulWidget {
   List<dynamic>? event3;
   List<dynamic>? event4;
   List<dynamic>? event5;
+  List<dynamic>? a;
   Map? profile;
   Home(this.event0, this.event1, this.event2, this.event3, this.event4,
-      this.event5, this.profile,
+      this.event5, this.profile, this.a,
       {Key? key})
       : super(key: key);
 
@@ -61,8 +64,33 @@ class HomeState extends State<Home> {
 
   List Sort1 = ["name", "price", "date"];
   int showIndex = 0;
+  List<dynamic>? all;
+  late List name;
 
   List<dynamic>? show;
+
+  List<String> _getSuggestions(String pattern) {
+    List<String> list = [];
+
+    if (widget.a != null) {
+      for (var index in all!) {
+        if (list.length < 4) {
+          if (widget.a![index]['title']
+              .toLowerCase()
+              .contains(pattern.toLowerCase())) {
+            list.add("%l%" + widget.a![index]['title']);
+            if (list.length == 4) {
+              break;
+            }
+          }
+        }
+      }
+
+      return list;
+    } else {
+      return list;
+    }
+  }
 
   @override
   void initState() {
@@ -71,12 +99,13 @@ class HomeState extends State<Home> {
     start = false;
     catSelect = 10;
     show = widget.event0;
-
     Future.delayed(const Duration(milliseconds: 150), () {
-      setState(() {
-        start = true;
-        catSelect = 0;
-      });
+      if (mounted) {
+        setState(() {
+          start = true;
+          catSelect = 0;
+        });
+      }
     });
   }
 
@@ -87,6 +116,7 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
+        print(widget.a.toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -142,7 +172,7 @@ class HomeState extends State<Home> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: screenHeight * .005,
+                                    height: screenHeight * .009,
                                   ),
                                   AnimatedOpacity(
                                     duration: const Duration(seconds: 3),
@@ -255,7 +285,6 @@ class HomeState extends State<Home> {
                                   ),
                                 ),
 
-                                //
                                 AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.decelerate,
@@ -265,30 +294,72 @@ class HomeState extends State<Home> {
                                   child: SizedBox(
                                     height: screenHeight * .065,
                                     width: screenWidth * .65,
-                                    child: TextField(
-                                      scrollPhysics:
-                                          const BouncingScrollPhysics(),
-                                      cursorColor: Constants.iconIn,
-                                      cursorRadius: const Radius.circular(10),
-                                      style: const TextStyle(
-                                        fontFamily: 'Helvetica',
-                                        color: Constants.iconAc,
-                                        fontSize: 16,
-                                      ),
-                                      textAlign: TextAlign.start,
-                                      decoration: InputDecoration(
-                                        hintText: "Discover new event",
-                                        hintStyle: TextStyle(
-                                          fontFamily: 'Helvetica',
-                                          color: Constants.iconIn,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w100,
+                                    child: TypeAheadField(
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                        cursorColor: Constants.iconIn,
+                                        cursorRadius: const Radius.circular(10),
+                                        textCapitalization:
+                                            TextCapitalization.sentences,
+                                        decoration: InputDecoration(
+                                          hintText: "Discover new event",
+                                          hintStyle: TextStyle(
+                                            fontFamily: 'Helvetica',
+                                            color: Constants.iconIn,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                          hoverColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          border: InputBorder.none,
+                                          contentPadding:
+                                              const EdgeInsets.all(0),
                                         ),
-                                        hoverColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        border: InputBorder.none,
-                                        contentPadding: const EdgeInsets.all(0),
                                       ),
+                                      itemBuilder:
+                                          (BuildContext context, suggestion) {
+                                        return ListTile(
+                                          onTap: () {
+                                            for (var element in widget.a!) {
+                                              if (element['title'] ==
+                                                  suggestion.toString()) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            EventDetails(
+                                                                element)));
+                                              }
+                                            }
+                                          },
+                                          leading: Icon(
+                                            CupertinoIcons.location,
+                                            color: Constants.color2
+                                                .withOpacity(.40),
+                                          ),
+                                          title: Text(
+                                            suggestion
+                                                .toString()
+                                                .replaceAll("%l%", "")
+                                                .replaceAll("%e%", ""),
+                                            style: TextStyle(
+                                                color: Constants.color2
+                                                    .withOpacity(.40)),
+                                          ),
+                                        );
+                                      },
+                                      suggestionsCallback:
+                                          (String pattern) async {
+                                        return _getSuggestions(pattern);
+                                      },
+                                      hideOnError: true,
+                                      hideOnEmpty: true,
+                                      hideOnLoading: true,
+                                      hideSuggestionsOnKeyboardHide: true,
+                                      onSuggestionSelected:
+                                          (String suggestion) {},
                                     ),
                                   ),
                                 ),
@@ -773,7 +844,26 @@ class HomeState extends State<Home> {
                   ],
                 ),
 
-                notificationPage(context),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: screenHeight * .1,
+                      width: screenWidth,
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      height: notPressed ? screenHeight * .7 : 0,
+                      width: screenWidth * .91,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.black),
+                      child: const NotificationPage(),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
