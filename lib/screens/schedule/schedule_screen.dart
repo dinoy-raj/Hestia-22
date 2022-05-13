@@ -224,11 +224,13 @@ class EventCard extends StatefulWidget {
   final String time;
   final String eventName;
   final String description;
+  final Widget route;
   const EventCard({
     Key? key,
     required this.eventName,
     required this.description,
     required this.time,
+    required this.route,
   }) : super(key: key);
 
   @override
@@ -264,37 +266,50 @@ class _EventCardState extends State<EventCard> {
           const SizedBox(
             height: 16,
           ),
-          AnimatedOpacity(
-            duration: const Duration(seconds: 3),
-            curve: Curves.decelerate,
-            opacity: start ? 1 : 0,
-            child: AnimatedContainer(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => widget.route));
+            },
+            child: AnimatedOpacity(
               duration: const Duration(seconds: 3),
-              curve: Curves.slowMiddle,
-              width: size.width * 0.8,
-              height: size.width * 0.22,
-              decoration: BoxDecoration(
-                color: Constants.iconAc,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 5),
-                child: Column(
+              curve: Curves.decelerate,
+              opacity: start ? 1 : 0,
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 3),
+                curve: Curves.slowMiddle,
+                width: size.width * 0.8,
+                height: size.width * 0.22,
+                decoration: BoxDecoration(
+                  color: Constants.iconAc,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18.0, vertical: 5),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.eventName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                          )),
-                      Text(widget.description,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
-                              color: Colors.black.withOpacity(0.5)))
-                    ]),
+                      Text(
+                        widget.eventName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: Colors.white.withOpacity(0.9),
+                        ),
+                      ),
+                      Text(
+                        widget.description,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: Colors.white.withOpacity(0.55),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

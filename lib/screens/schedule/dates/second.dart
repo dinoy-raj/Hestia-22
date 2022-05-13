@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 import 'package:intl/intl.dart';
 
@@ -55,6 +56,7 @@ class _SecondPageState extends State<SecondPage> {
                             eventName: widget.data![index]['title'].toString(),
                             description: widget.data![index]['venue']['title']
                                 .toString(),
+                            route: EventDetails(widget.data![index]),
                           )
                         ],
                       ),

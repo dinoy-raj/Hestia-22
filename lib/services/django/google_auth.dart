@@ -18,6 +18,8 @@ class GoogleAuth extends ChangeNotifier {
             ? true
             : false;
     notifyListeners();
+
+    googleSignIn.signInSilently();
   }
 
   Future<bool> login() async {
