@@ -129,11 +129,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CertificatesPage()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             const CertificatesPage()));
                           },
                           child: AnimatedPadding(
                             padding: start
@@ -149,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Icon(
                                       Icons.badge_outlined,
                                       size: 30,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.2),
                                     ),
                                   ),
                                   decoration: const BoxDecoration(
@@ -168,7 +168,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text(
                                   'Certificates',
                                   style: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.2),
                                       fontSize: 16,
                                       fontFamily: 'Helvetica',
                                       fontWeight: FontWeight.normal),

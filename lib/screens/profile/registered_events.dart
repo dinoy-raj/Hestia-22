@@ -125,7 +125,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                           Expanded(
                                             child: Text(
                                               data![index]['start_date'] ??
-                                                  "May 27",
+                                                  "May 26-29",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   overflow: TextOverflow.clip,
@@ -139,7 +139,8 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              data![index]['short_desc'],
+                                              data![index]['short_desc']
+                                                  .toString(),
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   overflow: TextOverflow.clip,
@@ -153,7 +154,8 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              data![index]['venue']['title'],
+                                              data![index]['venue']['title']
+                                                  .toString(),
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   overflow: TextOverflow.clip,
