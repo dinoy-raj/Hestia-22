@@ -75,8 +75,6 @@ class Constants {
   static Color iconIn = Colors.grey.withOpacity(.35);
   static final Color color1 = Colors.grey.withOpacity(0.1);
   static const Color color2 = Colors.white;
-  static final Color color33 = Colors.brown[700]!;
-  static const Color color4 = Colors.blueGrey;
   static const pureBlack = Color(0x00000000);
   static const imageColor = Color(0x0031164a);
   static const detailsColor = Color(0x005a2d85);
