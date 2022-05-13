@@ -94,31 +94,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     height: size.width * 0.1,
                     margin: const EdgeInsets.only(top: 250),
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(.1),
+                      color: Constants.sc,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30)),
                     )),
               ]),
             ),
-            Expanded(
-              child: Container(
-                color: Colors.grey.withOpacity(.1),
-                child: Consumer<DateInfo>(
-                    builder: (context, value, child) {
-                      if (value.dateType == DateType.a) {
-                        return const FirstPage();
-                      } else if (value.dateType == DateType.b) {
-                        return const SecondPage();
-                      } else if (value.dateType == DateType.c) {
-                        return const ThirdPage();
-                      } else {
-                        return const FourthPage();
-                      }
-                    },
-                    child: const FirstPage()),
-              ),
+            Container(
+              height: size.height*0.55,
+              color: Constants.sc,
+              child: Consumer<DateInfo>(
+                  builder: (context, value, child) {
+                    if (value.dateType == DateType.a) {
+                      return FirstPage();
+                    } else if (value.dateType == DateType.b) {
+                      return const SecondPage();
+                    } else if (value.dateType == DateType.c) {
+                      return const ThirdPage();
+                    } else {
+                      return const FourthPage();
+                    }
+                  },
+                  child: FirstPage()),
             ),
+            Expanded(child: Container(color: Constants.sc,)) 
           ],
         ),
       ),
@@ -256,7 +256,7 @@ class _EventCardState extends State<EventCard> {
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14),
+                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 5),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -264,7 +264,7 @@ class _EventCardState extends State<EventCard> {
                       Text(widget.eventName,
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 20,
+                            fontSize: 18,
                           )),
                       Text(widget.description,
                           style: TextStyle(

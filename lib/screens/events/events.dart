@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -30,8 +31,9 @@ class _EventDetailsState extends State<EventDetails> {
   void initState() {
     // TODO: implement initState
     dateFormat =
-        DateFormat("yyyy-mm-ddThh:mm:ss").parse(widget.eventData['reg_end']);
-    DateTime endDate = DateTime.parse(dateFormat.toString());
+        DateTime.parse(widget.eventData['reg_end']);
+    DateTime endDate = dateFormat!.toLocal();
+    log(endDate.toString());
     duration = Duration(
         days: endDate.day - DateTime.now().day,
         hours: endDate.hour - DateTime.now().hour,
