@@ -131,11 +131,11 @@ class SpotsState extends State<Spots> {
                         ),
                       ),
                       RotateAnimatedText(
-                        "SPIRIT OF TOMORROW",
+                        "#SPIRIT OF TOMORROW",
                         textStyle: const TextStyle(
                           color: Constants.iconAc,
                           letterSpacing: 1,
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -223,7 +223,9 @@ class SpotsState extends State<Spots> {
                                 ? CupertinoIcons.star
                                 : CupertinoIcons.location,
                             color: Constants.color2.withOpacity(.40),
+                            size: 20,
                           ),
+                          minLeadingWidth: 0,
                           title: Text(
                             suggestion
                                 .toString()

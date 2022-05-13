@@ -123,7 +123,7 @@ class _CardsState extends State<Cards> {
                                   fit: BoxFit.cover,
                                   image: NetworkImage(widget.data[index]
                                           ['picture'] ??
-                                      "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg")),
+                                      "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg")),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,31 +147,31 @@ class _CardsState extends State<Cards> {
                                           overflow: TextOverflow.clip,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
-                                          color:
-                                              Constants.color2.withOpacity(.9)),
+                                          color: Constants.color2
+                                              .withOpacity(.75)),
                                     ),
                                     const SizedBox(
                                       height: 5,
-                                    ),
-                                    Text(
-                                      widget.data[index]['desc'].toString(),
-                                      style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontSize: 14,
-                                          color: Constants.color2
-                                              .withOpacity(.65)),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
                                     ),
                                     Text(
                                       widget.data[index]['short_desc']
                                           .toString(),
                                       style: TextStyle(
                                           overflow: TextOverflow.clip,
+                                          fontSize: 14,
+                                          color:
+                                              Constants.color2.withOpacity(.6)),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      widget.data[index]['desc'].toString(),
+                                      style: TextStyle(
+                                          overflow: TextOverflow.clip,
                                           fontSize: 12,
-                                          color: Constants.color2
-                                              .withOpacity(.35)),
+                                          color:
+                                              Constants.color2.withOpacity(.4)),
                                     ),
                                     const SizedBox(
                                       height: 10,

@@ -141,7 +141,7 @@ class _SpotPageState extends State<SpotPage> {
                                         overflow: TextOverflow.clip,
                                         fontSize: 18,
                                         color:
-                                            Constants.color2.withOpacity(.5)),
+                                            Constants.color2.withOpacity(.65)),
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -152,7 +152,7 @@ class _SpotPageState extends State<SpotPage> {
                                         overflow: TextOverflow.clip,
                                         fontSize: 14,
                                         color:
-                                            Constants.color2.withOpacity(.25)),
+                                            Constants.color2.withOpacity(.4)),
                                   ),
                                   const SizedBox(
                                     height: 10,

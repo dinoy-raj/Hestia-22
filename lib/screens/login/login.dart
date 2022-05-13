@@ -26,7 +26,8 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: screenHeight * 1.2,
               width: screenWidth * 1.3,
-              child: Lottie.asset('assets/animations/welcome.json',animate: true),
+              child:
+                  Lottie.asset('assets/animations/welcome.json', animate: true),
             ),
             Center(
               child: Column(
@@ -39,38 +40,41 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.all(Radius.circular(25))),
                     height: 70,
                     width: 280,
-                    child: RoundedButton(
-                      text: _text,
-                      press: () async {
-                        setState(() {
-                          _text = 'Logging you in...';
-                        });
-                        if (await main.auth.login()) {
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: RoundedButton(
+                        text: _text,
+                        press: () async {
                           setState(() {
-                            _text = 'Logged in';
+                            _text = 'Logging you in...';
                           });
-                        } else {
-                          _text = 'Error logging in...';
-
-                          Future.delayed(const Duration(milliseconds: 1000),
-                              () {
+                          if (await main.auth.login()) {
                             setState(() {
-                              _text = 'Try again...';
+                              _text = 'Logged in';
                             });
-                          });
+                          } else {
+                            _text = 'Error logging in...';
 
-                          Future.delayed(const Duration(milliseconds: 2500),
-                              () {
-                            setState(() {
-                              _text = 'Continue with Google';
+                            Future.delayed(const Duration(milliseconds: 1000),
+                                () {
+                              setState(() {
+                                _text = 'Try again...';
+                              });
                             });
-                          });
-                        }
-                      },
+
+                            Future.delayed(const Duration(milliseconds: 2500),
+                                () {
+                              setState(() {
+                                _text = 'Continue with Google';
+                              });
+                            });
+                          }
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 50,
                   ),
                 ],
               ),
@@ -97,12 +101,8 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return TextButton(
       onPressed: press,
-      style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
