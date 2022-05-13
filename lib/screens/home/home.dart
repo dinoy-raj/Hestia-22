@@ -211,13 +211,17 @@ class HomeState extends State<Home> {
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   opacity: start ? 1 : 0,
                                   child: Badge(
-                                    badgeColor: Constants.iconAc,
+                                    position: BadgePosition.topEnd(end: -5),
+                                    badgeColor: not == null
+                                        ? Colors.transparent
+                                        : Constants.iconAc,
                                     badgeContent: Text(
                                       not == null
                                           ? " "
                                           : (not?.length).toString(),
                                       style: const TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 9,
+                                          color: Colors.transparent,
                                           fontFamily: 'Helvetica',
                                           fontWeight: FontWeight.bold),
                                     ),
