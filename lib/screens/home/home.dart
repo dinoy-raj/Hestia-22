@@ -68,6 +68,7 @@ class HomeState extends State<Home> {
   late List name;
 
   List<dynamic>? show;
+  List<dynamic>? not;
 
   List<String> _getSuggestions(String pattern) {
     List<String> list = [];
@@ -86,8 +87,10 @@ class HomeState extends State<Home> {
         }
       }
 
+      print(list);
       return list;
     } else {
+      print(list);
       return list;
     }
   }
@@ -99,6 +102,12 @@ class HomeState extends State<Home> {
     start = false;
     catSelect = 10;
     show = widget.event0;
+
+    auth.getNotifications().then((value) {
+      setState(() {
+        not = value;
+      });
+    });
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {
         setState(() {
@@ -116,7 +125,6 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        print(widget.a.toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -203,15 +211,17 @@ class HomeState extends State<Home> {
                                   opacity: start ? 1 : 0,
                                   child: Badge(
                                     badgeColor: Constants.iconAc,
-                                    badgeContent: const Text(
-                                      "1",
-                                      style: TextStyle(
+                                    badgeContent: Text(
+                                      not==null?" ":
+                                      (not?.length).toString(),
+                                      style: const TextStyle(
+                                        fontSize: 10,
                                         fontFamily: 'Helvetica',
-                                        //fontWeight: FontWeight.bold
+                                        fontWeight: FontWeight.bold
                                       ),
                                     ),
                                     animationDuration:
-                                        const Duration(milliseconds: 700),
+                                        const Duration(milliseconds: 800),
                                     animationType: BadgeAnimationType.scale,
                                     child: AnimatedContainer(
                                       duration: const Duration(seconds: 2),
@@ -860,10 +870,12 @@ class HomeState extends State<Home> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.black),
-                      child: const NotificationPage(),
+                      child:  const NotificationPage(),
                     ),
                   ],
                 ),
+
+
               ],
             ),
           ),
