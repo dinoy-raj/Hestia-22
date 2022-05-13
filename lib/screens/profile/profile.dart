@@ -1,9 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/profile/profile_registration.dart';
+import 'package:hestia22/screens/profile/registered_events.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, this.data}) : super(key: key);
@@ -28,7 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height - 24;
-    double screenWidth = MediaQuery.of(context).size.width;
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 800),
       curve: Curves.decelerate,
@@ -74,46 +74,53 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        AnimatedPadding(
-                          padding: start
-                              ? const EdgeInsets.only(right: 5)
-                              : const EdgeInsets.only(right: 10),
-                          duration: const Duration(milliseconds: 800),
-                          curve: Curves.decelerate,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisteredEvents()));
+                          },
+                          child: AnimatedPadding(
+                            padding: start
+                                ? const EdgeInsets.only(right: 5)
+                                : const EdgeInsets.only(right: 10),
+                            duration: const Duration(milliseconds: 800),
+                            curve: Curves.decelerate,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: Constants.bg,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  height: 70,
+                                  width: 140,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.event_available_outlined,
+                                      color: Colors.white.withOpacity(0.5),
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
-                                height: 70,
-                                width: 140,
-                                child: Center(
-                                  child: IconButton(
-                                    icon: const Icon(
-                                        Icons.event_available_outlined),
-                                    color: Colors.white.withOpacity(0.5),
-                                    iconSize: 30,
-                                    onPressed: () {},
-                                  ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Registered Events',
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.5),
-                                    fontSize: 16,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
+                                Text(
+                                  'Registered Events',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontSize: 16,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -185,14 +192,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(10),
                             ),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.brown.withOpacity(0.1),
-                                Colors.brown.withOpacity(0.2),
-                              ],
-                              begin: AlignmentDirectional.topStart,
-                              end: AlignmentDirectional.bottomEnd,
-                            ),
+                            color: Constants.iconAc.withOpacity(0.1),
                           ),
                           child: AnimatedPadding(
                             padding: start
@@ -204,6 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             curve: Curves.decelerate,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   decoration: const BoxDecoration(
@@ -218,7 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Icon(
                                           Icons.person_outline,
                                           color: Colors.white.withOpacity(.5),
-                                          size: 24,
+                                          size: 20,
                                           // Image.asset('assets/icons/person.png'),
                                         ),
                                       ),
@@ -226,14 +227,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: AnimatedPadding(
                                           padding: start
                                               ? const EdgeInsets.only(left: 20)
-                                              : const EdgeInsets.only(left: 40),
+                                              : const EdgeInsets.only(left: 35),
                                           duration:
                                               const Duration(milliseconds: 800),
                                           curve: Curves.decelerate,
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['name'].toString(),
+                                                : widget.data!['name']
+                                                    .toString(),
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
@@ -261,15 +263,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: AnimatedPadding(
                                           padding: start
                                               ? const EdgeInsets.only(left: 20)
-                                              : const EdgeInsets.only(left: 40),
+                                              : const EdgeInsets.only(left: 35),
                                           duration:
                                               const Duration(milliseconds: 800),
                                           curve: Curves.decelerate,
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['phone_number'].toString()
-                                                    .substring(3),
+                                                : "+91 " +
+                                                    widget.data!['phone_number']
+                                                        .toString()
+                                                        .substring(3),
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
@@ -297,17 +301,18 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: AnimatedPadding(
                                           padding: start
                                               ? const EdgeInsets.only(left: 20)
-                                              : const EdgeInsets.only(left: 40),
+                                              : const EdgeInsets.only(left: 35),
                                           duration:
                                               const Duration(milliseconds: 800),
                                           curve: Curves.decelerate,
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['dept_name'].toString() +
+                                                : widget.data!['dept_name']
+                                                        .toString() +
                                                     ", " +
-                                                    widget
-                                                        .data!['college_name'].toString(),
+                                                    widget.data!['college_name']
+                                                        .toString(),
                                             style: TextStyle(
                                                 overflow: TextOverflow.clip,
                                                 color: Colors.white
@@ -329,16 +334,39 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                    ),
+                    child: TextButton(
+                        style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ProfileRegistration()));
+                        },
+                        child: const Text(
+                          "Update profile",
+                          style: TextStyle(
+                            color: Constants.iconAc,
+                          ),
+                        )),
+                  ),
+                ),
                 AnimatedPadding(
-                  padding: start
-                      ? const EdgeInsets.only(right: 20)
-                      : EdgeInsets.zero,
+                  padding:
+                      start ? EdgeInsets.zero : const EdgeInsets.only(left: 20),
                   duration: const Duration(milliseconds: 800),
                   curve: Curves.decelerate,
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          left: 70, right: 70, top: 50, bottom: 50),
+                          left: 70, right: 70, top: 5, bottom: 50),
                       child: GestureDetector(
                         onTap: () {
                           Future.delayed(const Duration(milliseconds: 800),
@@ -348,7 +376,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Constants.color3,
+                            color: Constants.iconAc.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           height: 40,
@@ -362,7 +390,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Center(
                                     child: Icon(
                                       FontAwesomeIcons.arrowRightFromBracket,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.75),
                                       size: 16,
                                     ),
                                   ),
@@ -370,7 +398,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text('Logout',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: Colors.white.withOpacity(0.5),
+                                        color: Colors.white.withOpacity(0.75),
                                         fontSize: 16,
                                         fontFamily: 'Helvetica',
                                         fontWeight: FontWeight.normal)),

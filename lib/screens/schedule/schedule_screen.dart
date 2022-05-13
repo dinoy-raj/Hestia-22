@@ -81,8 +81,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: dateItems
-                              .map((currentMenuInfo) =>
-                                  buildDateButton(currentMenuInfo))
+                              .map((currentDateInfo) =>
+                                  buildDateButton(currentDateInfo))
                               .toList(),
                         ),
                       ],
