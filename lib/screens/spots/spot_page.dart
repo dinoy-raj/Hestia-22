@@ -49,21 +49,24 @@ class _SpotPageState extends State<SpotPage> {
                     child: AnimatedOpacity(
                         duration: const Duration(milliseconds: 800),
                         opacity: _opacity,
-                        child: Image.network(
-                          widget.data['picture'] != null
-                              ? widget.data['picture'].toString()
-                              : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
-                          height: 300,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          color: Constants.color3.withOpacity(.5),
-                          colorBlendMode: BlendMode.overlay,
+                        child: Container(
+                          color: Constants.iconAc.withOpacity(.1),
+                          child: Image.network(
+                            widget.data['picture'] != null
+                                ? widget.data['picture'].toString()
+                                : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
+                            height: 300,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            color: Constants.iconAc.withOpacity(.1),
+                            colorBlendMode: BlendMode.overlay,
+                          ),
                         )),
                   ),
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
-                    top: 70,
-                    left: _animate ? 15 : 25,
+                    top: 50,
+                    left: _animate ? 15 : 20,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: BackdropFilter(
@@ -73,8 +76,8 @@ class _SpotPageState extends State<SpotPage> {
                             borderRadius: BorderRadius.circular(8),
                             gradient: LinearGradient(
                               colors: [
-                                Constants.bg.withOpacity(.3),
-                                Constants.bg.withOpacity(.6),
+                                Colors.black.withOpacity(.4),
+                                Colors.black.withOpacity(.3),
                               ],
                               begin: AlignmentDirectional.topStart,
                               end: AlignmentDirectional.bottomEnd,
@@ -90,7 +93,7 @@ class _SpotPageState extends State<SpotPage> {
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 800),
                     right: _animate ? 20 : 30,
-                    top: 70,
+                    top: 80,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: BackdropFilter(
@@ -99,12 +102,11 @@ class _SpotPageState extends State<SpotPage> {
                           height: 200,
                           width: 200,
                           decoration: BoxDecoration(
-                            color: Constants.bg,
                             borderRadius: BorderRadius.circular(20),
                             gradient: LinearGradient(
                               colors: [
-                                Constants.bg.withOpacity(.8),
-                                Constants.bg.withOpacity(.4),
+                                Colors.black.withOpacity(.3),
+                                Colors.black.withOpacity(.2),
                               ],
                               begin: AlignmentDirectional.topStart,
                               end: AlignmentDirectional.bottomEnd,
@@ -139,7 +141,7 @@ class _SpotPageState extends State<SpotPage> {
                                         overflow: TextOverflow.clip,
                                         fontSize: 18,
                                         color:
-                                            Constants.color2.withOpacity(.5)),
+                                            Constants.color2.withOpacity(.65)),
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -150,7 +152,7 @@ class _SpotPageState extends State<SpotPage> {
                                         overflow: TextOverflow.clip,
                                         fontSize: 14,
                                         color:
-                                            Constants.color2.withOpacity(.25)),
+                                            Constants.color2.withOpacity(.4)),
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -181,14 +183,7 @@ class _SpotPageState extends State<SpotPage> {
                         width: 270,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            colors: [
-                              Constants.color3.withOpacity(.1),
-                              Constants.color3.withOpacity(.3),
-                            ],
-                            begin: AlignmentDirectional.topStart,
-                            end: AlignmentDirectional.bottomEnd,
-                          ),
+                          color: Constants.iconAc.withOpacity(.1),
                         ),
                         child: ListView.builder(
                           itemCount: widget.data['events'].length,
@@ -214,7 +209,7 @@ class _SpotPageState extends State<SpotPage> {
                                 children: [
                                   ListTile(
                                     onTap: () {
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>

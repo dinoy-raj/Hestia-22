@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
 import 'package:hestia22/screens/login/login.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
-import 'package:hestia22/screens/profile/registered_events.dart';
 import 'services/django/google_auth.dart';
 
 GoogleAuth auth = GoogleAuth();
@@ -43,7 +42,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Hestia22',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.grey,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
       ),
@@ -76,8 +75,6 @@ class Constants {
   static Color iconIn = Colors.grey.withOpacity(.35);
   static final Color color1 = Colors.grey.withOpacity(0.1);
   static const Color color2 = Colors.white;
-  static final Color color3 = Colors.brown[700]!;
-  static const Color color4 = Colors.blueGrey;
   static const pureBlack = Color(0x00000000);
   static const imageColor = Color(0x0031164a);
   static const detailsColor = Color(0x005a2d85);
@@ -88,7 +85,7 @@ class Constants {
   static const gradient1 = Colors.black;
   static const gradient2 = Colors.grey;
   static const gradient3 = Colors.white10;
-  static const transaparent = Colors.transparent;
+  static const transparent = Colors.transparent;
   static const lightWhite = Colors.white70;
 }
 

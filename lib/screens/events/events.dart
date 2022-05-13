@@ -44,19 +44,24 @@ class _EventDetailsState extends State<EventDetails> {
         start = true;
       });
     });
-    imageUrl = widget.eventData['image'];
+    if (widget.eventData['image'] != null) {
+      imageUrl = widget.eventData['image'];
+    } else {
+      imageUrl =
+          "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (duration!.inSeconds <= 0) {
+      setState(() {});
+    }
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    if (duration!.inSeconds <= 0) {
-      setState(() {});
-    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -99,14 +104,14 @@ class _EventDetailsState extends State<EventDetails> {
     return SliverAppBar(
       backgroundColor: Constants.sc,
       leading: AnimatedOpacity(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(seconds: 1),
         curve: Curves.decelerate,
-        opacity: start ? 1 : 0,
+        opacity: start ? 1 : 0.5,
         child: AnimatedPadding(
           padding: start
               ? EdgeInsets.all(width * 0.02)
               : EdgeInsets.all(width * 0.012),
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 1000),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: BackdropFilter(
@@ -169,7 +174,7 @@ class _EventDetailsState extends State<EventDetails> {
                     height: 0,
                   )
                 : AnimatedOpacity(
-                    duration: const Duration(seconds: 2),
+                    duration: const Duration(milliseconds: 800),
                     curve: Curves.decelerate,
                     opacity: start ? 1 : 0,
                     child: Container(
@@ -181,15 +186,15 @@ class _EventDetailsState extends State<EventDetails> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                               child: Container(
                                 width: width * 0.5,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   gradient: LinearGradient(
                                     colors: [
-                                      Constants.bg.withOpacity(.8),
-                                      Constants.bg.withOpacity(.8),
+                                      Constants.bg.withOpacity(.6),
+                                      Constants.bg.withOpacity(.6),
                                     ],
                                     begin: AlignmentDirectional.topStart,
                                     end: AlignmentDirectional.bottomEnd,
@@ -234,14 +239,14 @@ class _EventDetailsState extends State<EventDetails> {
                                           fontWeight: FontWeight.w200,
                                           decoration: TextDecoration.none,
                                           decorationColor:
-                                              Constants.transaparent,
+                                              Constants.transparent,
                                           overflow: TextOverflow.clip,
                                           color: Constants.pureWhite
                                               .withOpacity(0.9),
                                           fontFamily: fontfamily,
                                         ),
                                         decoration: const BoxDecoration(
-                                            color: Constants.transaparent),
+                                            color: Constants.transparent),
                                         slideDirection: SlideDirection.down,
                                         duration: duration == null
                                             ? const Duration(

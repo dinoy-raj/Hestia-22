@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -96,26 +98,6 @@ class _EventCardsState extends State<EventCards6> {
                               blurRadius: 20,
                             )
                           ],
-                          image: DecorationImage(
-                            fit: index == currentPage
-                                ? BoxFit.fill
-                                : BoxFit.cover,
-                            image: widget.catSelect == 0
-                                ? (widget.show[index]['event'] == null
-                                    ? const NetworkImage(
-                                        "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                        scale: 1.0)
-                                    : NetworkImage(
-                                        widget.show[index]['event']['image'],
-                                      ))
-                                : (widget.show[index]['image'] == null
-                                    ? const NetworkImage(
-                                        "https://ieeesbtkmce-assets.s3.amazonaws.com/media/events/posters/stomp_yard_org.jpeg",
-                                        scale: 1.0)
-                                    : NetworkImage(
-                                        widget.show[index]['image'],
-                                      )),
-                          ),
                           gradient: const LinearGradient(
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
@@ -128,6 +110,21 @@ class _EventCardsState extends State<EventCards6> {
                           border: Border.all(color: Constants.sc),
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.grey),
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: CachedNetworkImage(
+                          fadeInDuration: const Duration(milliseconds: 500),
+                          fadeInCurve: Curves.fastLinearToSlowEaseIn,
+                          placeholder: (BuildContext context, url) =>
+                          const CupertinoActivityIndicator(
+                            color: Colors.white,
+                          ),
+                          fit:
+                          index == currentPage ? BoxFit.fill : BoxFit.cover,
+                          imageUrl: widget.show[index]['image'],
+                        ),
+                      ),
                     ),
                   ),
                 ),

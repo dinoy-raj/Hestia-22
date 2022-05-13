@@ -53,11 +53,11 @@ class HomeState extends State<Home> {
   static int catSelect = 10;
   static List category = [
     "Trending",
-    "Proshows",
     "Culturals",
-    "Workshops",
     "Technical",
+    "Workshops",
     "Lectures",
+    "Proshows",
   ];
 
   late Map eDetails;
@@ -68,6 +68,7 @@ class HomeState extends State<Home> {
   late List name;
 
   List<dynamic>? show;
+  List<dynamic>? not;
 
   List<String> _getSuggestions(String pattern) {
     List<String> list = [];
@@ -85,7 +86,6 @@ class HomeState extends State<Home> {
           }
         }
       }
-
       return list;
     } else {
       return list;
@@ -99,6 +99,12 @@ class HomeState extends State<Home> {
     start = false;
     catSelect = 10;
     show = widget.event0;
+
+    auth.getNotifications().then((value) {
+      setState(() {
+        not = value;
+      });
+    });
     Future.delayed(const Duration(milliseconds: 150), () {
       if (mounted) {
         setState(() {
@@ -116,7 +122,6 @@ class HomeState extends State<Home> {
 
     return GestureDetector(
       onTap: () async {
-        print(widget.a.toString());
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
@@ -193,9 +198,13 @@ class HomeState extends State<Home> {
                               //notification bell
                               GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    notPressed = !notPressed;
-                                  });
+                                  FocusScopeNode currentFocus =
+                                      FocusScope.of(context);
+                                  if (currentFocus.hasPrimaryFocus) {
+                                    setState(() {
+                                      notPressed = !notPressed;
+                                    });
+                                  }
                                 },
                                 child: AnimatedOpacity(
                                   duration: const Duration(seconds: 1),
@@ -203,15 +212,17 @@ class HomeState extends State<Home> {
                                   opacity: start ? 1 : 0,
                                   child: Badge(
                                     badgeColor: Constants.iconAc,
-                                    badgeContent: const Text(
-                                      "1",
-                                      style: TextStyle(
-                                        fontFamily: 'Helvetica',
-                                        //fontWeight: FontWeight.bold
-                                      ),
+                                    badgeContent: Text(
+                                      not == null
+                                          ? " "
+                                          : (not?.length).toString(),
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          fontFamily: 'Helvetica',
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     animationDuration:
-                                        const Duration(milliseconds: 700),
+                                        const Duration(milliseconds: 800),
                                     animationType: BadgeAnimationType.scale,
                                     child: AnimatedContainer(
                                       duration: const Duration(seconds: 2),

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
@@ -15,12 +14,12 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   bool start = false;
   List<dynamic>? data;
-  List<dynamic>? eventTitle;
 
   @override
   void initState() {
+
     super.initState();
-    django.getSchedule("2022-05-27").then((value) {
+    django.getSchedule("2022-05-26").then((value) {
       setState(() {
         
       data = value;
@@ -41,10 +40,9 @@ class _FirstPageState extends State<FirstPage> {
       curve: Curves.fastLinearToSlowEaseIn,
       padding: start ? const EdgeInsets.only(left: 15, right: 15) 
       : const EdgeInsets.only(left: 0, right: 0),
-      
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: data==null? Center(child: CircularProgressIndicator()): ListView.builder(
+        child: data==null? const Center(child: CircularProgressIndicator()): ListView.builder(
           itemCount: data!.length,
           itemBuilder: ((context, index) {
           return SizedBox(

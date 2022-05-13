@@ -26,54 +26,58 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: screenHeight * 1.2,
               width: screenWidth * 1.3,
-              child: Lottie.asset('assets/animations/welcome.json'),
+              child:
+                  Lottie.asset('assets/animations/welcome.json', animate: true),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Color(0xff121212),
-                      borderRadius: BorderRadius.all(Radius.circular(25))),
-                  height: 70,
-                  width: 280,
-                  child: Center(
-                    child: RoundedButton(
-                      text: _text,
-                      press: () async {
-                        setState(() {
-                          _text = 'Logging you in...';
-                        });
-                        if (await main.auth.login()) {
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: Color(0xff121212),
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    height: 70,
+                    width: 280,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: RoundedButton(
+                        text: _text,
+                        press: () async {
                           setState(() {
-                            _text = 'Logged in';
+                            _text = 'Logging you in...';
                           });
-                        } else {
-                          _text = 'Error logging in...';
-
-                          Future.delayed(const Duration(milliseconds: 1000),
-                              () {
+                          if (await main.auth.login()) {
                             setState(() {
-                              _text = 'Try again...';
+                              _text = 'Logged in';
                             });
-                          });
+                          } else {
+                            _text = 'Error logging in...';
 
-                          Future.delayed(const Duration(milliseconds: 2500),
-                              () {
-                            setState(() {
-                              _text = 'Continue with Google';
+                            Future.delayed(const Duration(milliseconds: 1000),
+                                () {
+                              setState(() {
+                                _text = 'Try again...';
+                              });
                             });
-                          });
-                        }
-                      },
+
+                            Future.delayed(const Duration(milliseconds: 2500),
+                                () {
+                              setState(() {
+                                _text = 'Continue with Google';
+                              });
+                            });
+                          }
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  height: screenHeight * 0.1,
-                ),
-              ],
+                  const SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -97,7 +101,6 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return TextButton(
       onPressed: press,
       child: Row(

@@ -1,3 +1,4 @@
+import 'package:hestia22/services/django/django.dart' as django;
 import 'package:flutter/material.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 
@@ -11,10 +12,16 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
 
   bool start = false;
+  List<dynamic>? data;
 
   @override
   void initState() {
     super.initState();
+    django.getSchedule("2022-05-27").then((value) {
+      setState(() {
+        
+      data = value;
+      });});
 
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
@@ -33,8 +40,9 @@ class _SecondPageState extends State<SecondPage> {
       : const EdgeInsets.only(left: 0, right: 0),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: ListView.builder(
-          itemCount: 12,
+        child: data==null? Center(child: CircularProgressIndicator()): 
+        ListView.builder(
+          itemCount:  data!.length,
           itemBuilder: ((context, index) {
           return SizedBox(
               height: size.width * 0.39,
@@ -46,10 +54,9 @@ class _SecondPageState extends State<SecondPage> {
                   ),
                   EventCard(
                     time: '08:00 - 10:00',
-                    eventName: 'Team Event',
-                    description: 'APJ Park, Front Gate',
-                  ),
-                ],
+                    eventName: data![index]['title'].toString(),
+                    description: data![index]['venue']['title'].toString(),
+              )],
               ),
             );
         }))
