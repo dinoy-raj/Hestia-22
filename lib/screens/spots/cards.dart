@@ -58,12 +58,12 @@ class _CardsState extends State<Cards> {
                 child: RotatedBox(
                   quarterTurns: -1,
                   child: AnimatedPadding(
-                    padding: !_animate
+                    padding: _animate
                         ? const EdgeInsets.only(
                             top: 0,
                           )
                         : const EdgeInsets.only(
-                            top: 15,
+                            top: 10,
                           ),
                     duration: const Duration(milliseconds: 800),
                     curve: Curves.decelerate,
@@ -122,7 +122,7 @@ class _CardsState extends State<Cards> {
                                   opacity: 0.5,
                                   fit: BoxFit.cover,
                                   image: NetworkImage(widget.data[index]
-                                  ['picture'] ??
+                                          ['picture'] ??
                                       "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg")),
                             ),
                             child: Column(
