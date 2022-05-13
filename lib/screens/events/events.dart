@@ -30,10 +30,12 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   void initState() {
     // TODO: implement initState
-    dateFormat =
-        DateTime.parse(widget.eventData['reg_end']);
-    DateTime endDate = dateFormat!.toLocal();
-    log(endDate.toString());
+
+    dateFormat = widget.eventData['reg_end'] != null
+        ? DateFormat("yyyy-mm-ddThh:mm:ss").parse(widget.eventData['reg_end'])
+        : DateTime.now();
+    DateTime endDate = DateTime.parse(dateFormat.toString());
+
     duration = Duration(
         days: endDate.day - DateTime.now().day,
         hours: endDate.hour - DateTime.now().hour,
@@ -73,8 +75,8 @@ class _EventDetailsState extends State<EventDetails> {
           eventDetails(height, width),
           Divider(
             height: width * 0.03,
-            endIndent: width * 0.03,
-            indent: width * 0.03,
+            endIndent: width * 0.035,
+            indent: width * 0.035,
             thickness: 0.3,
             color: Constants.lightWhite,
           ),
@@ -281,7 +283,7 @@ class _EventDetailsState extends State<EventDetails> {
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(
-                width * 0.03, width * 0.04, width * 0.03, 0),
+                width * 0.035, width * 0.04, width * 0.035, 0),
             child: Stack(
               children: [
                 AnimatedOpacity(
@@ -289,7 +291,7 @@ class _EventDetailsState extends State<EventDetails> {
                   curve: Curves.slowMiddle,
                   opacity: start ? 1 : 0.3,
                   child: Container(
-                    height: width * 0.35,
+                    height: width * 0.38,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -297,7 +299,7 @@ class _EventDetailsState extends State<EventDetails> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              width: width * 0.65,
+                              width: width * 0.60,
                               child: Text(
                                 widget.eventData['title'],
                                 overflow: TextOverflow.ellipsis,
@@ -318,7 +320,7 @@ class _EventDetailsState extends State<EventDetails> {
                             ? AnimatedOpacity(
                                 duration: const Duration(seconds: 1),
                                 curve: Curves.slowMiddle,
-                                opacity: start ? 1 : 0.3,
+                                opacity: start ? 1 : 0.5,
                                 child: Padding(
                                   padding: EdgeInsets.only(top: width * 0.06),
                                   child: Row(
@@ -355,6 +357,59 @@ class _EventDetailsState extends State<EventDetails> {
                             : const SizedBox(
                                 height: 0,
                               ),
+                        widget.eventData['fees'] != null
+                            ? AnimatedOpacity(
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.slowMiddle,
+                          opacity: start ? 1 : 0.5,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: width * 0.06),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.indianRupeeSign,
+                                  color: Constants.lightWhite
+                                      .withOpacity(0.4),
+                                  size: 15,
+                                ),
+                                widget.eventData['fees']==null ?Text(
+                                  "0"
+                                  ,
+                                  style: TextStyle(
+                                    letterSpacing: letterspace,
+                                    decoration: TextDecoration.none,
+                                    fontSize: 15,
+                                    fontFamily: fontfamily,
+                                    overflow: TextOverflow.clip,
+                                    color: Constants.textColor
+                                        .withOpacity(0.8),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ):Text(
+                                      widget.eventData['fees']<100 ? "  "+widget.eventData['fees'].toString()
+                                      .toUpperCase()+ "Ps" :"  "+ (widget.eventData['fees']/100).toString()
+                                          ,
+                                  style: TextStyle(
+                                    letterSpacing: letterspace,
+                                    decoration: TextDecoration.none,
+                                    fontSize: 15,
+                                    fontFamily: fontfamily,
+                                    overflow: TextOverflow.clip,
+                                    color: Constants.textColor
+                                        .withOpacity(0.8),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                            : const SizedBox(
+                          height: 0,
+                        ),
                       ],
                     ),
                   ),
@@ -370,19 +425,19 @@ class _EventDetailsState extends State<EventDetails> {
                           AnimatedOpacity(
                             duration: const Duration(seconds: 1),
                             curve: Curves.linear,
-                            opacity: start ? 1 : 0.3,
+                            opacity: start ? 1 : 0.6,
                             child: Container(
-                              width: width * 0.28,
+                              width: width * 0.32,
                               color: Colors.transparent,
                               child: Stack(
                                 children: [
                                   Container(
-                                    width: width * 0.28,
+                                    width: width * 0.32,
                                     height: width * 0.20,
                                     padding: EdgeInsets.only(
                                         top: width * 0.03,
-                                        left: width * 0.01,
-                                        right: width * 0.01),
+                                        left: width * 0.003,
+                                        right: width * 0.003),
                                     decoration: const BoxDecoration(
                                       color: Constants.iconAc,
                                       borderRadius: BorderRadius.only(
@@ -391,28 +446,33 @@ class _EventDetailsState extends State<EventDetails> {
                                           bottomRight: Radius.circular(10),
                                           bottomLeft: Radius.circular(10)),
                                     ),
-                                    child: Text(
-                                      "MAY " + dateFormat!.day.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          letterSpacing: contentspace,
-                                          overflow: TextOverflow.clip,
-                                          color: Constants.textColor.shade100,
-                                          fontFamily: fontfamily,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 18),
+                                    child: AnimatedOpacity(
+                                      duration: const Duration(seconds: 1),
+                                      curve: Curves.linear,
+                                      opacity: start ? 1 : 0.3,
+                                      child: Text(
+                                        "MAY " + dateFormat!.day.toString(),
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            letterSpacing: contentspace,
+                                            overflow: TextOverflow.clip,
+                                            color: Constants.textColor.shade100,
+                                            fontFamily: fontfamily,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18),
+                                      ),
                                     ),
                                   ),
                                   Container(
-                                    width: width * 0.28,
+                                    width: width * 0.32,
                                     height: width * 0.2,
-                                    margin: EdgeInsets.only(top: width * .12),
+                                    margin: EdgeInsets.only(top: width * .10),
                                     padding: EdgeInsets.only(
                                         top: width * 0.035,
                                         bottom: width * 0.02,
-                                        right: width * 0.04,
-                                        left: width * 0.04),
+                                        right: width * 0.003,
+                                        left: width * 0.003),
                                     decoration: BoxDecoration(
                                       color: Colors.grey[900],
                                       borderRadius: const BorderRadius.only(
@@ -422,33 +482,53 @@ class _EventDetailsState extends State<EventDetails> {
                                           topLeft: Radius.circular(10)),
                                     ),
                                     child: Center(
-                                        child: widget.eventData['prize'] == null
-                                            ? Text(
-                                                "0 K",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    letterSpacing: contentspace,
-                                                    overflow: TextOverflow.clip,
-                                                    color: Constants
-                                                        .textColor.shade100,
-                                                    fontFamily: fontfamily,
-                                                    fontSize: 16),
-                                              )
-                                            : Text(
-                                                (widget.eventData["prize"] /
-                                                            1000)
-                                                        .toString() +
-                                                    " K",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    letterSpacing: contentspace,
-                                                    overflow: TextOverflow.clip,
-                                                    color: Constants
-                                                        .textColor.shade100,
-                                                    fontFamily: fontfamily,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
-                                              )),
+                                        child: AnimatedOpacity(
+                                          duration: const Duration(seconds: 1),
+                                          curve: Curves.linear,
+                                          opacity: start ? 1 : 0.3,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              const Icon(FontAwesomeIcons.ticket,color: Constants.iconAc,size: 18,),
+                                              const Text("   "),
+                                              Row(
+                                                children: [
+                                                  widget.eventData['prize'] == null
+                                                      ? Text(
+                                                          "0 K",
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                              letterSpacing: contentspace,
+                                                              overflow: TextOverflow.clip,
+                                                              color: Constants.iconAc,
+                                                              fontFamily: fontfamily,
+                                                              fontSize: 14),
+                                                        )
+                                                      : Text(
+                                                          widget.eventData["prize"] < 1000
+                                                              ? (widget.eventData[
+                                                                          "prize"])
+                                                                  .toString()+" Rs"
+                                                              : (widget.eventData[
+                                                                              "prize"] /
+                                                                          1000)
+                                                                      .toString() +
+                                                                  " K",
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                              letterSpacing: contentspace,
+                                                              overflow: TextOverflow.clip,
+                                                              color: Constants.iconAc,
+                                                              fontFamily: fontfamily,
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 14),
+                                                        ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )),
                                   ),
                                 ],
                               ),
@@ -460,176 +540,6 @@ class _EventDetailsState extends State<EventDetails> {
             ),
           ),
           const Text(""),
-
-          /*Container(
-              padding: EdgeInsets.fromLTRB(
-                  width * 0.06, width * 0.04, width * 0.06, width * 0.01),
-
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-              ),
-              child: MaterialButton(
-                elevation: 4,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                onPressed: () {},
-                color: Constants.iconAc,
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.ticket,
-                      size: 20,
-                      color: Constants.pureWhite,
-                    ),
-                    Text(
-                      "  " + eventData["prize"],
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          letterSpacing: contentspace,
-                          overflow: TextOverflow.clip,
-                          color: Constants.lightWhite,
-                          fontFamily: fontfamily,
-                          fontSize: 16),
-                    ),
-                  ],
-                ),
-              )),
-              dateFormat != null
-              ? AnimatedPadding(
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.decelerate,
-                  padding: start
-                      ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
-                      : const EdgeInsets.only(left: 0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.schedule,
-                          color: Constants.lightWhite.withOpacity(0.4),
-                        ),
-                        Text(
-                          "   " +
-                              dateFormat!.day.toString() +
-                              ' / ' +
-                              dateFormat!.month.toString() +
-                              ' / ' +
-                              dateFormat!.year.toString() +
-                              "     ",
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            letterSpacing: letterspace,
-                            decoration: TextDecoration.none,
-                            fontSize: 16,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: fontfamily,
-                            color: Constants.textColor.shade50,
-                            overflow: TextOverflow.clip,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : const SizedBox(
-                  height: 0,
-                ),
-          Container(
-            padding: EdgeInsets.fromLTRB(
-                width * 0.06, width * 0.02, width * 0.06, width * 0.01),
-            child: Row(
-              children: [
-                Icon(
-                  FontAwesomeIcons.ticket,
-                  size: 20,
-                  color: Constants.lightWhite.withOpacity(0.4),
-                ),
-                Text(
-                  "   " +
-                      eventData['registrationfee'] +
-                      " Reg. Fee /  " +
-                      eventData['prize'] +
-                      " Prize",
-                  style: TextStyle(
-                    letterSpacing: letterspace,
-                    decoration: TextDecoration.none,
-                    fontSize: 16,
-                    fontFamily: fontfamily,
-                    overflow: TextOverflow.clip,
-                    color: Constants.textColor,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Text(""),
-          widget.eventData['venue']['title'] != null
-              ? AnimatedPadding(
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.decelerate,
-                  padding: start
-                      ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
-                      : const EdgeInsets.only(left: 0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.location_on_outlined,
-                          color: Constants.lightWhite.withOpacity(0.4),
-                          size: 24,
-                        ),
-                        Text(
-                          "   " +
-                              widget.eventData['venue']['title']
-                                  .toString()
-                                  .toUpperCase(),
-                          style: TextStyle(
-                            letterSpacing: letterspace,
-                            decoration: TextDecoration.none,
-                            fontSize: 16,
-                            fontFamily: fontfamily,
-                            overflow: TextOverflow.clip,
-                            color: Constants.textColor.shade50,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              : const SizedBox(
-                  height: 0,
-                ),
-          Container(
-            padding: EdgeInsets.fromLTRB(
-                width * 0.04, width * 0.02, width * 0.04, width * 0.01),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.currency_rupee_outlined,
-                  color: AppColors.pureWhite,
-                ),
-                Text(
-                  '  Prize : ' + eventData['prize'],
-                  style: const TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 18,
-                    fontFamily: 'Helvetica',
-                    color: AppColors.pureWhite,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ],
-            ),
-          ),*/
         ],
       ),
     );
@@ -637,82 +547,87 @@ class _EventDetailsState extends State<EventDetails> {
 
   Widget aboutEvent(double height, double width) {
     final lines = isReadmore ? null : 4;
-    return AnimatedOpacity(
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.decelerate,
-      opacity: start ? 1 : 0.5,
-      child: AnimatedPadding(
-        duration: const Duration(seconds: 1),
-        curve: Curves.decelerate,
-        padding: start
-            ? EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0)
-            : const EdgeInsets.only(left: 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(""),
-            Text(
-              'About Event',
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 18,
-                letterSpacing: 0.8,
-                fontFamily: fontfamily,
-                overflow: TextOverflow.clip,
-                color: Constants.pureWhite.withOpacity(0.75),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Text(""),
-            Text(
-              widget.eventData['desc'],
-              overflow:
-                  isReadmore ? TextOverflow.visible : TextOverflow.ellipsis,
-              maxLines: lines,
-              style: const TextStyle(
-                overflow: TextOverflow.clip,
-                fontSize: 16,
-                height: 1.5,
-                fontFamily: fontfamily,
-                color: Constants.textColor,
-                inherit: true,
-                letterSpacing: 0.9,
-                wordSpacing: 1.2,
-              ),
-            ),
-            MaterialButton(
-              padding: const EdgeInsets.all(0),
-              animationDuration: const Duration(seconds: 0),
-              onPressed: () {
-                setState(() {
-                  // toggle the bool variable true or false
-                  isReadmore = !isReadmore;
-                });
-              },
-              child: Row(
+    return widget.eventData['desc'] != null
+        ? AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.decelerate,
+            opacity: start ? 1 : 0.5,
+            child: AnimatedPadding(
+              duration: const Duration(seconds: 1),
+              curve: Curves.decelerate,
+              padding: start
+                  ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
+                  : const EdgeInsets.only(left: 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Text(""),
                   Text(
-                    (isReadmore ? 'Read Less\n' : 'Read More\n'),
-                    overflow: TextOverflow.clip,
-                    textAlign: TextAlign.start,
+                    'About Event',
                     style: TextStyle(
-                      overflow: TextOverflow.clip,
-                      fontSize: 14,
+                      decoration: TextDecoration.none,
+                      fontSize: 18,
+                      letterSpacing: 0.8,
                       fontFamily: fontfamily,
-                      color: Constants.lightWhite.withOpacity(0.3),
-                      inherit: true,
-                      fontWeight: FontWeight.normal,
+                      overflow: TextOverflow.clip,
+                      color: Constants.pureWhite.withOpacity(0.75),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Text(""),
+                  Text(
+                    widget.eventData['desc'],
+                    overflow: isReadmore
+                        ? TextOverflow.visible
+                        : TextOverflow.ellipsis,
+                    maxLines: lines,
+                    style: const TextStyle(
+                      overflow: TextOverflow.clip,
+                      fontSize: 16,
+                      height: 1.5,
+                      fontFamily: fontfamily,
+                      color: Constants.textColor,
+                      inherit: true,
+                      letterSpacing: 0.9,
+                      wordSpacing: 1.2,
+                    ),
+                  ),
+                  MaterialButton(
+                    padding: const EdgeInsets.all(0),
+                    animationDuration: const Duration(seconds: 0),
+                    onPressed: () {
+                      setState(() {
+                        // toggle the bool variable true or false
+                        isReadmore = !isReadmore;
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          (isReadmore ? 'Read Less\n' : 'Read More\n'),
+                          overflow: TextOverflow.clip,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            overflow: TextOverflow.clip,
+                            fontSize: 14,
+                            fontFamily: fontfamily,
+                            color: Constants.lightWhite.withOpacity(0.3),
+                            inherit: true,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        const Text(""),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          )
+        : const SizedBox(
+            height: 0,
+          );
   }
 
   Widget guidelines(double height, double width) {
@@ -724,7 +639,7 @@ class _EventDetailsState extends State<EventDetails> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.decelerate,
         padding: start
-            ? EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0)
+            ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
             : const EdgeInsets.only(left: 0),
         child: MaterialButton(
             color: Colors.grey[900],
@@ -769,7 +684,7 @@ class _EventDetailsState extends State<EventDetails> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.decelerate,
         padding: start
-            ? EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0)
+            ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
             : const EdgeInsets.only(left: 0),
         child: Column(
           children: [
@@ -892,7 +807,7 @@ class _EventDetailsState extends State<EventDetails> {
       child: Container(
         height: width * 0.18,
         padding: EdgeInsets.fromLTRB(
-            width * .03, width * .03, width * .03, width * .03),
+            width * .035, width * .03, width * .035, width * .03),
         child: MaterialButton(
           autofocus: true,
           highlightColor: Colors.grey[900],
