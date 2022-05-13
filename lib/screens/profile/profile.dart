@@ -185,14 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(10),
                             ),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.brown.withOpacity(0.1),
-                                Colors.brown.withOpacity(0.2),
-                              ],
-                              begin: AlignmentDirectional.topStart,
-                              end: AlignmentDirectional.bottomEnd,
-                            ),
+                            color: Constants.iconAc.withOpacity(0.1),
                           ),
                           child: AnimatedPadding(
                             padding: start
@@ -233,7 +226,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['name'].toString(),
+                                                : widget.data!['name']
+                                                    .toString(),
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
@@ -268,7 +262,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['phone_number'].toString()
+                                                : widget.data!['phone_number']
+                                                    .toString()
                                                     .substring(3),
                                             style: TextStyle(
                                                 color: Colors.white
@@ -304,10 +299,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['dept_name'].toString() +
+                                                : widget.data!['dept_name']
+                                                        .toString() +
                                                     ", " +
-                                                    widget
-                                                        .data!['college_name'].toString(),
+                                                    widget.data!['college_name']
+                                                        .toString(),
                                             style: TextStyle(
                                                 overflow: TextOverflow.clip,
                                                 color: Colors.white
@@ -348,7 +344,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Constants.color3,
+                            color: Constants.iconAc.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           height: 40,
@@ -362,7 +358,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Center(
                                     child: Icon(
                                       FontAwesomeIcons.arrowRightFromBracket,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.75),
                                       size: 16,
                                     ),
                                   ),
@@ -370,7 +366,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text('Logout',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: Colors.white.withOpacity(0.5),
+                                        color: Colors.white.withOpacity(0.75),
                                         fontSize: 16,
                                         fontFamily: 'Helvetica',
                                         fontWeight: FontWeight.normal)),
