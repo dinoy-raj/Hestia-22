@@ -79,7 +79,7 @@ class HomeState extends State<Home> {
           if (widget.a![index]['title']
               .toLowerCase()
               .contains(pattern.toLowerCase())) {
-            list.add("%l%" + widget.a![index]['title']);
+            list.add(widget.a![index]['title']);
             if (list.length == 4) {
               break;
             }
@@ -201,9 +201,11 @@ class HomeState extends State<Home> {
                                   FocusScopeNode currentFocus =
                                       FocusScope.of(context);
                                   if (currentFocus.hasPrimaryFocus) {
-                                    setState(() {
-                                      notPressed = !notPressed;
-                                    });
+                                    if (mounted) {
+                                      setState(() {
+                                        notPressed = !notPressed;
+                                      });
+                                    }
                                   }
                                 },
                                 child: AnimatedOpacity(
@@ -381,9 +383,15 @@ class HomeState extends State<Home> {
                                   opacity: start ? 1 : 0,
                                   child: GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        filPressed = !filPressed;
-                                      });
+                                      FocusScopeNode currentFocus =
+                                          FocusScope.of(context);
+                                      if (currentFocus.hasPrimaryFocus) {
+                                        if (mounted) {
+                                          setState(() {
+                                            filPressed = !filPressed;
+                                          });
+                                        }
+                                      }
                                     },
                                     child: AnimatedContainer(
                                       duration: const Duration(seconds: 1),
