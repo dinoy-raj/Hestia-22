@@ -30,7 +30,7 @@ class _EventDetailsState extends State<EventDetails> {
   void initState() {
     // TODO: implement initState
     dateFormat =
-        DateFormat("yyyy-mm-ddThh:mm:ss").parse(widget.eventData['reg_end']);
+    widget.eventData['reg_end']!=null?DateFormat("yyyy-mm-ddThh:mm:ss").parse(widget.eventData['reg_end']):DateTime.now();
     DateTime endDate = DateTime.parse(dateFormat.toString());
     duration = Duration(
         days: endDate.day - DateTime.now().day,
@@ -71,8 +71,8 @@ class _EventDetailsState extends State<EventDetails> {
           eventDetails(height, width),
           Divider(
             height: width * 0.03,
-            endIndent: width * 0.03,
-            indent: width * 0.03,
+            endIndent: width * 0.035,
+            indent: width * 0.035,
             thickness: 0.3,
             color: Constants.lightWhite,
           ),
@@ -279,7 +279,7 @@ class _EventDetailsState extends State<EventDetails> {
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(
-                width * 0.03, width * 0.04, width * 0.03, 0),
+                width * 0.035, width * 0.04, width * 0.035, 0),
             child: Stack(
               children: [
                 AnimatedOpacity(
@@ -295,7 +295,7 @@ class _EventDetailsState extends State<EventDetails> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              width: width * 0.65,
+                              width: width * 0.62,
                               child: Text(
                                 widget.eventData['title'],
                                 overflow: TextOverflow.ellipsis,
@@ -458,176 +458,6 @@ class _EventDetailsState extends State<EventDetails> {
             ),
           ),
           const Text(""),
-
-          /*Container(
-              padding: EdgeInsets.fromLTRB(
-                  width * 0.06, width * 0.04, width * 0.06, width * 0.01),
-
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-              ),
-              child: MaterialButton(
-                elevation: 4,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                onPressed: () {},
-                color: Constants.iconAc,
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.ticket,
-                      size: 20,
-                      color: Constants.pureWhite,
-                    ),
-                    Text(
-                      "  " + eventData["prize"],
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          letterSpacing: contentspace,
-                          overflow: TextOverflow.clip,
-                          color: Constants.lightWhite,
-                          fontFamily: fontfamily,
-                          fontSize: 16),
-                    ),
-                  ],
-                ),
-              )),
-              dateFormat != null
-              ? AnimatedPadding(
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.decelerate,
-                  padding: start
-                      ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
-                      : const EdgeInsets.only(left: 0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.schedule,
-                          color: Constants.lightWhite.withOpacity(0.4),
-                        ),
-                        Text(
-                          "   " +
-                              dateFormat!.day.toString() +
-                              ' / ' +
-                              dateFormat!.month.toString() +
-                              ' / ' +
-                              dateFormat!.year.toString() +
-                              "     ",
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            letterSpacing: letterspace,
-                            decoration: TextDecoration.none,
-                            fontSize: 16,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: fontfamily,
-                            color: Constants.textColor.shade50,
-                            overflow: TextOverflow.clip,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : const SizedBox(
-                  height: 0,
-                ),
-          Container(
-            padding: EdgeInsets.fromLTRB(
-                width * 0.06, width * 0.02, width * 0.06, width * 0.01),
-            child: Row(
-              children: [
-                Icon(
-                  FontAwesomeIcons.ticket,
-                  size: 20,
-                  color: Constants.lightWhite.withOpacity(0.4),
-                ),
-                Text(
-                  "   " +
-                      eventData['registrationfee'] +
-                      " Reg. Fee /  " +
-                      eventData['prize'] +
-                      " Prize",
-                  style: TextStyle(
-                    letterSpacing: letterspace,
-                    decoration: TextDecoration.none,
-                    fontSize: 16,
-                    fontFamily: fontfamily,
-                    overflow: TextOverflow.clip,
-                    color: Constants.textColor,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Text(""),
-          widget.eventData['venue']['title'] != null
-              ? AnimatedPadding(
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.decelerate,
-                  padding: start
-                      ? EdgeInsets.fromLTRB(width * 0.06, 0, 0, 0)
-                      : const EdgeInsets.only(left: 0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.location_on_outlined,
-                          color: Constants.lightWhite.withOpacity(0.4),
-                          size: 24,
-                        ),
-                        Text(
-                          "   " +
-                              widget.eventData['venue']['title']
-                                  .toString()
-                                  .toUpperCase(),
-                          style: TextStyle(
-                            letterSpacing: letterspace,
-                            decoration: TextDecoration.none,
-                            fontSize: 16,
-                            fontFamily: fontfamily,
-                            overflow: TextOverflow.clip,
-                            color: Constants.textColor.shade50,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              : const SizedBox(
-                  height: 0,
-                ),
-          Container(
-            padding: EdgeInsets.fromLTRB(
-                width * 0.04, width * 0.02, width * 0.04, width * 0.01),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.currency_rupee_outlined,
-                  color: AppColors.pureWhite,
-                ),
-                Text(
-                  '  Prize : ' + eventData['prize'],
-                  style: const TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 18,
-                    fontFamily: 'Helvetica',
-                    color: AppColors.pureWhite,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ],
-            ),
-          ),*/
         ],
       ),
     );
@@ -635,7 +465,7 @@ class _EventDetailsState extends State<EventDetails> {
 
   Widget aboutEvent(double height, double width) {
     final lines = isReadmore ? null : 4;
-    return AnimatedOpacity(
+    return widget.eventData['desc']!=null ? AnimatedOpacity(
       duration: const Duration(milliseconds: 500),
       curve: Curves.decelerate,
       opacity: start ? 1 : 0.5,
@@ -643,7 +473,7 @@ class _EventDetailsState extends State<EventDetails> {
         duration: const Duration(seconds: 1),
         curve: Curves.decelerate,
         padding: start
-            ? EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0)
+            ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
             : const EdgeInsets.only(left: 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -710,7 +540,7 @@ class _EventDetailsState extends State<EventDetails> {
           ],
         ),
       ),
-    );
+    ) : const SizedBox(height: 0,);
   }
 
   Widget guidelines(double height, double width) {
@@ -722,7 +552,7 @@ class _EventDetailsState extends State<EventDetails> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.decelerate,
         padding: start
-            ? EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0)
+            ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
             : const EdgeInsets.only(left: 0),
         child: MaterialButton(
             color: Colors.grey[900],
@@ -767,7 +597,7 @@ class _EventDetailsState extends State<EventDetails> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.decelerate,
         padding: start
-            ? EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0)
+            ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
             : const EdgeInsets.only(left: 0),
         child: Column(
           children: [
@@ -890,7 +720,7 @@ class _EventDetailsState extends State<EventDetails> {
       child: Container(
         height: width * 0.18,
         padding: EdgeInsets.fromLTRB(
-            width * .03, width * .03, width * .03, width * .03),
+            width * .035, width * .03, width * .035, width * .03),
         child: MaterialButton(
           autofocus: true,
           highlightColor: Colors.grey[900],
