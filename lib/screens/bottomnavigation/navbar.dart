@@ -124,7 +124,6 @@ class NavBarState extends State<NavBar> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     if(buildFlag) {
-      print("A");
       buildFlag = false;
       auth.getProfile().then((value) {
         setState(() {
