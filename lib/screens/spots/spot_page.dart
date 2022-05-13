@@ -183,14 +183,7 @@ class _SpotPageState extends State<SpotPage> {
                         width: 270,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            colors: [
-                              Constants.iconAc.withOpacity(.1),
-                              Constants.iconAc.withOpacity(.2),
-                            ],
-                            begin: AlignmentDirectional.topStart,
-                            end: AlignmentDirectional.bottomEnd,
-                          ),
+                          color: Constants.iconAc.withOpacity(.1),
                         ),
                         child: ListView.builder(
                           itemCount: widget.data['events'].length,
