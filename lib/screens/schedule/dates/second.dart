@@ -33,26 +33,26 @@ class _SecondPageState extends State<SecondPage> {
       : const EdgeInsets.only(left: 0, right: 0),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          children: [
-            Container(
+        child: ListView.builder(
+          itemCount: 12,
+          itemBuilder: ((context, index) {
+          return SizedBox(
               height: size.width * 0.39,
               child: Row(
                 children: [
                   const TimeLine(),
                    SizedBox(
-                    width: size.width * 0.05,
+                    width: size.width * 0.05
                   ),
                   EventCard(
                     time: '08:00 - 10:00',
-                    eventName: 'Pubg Tourney',
-                    description: 'IEDC Room',
+                    eventName: 'Team Event',
+                    description: 'APJ Park, Front Gate',
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
+            );
+        }))
       ),
     );
   }

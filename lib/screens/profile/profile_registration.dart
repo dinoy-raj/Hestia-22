@@ -136,7 +136,7 @@ class ProfileRegistration extends StatelessWidget {
                                       ),
                             color: context.read<ProfileProvider>().result == 0
                                 ? Colors.green
-                                : Constants.color3,
+                                : Constants.iconAc,
                           ),
                           const SizedBox(
                             height: 50,

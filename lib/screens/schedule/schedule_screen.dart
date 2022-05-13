@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
-import 'package:hestia22/screens/schedule/custompage_route.dart';
 import 'package:hestia22/screens/schedule/data.dart';
 import 'package:hestia22/screens/schedule/date_info.dart';
 import 'package:hestia22/screens/schedule/dates/first.dart';
@@ -35,88 +34,93 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: Constants.sc,
-      body: Column(
-        children: [
-          SizedBox(
-            height: size.width*0.68,
-            child: Stack(children: [
-              AnimatedPadding(
-                duration: const Duration(seconds: 3),
-                curve: Curves.fastLinearToSlowEaseIn,
-                padding: start
-                    ? const EdgeInsets.symmetric(horizontal: 10)
-                    : const EdgeInsets.only(left: 0, right: 0),
-                child: SizedBox(
-                  height: size.width * 0.68,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: size.width * 0.17,
-                      ),
-                      AnimatedOpacity(
-                        duration: const Duration(seconds: 3),
-                        curve: Curves.decelerate,
-                        opacity: start ? 1 : 0.2,
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 18.0),
-                          child: Text(
-                            'Schedule',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'helvetica',
-                                letterSpacing: 1.4),
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 800),
+      opacity: start ? 1 : 0,
+      child: Scaffold(
+        backgroundColor: Constants.sc,
+        body: Column(
+          children: [
+            SizedBox(
+              height: size.width * 0.68,
+              child: Stack(children: [
+                AnimatedPadding(
+                  duration: const Duration(seconds: 3),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  padding: start
+                      ? const EdgeInsets.symmetric(horizontal: 10)
+                      : const EdgeInsets.only(left: 0, right: 0),
+                  child: SizedBox(
+                    height: size.width * 0.68,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: size.width * 0.17,
+                        ),
+                        AnimatedOpacity(
+                          duration: const Duration(seconds: 3),
+                          curve: Curves.decelerate,
+                          opacity: start ? 1 : 0.2,
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18.0),
+                            child: Text(
+                              'Schedule',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'helvetica',
+                                  letterSpacing: 1.4),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: size.width * 0.1,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: dateItems
-                            .map((currentMenuInfo) =>
-                                buildDateButton(currentMenuInfo))
-                            .toList(),
-                      ),
-                    ],
+                        SizedBox(
+                          height: size.width * 0.1,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: dateItems
+                              .map((currentDateInfo) =>
+                                  buildDateButton(currentDateInfo))
+                              .toList(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                  width: size.width,
-                  height: size.width * 0.1,
-                  margin: EdgeInsets.only(top: 250),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(.1),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
-                  )),
-            ]),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.grey.withOpacity(.1),
-              child: Consumer<DateInfo>(
-                  builder: (context, value, child) {
-                    if (value.dateType == DateType.a)
-                      return FirstPage();
-                    else if (value.dateType == DateType.b)
-                      return SecondPage();
-                    else if (value.dateType == DateType.c)
-                      return ThirdPage();
-                    else
-                      return FourthPage();
-                  },
-                  child: FirstPage()),
+                Container(
+                    width: size.width,
+                    height: size.width * 0.1,
+                    margin: const EdgeInsets.only(top: 250),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(.1),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30)),
+                    )),
+              ]),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                color: Colors.grey.withOpacity(.1),
+                child: Consumer<DateInfo>(
+                    builder: (context, value, child) {
+                      if (value.dateType == DateType.a) {
+                        return const FirstPage();
+                      } else if (value.dateType == DateType.b) {
+                        return const SecondPage();
+                      } else if (value.dateType == DateType.c) {
+                        return const ThirdPage();
+                      } else {
+                        return const FourthPage();
+                      }
+                    },
+                    child: const FirstPage()),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -197,7 +201,7 @@ class EventCard extends StatefulWidget {
   final String time;
   final String eventName;
   final String description;
-  EventCard({
+  const EventCard({
     Key? key,
     required this.eventName,
     required this.description,
@@ -247,7 +251,7 @@ class _EventCardState extends State<EventCard> {
               width: size.width * 0.8,
               height: size.width * 0.22,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 226, 226, 226),
+                color: const Color.fromARGB(255, 226, 226, 226),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
@@ -258,7 +262,7 @@ class _EventCardState extends State<EventCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(widget.eventName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
                           )),

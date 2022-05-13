@@ -114,8 +114,8 @@ class SpotsState extends State<Spots> {
                     animatedTexts: [
                       RotateAnimatedText(
                         "TKMCE",
-                        textStyle: TextStyle(
-                          color: Constants.color3,
+                        textStyle: const TextStyle(
+                          color: Constants.iconAc,
                           letterSpacing: 3,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -123,19 +123,19 @@ class SpotsState extends State<Spots> {
                       ),
                       RotateAnimatedText(
                         "HESTIA'22",
-                        textStyle: TextStyle(
-                          color: Constants.color3,
+                        textStyle: const TextStyle(
+                          color: Constants.iconAc,
                           letterSpacing: 1,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       RotateAnimatedText(
-                        "UTOPIA",
-                        textStyle: TextStyle(
-                          color: Constants.color3,
+                        "SPIRIT OF TOMORROW",
+                        textStyle: const TextStyle(
+                          color: Constants.iconAc,
                           letterSpacing: 1,
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

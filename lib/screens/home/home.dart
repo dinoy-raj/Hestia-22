@@ -72,13 +72,13 @@ class HomeState extends State<Home> {
   List<String> _getSuggestions(String pattern) {
     List<String> list = [];
 
-    if (all != null) {
+    if (widget.a != null) {
       for (var index in all!) {
         if (list.length < 4) {
-          if (all![index]['title']
+          if (widget.a![index]['title']
               .toLowerCase()
               .contains(pattern.toLowerCase())) {
-            list.add("%l%" + all![index]['title']);
+            list.add("%l%" + widget.a![index]['title']);
             if (list.length == 4) {
               break;
             }
@@ -303,11 +303,6 @@ class HomeState extends State<Home> {
                                         cursorRadius: const Radius.circular(10),
                                         textCapitalization:
                                             TextCapitalization.sentences,
-                                        // style: const TextStyle(
-                                        //   fontFamily: 'Helvetica',
-                                        //   color: Constants.iconAc,
-                                        //   fontSize: 16,
-                                        // ),
                                         decoration: InputDecoration(
                                           hintText: "Discover new event",
                                           hintStyle: TextStyle(
@@ -327,7 +322,7 @@ class HomeState extends State<Home> {
                                           (BuildContext context, suggestion) {
                                         return ListTile(
                                           onTap: () {
-                                            for (var element in all!) {
+                                            for (var element in widget.a!) {
                                               if (element['title'] ==
                                                   suggestion.toString()) {
                                                 Navigator.push(

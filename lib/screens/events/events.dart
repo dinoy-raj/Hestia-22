@@ -237,14 +237,14 @@ class _EventDetailsState extends State<EventDetails> {
                                           fontWeight: FontWeight.w200,
                                           decoration: TextDecoration.none,
                                           decorationColor:
-                                              Constants.transaparent,
+                                              Constants.transparent,
                                           overflow: TextOverflow.clip,
                                           color: Constants.pureWhite
                                               .withOpacity(0.9),
                                           fontFamily: fontfamily,
                                         ),
                                         decoration: const BoxDecoration(
-                                            color: Constants.transaparent),
+                                            color: Constants.transparent),
                                         slideDirection: SlideDirection.down,
                                         duration: duration == null
                                             ? const Duration(

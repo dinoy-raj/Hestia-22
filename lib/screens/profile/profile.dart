@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/profile/registered_events.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, this.data}) : super(key: key);
@@ -74,46 +75,53 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        AnimatedPadding(
-                          padding: start
-                              ? const EdgeInsets.only(right: 5)
-                              : const EdgeInsets.only(right: 10),
-                          duration: const Duration(milliseconds: 800),
-                          curve: Curves.decelerate,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: Constants.bg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisteredEvents()));
+                          },
+                          child: AnimatedPadding(
+                            padding: start
+                                ? const EdgeInsets.only(right: 5)
+                                : const EdgeInsets.only(right: 10),
+                            duration: const Duration(milliseconds: 800),
+                            curve: Curves.decelerate,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: Constants.bg,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                  height: 70,
+                                  width: 140,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.event_available_outlined,
+                                      color: Colors.white.withOpacity(0.5),
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
-                                height: 70,
-                                width: 140,
-                                child: Center(
-                                  child: IconButton(
-                                    icon: const Icon(
-                                        Icons.event_available_outlined),
-                                    color: Colors.white.withOpacity(0.5),
-                                    iconSize: 30,
-                                    onPressed: () {},
-                                  ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                'Registered Events',
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.5),
-                                    fontSize: 16,
-                                    fontFamily: 'Helvetica',
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
+                                Text(
+                                  'Registered Events',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontSize: 16,
+                                      fontFamily: 'Helvetica',
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -185,14 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(10),
                             ),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.brown.withOpacity(0.1),
-                                Colors.brown.withOpacity(0.2),
-                              ],
-                              begin: AlignmentDirectional.topStart,
-                              end: AlignmentDirectional.bottomEnd,
-                            ),
+                            color: Constants.iconAc.withOpacity(0.1),
                           ),
                           child: AnimatedPadding(
                             padding: start
@@ -233,7 +234,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['name'].toString(),
+                                                : widget.data!['name']
+                                                    .toString(),
                                             style: TextStyle(
                                                 color: Colors.white
                                                     .withOpacity(.5),
@@ -268,7 +270,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['phone_number'].toString()
+                                                : widget.data!['phone_number']
+                                                    .toString()
                                                     .substring(3),
                                             style: TextStyle(
                                                 color: Colors.white
@@ -304,10 +307,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: Text(
                                             widget.data == null
                                                 ? ""
-                                                : widget.data!['dept_name'].toString() +
+                                                : widget.data!['dept_name']
+                                                        .toString() +
                                                     ", " +
-                                                    widget
-                                                        .data!['college_name'].toString(),
+                                                    widget.data!['college_name']
+                                                        .toString(),
                                             style: TextStyle(
                                                 overflow: TextOverflow.clip,
                                                 color: Colors.white
@@ -348,7 +352,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Constants.color3,
+                            color: Constants.iconAc.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           height: 40,
@@ -362,7 +366,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Center(
                                     child: Icon(
                                       FontAwesomeIcons.arrowRightFromBracket,
-                                      color: Colors.white.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.75),
                                       size: 16,
                                     ),
                                   ),
@@ -370,7 +374,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text('Logout',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: Colors.white.withOpacity(0.5),
+                                        color: Colors.white.withOpacity(0.75),
                                         fontSize: 16,
                                         fontFamily: 'Helvetica',
                                         fontWeight: FontWeight.normal)),

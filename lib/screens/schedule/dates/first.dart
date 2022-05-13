@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+
+  // final List<dynamic> data;
+
+
+  const FirstPage({Key? key, 
+  // required this.data
+  }) : super(key: key);
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -33,9 +39,11 @@ class _FirstPageState extends State<FirstPage> {
       
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          children: [
-            SizedBox(
+        child: ListView.builder(
+          itemCount: 2,
+          // widget.data.length,
+          itemBuilder: ((context, index) {
+          return SizedBox(
               height: size.width * 0.39,
               child: Row(
                 children: [
@@ -46,29 +54,13 @@ class _FirstPageState extends State<FirstPage> {
                   EventCard(
                     time: '08:00 - 10:00',
                     eventName: 'Team Event',
-                    description: 'APJ Park, Front Gate',
+                    description: 'f',
                   ),
                 ],
               ),
-            ),
-            Container(
-              height: size.width * 0.39,
-              child: Row(
-                children: [
-                  TimeLine(),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  EventCard(
-                    time: '11:00 - 12:00',
-                    eventName: 'Team Event',
-                    description: 'APJ Park, Front Gate',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+            );
+        }))
+        
       ),
     );
   }
