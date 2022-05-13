@@ -93,7 +93,8 @@ class GoogleAuth extends ChangeNotifier {
     }
 
     await const FlutterSecureStorage()
-        .write(key: 'is_completed', value: "true");
+        .write(key: 'is_completed', value: 'true');
+
     isCompleted = true;
     notifyListeners();
 
