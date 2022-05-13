@@ -86,368 +86,178 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  Text(
-                    widget.data == null ? "" : widget.data!['name'].toString(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.white,
+                  Container(
+                    height: screenHeight * .05,
+                    width: screenWidth,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.data == null
+                              ? ""
+                              : widget.data!['name'].toString(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            letterSpacing: 1,
+                            color: Colors.white,
+                            fontFamily: "Helvetica",
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          auth.googleSignIn.currentUser!.email,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                            color: Constants.iconIn,
+                            fontFamily: "Helvetica",
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: screenHeight * 0.18,
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const RegisteredEvents()));
-                            },
-                            child: AnimatedPadding(
-                              padding: start
-                                  ? const EdgeInsets.only(right: 5)
-                                  : const EdgeInsets.only(right: 10),
-                              duration: const Duration(milliseconds: 800),
-                              curve: Curves.decelerate,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                      color: Constants.bg,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    height: 70,
-                                    width: 140,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.event_available_outlined,
-                                        color: Colors.white.withOpacity(0.5),
-                                        size: 30,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    'Registered Events',
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.5),
-                                        fontSize: 16,
-                                        fontFamily: 'Helvetica',
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                ],
+                  Container(
+                    height: screenHeight * .1,
+                    width: screenWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: screenHeight * .07,
+                          width: screenWidth * .40,
+                          decoration: BoxDecoration(
+                              color: Constants.iconAc,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Center(
+                            child: Text(
+                              "Registered Events",
+                              style: TextStyle(
+                                fontFamily: "Helvetica",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Colors.black,
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             const CertificatesPage()));
-                            },
-                            child: AnimatedPadding(
-                              padding: start
-                                  ? const EdgeInsets.only(left: 5)
-                                  : const EdgeInsets.only(left: 10),
-                              duration: const Duration(milliseconds: 800),
-                              curve: Curves.decelerate,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.badge_outlined,
-                                        size: 30,
-                                        color: Colors.white.withOpacity(0.2),
-                                      ),
-                                    ),
-                                    decoration: const BoxDecoration(
-                                      color: Constants.bg,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    height: 70,
-                                    width: 140,
-                                    //color: const Color(0xff121212)
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    'Certificates',
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.2),
-                                        fontSize: 16,
-                                        fontFamily: 'Helvetica',
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                ],
+                        ),
+                        Container(
+                          height: screenHeight * .07,
+                          width: screenWidth * .40,
+                          decoration: BoxDecoration(
+                              color: Constants.bg,
+                              border: Border.all(
+                                  color: Constants.iconAc, width: .2),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Center(
+                            child: Text(
+                              "Certificates",
+                              style: TextStyle(
+                                fontFamily: "Helvetica",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Constants.iconIn,
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
+                  Container(
+                    height: screenHeight * .25,
+                    width: screenWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Constants.bg,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: screenHeight * .04,
+                          width: screenWidth * .8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [],
+                          ),
+                        ),
+                        Container(
+                          height: screenHeight * .0005,
+                          width: screenWidth * .8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Constants.iconIn),
+                        ),
+                        SizedBox(
+                          height: screenHeight * .04,
+                          width: screenWidth * .8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [],
+                          ),
+                        ),
+                        Container(
+                          height: screenHeight * .0005,
+                          width: screenWidth * .8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Constants.iconIn),
+                        ),
+                        Container(
+                          height: screenHeight * .04,
+                          width: screenWidth * .8,
+                          decoration: BoxDecoration(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
                     height: 30,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                    ),
-                    child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 800),
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              color: Constants.iconAc.withOpacity(0.1),
-                            ),
-                            child: AnimatedPadding(
-                              padding: start
-                                  ? const EdgeInsets.only(
-                                      left: 10,
-                                    )
-                                  : EdgeInsets.zero,
-                              duration: const Duration(milliseconds: 800),
-                              curve: Curves.decelerate,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    height: 60,
-                                    child: Row(
-                                      children: [
-                                        Center(
-                                          child: Icon(
-                                            Icons.person_outline,
-                                            color: Colors.white.withOpacity(.5),
-                                            size: 20,
-                                            // Image.asset('assets/icons/person.png'),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: AnimatedPadding(
-                                            padding: start
-                                                ? const EdgeInsets.only(
-                                                    left: 20)
-                                                : const EdgeInsets.only(
-                                                    left: 35),
-                                            duration: const Duration(
-                                                milliseconds: 800),
-                                            curve: Curves.decelerate,
-                                            child: Text(
-                                              widget.data == null
-                                                  ? ""
-                                                  : widget.data!['name']
-                                                      .toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white
-                                                      .withOpacity(.5),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Helvetica',
-                                                  fontWeight:
-                                                      FontWeight.normal),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 60,
-                                    child: Row(
-                                      children: [
-                                        Center(
-                                          child: Icon(
-                                            CupertinoIcons.phone,
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: AnimatedPadding(
-                                            padding: start
-                                                ? const EdgeInsets.only(
-                                                    left: 20)
-                                                : const EdgeInsets.only(
-                                                    left: 35),
-                                            duration: const Duration(
-                                                milliseconds: 800),
-                                            curve: Curves.decelerate,
-                                            child: Text(
-                                              widget.data == null
-                                                  ? ""
-                                                  : "+91 " +
-                                                      widget
-                                                          .data!['phone_number']
-                                                          .toString()
-                                                          .substring(3),
-                                              style: TextStyle(
-                                                  color: Colors.white
-                                                      .withOpacity(.5),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Helvetica',
-                                                  fontWeight:
-                                                      FontWeight.normal),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 60,
-                                    child: Row(
-                                      children: [
-                                        Center(
-                                          child: Icon(
-                                            CupertinoIcons.building_2_fill,
-                                            color: Colors.white.withOpacity(.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: AnimatedPadding(
-                                            padding: start
-                                                ? const EdgeInsets.only(
-                                                    left: 20)
-                                                : const EdgeInsets.only(
-                                                    left: 35),
-                                            duration: const Duration(
-                                                milliseconds: 800),
-                                            curve: Curves.decelerate,
-                                            child: Text(
-                                              widget.data == null
-                                                  ? ""
-                                                  : widget.data!['dept_name']
-                                                          .toString() +
-                                                      ", " +
-                                                      widget
-                                                          .data!['college_name']
-                                                          .toString(),
-                                              style: TextStyle(
-                                                  overflow: TextOverflow.clip,
-                                                  color: Colors.white
-                                                      .withOpacity(0.5),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Helvetica',
-                                                  fontWeight:
-                                                      FontWeight.normal),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 30,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Constants.iconAc, width: 1),
+                        borderRadius: BorderRadius.circular(7),
                       ),
-                      child: TextButton(
-                          style: ButtonStyle(
-                              overlayColor: MaterialStateProperty.all(
-                                  Colors.transparent)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ProfileRegistration()));
-                          },
-                          child: const Text(
-                            "Update profile",
-                            style: TextStyle(
-                              color: Constants.iconAc,
-                            ),
-                          )),
-                    ),
-                  ),
-                  AnimatedPadding(
-                    padding: start
-                        ? const EdgeInsets.only(left: 20, right: 20)
-                        : const EdgeInsets.only(left: 10, right: 10),
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.decelerate,
-                    child: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Constants.iconAc, width: 1),
-                          borderRadius: BorderRadius.circular(7),
+                      height: screenHeight * .05,
+                      width: screenWidth,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          shadowColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.black45),
+                          elevation: MaterialStateProperty.all(5),
                         ),
-                        height: screenHeight * .05,
-                        width: screenWidth,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            shadowColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            overlayColor:
-                                MaterialStateProperty.all(Colors.black45),
-                            elevation: MaterialStateProperty.all(5),
-                          ),
-                          onPressed: () {
-                            Future.delayed(const Duration(milliseconds: 800),
-                                () async {
-                              await auth.logOut();
-                            });
-                          },
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('Logout',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Constants.iconAc,
-                                      fontSize: 16,
-                                      fontFamily: 'Helvetica',
-                                    )),
-                              ],
-                            ),
+                        onPressed: () {
+                          Future.delayed(const Duration(milliseconds: 800),
+                              () async {
+                            await auth.logOut();
+                          });
+                        },
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text('Logout',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Constants.iconAc,
+                                    fontSize: 16,
+                                    fontFamily: 'Helvetica',
+                                  )),
+                            ],
                           ),
                         ),
                       ),
