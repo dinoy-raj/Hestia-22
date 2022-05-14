@@ -72,6 +72,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: BoxDecoration(
                           color: Constants.iconIn,
                           borderRadius: BorderRadius.circular(10),
+                          image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              opacity: .8,
+                              image: AssetImage("assets/header.jpg")),
                         ),
                       ),
                       Padding(
