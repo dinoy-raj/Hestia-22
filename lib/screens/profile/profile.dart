@@ -307,6 +307,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             shadowColor:
                                                 MaterialStateProperty.all(
                                                     Colors.transparent),
+                                            overlayColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.black),
                                           ),
                                           child: Row(
                                             mainAxisAlignment:
@@ -360,6 +363,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             shadowColor:
                                                 MaterialStateProperty.all(
                                                     Colors.transparent),
+                                            overlayColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.black),
                                           ),
                                           child: Row(
                                             mainAxisAlignment:
@@ -417,6 +423,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             shadowColor:
                                                 MaterialStateProperty.all(
                                                     Colors.transparent),
+                                            overlayColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.black),
                                           ),
                                           child: Row(
                                             mainAxisAlignment:
@@ -784,155 +793,195 @@ class _ProfilePageState extends State<ProfilePage> {
                                   color: Colors.black,
                                   borderRadius: BorderRadius.circular(10)),
                               child: SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 8.0, left: 20, right: 20),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: screenHeight * .05,
-                                        width: screenWidth,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            //close button
-                                            GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  con = false;
-                                                });
-                                              },
-                                              child: Container(
-                                                height: screenHeight * .03,
-                                                width: screenHeight * .03,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    border: Border.all(
-                                                        color: Constants.iconAc
-                                                            .withOpacity(.1))),
-                                                child: const Icon(
-                                                  Icons.close_rounded,
-                                                  size: 20,
-                                                  color: Colors.grey,
+                                child: AnimatedPadding(
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.decelerate,
+                                  padding: con? const EdgeInsets.only(
+                                      top: 8.0, left: 20, right: 20): const EdgeInsets.only(
+                                      top: 8.0, left: 10, right: 10),
+                                  child: AnimatedOpacity(
+                                    duration: const Duration(seconds: 4),
+                                    curve: Curves.decelerate,
+                                    opacity: con ? 1 : 0,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: screenHeight * .05,
+                                          width: screenWidth,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              //close button
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    con = false;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  height: screenHeight * .03,
+                                                  width: screenHeight * .03,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                      border: Border.all(
+                                                          color: Constants
+                                                              .iconAc
+                                                              .withOpacity(
+                                                                  .1))),
+                                                  child: const Icon(
+                                                    Icons.close_rounded,
+                                                    size: 20,
+                                                    color: Colors.grey,
+                                                  ),
                                                 ),
-                                              ),
-                                            )
-                                          ],
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
 
-                                      Container(
-                                        height: screenHeight*.06,
-                                        width: screenWidth,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: screenHeight*.06,
-                                              width: screenHeight*.06,
-                                              decoration: BoxDecoration(
-                                                image: const DecorationImage(
-                                                  fit: BoxFit.contain,
-                                                  image: AssetImage("assets/logo/app-icon.png")
-                                                ),
-                                                borderRadius: BorderRadius.circular(10),
-                                                border: Border.all(color: Constants.iconAc)
-                                              ),
-
-                                            ),
-                                            Container(
-                                              width: screenWidth*.05,
-                                            ),
-
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                        AnimatedOpacity(
+                                          duration: const Duration(seconds: 4),
+                                          curve: Curves.decelerate,
+                                          opacity: con ? 1 : 0,
+                                          child: SizedBox(
+                                            height: screenHeight * .06,
+                                            width: screenWidth,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
-                                                const Text("Hestia'22",style: TextStyle(
-                                                  fontSize: 25,
-                                                  fontFamily: "Helvetica",
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white
-                                                ),),
                                                 Container(
-                                                  height: screenHeight*.005,
+                                                  height: screenHeight * .06,
+                                                  width: screenHeight * .06,
+                                                  decoration: BoxDecoration(
+                                                      image: const DecorationImage(
+                                                          fit: BoxFit.contain,
+                                                          image: AssetImage(
+                                                              "assets/logo/app-icon.png")),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                          color: Constants
+                                                              .iconAc)),
                                                 ),
-                                                const Text("Spirit of Tomorrow",style: TextStyle(
-                                                    fontSize: 10,
+                                                Container(
+                                                  width: screenWidth * .05,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    const Text(
+                                                      "Hestia'22",
+                                                      style: TextStyle(
+                                                          fontSize: 25,
+                                                          fontFamily:
+                                                              "Helvetica",
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                    ),
+                                                    Container(
+                                                      height:
+                                                          screenHeight * .005,
+                                                    ),
+                                                    const Text(
+                                                      "Spirit of Tomorrow",
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontFamily:
+                                                              "Helvetica",
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.grey),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: screenHeight * .05,
+                                        ),
+
+                                        //college site
+                                        AnimatedOpacity(
+                                          duration: Duration(seconds: 4),
+                                          curve: Curves.decelerate,
+                                          opacity: con ? 1 : 0,
+                                          child: Container(
+                                            height: screenHeight * .04,
+                                            width: screenWidth,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                border: Border.all(
+                                                    color: Constants.iconAc,
+                                                    width: 1)),
+                                            child: ElevatedButton(
+                                              onPressed: _launchHestia,
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Constants
+                                                              .transparent)),
+                                              child: const Text(
+                                                "Official Website",
+                                                style: TextStyle(
+                                                  fontFamily: "Helvetica",
+                                                  color: Constants.iconAc,
+                                                  //fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        //email
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              top: screenHeight * .02),
+                                          child: AnimatedOpacity(
+                                            duration:
+                                                const Duration(seconds: 4),
+                                            curve: Curves.decelerate,
+                                            opacity: con ? 1 : 0,
+                                            child: Container(
+                                              height: screenHeight * .04,
+                                              width: screenWidth,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: ElevatedButton(
+                                                onPressed: _launchMail,
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Constants
+                                                                .iconAc)),
+                                                child: const Text(
+                                                  "Mail Us",
+                                                  style: TextStyle(
                                                     fontFamily: "Helvetica",
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.grey
-                                                ),),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: screenHeight*.05,
-                                      ),
-
-                                      //college site
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: screenHeight * .02),
-                                        child: Container(
-                                          height: screenHeight * .04,
-                                          width: screenWidth,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(6),
-                                            border: Border.all(color: Constants.iconAc,width: 1)
-                                          ),
-                                          child: ElevatedButton(
-                                            onPressed: _launchHestia,
-                                            style: ButtonStyle(
-                                                backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Constants.transparent)),
-                                            child: const Text(
-                                              "Official Website",
-                                              style: TextStyle(
-                                                fontFamily: "Helvetica",
-                                                color: Constants.iconAc,
-                                                //fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
 
-                                      //email
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: screenHeight * .02),
-                                        child: Container(
-                                          height: screenHeight * .04,
-                                          width: screenWidth,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: ElevatedButton(
-                                            onPressed: _launchMail,
-                                            style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        Constants.iconAc)),
-                                            child: const Text(
-                                              "Mail Us",
-                                              style: TextStyle(
-                                                fontFamily: "Helvetica",
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
