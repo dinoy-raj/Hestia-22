@@ -8,7 +8,6 @@ import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/home/card2.dart';
 import 'package:hestia22/screens/home/cards1.dart';
-import 'package:lottie/lottie.dart';
 import 'card3.dart';
 import 'card4.dart';
 import 'card5.dart';

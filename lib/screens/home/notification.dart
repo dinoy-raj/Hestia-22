@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:intl/intl.dart';
@@ -134,8 +136,14 @@ class _NotificationPageState extends State<NotificationPage> {
                                                           fontSize: 12,
                                                           fontFamily:
                                                               "Helvetica",
-                                                          color: Constants
-                                                              .pureWhite,
+                                                          color: widget.notifications?[
+                                                                          index]
+                                                                      [
+                                                                      'title'] ==
+                                                                  "Request Accepted"
+                                                              ? Colors.green
+                                                              : Constants
+                                                                  .pureWhite,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
