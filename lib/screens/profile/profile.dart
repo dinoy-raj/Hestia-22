@@ -835,9 +835,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                               height: screenHeight*.06,
                                               width: screenHeight*.06,
                                               decoration: BoxDecoration(
+                                                image: const DecorationImage(
+                                                  fit: BoxFit.contain,
+                                                  image: AssetImage("assets/logo/app-icon.png")
+                                                ),
                                                 borderRadius: BorderRadius.circular(10),
                                                 border: Border.all(color: Constants.iconAc)
                                               ),
+
                                             ),
                                             Container(
                                               width: screenWidth*.05,
