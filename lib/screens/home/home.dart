@@ -237,36 +237,42 @@ class HomeState extends State<Home> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AnimatedOpacity(
-                                    duration: const Duration(seconds: 3),
-                                    curve: Curves.decelerate,
-                                    opacity: start ? 1 : 0,
-                                    child: SizedBox(
-                                      width: screenWidth * .7,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
-                                            style: const TextStyle(
-                                                overflow: TextOverflow.fade,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                                fontFamily: 'helvetica',
-                                                color: Colors.white),
-                                          ),
-                                          Image.network(
-                                            "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif",
-                                            height: 25,
-                                            width: 25,
-                                          ),
-                                        ],
+                                  Expanded(
+                                    child: AnimatedOpacity(
+                                      duration: const Duration(seconds: 3),
+                                      curve: Curves.decelerate,
+                                      opacity: start ? 1 : 0,
+                                      child: SizedBox(
+                                        width: screenWidth * .7,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                                style: const TextStyle(
+                                                  overflow: TextOverflow.fade,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                  fontFamily: 'helvetica',
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Image.network(
+                                              "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif",
+                                              height: 25,
+                                              alignment: Alignment.centerLeft,
+                                              width: 25,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: screenHeight * .009,
+                                    height: screenHeight * .01,
                                   ),
                                   AnimatedOpacity(
                                     duration: const Duration(seconds: 3),
@@ -280,6 +286,9 @@ class HomeState extends State<Home> {
                                           fontFamily: 'helvetica',
                                           color: Constants.iconIn),
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * .01,
                                   ),
                                 ],
                               ),
