@@ -33,50 +33,96 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Constants.sc,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+        child: AnimatedPadding(
+          duration: const Duration(seconds: 1),
+          curve: Curves.decelerate,
+          padding: start
+              ? const EdgeInsets.only(
+                  left: 15.0, top: 30, right: 15, bottom: 20)
+              : const EdgeInsets.only(
+                  left: 10.0, top: 29, right: 10, bottom: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: size.width * 0.06,
-              ),
               AnimatedOpacity(
-                duration: const Duration(seconds: 3),
+                duration: const Duration(seconds: 1),
                 curve: Curves.decelerate,
                 opacity: start ? 1 : 0,
-                child: Text(
-                  'Registered Events',
-                  style: TextStyle(
-                      overflow: TextOverflow.fade,
-                      fontSize: 20,
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'helvetica',
-                      color: Colors.white
+                child: SizedBox(
+                  height: screenHeight * .05,
+                  width: screenWidth,
+                  child: Stack(
+                    children: [
+                      //title
+                      SizedBox(
+                        height: screenHeight * .05,
+                        width: screenWidth,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Text(
+                              'Registered Events',
+                              style: TextStyle(
+                                  overflow: TextOverflow.fade,
+                                  fontSize: 18,
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'helvetica',
+                                  color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //back button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                                height: screenHeight * .05,
+                                width: screenHeight * .05,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Constants.bg,
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_back,
+                                  size: 17,
+                                  color: Colors.grey,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.width * 0.06,
-              ),
               data == null
-                  ? const Center(
-                      child: SizedBox(
-                          height: 50, child: CupertinoActivityIndicator()))
+                  ? SizedBox(
+                      height: screenHeight * .8,
+                      width: screenWidth,
+                      child: const Center(child: CupertinoActivityIndicator()))
                   : data!.isEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.only(
-                            left: 8.0,
-                          ),
-                          child: Text(
-                            "No events",
-                            style:
-                                TextStyle(color: Colors.white.withOpacity(0.5)),
+                      ? SizedBox(
+                          height: screenHeight * .8,
+                          width: screenWidth,
+                          child: Center(
+                            child: Text(
+                              "No events",
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.5)),
+                            ),
                           ),
                         )
                       : ListView.separated(
@@ -97,7 +143,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                   duration: const Duration(milliseconds: 300),
                                   opacity: start ? 1 : 0.2,
                                   child: AnimatedContainer(
-                                    height: size.width * 0.5,
+                                    height: screenWidth * 0.5,
                                     duration: const Duration(milliseconds: 300),
                                     padding: const EdgeInsets.all(20),
                                     margin: start
