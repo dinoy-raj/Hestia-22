@@ -16,6 +16,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool det = false;
+
   bool start = false;
   @override
   void initState() {
@@ -45,8 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: start
                 ? const EdgeInsets.only(
                     left: 15, right: 15, top: 45, bottom: 20)
-                : const EdgeInsets.only(
-                    left: 8, right: 8, top: 45, bottom: 20),
+                : const EdgeInsets.only(left: 8, right: 8, top: 45, bottom: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -192,243 +193,332 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
 
                 //menu
-                Stack(
-                  children: [
-                    Container(
-                      height: screenHeight * .4,
-                      width: screenWidth,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: screenHeight * .35,
-                            width: screenWidth * .85,
-                            decoration: BoxDecoration(
-                              color: Constants.bg,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: screenHeight * .075,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shadowColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: screenHeight * .05,
-                                              width: screenHeight * .05,
-                                              decoration: BoxDecoration(
-                                                color: Constants.sc,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: const Center(
-                                                child: Icon(
-                                                  FontAwesomeIcons.userLarge,
-                                                  color: Constants.iconAc,
-                                                  size: 10,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: screenWidth * .1,
-                                            ),
-                                            const Text(
-                                              "Personal details",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                  Container(
-                                    height: screenHeight * .075,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shadowColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: screenHeight * .05,
-                                              width: screenHeight * .05,
-                                              decoration: BoxDecoration(
-                                                color: Constants.sc,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: const Center(
-                                                child: Icon(
-                                                  FontAwesomeIcons.alignLeft,
-                                                  color: Constants.iconAc,
-                                                  size: 10,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: screenWidth * .1,
-                                            ),
-                                            const Text(
-                                              "Terms & Conditions",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                  Container(
-                                    height: screenHeight * .075,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shadowColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: screenHeight * .05,
-                                              width: screenHeight * .05,
-                                              decoration: BoxDecoration(
-                                                color: Constants.sc,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: const Center(
-                                                child: Icon(
-                                                  FontAwesomeIcons.copyright,
-                                                  color: Constants.iconAc,
-                                                  size: 10,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: screenWidth * .1,
-                                            ),
-                                            const Text(
-                                              "Privacy Policy",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                  Container(
-                                    height: screenHeight * .075,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shadowColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: screenHeight * .05,
-                                              width: screenHeight * .05,
-                                              decoration: BoxDecoration(
+                Container(
+                  height: screenHeight * .4,
+                  width: screenWidth,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: screenHeight * .35,
+                        width: screenWidth * .85,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: screenHeight * .35,
+                              width: screenWidth * .85,
+                              decoration: BoxDecoration(
+                                color: Constants.bg,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: screenHeight * .075,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: ElevatedButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              det = true;
+                                            });
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                            shadowColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                height: screenHeight * .05,
+                                                width: screenHeight * .05,
+                                                decoration: BoxDecoration(
+                                                  color: Constants.sc,
                                                   borderRadius:
                                                       BorderRadius.circular(10),
-                                                  color: Constants.sc),
-                                              child: const Center(
-                                                child: Icon(
-                                                  FontAwesomeIcons.headset,
-                                                  color: Constants.iconAc,
-                                                  size: 10,
+                                                ),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    FontAwesomeIcons.userLarge,
+                                                    color: Constants.iconAc,
+                                                    size: 10,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              width: screenWidth * .1,
-                                            ),
-                                            const Text(
-                                              "Contact Us",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily: "Helvetica",
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ],
+                                              Container(
+                                                width: screenWidth * .1,
+                                              ),
+                                              const Text(
+                                                "Personal details",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontFamily: "Helvetica",
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
+                                    Container(
+                                      height: screenHeight * .075,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: ElevatedButton(
+                                          onPressed: () {},
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                            shadowColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                height: screenHeight * .05,
+                                                width: screenHeight * .05,
+                                                decoration: BoxDecoration(
+                                                  color: Constants.sc,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    FontAwesomeIcons.alignLeft,
+                                                    color: Constants.iconAc,
+                                                    size: 10,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: screenWidth * .1,
+                                              ),
+                                              const Text(
+                                                "Terms & Conditions",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontFamily: "Helvetica",
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
+                                    Container(
+                                      height: screenHeight * .075,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: ElevatedButton(
+                                          onPressed: () {},
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                            shadowColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                height: screenHeight * .05,
+                                                width: screenHeight * .05,
+                                                decoration: BoxDecoration(
+                                                  color: Constants.sc,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    FontAwesomeIcons.copyright,
+                                                    color: Constants.iconAc,
+                                                    size: 10,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: screenWidth * .1,
+                                              ),
+                                              const Text(
+                                                "Privacy Policy",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontFamily: "Helvetica",
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
+                                    Container(
+                                      height: screenHeight * .075,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: ElevatedButton(
+                                          onPressed: () {},
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                            shadowColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                height: screenHeight * .05,
+                                                width: screenHeight * .05,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: Constants.sc),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    FontAwesomeIcons.headset,
+                                                    color: Constants.iconAc,
+                                                    size: 10,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: screenWidth * .1,
+                                              ),
+                                              const Text(
+                                                "Contact Us",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontFamily: "Helvetica",
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.decelerate,
+                              height: det ? screenHeight * .35 : 0,
+                              width: screenWidth * .85,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, left: 20, right: 20),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: screenHeight * .05,
+                                        width: screenWidth,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: screenHeight * .015,
+                                                  width: screenWidth * .004,
+                                                  decoration: BoxDecoration(
+                                                      color: Constants.iconAc,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                ),
+                                                Container(
+                                                  width: screenWidth * .02,
+                                                ),
+                                                const Text(
+                                                  "personal Details",
+                                                  style: TextStyle(
+                                                    color: Constants.iconAc,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily: "Helvetica",
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  det = false;
+                                                });
+                                              },
+                                              child: Container(
+                                                height: screenHeight * .03,
+                                                width: screenHeight * .03,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    border: Border.all(
+                                                        color: Constants.iconAc
+                                                            .withOpacity(.1))),
+                                                child: const Icon(
+                                                  Icons.close_rounded,
+                                                  size: 20,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
 
                 Center(
