@@ -50,10 +50,8 @@ class NavBarState extends State<NavBar> {
         return 0;
       }
 
-      return DateFormat('yyyy-mm-ddThh:mm:ss')
-          .parseUtc(a['event_start'])
-          .compareTo(
-              DateFormat('yyyy-mm-ddThh:mm:ss').parseUtc(b['event_start']));
+      return DateTime.parse(a['event_start'])
+          .compareTo(DateTime.parse(b['event_start']));
     });
   }
 
@@ -71,26 +69,10 @@ class NavBarState extends State<NavBar> {
       }
     });
 
-    django.getProshows().then((value) {
-      if (mounted) {
-        setState(() {
-          show5 = value;
-        });
-      }
-    });
-
     django.getCulturals().then((value) {
       if (mounted) {
         setState(() {
           show1 = value;
-        });
-      }
-    });
-
-    django.getWorkshops().then((value) {
-      if (mounted) {
-        setState(() {
-          show3 = value;
         });
       }
     });
@@ -103,10 +85,34 @@ class NavBarState extends State<NavBar> {
       }
     });
 
-    django.getLectures().then((value) {
+    django.getGenerals().then((value) {
+      if (mounted) {
+        setState(() {
+          show3 = value;
+        });
+      }
+    });
+
+    django.getWorkshops().then((value) {
       if (mounted) {
         setState(() {
           show4 = value;
+        });
+      }
+    });
+
+    django.getLectures().then((value) {
+      if (mounted) {
+        setState(() {
+          show5 = value;
+        });
+      }
+    });
+
+    django.getProshows().then((value) {
+      if (mounted) {
+        setState(() {
+          show6 = value;
         });
       }
     });
@@ -205,7 +211,8 @@ class NavBarState extends State<NavBar> {
             controller: pageControl,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Home(show0, show1, show2, show3, show4, show5, profile, all),
+              Home(show0, show1, show2, show3, show4, show5, show6, profile,
+                  all),
               ChangeNotifierProvider<DateInfo>(
                   create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
                   child: ScheduleScreen(
