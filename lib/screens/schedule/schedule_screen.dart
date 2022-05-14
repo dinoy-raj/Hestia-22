@@ -364,7 +364,7 @@ class _TimeLineState extends State<TimeLine> {
           ),
           Container(
             width: size.width * 0.006,
-            height: size.width * 0.3,
+            height: size.width * 0.37,
             color: Colors.grey,
           ),
         ],
