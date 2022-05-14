@@ -58,15 +58,7 @@ class _EventCardsState extends State<EventCards3> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
-              Text(
-                "Loading....",
-                style: TextStyle(
-                  fontFamily: "Helvetica",
-                  color: Constants.iconAc,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              CupertinoActivityIndicator(),
             ],
           )
         : widget.show!.isEmpty

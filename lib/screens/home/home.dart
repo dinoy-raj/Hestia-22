@@ -8,6 +8,7 @@ import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/home/card2.dart';
 import 'package:hestia22/screens/home/cards1.dart';
+import 'package:lottie/lottie.dart';
 import 'card3.dart';
 import 'card4.dart';
 import 'card5.dart';
@@ -242,14 +243,25 @@ class HomeState extends State<Home> {
                                     opacity: start ? 1 : 0,
                                     child: SizedBox(
                                       width: screenWidth * .7,
-                                      child: Text(
-                                        "Hi, ${widget.profile == null ? "" : widget.profile!['name']} 👋",
-                                        style: const TextStyle(
-                                            overflow: TextOverflow.fade,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            fontFamily: 'helvetica',
-                                            color: Colors.white),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                            style: const TextStyle(
+                                                overflow: TextOverflow.fade,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                                fontFamily: 'helvetica',
+                                                color: Colors.white),
+                                          ),
+                                          Image.network(
+                                            "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif",
+                                            height: 25,
+                                            width: 25,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -288,7 +300,8 @@ class HomeState extends State<Home> {
                                   if (mounted) {
                                     setState(() {
                                       unreadNotifications = [];
-                                      notificationPressed = !notificationPressed;
+                                      notificationPressed =
+                                          !notificationPressed;
                                       FocusManager.instance.primaryFocus
                                           ?.unfocus();
                                     });
@@ -735,7 +748,8 @@ class HomeState extends State<Home> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   curve: Curves.decelerate,
-                                                  opacity: filterPressed ? 1 : 0,
+                                                  opacity:
+                                                      filterPressed ? 1 : 0,
                                                   child: Container(
                                                       height:
                                                           screenHeight * .04,
@@ -779,7 +793,8 @@ class HomeState extends State<Home> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   curve: Curves.decelerate,
-                                                  opacity: filterPressed ? 1 : 0,
+                                                  opacity:
+                                                      filterPressed ? 1 : 0,
                                                   child: SizedBox(
                                                       height:
                                                           screenHeight * .04,

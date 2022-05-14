@@ -35,12 +35,11 @@ class _EventCardsState extends State<EventCards4> {
     });
 
     Future.delayed(const Duration(milliseconds: 150), () {
-      if(mounted)
-        {
-          setState(() {
-            start = true;
-          });
-        }
+      if (mounted) {
+        setState(() {
+          start = true;
+        });
+      }
     });
   }
 
@@ -59,15 +58,7 @@ class _EventCardsState extends State<EventCards4> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
-              Text(
-                "Loading....",
-                style: TextStyle(
-                  fontFamily: "Helvetica",
-                  color: Constants.iconAc,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              CupertinoActivityIndicator(),
             ],
           )
         : widget.show!.isEmpty
