@@ -302,7 +302,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           width: screenWidth * .1,
                                         ),
                                         const Text(
-                                          "Terms And Conditions",
+                                          "Terms  &  Conditions",
                                           style: TextStyle(
                                               fontSize: 13,
                                               fontFamily: "Helvetica",
@@ -352,7 +352,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           width: screenWidth * .1,
                                         ),
                                         const Text(
-                                          "Privacy and Policy",
+                                          "Privacy  &  Policy",
                                           style: TextStyle(
                                               fontSize: 13,
                                               fontFamily: "Helvetica",

@@ -140,23 +140,26 @@ class _EventCardsState extends State<EventCards1> {
                                   color: Colors.grey),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
-                                child: CachedNetworkImage(
-                                  fadeInDuration:
-                                      const Duration(milliseconds: 500),
-                                  fadeInCurve: Curves.fastLinearToSlowEaseIn,
-                                  fit: index == currentPage
-                                      ? BoxFit.fill
-                                      : BoxFit.cover,
-                                  imageUrl: widget.show![index]['event']
-                                      ['image'],
-                                  errorWidget:
-                                      (BuildContext context, url, error) =>
-                                          const Text(
-                                    "Error In Loading",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 10,
-                                      color: Colors.white,
+                                child: Hero(
+                                  tag: "image",
+                                  child: CachedNetworkImage(
+                                    fadeInDuration:
+                                        const Duration(milliseconds: 500),
+                                    fadeInCurve: Curves.fastLinearToSlowEaseIn,
+                                    fit: index == currentPage
+                                        ? BoxFit.fill
+                                        : BoxFit.cover,
+                                    imageUrl: widget.show![index]['event']
+                                        ['image'],
+                                    errorWidget:
+                                        (BuildContext context, url, error) =>
+                                            const Text(
+                                      "Error In Loading",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
