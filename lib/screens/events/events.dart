@@ -1,4 +1,7 @@
+import 'dart:math';
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +16,7 @@ class EventDetails extends StatefulWidget {
   State<EventDetails> createState() => _EventDetailsState();
 }
 
+String fee = "";
 class _EventDetailsState extends State<EventDetails> {
   static const fontfamily = 'Helvetica';
   double letterspace = 0.8;
@@ -27,7 +31,11 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   void initState() {
     // TODO: implement initState
-
+    if (widget.eventData['fees'] != null) {
+      fee = (widget.eventData['fees'] / 100).toString().replaceAll(r".0", '');
+    } else {
+      fee = "0";
+    }
     dateFormat = widget.eventData['reg_end'] != null
         ? DateFormat("yyyy-mm-ddThh:mm:ss").parse(widget.eventData['reg_end'])
         : DateTime.now();
@@ -62,43 +70,49 @@ class _EventDetailsState extends State<EventDetails> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Constants.sc,
-      body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
-        appbar(height, width),
-        SliverList(
-            delegate: SliverChildListDelegate([
-          eventDetails(height, width),
-          Divider(
-            height: width * 0.03,
-            endIndent: width * 0.035,
-            indent: width * 0.035,
-            thickness: 0.3,
-            color: Constants.lightWhite,
-          ),
-          aboutEvent(height, width),
-          widget.eventData['is_file_upload'] &&
-                  widget.eventData['guideline_file'] != null
-              ? guidelines(height, width)
-              : const SizedBox(
-                  height: 0,
+      body: CustomScrollView(
+          dragStartBehavior: DragStartBehavior.down,
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            appbar(height, width),
+            SliverList(
+                delegate: SliverChildListDelegate(
+              [
+                eventDetails(height, width),
+                Divider(
+                  height: width * 0.03,
+                  endIndent: width * 0.035,
+                  indent: width * 0.035,
+                  thickness: 0.3,
+                  color: Constants.lightWhite,
                 ),
-          widget.eventData['coordinator_1'] != null ||
-                  widget.eventData['coordinator_2'] == null
-              ? contactDetails(height, width)
-              : const SizedBox(
-                  height: 0,
-                ),
-          duration!.inSeconds <= 0
-              ? const Text("")
-              : floatButton(height, width),
-          //contactDetails(height, width)
-        ]))
-      ]),
+                aboutEvent(height, width),
+                widget.eventData['is_file_upload'] &&
+                        widget.eventData['guideline_file'] != null
+                    ? guidelines(height, width)
+                    : const SizedBox(
+                        height: 0,
+                      ),
+                widget.eventData['coordinator_1'] != null ||
+                        widget.eventData['coordinator_2'] == null
+                    ? contactDetails(height, width)
+                    : const SizedBox(
+                        height: 0,
+                      ),
+                duration!.inSeconds <= 0
+                    ? const Text("")
+                    : floatButton(height, width),
+              ],
+            ))
+          ]),
     );
   }
 
   Widget appbar(double height, double width) {
     return SliverAppBar(
+      forceElevated: false,
       backgroundColor: Constants.sc,
+      expandedHeight: height * 0.55,
       leading: AnimatedOpacity(
         duration: const Duration(seconds: 1),
         curve: Curves.decelerate,
@@ -136,31 +150,38 @@ class _EventDetailsState extends State<EventDetails> {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30))),
-      expandedHeight: height * .65,
-      flexibleSpace: FlexibleSpaceBar(
-        background: AnimatedOpacity(
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.easeInOutCubicEmphasized,
-          opacity: start ? 1 : 0,
-          child: Hero(
-            tag: widget.eventData['title'],
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeOutQuad,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(imageUrl),
-                      onError: (Object exception, StackTrace? stackTrace) {
-                        setState(() {
-                          imageUrl =
-                              "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
-                        });
-                      },
-                      fit: BoxFit.contain)),
+      flexibleSpace: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return FlexibleSpaceBar(
+          collapseMode: CollapseMode.parallax,
+          background: AnimatedOpacity(
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeInOutCubicEmphasized,
+            opacity: start ? 1 : 0,
+            child: Hero(
+              tag: widget.eventData['title'],
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeOutQuad,
+                child: CachedNetworkImage(
+                    fadeInDuration: const Duration(milliseconds: 500),
+                    fadeInCurve: Curves.decelerate,
+                    imageUrl: imageUrl,
+                    errorWidget: (BuildContext context, url, error) =>
+                        const Text(
+                          "Error In Loading",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                    fit: BoxFit.fill),
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 
@@ -190,7 +211,7 @@ class _EventDetailsState extends State<EventDetails> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: width * 0.60,
+                              width: width * 0.57,
                               child: Text(
                                 widget.eventData['title'],
                                 overflow: TextOverflow.ellipsis,
@@ -254,7 +275,7 @@ class _EventDetailsState extends State<EventDetails> {
                                 curve: Curves.slowMiddle,
                                 opacity: start ? 1 : 0.5,
                                 child: Padding(
-                                  padding: EdgeInsets.only(top: width * 0.06),
+                                  padding: EdgeInsets.only(top: width * 0.034),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -284,14 +305,9 @@ class _EventDetailsState extends State<EventDetails> {
                                               widget.eventData['fees'] < 100
                                                   ? "  " +
                                                       widget.eventData['fees']
-                                                          .toString()
-                                                          .toUpperCase() +
-                                                      "Ps"
-                                                  : "  " +
-                                                      (widget.eventData[
-                                                                  'fees'] /
-                                                              100)
-                                                          .toString(),
+                                                          .toString() +
+                                                      " Ps"
+                                                  : "  " + fee,
                                               style: TextStyle(
                                                 letterSpacing: letterspace,
                                                 decoration: TextDecoration.none,
@@ -333,7 +349,7 @@ class _EventDetailsState extends State<EventDetails> {
                                 children: [
                                   Container(
                                     width: width * 0.32,
-                                    height: width * 0.20,
+                                    height: width * 0.14,
                                     padding: EdgeInsets.only(
                                         top: width * 0.03,
                                         left: width * 0.003,
@@ -360,16 +376,16 @@ class _EventDetailsState extends State<EventDetails> {
                                             color: Constants.textColor.shade100,
                                             fontFamily: fontfamily,
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 18),
+                                            fontSize: 15),
                                       ),
                                     ),
                                   ),
                                   Container(
                                     width: width * 0.32,
-                                    height: width * 0.2,
-                                    margin: EdgeInsets.only(top: width * .10),
+                                    height: width * 0.14,
+                                    margin: EdgeInsets.only(top: width * .085),
                                     padding: EdgeInsets.only(
-                                        top: width * 0.035,
+                                        top: width * 0.02,
                                         bottom: width * 0.02,
                                         right: width * 0.003,
                                         left: width * 0.003),
@@ -422,11 +438,20 @@ class _EventDetailsState extends State<EventDetails> {
                                                               1000
                                                           ? (widget.eventData[
                                                                       "prize"])
-                                                                  .toString() +
+                                                                  .toString()
+                                                                  .replaceAll(
+                                                                      RegExp(
+                                                                          r".0"),
+                                                                      '') +
                                                               " Rs"
                                                           : (widget.eventData[
                                                                           "prize"] /
                                                                       1000)
+                                                                  .toString()
+                                                                  .replaceAll(
+                                                                      RegExp(
+                                                                          r".0"),
+                                                                      '')
                                                                   .toString() +
                                                               " K",
                                                       textAlign:
@@ -459,7 +484,6 @@ class _EventDetailsState extends State<EventDetails> {
               ],
             ),
           ),
-          const Text(""),
         ],
       ),
     );
@@ -471,13 +495,9 @@ class _EventDetailsState extends State<EventDetails> {
         ? AnimatedOpacity(
             duration: const Duration(milliseconds: 500),
             curve: Curves.decelerate,
-            opacity: start ? 1 : 0.5,
-            child: AnimatedPadding(
-              duration: const Duration(seconds: 1),
-              curve: Curves.decelerate,
-              padding: start
-                  ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
-                  : const EdgeInsets.only(left: 0),
+            opacity: start ? 1 : 0.3,
+            child: Padding(
+              padding:EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
