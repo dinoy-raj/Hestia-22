@@ -236,25 +236,42 @@ class HomeState extends State<Home> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AnimatedOpacity(
-                                    duration: const Duration(seconds: 3),
-                                    curve: Curves.decelerate,
-                                    opacity: start ? 1 : 0,
-                                    child: SizedBox(
-                                      width: screenWidth * .7,
-                                      child: Text(
-                                        "Hi, ${widget.profile == null ? "" : widget.profile!['name']} 👋",
-                                        style: const TextStyle(
-                                            overflow: TextOverflow.fade,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            fontFamily: 'helvetica',
-                                            color: Colors.white),
+                                  Expanded(
+                                    child: AnimatedOpacity(
+                                      duration: const Duration(seconds: 3),
+                                      curve: Curves.decelerate,
+                                      opacity: start ? 1 : 0,
+                                      child: SizedBox(
+                                        width: screenWidth * .7,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                                style: const TextStyle(
+                                                  overflow: TextOverflow.fade,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                  fontFamily: 'helvetica',
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Image.network(
+                                              "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif",
+                                              height: 25,
+                                              alignment: Alignment.centerLeft,
+                                              width: 25,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: screenHeight * .009,
+                                    height: screenHeight * .01,
                                   ),
                                   AnimatedOpacity(
                                     duration: const Duration(seconds: 3),
@@ -268,6 +285,9 @@ class HomeState extends State<Home> {
                                           fontFamily: 'helvetica',
                                           color: Constants.iconIn),
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * .01,
                                   ),
                                 ],
                               ),
@@ -288,7 +308,8 @@ class HomeState extends State<Home> {
                                   if (mounted) {
                                     setState(() {
                                       unreadNotifications = [];
-                                      notificationPressed = !notificationPressed;
+                                      notificationPressed =
+                                          !notificationPressed;
                                       FocusManager.instance.primaryFocus
                                           ?.unfocus();
                                     });
@@ -735,7 +756,8 @@ class HomeState extends State<Home> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   curve: Curves.decelerate,
-                                                  opacity: filterPressed ? 1 : 0,
+                                                  opacity:
+                                                      filterPressed ? 1 : 0,
                                                   child: Container(
                                                       height:
                                                           screenHeight * .04,
@@ -779,7 +801,8 @@ class HomeState extends State<Home> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   curve: Curves.decelerate,
-                                                  opacity: filterPressed ? 1 : 0,
+                                                  opacity:
+                                                      filterPressed ? 1 : 0,
                                                   child: SizedBox(
                                                       height:
                                                           screenHeight * .04,
