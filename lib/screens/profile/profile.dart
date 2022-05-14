@@ -6,6 +6,7 @@ import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/profile/certificates.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registered_events.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, this.data}) : super(key: key);
@@ -17,6 +18,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool det = false;
+  bool con = false;
+
+  final Uri _terms = Uri.parse('https://www.hestiatkmce.live/termsandcondition');
+  final Uri _policy = Uri.parse('https://www.hestiatkmce.live/privacypolicy');
 
   bool start = false;
   @override
@@ -234,6 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             });
                                           },
                                           style: ButtonStyle(
+                                            overlayColor: MaterialStateProperty.all(Colors.black),
                                             backgroundColor:
                                                 MaterialStateProperty.all(
                                                     Colors.transparent),
@@ -283,7 +289,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: _launchTerms,
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -334,7 +340,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: _launchPolicy,
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -434,6 +440,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
+
+                            //personal details drop down
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.decelerate,
@@ -800,5 +808,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+
+  }
+  void _launchTerms() async {
+    if (!await launchUrl(_terms)) throw 'Could not launch $_terms';
+  }
+
+  void _launchPolicy() async {
+    if (!await launchUrl(_policy)) throw 'Could not launch $_policy';
   }
 }
+
