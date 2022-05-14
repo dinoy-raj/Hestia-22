@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:intl/intl.dart';
 
+import 'home.dart';
+
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key, required this.notifications})
       : super(key: key);
@@ -34,13 +36,15 @@ class _NotificationPageState extends State<NotificationPage> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return widget.notifications == null
-        ? const Center(
+        ? Center(
             child: SizedBox(
             height: 10,
             width: 10,
-            child: CircularProgressIndicator(
-              strokeWidth: 1,
-            ),
+            child: HomeState.notificationPressed
+                ? const CircularProgressIndicator(
+                    strokeWidth: 1,
+                  )
+                : null,
           ))
         : widget.notifications!.isEmpty
             ? const Center(

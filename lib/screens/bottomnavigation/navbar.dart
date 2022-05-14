@@ -7,6 +7,7 @@ import 'package:hestia22/screens/schedule/date_info.dart';
 import 'package:hestia22/screens/schedule/enums.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 import 'package:hestia22/screens/spots/spots.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:hestia22/screens/profile/profile.dart';
 import 'package:hestia22/services/django/django.dart' as django;
@@ -42,6 +43,19 @@ class NavBarState extends State<NavBar> {
   List<dynamic>? schedule4;
   List<dynamic>? all;
   Map? profile;
+
+  void sort(List<dynamic> list) {
+    list.sort((a, b) {
+      if (a['event_start'] == null || b['event_start'] == null) {
+        return 0;
+      }
+
+      return DateFormat('yyyy-mm-ddThh:mm:ss')
+          .parseUtc(a['event_start'])
+          .compareTo(
+              DateFormat('yyyy-mm-ddThh:mm:ss').parseUtc(b['event_start']));
+    });
+  }
 
   @override
   void initState() {
@@ -111,6 +125,7 @@ class NavBarState extends State<NavBar> {
       if (mounted) {
         setState(() {
           schedule1 = value;
+          sort(schedule1!);
         });
       }
     });
@@ -119,6 +134,7 @@ class NavBarState extends State<NavBar> {
       if (mounted) {
         setState(() {
           schedule2 = value;
+          sort(schedule2!);
         });
       }
     });
@@ -127,6 +143,7 @@ class NavBarState extends State<NavBar> {
       if (mounted) {
         setState(() {
           schedule3 = value;
+          sort(schedule3!);
         });
       }
     });
@@ -135,6 +152,7 @@ class NavBarState extends State<NavBar> {
       if (mounted) {
         setState(() {
           schedule4 = value;
+          sort(schedule4!);
         });
       }
     });

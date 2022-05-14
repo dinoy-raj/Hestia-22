@@ -52,8 +52,15 @@ class _FourthPageState extends State<FourthPage> {
                           const TimeLine(),
                           SizedBox(width: size.width * 0.05),
                           EventCard(
-                            time: DateFormat('hh:mm a').format(
-                                DateTime.parse(widget.data![0]['event_start'])),
+                            time: DateFormat('yyyy-mm-ddThh:mm:ss')
+                                        .parseUtc(
+                                            widget.data![index]['event_start'])
+                                        .day ==
+                                    29
+                                ? DateFormat('hh:mm a').format(
+                                    DateFormat('yyyy-mm-ddThh:mm:ss').parseUtc(
+                                        widget.data![index]['event_start']))
+                                : '12:00 AM',
                             eventName: widget.data![index]['title'].toString(),
                             description:
                                 widget.data![index]['short_desc'].toString(),
