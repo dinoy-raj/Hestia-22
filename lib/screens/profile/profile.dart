@@ -42,8 +42,11 @@ class _ProfilePageState extends State<ProfilePage> {
           child: AnimatedPadding(
             duration: const Duration(seconds: 1),
             curve: Curves.decelerate,
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 45, bottom: 20),
+            padding: start
+                ? const EdgeInsets.only(
+                    left: 15, right: 15, top: 45, bottom: 20)
+                : const EdgeInsets.only(
+                    left: 8, right: 8, top: 45, bottom: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -211,21 +214,24 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     height: screenHeight * .075,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15)),
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
                                     child: ElevatedButton(
                                         onPressed: () {},
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   Colors.transparent),
-                                          shadowColor: MaterialStateProperty.all(
-                                              Colors.transparent),
+                                          shadowColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.transparent),
                                         ),
                                         child: Row(
                                           mainAxisAlignment:
@@ -236,10 +242,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                             Container(
                                               height: screenHeight * .05,
                                               width: screenHeight * .05,
-                                              decoration: BoxDecoration(   color: Constants.bg,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-
+                                              decoration: BoxDecoration(
+                                                color: Constants.sc,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
                                               ),
                                               child: const Center(
                                                 child: Icon(
@@ -263,20 +269,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ],
                                         )),
                                   ),
-
-
                                   Container(
                                     height: screenHeight * .075,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15)),
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
                                     child: ElevatedButton(
                                         onPressed: () {},
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   Colors.transparent),
-                                          shadowColor: MaterialStateProperty.all(
-                                              Colors.transparent),
+                                          shadowColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.transparent),
                                         ),
                                         child: Row(
                                           mainAxisAlignment:
@@ -288,10 +294,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                               height: screenHeight * .05,
                                               width: screenHeight * .05,
                                               decoration: BoxDecoration(
-                                                  color: Constants.sc,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
+                                                color: Constants.sc,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
                                               child: const Center(
                                                 child: Icon(
                                                   FontAwesomeIcons.alignLeft,
@@ -304,9 +310,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               width: screenWidth * .1,
                                             ),
                                             const Text(
-                                              "Terms  &  Conditions",
+                                              "Terms & Conditions",
                                               style: TextStyle(
-                                                  fontSize: 13,
+                                                  fontSize: 12,
                                                   fontFamily: "Helvetica",
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.grey),
@@ -314,20 +320,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ],
                                         )),
                                   ),
-
-
                                   Container(
                                     height: screenHeight * .075,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15)),
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
                                     child: ElevatedButton(
                                         onPressed: () {},
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   Colors.transparent),
-                                          shadowColor: MaterialStateProperty.all(
-                                              Colors.transparent),
+                                          shadowColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.transparent),
                                         ),
                                         child: Row(
                                           mainAxisAlignment:
@@ -339,10 +345,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                               height: screenHeight * .05,
                                               width: screenHeight * .05,
                                               decoration: BoxDecoration(
-                                                  color: Constants.sc,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                 ),
+                                                color: Constants.sc,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
                                               child: const Center(
                                                 child: Icon(
                                                   FontAwesomeIcons.copyright,
@@ -355,9 +361,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               width: screenWidth * .1,
                                             ),
                                             const Text(
-                                              "Privacy  &  Policy",
+                                              "Privacy Policy",
                                               style: TextStyle(
-                                                  fontSize: 13,
+                                                  fontSize: 12,
                                                   fontFamily: "Helvetica",
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.grey),
@@ -365,20 +371,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ],
                                         )),
                                   ),
-
-
                                   Container(
                                     height: screenHeight * .075,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15)),
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
                                     child: ElevatedButton(
                                         onPressed: () {},
                                         style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   Colors.transparent),
-                                          shadowColor: MaterialStateProperty.all(
-                                              Colors.transparent),
+                                          shadowColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.transparent),
                                         ),
                                         child: Row(
                                           mainAxisAlignment:
@@ -392,8 +398,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
-                                                color: Constants.sc
-                                               ),
+                                                  color: Constants.sc),
                                               child: const Center(
                                                 child: Icon(
                                                   FontAwesomeIcons.headset,
@@ -408,7 +413,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             const Text(
                                               "Contact Us",
                                               style: TextStyle(
-                                                  fontSize: 13,
+                                                  fontSize: 12,
                                                   fontFamily: "Helvetica",
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.grey),

@@ -113,7 +113,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
               ),
               data == null
                   ? SizedBox(
-                      height: screenHeight * .8,
+                      height: screenHeight * .7,
                       width: screenWidth,
                       child: const Center(
                           child: CupertinoActivityIndicator(
@@ -121,7 +121,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                       )))
                   : data!.isEmpty
                       ? SizedBox(
-                          height: screenHeight * .8,
+                          height: screenHeight * .7,
                           width: screenWidth,
                           child: Center(
                             child: Text(
@@ -181,7 +181,6 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                               color: Constants.color2
                                                   .withOpacity(.65)),
                                         ),
-
                                       ],
                                     ),
                                   ),

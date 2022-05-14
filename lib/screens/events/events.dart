@@ -1,12 +1,9 @@
-import 'dart:developer';
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:slide_countdown/slide_countdown.dart';
 import '../../main.dart';
 
 class EventDetails extends StatefulWidget {
@@ -135,8 +132,6 @@ class _EventDetailsState extends State<EventDetails> {
           ),
         ),
       ),
-      floating: true,
-      stretch: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
@@ -148,7 +143,7 @@ class _EventDetailsState extends State<EventDetails> {
           curve: Curves.easeInOutCubicEmphasized,
           opacity: start ? 1 : 0,
           child: Hero(
-            tag: "image",
+            tag: widget.eventData['title'],
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),
               curve: Curves.easeOutQuad,
@@ -186,7 +181,7 @@ class _EventDetailsState extends State<EventDetails> {
                   duration: const Duration(seconds: 1),
                   curve: Curves.slowMiddle,
                   opacity: start ? 1 : 0.3,
-                  child: Container(
+                  child: SizedBox(
                     height: width * 0.38,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -194,7 +189,7 @@ class _EventDetailsState extends State<EventDetails> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
                               width: width * 0.60,
                               child: Text(
                                 widget.eventData['title'],

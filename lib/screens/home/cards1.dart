@@ -141,7 +141,7 @@ class _EventCardsState extends State<EventCards1> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: Hero(
-                                  tag: "image",
+                                  tag: widget.show![index]['event']['title'],
                                   child: CachedNetworkImage(
                                     fadeInDuration:
                                         const Duration(milliseconds: 500),
