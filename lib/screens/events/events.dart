@@ -17,6 +17,8 @@ class EventDetails extends StatefulWidget {
 }
 
 String fee = "";
+String prize = "0";
+
 class _EventDetailsState extends State<EventDetails> {
   static const fontfamily = 'Helvetica';
   double letterspace = 0.8;
@@ -27,6 +29,8 @@ class _EventDetailsState extends State<EventDetails> {
   bool isReadmore = false;
   int lines = 4;
   bool start = false;
+  int money=0;
+  int prizemoney=0;
   DateTime? dateFormat;
   @override
   void initState() {
@@ -36,9 +40,21 @@ class _EventDetailsState extends State<EventDetails> {
     } else {
       fee = "0";
     }
-    dateFormat = widget.eventData['reg_end'] != null
-        ? DateFormat("yyyy-mm-ddThh:mm:ss").parse(widget.eventData['reg_end'])
-        : DateTime.now();
+    if (widget.eventData['prize'] != null) {
+      money=widget.eventData["prize"].round();
+      if (money < 1000) {
+        prize=money.toString();
+      } else {
+        prize=(money/1000).toString();
+      }
+    } else {
+      prize = "0";
+    }
+    prizemoney=double.parse(prize).toInt();
+    dateFormat = widget.eventData['event_start'] != null
+        ? DateFormat("yyyy-mm-ddThh:mm:ss")
+            .parse(widget.eventData['event_start'])
+        : DateFormat('yyyy-mm-dd').parse("2022-05-26");
     DateTime endDate = DateTime.parse(dateFormat.toString());
 
     duration = Duration(
@@ -266,11 +282,95 @@ class _EventDetailsState extends State<EventDetails> {
                                   ),
                                 ),
                               )
-                            : const SizedBox(
-                                height: 0,
+                            : AnimatedOpacity(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.slowMiddle,
+                                opacity: start ? 1 : 0.5,
+                                child: Padding(
+                                  padding: EdgeInsets.only(top: width * 0.06),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        FontAwesomeIcons.locationDot,
+                                        color: Constants.lightWhite
+                                            .withOpacity(0.4),
+                                        size: 15,
+                                      ),
+                                      Text(
+                                        "  " + "TKMCE".toString().toUpperCase(),
+                                        style: TextStyle(
+                                          letterSpacing: letterspace,
+                                          decoration: TextDecoration.none,
+                                          fontSize: 15,
+                                          fontFamily: fontfamily,
+                                          overflow: TextOverflow.clip,
+                                          color: Constants.textColor
+                                              .withOpacity(0.8),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                         widget.eventData['fees'] != null
                             ? AnimatedOpacity(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.slowMiddle,
+                                opacity: start ? 1 : 0.5,
+                                child: Padding(
+                                  padding: EdgeInsets.only(top: width * 0.034),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        FontAwesomeIcons.indianRupeeSign,
+                                        color: Constants.lightWhite
+                                            .withOpacity(0.4),
+                                        size: 15,
+                                      ),
+                                      widget.eventData['fees'] == null
+                                          ? Text(
+                                              "0",
+                                              style: TextStyle(
+                                                letterSpacing: letterspace,
+                                                decoration: TextDecoration.none,
+                                                fontSize: 14,
+                                                fontFamily: fontfamily,
+                                                overflow: TextOverflow.clip,
+                                                color: Constants.textColor
+                                                    .withOpacity(0.8),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                          : Text(
+                                              widget.eventData['fees'] < 100
+                                                  ? "  " +
+                                                      widget.eventData['fees']
+                                                          .toString() +
+                                                      " Ps"
+                                                  : "  " + fee,
+                                              style: TextStyle(
+                                                letterSpacing: letterspace,
+                                                decoration: TextDecoration.none,
+                                                fontSize: 15,
+                                                fontFamily: fontfamily,
+                                                overflow: TextOverflow.clip,
+                                                color: Constants.textColor
+                                                    .withOpacity(0.8),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : AnimatedOpacity(
                                 duration: const Duration(seconds: 1),
                                 curve: Curves.slowMiddle,
                                 opacity: start ? 1 : 0.5,
@@ -302,12 +402,7 @@ class _EventDetailsState extends State<EventDetails> {
                                               ),
                                             )
                                           : Text(
-                                              widget.eventData['fees'] < 100
-                                                  ? "  " +
-                                                      widget.eventData['fees']
-                                                          .toString() +
-                                                      " Ps"
-                                                  : "  " + fee,
+                                              "   " + fee,
                                               style: TextStyle(
                                                 letterSpacing: letterspace,
                                                 decoration: TextDecoration.none,
@@ -322,20 +417,12 @@ class _EventDetailsState extends State<EventDetails> {
                                     ],
                                   ),
                                 ),
-                              )
-                            : const SizedBox(
-                                height: 0,
                               ),
                       ],
                     ),
                   ),
                 ),
-                widget.eventData["prize"] == null &&
-                        widget.eventData['reg_end'] != null
-                    ? const SizedBox(
-                        height: 0,
-                      )
-                    : Row(
+                Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           AnimatedOpacity(
@@ -385,10 +472,10 @@ class _EventDetailsState extends State<EventDetails> {
                                     height: width * 0.14,
                                     margin: EdgeInsets.only(top: width * .085),
                                     padding: EdgeInsets.only(
-                                        top: width * 0.02,
-                                        bottom: width * 0.02,
-                                        right: width * 0.003,
-                                        left: width * 0.003),
+                                        top: width * 0.01,
+                                        bottom: width * 0.01,
+                                        right: width * 0.0001,
+                                        left: width * 0.0001),
                                     decoration: BoxDecoration(
                                       color: Colors.grey[900],
                                       borderRadius: const BorderRadius.only(
@@ -436,24 +523,8 @@ class _EventDetailsState extends State<EventDetails> {
                                                       widget.eventData[
                                                                   "prize"] <
                                                               1000
-                                                          ? (widget.eventData[
-                                                                      "prize"])
-                                                                  .toString()
-                                                                  .replaceAll(
-                                                                      RegExp(
-                                                                          r".0"),
-                                                                      '') +
-                                                              " Rs"
-                                                          : (widget.eventData[
-                                                                          "prize"] /
-                                                                      1000)
-                                                                  .toString()
-                                                                  .replaceAll(
-                                                                      RegExp(
-                                                                          r".0"),
-                                                                      '')
-                                                                  .toString() +
-                                                              " K",
+                                                          ? prizemoney.toString() + " Rs"
+                                                          : prizemoney.toString() + " K",
                                                       textAlign:
                                                           TextAlign.center,
                                                       style: TextStyle(
@@ -497,7 +568,7 @@ class _EventDetailsState extends State<EventDetails> {
             curve: Curves.decelerate,
             opacity: start ? 1 : 0.3,
             child: Padding(
-              padding:EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0),
+              padding: EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
