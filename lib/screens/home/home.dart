@@ -37,10 +37,10 @@ class HomeState extends State<Home> {
   //for initial animations future delayed
   static bool start = false;
   //notification icon
-  static bool notPressed = false;
+  static bool notificationPressed = false;
 
   //filter icon
-  static bool filPressed = false;
+  static bool filterPressed = false;
 
   //category list
   static int catSelect = 10;
@@ -87,7 +87,7 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    notPressed = false;
+    notificationPressed = false;
     start = false;
     catSelect = 10;
     show = widget.event0;
@@ -130,7 +130,7 @@ class HomeState extends State<Home> {
 
   void sort(String field, bool reverse) {
     setState(() {
-      filPressed = false;
+      filterPressed = false;
       switch (catSelect) {
         case 0:
           widget.event0?.sort((a, b) {
@@ -288,7 +288,7 @@ class HomeState extends State<Home> {
                                   if (mounted) {
                                     setState(() {
                                       unreadNotifications = [];
-                                      notPressed = !notPressed;
+                                      notificationPressed = !notificationPressed;
                                       FocusManager.instance.primaryFocus
                                           ?.unfocus();
                                     });
@@ -321,14 +321,14 @@ class HomeState extends State<Home> {
                                     child: AnimatedContainer(
                                       duration: const Duration(seconds: 2),
                                       curve: Curves.fastLinearToSlowEaseIn,
-                                      height: notPressed
+                                      height: notificationPressed
                                           ? screenHeight * .048
                                           : screenHeight * .05,
-                                      width: notPressed
+                                      width: notificationPressed
                                           ? screenHeight * .048
                                           : screenHeight * .05,
                                       decoration: BoxDecoration(
-                                          border: notPressed
+                                          border: notificationPressed
                                               ? Border.all(
                                                   color: Constants.iconAc)
                                               : Border.all(
@@ -395,7 +395,7 @@ class HomeState extends State<Home> {
                                           onTap: () {
                                             if (mounted) {
                                               setState(() {
-                                                filPressed = false;
+                                                filterPressed = false;
                                               });
                                             }
                                           },
@@ -492,7 +492,7 @@ class HomeState extends State<Home> {
                                       onTap: () {
                                         if (mounted) {
                                           setState(() {
-                                            filPressed = !filPressed;
+                                            filterPressed = !filterPressed;
                                             FocusManager.instance.primaryFocus
                                                 ?.unfocus();
                                           });
@@ -505,7 +505,7 @@ class HomeState extends State<Home> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           border: Border.all(
-                                              color: filPressed
+                                              color: filterPressed
                                                   ? Constants.iconAc
                                                   : Colors.transparent),
                                         ),
@@ -513,7 +513,7 @@ class HomeState extends State<Home> {
                                         width: screenHeight * .05,
                                         child: Icon(
                                           FontAwesomeIcons.sliders,
-                                          color: filPressed
+                                          color: filterPressed
                                               ? Colors.grey
                                               : Constants.iconIn,
                                           size: 18,
@@ -690,7 +690,7 @@ class HomeState extends State<Home> {
                         child: AnimatedContainer(
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          height: filPressed ? screenHeight * .35 : 0,
+                          height: filterPressed ? screenHeight * .35 : 0,
                           width: screenWidth * .85,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
@@ -699,7 +699,7 @@ class HomeState extends State<Home> {
                               child: AnimatedContainer(
                                 duration: const Duration(seconds: 1),
                                 curve: Curves.fastLinearToSlowEaseIn,
-                                height: filPressed ? screenHeight * .4 : 0,
+                                height: filterPressed ? screenHeight * .4 : 0,
                                 width: screenWidth * .85,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
@@ -709,13 +709,13 @@ class HomeState extends State<Home> {
                                   child: AnimatedPadding(
                                     duration: const Duration(seconds: 1),
                                     curve: Curves.decelerate,
-                                    padding: filPressed
+                                    padding: filterPressed
                                         ? EdgeInsets.all(screenHeight * .025)
                                         : const EdgeInsets.all(0),
                                     child: AnimatedOpacity(
                                       duration: const Duration(seconds: 1),
                                       curve: Curves.decelerate,
-                                      opacity: filPressed ? 1 : 0,
+                                      opacity: filterPressed ? 1 : 0,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -735,7 +735,7 @@ class HomeState extends State<Home> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   curve: Curves.decelerate,
-                                                  opacity: filPressed ? 1 : 0,
+                                                  opacity: filterPressed ? 1 : 0,
                                                   child: Container(
                                                       height:
                                                           screenHeight * .04,
@@ -750,7 +750,7 @@ class HomeState extends State<Home> {
                                                       child: ElevatedButton(
                                                           onPressed: () {
                                                             setState(() {
-                                                              filPressed =
+                                                              filterPressed =
                                                                   false;
 
                                                               sort('prize',
@@ -779,7 +779,7 @@ class HomeState extends State<Home> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   curve: Curves.decelerate,
-                                                  opacity: filPressed ? 1 : 0,
+                                                  opacity: filterPressed ? 1 : 0,
                                                   child: SizedBox(
                                                       height:
                                                           screenHeight * .04,
@@ -842,7 +842,7 @@ class HomeState extends State<Home> {
                                                         seconds: 1),
                                                     curve: Curves.decelerate,
                                                     padding: EdgeInsets.only(
-                                                      top: filPressed
+                                                      top: filterPressed
                                                           ? (screenHeight * .01)
                                                           : 0,
                                                     ),
@@ -921,7 +921,7 @@ class HomeState extends State<Home> {
                     AnimatedContainer(
                       duration: const Duration(seconds: 1),
                       curve: Curves.fastLinearToSlowEaseIn,
-                      height: notPressed ? screenHeight * .7 : 0,
+                      height: notificationPressed ? screenHeight * .7 : 0,
                       width: screenWidth * .91,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
