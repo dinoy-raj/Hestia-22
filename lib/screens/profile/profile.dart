@@ -509,6 +509,45 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ],
                                         ),
                                       ),
+                                      Container(
+                                        height: screenHeight * .23,
+                                        width: screenWidth,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [],
+                                        ),
+                                      ),
+                                      Container(
+                                        height: screenHeight * .04,
+                                        width: screenWidth,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const ProfileRegistration()));
+                                          },
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Constants.iconAc)),
+                                          child: const Text(
+                                            "Edit Profile",
+                                            style: TextStyle(
+                                              fontFamily: "Helvetica",
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
