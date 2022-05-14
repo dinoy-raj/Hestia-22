@@ -478,12 +478,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                   color: Colors.black,
                                   borderRadius: BorderRadius.circular(10)),
                               child: SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 8.0, left: 20, right: 20),
+                                child: AnimatedPadding(
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.decelerate,
+                                  padding: det
+                                      ? const EdgeInsets.only(
+                                          top: 8.0, left: 20, right: 20)
+                                      : const EdgeInsets.only(
+                                          top: 8.0, left: 10, right: 10),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: screenHeight * .05,
                                         width: screenWidth,
                                         child: Row(
@@ -491,33 +496,40 @@ class _ProfilePageState extends State<ProfilePage> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             //title : personal details
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  height: screenHeight * .015,
-                                                  width: screenWidth * .004,
-                                                  decoration: BoxDecoration(
-                                                      color: Constants.iconAc,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                ),
-                                                Container(
-                                                  width: screenWidth * .02,
-                                                ),
-                                                const Text(
-                                                  "personal Details",
-                                                  style: TextStyle(
-                                                    color: Constants.iconAc,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: "Helvetica",
+                                            AnimatedOpacity(
+                                              duration:
+                                                  const Duration(seconds: 3),
+                                              curve: Curves.decelerate,
+                                              opacity: det ? 1 : 0,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    height: screenHeight * .015,
+                                                    width: screenWidth * .004,
+                                                    decoration: BoxDecoration(
+                                                        color: Constants.iconAc,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
                                                   ),
-                                                ),
-                                              ],
+                                                  Container(
+                                                    width: screenWidth * .02,
+                                                  ),
+                                                  const Text(
+                                                    "personal Details",
+                                                    style: TextStyle(
+                                                      color: Constants.iconAc,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Helvetica",
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
 
                                             //close button
@@ -527,20 +539,28 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   det = false;
                                                 });
                                               },
-                                              child: Container(
-                                                height: screenHeight * .03,
-                                                width: screenHeight * .03,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    border: Border.all(
-                                                        color: Constants.iconAc
-                                                            .withOpacity(.1))),
-                                                child: const Icon(
-                                                  Icons.close_rounded,
-                                                  size: 20,
-                                                  color: Colors.grey,
+                                              child: AnimatedOpacity(
+                                                duration:
+                                                    const Duration(seconds: 3),
+                                                curve: Curves.decelerate,
+                                                opacity: det ? 1 : 0,
+                                                child: Container(
+                                                  height: screenHeight * .03,
+                                                  width: screenHeight * .03,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                      border: Border.all(
+                                                          color: Constants
+                                                              .iconAc
+                                                              .withOpacity(
+                                                                  .1))),
+                                                  child: const Icon(
+                                                    Icons.close_rounded,
+                                                    size: 20,
+                                                    color: Colors.grey,
+                                                  ),
                                                 ),
                                               ),
                                             )
@@ -549,198 +569,212 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
 
                                       //details container
-                                      Container(
-                                        height: screenHeight * .2,
-                                        width: screenWidth,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            //phone number
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                SizedBox(
-                                                  height: screenHeight * .05,
-                                                  width: screenWidth * .3,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        "Phone",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Helvetica",
-                                                            fontSize: 13,
-                                                            color: Constants
-                                                                .iconIn),
-                                                      ),
-                                                    ],
+                                      AnimatedOpacity(
+                                        duration: const Duration(seconds: 3),
+                                        curve: Curves.decelerate,
+                                        opacity: det ? 1 : 0,
+                                        child: Container(
+                                          height: screenHeight * .2,
+                                          width: screenWidth,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              //phone number
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  SizedBox(
+                                                    height: screenHeight * .05,
+                                                    width: screenWidth * .3,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "Phone",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                              fontSize: 13,
+                                                              color: Constants
+                                                                  .iconIn),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: screenHeight * .01,
-                                                  width: screenWidth * .003,
-                                                  decoration: BoxDecoration(
-                                                      color: Constants.iconAc,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3)),
-                                                ),
-                                                Container(
-                                                  height: screenHeight * .05,
-                                                  width: screenWidth * .4,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        widget.data == null
-                                                            ? ""
-                                                            : "+91 " +
-                                                                widget.data![
-                                                                        'phone_number']
-                                                                    .toString()
-                                                                    .substring(
-                                                                        3),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Helvetica",
-                                                            fontSize: 13,
-                                                            color: Constants
-                                                                .iconIn),
-                                                      ),
-                                                    ],
+                                                  Container(
+                                                    height: screenHeight * .01,
+                                                    width: screenWidth * .003,
+                                                    decoration: BoxDecoration(
+                                                        color: Constants.iconAc,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(3)),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
+                                                  Container(
+                                                    height: screenHeight * .05,
+                                                    width: screenWidth * .4,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          widget.data == null
+                                                              ? ""
+                                                              : "+91 " +
+                                                                  widget.data![
+                                                                          'phone_number']
+                                                                      .toString()
+                                                                      .substring(
+                                                                          3),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                              fontSize: 13,
+                                                              color: Constants
+                                                                  .iconIn),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
 
-                                            //department
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                SizedBox(
-                                                  height: screenHeight * .05,
-                                                  width: screenWidth * .3,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        "Department",
-                                                        style: TextStyle(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Helvetica",
-                                                            fontSize: 13,
-                                                            color: Constants
-                                                                .iconIn),
-                                                      ),
-                                                    ],
+                                              //department
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  SizedBox(
+                                                    height: screenHeight * .05,
+                                                    width: screenWidth * .3,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "Department",
+                                                          style: TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                              fontSize: 13,
+                                                              color: Constants
+                                                                  .iconIn),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  height: screenHeight * .01,
-                                                  width: screenWidth * .003,
-                                                  decoration: BoxDecoration(
-                                                      color: Constants.iconAc,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3)),
-                                                ),
-                                                Container(
-                                                  height: screenHeight * .05,
-                                                  width: screenWidth * .4,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        widget.data == null
-                                                            ? ""
-                                                            : widget.data ==
-                                                                    null
-                                                                ? ""
-                                                                : widget.data![
-                                                                        'dept_name']
-                                                                    .toString(),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Helvetica",
-                                                            fontSize: 13,
-                                                            color: Constants
-                                                                .iconIn),
-                                                      ),
-                                                    ],
+                                                  Container(
+                                                    height: screenHeight * .01,
+                                                    width: screenWidth * .003,
+                                                    decoration: BoxDecoration(
+                                                        color: Constants.iconAc,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(3)),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
+                                                  Container(
+                                                    height: screenHeight * .05,
+                                                    width: screenWidth * .4,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          widget.data == null
+                                                              ? ""
+                                                              : widget.data ==
+                                                                      null
+                                                                  ? ""
+                                                                  : widget
+                                                                      .data![
+                                                                          'dept_name']
+                                                                      .toString(),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                              fontSize: 13,
+                                                              color: Constants
+                                                                  .iconIn),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
 
-                                            //college
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Container(
-                                                  height: screenHeight * .05,
-                                                  width: screenWidth * .7,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        widget.data == null
-                                                            ? ""
-                                                            : widget.data ==
-                                                                    null
-                                                                ? ""
-                                                                : widget.data ==
-                                                                        null
-                                                                    ? ""
-                                                                    : widget
-                                                                        .data![
-                                                                            'college_name']
-                                                                        .toString(),
-                                                        style: TextStyle(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                "Helvetica",
-                                                            fontSize: 13,
-                                                            color: Constants
-                                                                .iconIn),
-                                                      ),
-                                                    ],
+                                              //college
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Container(
+                                                    height: screenHeight * .05,
+                                                    width: screenWidth * .7,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          widget.data == null
+                                                              ? ""
+                                                              : widget.data ==
+                                                                      null
+                                                                  ? ""
+                                                                  : widget.data ==
+                                                                          null
+                                                                      ? ""
+                                                                      : widget
+                                                                          .data![
+                                                                              'college_name']
+                                                                          .toString(),
+                                                          style: TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  "Helvetica",
+                                                              fontSize: 13,
+                                                              color: Constants
+                                                                  .iconIn),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
 
@@ -748,30 +782,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Padding(
                                         padding: EdgeInsets.only(
                                             top: screenHeight * .02),
-                                        child: Container(
-                                          height: screenHeight * .04,
-                                          width: screenWidth,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const ProfileRegistration()));
-                                            },
-                                            style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        Constants.iconAc)),
-                                            child: const Text(
-                                              "Edit Profile",
-                                              style: TextStyle(
-                                                fontFamily: "Helvetica",
-                                                fontWeight: FontWeight.bold,
+                                        child: AnimatedOpacity(
+                                          duration: const Duration(seconds: 3),
+                                          curve: Curves.decelerate,
+                                          opacity: det ? 1 : 0,
+                                          child: Container(
+                                            height: screenHeight * .04,
+                                            width: screenWidth,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ProfileRegistration()));
+                                              },
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Constants.iconAc)),
+                                              child: const Text(
+                                                "Edit Profile",
+                                                style: TextStyle(
+                                                  fontFamily: "Helvetica",
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -796,9 +835,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   curve: Curves.decelerate,
-                                  padding: con? const EdgeInsets.only(
-                                      top: 8.0, left: 20, right: 20): const EdgeInsets.only(
-                                      top: 8.0, left: 10, right: 10),
+                                  padding: con
+                                      ? const EdgeInsets.only(
+                                          top: 8.0, left: 20, right: 20)
+                                      : const EdgeInsets.only(
+                                          top: 8.0, left: 10, right: 10),
                                   child: AnimatedOpacity(
                                     duration: const Duration(seconds: 4),
                                     curve: Curves.decelerate,
@@ -978,8 +1019,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ),
                                           ),
                                         ),
-
-
                                       ],
                                     ),
                                   ),
