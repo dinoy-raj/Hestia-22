@@ -697,32 +697,28 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   Container(
                                                     height: screenHeight * .05,
                                                     width: screenWidth * .4,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          widget.data == null
-                                                              ? ""
-                                                              : widget.data ==
-                                                                      null
-                                                                  ? ""
-                                                                  : widget
-                                                                      .data![
-                                                                          'dept_name']
-                                                                      .toString(),
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontFamily:
-                                                                  "Helvetica",
-                                                              fontSize: 13,
-                                                              color: Constants
-                                                                  .iconIn),
-                                                        ),
-                                                      ],
+                                                    child: Center(
+                                                      child: Text(
+                                                        widget.data == null
+                                                            ? ""
+                                                            : widget.data ==
+                                                                    null
+                                                                ? ""
+                                                                : widget.data![
+                                                                        'dept_name']
+                                                                    .toString(),
+                                                        style: TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily:
+                                                                "Helvetica",
+                                                            fontSize: 13,
+                                                            color: Constants
+                                                                .iconIn),
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -737,38 +733,32 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   Container(
                                                     height: screenHeight * .05,
                                                     width: screenWidth * .7,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          widget.data == null
-                                                              ? ""
-                                                              : widget.data ==
-                                                                      null
-                                                                  ? ""
-                                                                  : widget.data ==
-                                                                          null
-                                                                      ? ""
-                                                                      : widget
-                                                                          .data![
-                                                                              'college_name']
-                                                                          .toString(),
-                                                          style: TextStyle(
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .clip,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontFamily:
-                                                                  "Helvetica",
-                                                              fontSize: 13,
-                                                              color: Constants
-                                                                  .iconIn),
-                                                        ),
-                                                      ],
+                                                    child: Center(
+                                                      child: Text(
+                                                        widget.data == null
+                                                            ? ""
+                                                            : widget.data ==
+                                                                    null
+                                                                ? ""
+                                                                : widget.data ==
+                                                                        null
+                                                                    ? ""
+                                                                    : widget
+                                                                        .data![
+                                                                            'college_name']
+                                                                        .toString(),
+                                                        style: TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily:
+                                                                "Helvetica",
+                                                            fontSize: 13,
+                                                            color: Constants
+                                                                .iconIn),
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
