@@ -21,11 +21,12 @@ class Home extends StatefulWidget {
   final List<dynamic>? event3;
   final List<dynamic>? event4;
   final List<dynamic>? event5;
+  final List<dynamic>? event6;
   final List<dynamic>? a;
   final Map? profile;
 
   const Home(this.event0, this.event1, this.event2, this.event3, this.event4,
-      this.event5, this.profile, this.a,
+      this.event5, this.event6, this.profile, this.a,
       {Key? key})
       : super(key: key);
 
@@ -48,6 +49,7 @@ class HomeState extends State<Home> {
     "Trending",
     "Culturals",
     "Technical",
+    "General",
     "Workshops",
     "Lectures",
     "Proshows",
@@ -55,7 +57,7 @@ class HomeState extends State<Home> {
 
   late Map eDetails;
 
-  List sortFields = ["Title", "Prize", "Date"];
+  List sortFields = ["Title", "Prize", "Date", "Fees"];
   int showIndex = 0;
   List<dynamic>? all;
   late List name;
@@ -134,8 +136,10 @@ class HomeState extends State<Home> {
       switch (catSelect) {
         case 0:
           widget.event0?.sort((a, b) {
-            if (a['event'][field] == null || b['event'][field] == null) {
-              return 0;
+            if (a['event'][field] == null) {
+              return 1;
+            } else if (b['event'][field] == null) {
+              return -1;
             }
 
             return reverse
@@ -145,7 +149,11 @@ class HomeState extends State<Home> {
           break;
         case 1:
           widget.event1?.sort((a, b) {
-            if (a[field] == null || b[field] == null) return 0;
+            if (a[field] == null) {
+              return 1;
+            } else if (b[field] == null) {
+              return -1;
+            }
 
             return reverse
                 ? -a[field].compareTo(b[field])
@@ -154,7 +162,11 @@ class HomeState extends State<Home> {
           break;
         case 2:
           widget.event2?.sort((a, b) {
-            if (a[field] == null || b[field] == null) return 0;
+            if (a[field] == null) {
+              return 1;
+            } else if (b[field] == null) {
+              return -1;
+            }
 
             return reverse
                 ? -a[field].compareTo(b[field])
@@ -163,7 +175,11 @@ class HomeState extends State<Home> {
           break;
         case 3:
           widget.event3?.sort((a, b) {
-            if (a[field] == null || b[field] == null) return 0;
+            if (a[field] == null) {
+              return 1;
+            } else if (b[field] == null) {
+              return -1;
+            }
 
             return reverse
                 ? -a[field].compareTo(b[field])
@@ -172,7 +188,11 @@ class HomeState extends State<Home> {
           break;
         case 4:
           widget.event4?.sort((a, b) {
-            if (a[field] == null || b[field] == null) return 0;
+            if (a[field] == null) {
+              return 1;
+            } else if (b[field] == null) {
+              return -1;
+            }
 
             return reverse
                 ? -a[field].compareTo(b[field])
@@ -181,7 +201,24 @@ class HomeState extends State<Home> {
           break;
         case 5:
           widget.event5?.sort((a, b) {
-            if (a[field] == null || b[field] == null) return 0;
+            if (a[field] == null) {
+              return 1;
+            } else if (b[field] == null) {
+              return -1;
+            }
+
+            return reverse
+                ? -a[field].compareTo(b[field])
+                : a[field].compareTo(b[field]);
+          });
+          break;
+        case 6:
+          widget.event6?.sort((a, b) {
+            if (a[field] == null) {
+              return 1;
+            } else if (b[field] == null) {
+              return -1;
+            }
 
             return reverse
                 ? -a[field].compareTo(b[field])
@@ -693,8 +730,11 @@ class HomeState extends State<Home> {
                                         : catSelect == 4
                                             ? EventCards5(
                                                 widget.event4, catSelect)
-                                            : EventCards6(
-                                                widget.event5, catSelect),
+                                            : catSelect == 5
+                                                ? EventCards6(
+                                                    widget.event5, catSelect)
+                                                : EventCards6(
+                                                    widget.event6, catSelect),
                       ),
                     ],
                   ),
@@ -706,12 +746,12 @@ class HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * .07),
+                      padding: EdgeInsets.only(bottom: screenHeight * .09),
                       child: Center(
                         child: AnimatedContainer(
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
-                          height: filterPressed ? screenHeight * .35 : 0,
+                          height: filterPressed ? screenHeight * .4 : 0,
                           width: screenWidth * .85,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
@@ -819,8 +859,12 @@ class HomeState extends State<Home> {
                                                                   true);
                                                             } else if (showIndex ==
                                                                 2) {
-                                                              sort('event_date',
-                                                                  true);
+                                                              sort(
+                                                                  'event_start',
+                                                                  false);
+                                                            } else {
+                                                              sort(
+                                                                  'fees', true);
                                                             }
                                                           },
                                                           style: ButtonStyle(
@@ -850,7 +894,7 @@ class HomeState extends State<Home> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: screenHeight * .25,
+                                            height: screenHeight * .3,
                                             width: screenWidth * .85,
                                             child: ListView.builder(
                                                 physics:
