@@ -53,10 +53,12 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                   'Registered Events',
                   style: TextStyle(
                       overflow: TextOverflow.fade,
-                      fontSize: 24,
-                      letterSpacing: 2,
+                      fontSize: 20,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.bold,
                       fontFamily: 'helvetica',
-                      color: Colors.white.withOpacity(0.9)),
+                      color: Colors.white
+                  ),
                 ),
               ),
               SizedBox(
