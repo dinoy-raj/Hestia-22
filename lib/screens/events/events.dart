@@ -87,7 +87,6 @@ class _EventDetailsState extends State<EventDetails> {
     return Scaffold(
       backgroundColor: Constants.sc,
       body: CustomScrollView(
-          dragStartBehavior: DragStartBehavior.down,
           physics: const BouncingScrollPhysics(),
           slivers: [
             appbar(height, width),
@@ -646,43 +645,36 @@ class _EventDetailsState extends State<EventDetails> {
       duration: const Duration(milliseconds: 100),
       curve: Curves.decelerate,
       opacity: start ? 1 : 0.5,
-      child: AnimatedPadding(
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.decelerate,
-        padding: start
-            ? EdgeInsets.fromLTRB(width * 0.035, 0, width * 0.035, 0)
-            : const EdgeInsets.only(left: 0),
-        child: MaterialButton(
-            color: Colors.grey[900],
-            onPressed: () async {
-              String url = widget.eventData['guideline_file'];
-              final _url = Uri.parse(url);
-              if (url != null && url.isNotEmpty) {
-                if (await launchUrl(_url,
-                    mode: LaunchMode.externalApplication)) {
-                } else {
-                  throw 'Could not launch $url';
-                }
+      child: MaterialButton(
+          color: Colors.grey[900],
+          onPressed: () async {
+            String url = widget.eventData['guideline_file'];
+            final _url = Uri.parse(url);
+            if (url != null && url.isNotEmpty) {
+              if (await launchUrl(_url,
+                  mode: LaunchMode.externalApplication)) {
+              } else {
+                throw 'Could not launch $url';
               }
-            },
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                side: BorderSide(color: Colors.white10)),
-            child: Center(
-              child: Text(
-                "View Guidelines",
-                style: TextStyle(
-                  letterSpacing: letterspace,
-                  decoration: TextDecoration.none,
-                  fontSize: 16,
-                  fontFamily: fontfamily,
-                  overflow: TextOverflow.clip,
-                  color: Constants.textColor,
-                  fontWeight: FontWeight.normal,
-                ),
+            }
+          },
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              side: BorderSide(color: Colors.white10)),
+          child: Center(
+            child: Text(
+              "View Guidelines",
+              style: TextStyle(
+                letterSpacing: letterspace,
+                decoration: TextDecoration.none,
+                fontSize: 16,
+                fontFamily: fontfamily,
+                overflow: TextOverflow.clip,
+                color: Constants.textColor,
+                fontWeight: FontWeight.normal,
               ),
-            )),
-      ),
+            ),
+          )),
     );
   }
 
