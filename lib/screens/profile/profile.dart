@@ -20,8 +20,12 @@ class _ProfilePageState extends State<ProfilePage> {
   bool det = false;
   bool con = false;
 
-  final Uri _terms = Uri.parse('https://www.hestiatkmce.live/termsandcondition');
+  final Uri _terms =
+      Uri.parse('https://www.hestiatkmce.live/termsandcondition');
   final Uri _policy = Uri.parse('https://www.hestiatkmce.live/privacypolicy');
+  final Uri _site = Uri.parse('https://www.hestiatkmce.live/');
+  final Uri _tkm = Uri.parse('https://www.tkmce.ac.in/');
+  final Uri _mail = Uri.parse('mailto:support@hestiatkmce.live');
 
   bool start = false;
   @override
@@ -57,6 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //header image
                 SizedBox(
                   height: screenHeight * .2,
                   child: Stack(
@@ -96,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
 
                 //name and email
-                Container(
+                SizedBox(
                   height: screenHeight * .05,
                   width: screenWidth,
                   child: Column(
@@ -197,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 5,
                 ),
 
-                //menu
+                //menu tiles
                 Container(
                   height: screenHeight * .4,
                   width: screenWidth,
@@ -227,6 +232,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
+                                    //personal details
                                     Container(
                                       height: screenHeight * .075,
                                       decoration: BoxDecoration(
@@ -239,7 +245,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             });
                                           },
                                           style: ButtonStyle(
-                                            overlayColor: MaterialStateProperty.all(Colors.black),
+                                            overlayColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.black),
                                             backgroundColor:
                                                 MaterialStateProperty.all(
                                                     Colors.transparent),
@@ -283,6 +291,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ],
                                           )),
                                     ),
+
+                                    //terms and conditions
                                     Container(
                                       height: screenHeight * .075,
                                       decoration: BoxDecoration(
@@ -334,6 +344,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ],
                                           )),
                                     ),
+
+                                    //privacy policy
                                     Container(
                                       height: screenHeight * .075,
                                       decoration: BoxDecoration(
@@ -385,13 +397,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ],
                                           )),
                                     ),
+
+                                    //contact us
                                     Container(
                                       height: screenHeight * .075,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              con = true;
+                                            });
+                                          },
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -755,6 +773,165 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
+
+                            //contact us
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.decelerate,
+                              height: con ? screenHeight * .35 : 0,
+                              width: screenWidth * .85,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, left: 20, right: 20),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: screenHeight * .05,
+                                        width: screenWidth,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            //close button
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  con = false;
+                                                });
+                                              },
+                                              child: Container(
+                                                height: screenHeight * .03,
+                                                width: screenHeight * .03,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    border: Border.all(
+                                                        color: Constants.iconAc
+                                                            .withOpacity(.1))),
+                                                child: const Icon(
+                                                  Icons.close_rounded,
+                                                  size: 20,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+
+                                      Container(
+                                        height: screenHeight*.06,
+                                        width: screenWidth,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              height: screenHeight*.06,
+                                              width: screenHeight*.06,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                border: Border.all(color: Constants.iconAc)
+                                              ),
+                                            ),
+                                            Container(
+                                              width: screenWidth*.05,
+                                            ),
+
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                const Text("Hestia'22",style: TextStyle(
+                                                  fontSize: 25,
+                                                  fontFamily: "Helvetica",
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white
+                                                ),),
+                                                Container(
+                                                  height: screenHeight*.005,
+                                                ),
+                                                const Text("Spirit of Tomorrow",style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontFamily: "Helvetica",
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.grey
+                                                ),),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        height: screenHeight*.05,
+                                      ),
+
+                                      //college site
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: screenHeight * .02),
+                                        child: Container(
+                                          height: screenHeight * .04,
+                                          width: screenWidth,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(6),
+                                            border: Border.all(color: Constants.iconAc,width: 1)
+                                          ),
+                                          child: ElevatedButton(
+                                            onPressed: _launchHestia,
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Constants.transparent)),
+                                            child: const Text(
+                                              "Official Website",
+                                              style: TextStyle(
+                                                fontFamily: "Helvetica",
+                                                color: Constants.iconAc,
+                                                //fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                      //email
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: screenHeight * .02),
+                                        child: Container(
+                                          height: screenHeight * .04,
+                                          width: screenWidth,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: ElevatedButton(
+                                            onPressed: _launchMail,
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Constants.iconAc)),
+                                            child: const Text(
+                                              "Mail Us",
+                                              style: TextStyle(
+                                                fontFamily: "Helvetica",
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -762,6 +939,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
 
+                //logout button
                 Center(
                   child: Container(
                     decoration: BoxDecoration(
@@ -808,8 +986,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-
   }
+
   void _launchTerms() async {
     if (!await launchUrl(_terms)) throw 'Could not launch $_terms';
   }
@@ -817,5 +995,16 @@ class _ProfilePageState extends State<ProfilePage> {
   void _launchPolicy() async {
     if (!await launchUrl(_policy)) throw 'Could not launch $_policy';
   }
-}
 
+  void _launchHestia() async {
+    if (!await launchUrl(_site)) throw 'Could not launch $_site';
+  }
+
+  void _launchMail() async {
+    if (!await launchUrl(_mail)) throw 'Could not launch $_mail';
+  }
+
+  void _launchTkm() async {
+    if (!await launchUrl(_tkm)) throw 'Could not launch $_tkm';
+  }
+}
