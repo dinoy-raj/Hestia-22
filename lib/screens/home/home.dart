@@ -13,6 +13,7 @@ import 'card3.dart';
 import 'card4.dart';
 import 'card5.dart';
 import 'card6.dart';
+import 'card7.dart';
 import 'notification.dart';
 
 class Home extends StatefulWidget {
@@ -746,7 +747,7 @@ class HomeState extends State<Home> {
                                             : catSelect == 5
                                                 ? EventCards6(
                                                     widget.event5, catSelect)
-                                                : EventCards6(
+                                                : EventCards7(
                                                     widget.event6, catSelect),
                       ),
                     ],

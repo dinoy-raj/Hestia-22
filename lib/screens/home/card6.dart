@@ -65,14 +65,18 @@ class _EventCardsState extends State<EventCards6> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "Coming Soon....",
-                    style: TextStyle(
-                      fontFamily: "Helvetica",
-                      color: Constants.iconAc,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
+                children:  [
+                  AnimatedOpacity(
+                    duration: const Duration(seconds: 3),
+                    opacity: start?1:0,
+                    child: const Text(
+                      "Coming Soon...",
+                      style: TextStyle(
+                        fontFamily: "Helvetica",
+                        color: Constants.iconAc,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

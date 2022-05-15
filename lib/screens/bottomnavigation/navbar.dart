@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
+import 'package:hestia22/screens/home/appstart.dart';
 import 'package:hestia22/screens/home/home.dart';
 import 'package:hestia22/screens/schedule/date_info.dart';
 import 'package:hestia22/screens/schedule/enums.dart';
@@ -42,6 +43,7 @@ class NavBarState extends State<NavBar> {
   List<dynamic>? schedule4;
   List<dynamic>? all;
   Map? profile;
+  bool isLoading = true;
 
   void sort(List<dynamic> list) {
     list.sort((a, b) {
@@ -166,6 +168,7 @@ class NavBarState extends State<NavBar> {
       if (mounted) {
         setState(() {
           spots = value;
+          isLoading = false;
         });
       }
     });
@@ -200,7 +203,9 @@ class NavBarState extends State<NavBar> {
     } else {
       mode = false;
     }
-    return Scaffold(
+    return isLoading?
+        const Splash():
+    Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Constants.bg,
       // backgroundColor: const Color.fromRGBO(31, 29, 43, 100),

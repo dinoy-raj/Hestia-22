@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../events/events.dart';
 
-class EventCards1 extends StatefulWidget {
+class EventCards7 extends StatefulWidget {
   List<dynamic>? show;
   int catSelect;
-  EventCards1(this.show, this.catSelect, {Key? key}) : super(key: key);
+  EventCards7(this.show, this.catSelect, {Key? key}) : super(key: key);
 
   @override
-  State<EventCards1> createState() => _EventCardsState();
+  State<EventCards7> createState() => _EventCardsState();
 }
 
-class _EventCardsState extends State<EventCards1> {
+class _EventCardsState extends State<EventCards7> {
   PageController pageControl =
       PageController(viewportFraction: .80, initialPage: 0);
   int currentPage = 0;
@@ -108,8 +108,8 @@ class _EventCardsState extends State<EventCards1> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => EventDetails(
-                                          widget.show![index]['event'])));
+                                      builder: (context) =>
+                                          EventDetails(widget.show![index])));
                             },
                             child: AnimatedContainer(
                               duration: const Duration(seconds: 1),
@@ -144,28 +144,14 @@ class _EventCardsState extends State<EventCards1> {
                                   color: Colors.grey),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
-                                child: Hero(
-                                  tag: widget.show![index]['event']['title'],
-                                  child: CachedNetworkImage(
-                                    fadeInDuration:
-                                        const Duration(milliseconds: 500),
-                                    fadeInCurve: Curves.fastLinearToSlowEaseIn,
-                                    fit: index == currentPage
-                                        ? BoxFit.fill
-                                        : BoxFit.cover,
-                                    imageUrl: widget.show![index]['event']
-                                        ['image'],
-                                    errorWidget:
-                                        (BuildContext context, url, error) =>
-                                            const Text(
-                                      "Error In Loading",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
+                                child: CachedNetworkImage(
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 500),
+                                  fadeInCurve: Curves.fastLinearToSlowEaseIn,
+                                  fit: index == currentPage
+                                      ? BoxFit.fill
+                                      : BoxFit.cover,
+                                  imageUrl: widget.show![index]['image'],
                                 ),
                               ),
                             ),
