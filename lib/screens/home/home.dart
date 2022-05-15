@@ -239,6 +239,9 @@ class HomeState extends State<Home> {
     return GestureDetector(
       onTap: () async {
         FocusManager.instance.primaryFocus?.unfocus();
+        setState(() {
+          notificationPressed = false;
+        });
       },
       child: Scaffold(
         backgroundColor: Constants.sc,
