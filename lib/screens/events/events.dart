@@ -87,10 +87,10 @@ class _EventDetailsState extends State<EventDetails> {
           [
             eventDetails(height, width),
             Divider(
-              height: width * 0.03,
+              height: width * 0.038,
               endIndent: width * 0.035,
               indent: width * 0.035,
-              thickness: 0.3,
+              thickness: 0.1,
               color: Constants.lightWhite,
             ),
             aboutEvent(height, width),
@@ -210,7 +210,7 @@ class _EventDetailsState extends State<EventDetails> {
                   curve: Curves.slowMiddle,
                   opacity: start ? 1 : 0.3,
                   child: SizedBox(
-                    height: width * 0.3,
+                    height: width * 0.33,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -523,7 +523,9 @@ class _EventDetailsState extends State<EventDetails> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(""),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Text(
                     'About Event',
                     style: TextStyle(
