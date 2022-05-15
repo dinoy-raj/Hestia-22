@@ -97,6 +97,3 @@ class Constants {
   static const transparent = Colors.transparent;
   static const lightWhite = Colors.white70;
 }
-
-// TODO
-// REMOVE KEY.JKS FROM ANDROID/APP
