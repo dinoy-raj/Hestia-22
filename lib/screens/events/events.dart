@@ -234,13 +234,14 @@ class _EventDetailsState extends State<EventDetails> {
 
   Widget eventDetails(double height, double width) {
     return AnimatedPadding(
-      padding: start
-          ? EdgeInsets.fromLTRB(width * 0.04, height * 0.01, width * 0.04, 0)
-          : EdgeInsets.only(right: 0, top: height * 0.01, left: 0),
-      curve: Curves.decelerate,
+      padding: start ? EdgeInsets.fromLTRB(
+          width * 0.035, height * 0.01, width * 0.035, 0):
+         EdgeInsets.fromLTRB(
+        width * 0.0, height * 0.01, width * 0.0, 0),
       duration: const Duration(milliseconds: 1000),
+      curve: Curves.decelerate,
       child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 1000),
         curve: Curves.decelerate,
         opacity: start ? 1 : 0,
         child: Column(
@@ -248,6 +249,7 @@ class _EventDetailsState extends State<EventDetails> {
           children: [
             Container(
               height: height * 0.12,
+              width: width,
               padding: EdgeInsets.fromLTRB(
                   width * 0.035, height * 0.01, width * 0.035, 0),
               child: Column(
@@ -351,7 +353,7 @@ class _EventDetailsState extends State<EventDetails> {
               ),
             ),
             Container(
-              width: width * 0.93,
+              width: width ,
               height: height * 0.15,
               padding:
                   EdgeInsets.only(top: height * 0.02, bottom: height * 0.02),
