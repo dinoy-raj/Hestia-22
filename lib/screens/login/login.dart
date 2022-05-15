@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: screenHeight * 1.2,
               width: screenWidth * 1.3,
-              child: Image.asset("assets/logo.jpg"),
+              child: Image.asset("assets/loginfinal.png"),
             ),
             Center(
               child: Column(
@@ -111,8 +111,8 @@ class RoundedButton extends StatelessWidget {
           ),
           Container(
             //color: Colors.blue,
-            child: Lottie.network(
-              'https://assets6.lottiefiles.com/private_files/lf30_3nvqj06a.json',
+            child: Lottie.asset(
+              'assets/google.json',
               width: 50,
               height: 80,
             ),

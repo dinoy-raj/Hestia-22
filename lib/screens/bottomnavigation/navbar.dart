@@ -20,9 +20,7 @@ class NavBar extends StatefulWidget {
   State<NavBar> createState() => NavBarState();
 }
 
-class NavBarState extends State<NavBar>   with SingleTickerProviderStateMixin {
-
-
+class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   FlutterGifController? gifController;
   PageController pageControl = PageController();
   static bool buildFlag = true;
@@ -51,7 +49,6 @@ class NavBarState extends State<NavBar>   with SingleTickerProviderStateMixin {
   bool flag = false;
 
   void sort(List<dynamic> list) {
-
     list.sort((a, b) {
       if (a['event_start'] == null || b['event_start'] == null) {
         return 0;
@@ -66,9 +63,9 @@ class NavBarState extends State<NavBar>   with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
- gifController = FlutterGifController(vsync:this);
+    gifController = FlutterGifController(vsync: this);
 
-    Future.delayed(const Duration(seconds: 11), () {
+    Future.delayed(const Duration(seconds: 12), () {
       setState(() {
         flag = true;
       });
@@ -218,22 +215,7 @@ class NavBarState extends State<NavBar>   with SingleTickerProviderStateMixin {
       mode = false;
     }
     return !flag || isLoading
-        ? Scaffold(
-            backgroundColor: Colors.black,
-            body: SizedBox(
-              height: screenHeight,
-              width: screenWidth,
-              child: Center(
-                child: SizedBox(
-                    height: screenHeight * .3,
-                    width: screenWidth * .3,
-                    child: GifImage(controller: gifController!,
-                    image:const AssetImage("assets/applogo.gif")
-
-                    )),
-              ),
-            ),
-          )
+        ? const Splash()
         : Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Constants.bg,
