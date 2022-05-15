@@ -67,7 +67,7 @@ class _FirstPageState extends State<FirstPage> {
                             venue: widget.data![index]['venue']['title']
                                 .toString(),
                             route: EventDetails(widget.data![index]),
-                            image:widget.data![index]["image"],
+                            image: widget.data![index]["image"],
                           ),
                         ],
                       ),

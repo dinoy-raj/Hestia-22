@@ -53,13 +53,13 @@ class _SecondPageState extends State<SecondPage> {
                           SizedBox(width: size.width * 0.05),
                           EventCard(
                             time: DateFormat('yyyy-mm-ddThh:mm:ss')
-                                .parseUtc(
-                                widget.data![index]['event_start'])
-                                .day ==
-                                27
+                                        .parseUtc(
+                                            widget.data![index]['event_start'])
+                                        .day ==
+                                    27
                                 ? DateFormat('hh:mm a').format(
-                                DateFormat('yyyy-mm-ddThh:mm:ss').parseUtc(
-                                    widget.data![index]['event_start']))
+                                    DateFormat('yyyy-mm-ddThh:mm:ss').parseUtc(
+                                        widget.data![index]['event_start']))
                                 : '12:00 AM',
                             eventName: widget.data![index]['title'].toString(),
                             description:
@@ -67,7 +67,7 @@ class _SecondPageState extends State<SecondPage> {
                             venue: widget.data![index]['venue']['title']
                                 .toString(),
                             route: EventDetails(widget.data![index]),
-                            image:widget.data![index]["image"],
+                            image: widget.data![index]["image"],
                           )
                         ],
                       ),
