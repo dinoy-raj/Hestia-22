@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:intl/intl.dart';

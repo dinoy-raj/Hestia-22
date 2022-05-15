@@ -1,9 +1,6 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
-import 'package:hestia22/screens/profile/certificates.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'package:hestia22/screens/profile/registered_events.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,7 +21,6 @@ class _ProfilePageState extends State<ProfilePage> {
       Uri.parse('https://www.hestiatkmce.live/termsandcondition');
   final Uri _policy = Uri.parse('https://www.hestiatkmce.live/privacypolicy');
   final Uri _site = Uri.parse('https://www.hestiatkmce.live/');
-  final Uri _tkm = Uri.parse('https://www.tkmce.ac.in/');
   final Uri _mail = Uri.parse('mailto:support@hestiatkmce.live');
 
   bool start = false;
@@ -217,7 +213,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         height: screenHeight * .35,
                         width: screenWidth * .85,
                         child: Stack(
@@ -577,7 +573,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         duration: const Duration(seconds: 3),
                                         curve: Curves.decelerate,
                                         opacity: det ? 1 : 0,
-                                        child: Container(
+                                        child: SizedBox(
                                           height: screenHeight * .2,
                                           width: screenWidth,
                                           child: Column(
@@ -624,7 +620,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             BorderRadius
                                                                 .circular(3)),
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     height: screenHeight * .05,
                                                     width: screenWidth * .4,
                                                     child: Row(
@@ -698,7 +694,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             BorderRadius
                                                                 .circular(3)),
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     height: screenHeight * .05,
                                                     width: screenWidth * .4,
                                                     child: Center(
@@ -734,7 +730,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: [
-                                                  Container(
+                                                  SizedBox(
                                                     height: screenHeight * .05,
                                                     width: screenWidth * .7,
                                                     child: Center(
@@ -948,7 +944,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                         //college site
                                         AnimatedOpacity(
-                                          duration: Duration(seconds: 4),
+                                          duration: const Duration(seconds: 4),
                                           curve: Curves.decelerate,
                                           opacity: con ? 1 : 0,
                                           child: Container(
@@ -1089,9 +1085,5 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _launchMail() async {
     if (!await launchUrl(_mail)) throw 'Could not launch $_mail';
-  }
-
-  void _launchTkm() async {
-    if (!await launchUrl(_tkm)) throw 'Could not launch $_tkm';
   }
 }

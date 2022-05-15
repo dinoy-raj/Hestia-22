@@ -7,7 +7,6 @@ import 'package:hestia22/screens/schedule/date_info.dart';
 import 'package:hestia22/screens/schedule/enums.dart';
 import 'package:hestia22/screens/schedule/schedule_screen.dart';
 import 'package:hestia22/screens/spots/spots.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:hestia22/screens/profile/profile.dart';
 import 'package:hestia22/services/django/django.dart' as django;

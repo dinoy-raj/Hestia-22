@@ -1,8 +1,6 @@
-import 'dart:math';
+
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -653,7 +651,7 @@ class _EventDetailsState extends State<EventDetails> {
                         height: 0,
                       )
                     : */
-                      Container(
+                      SizedBox(
                         width: width * 0.32,
                         child: Text(
                           widget.eventData['coordinator_1'] != null
@@ -708,7 +706,7 @@ class _EventDetailsState extends State<EventDetails> {
                       //         height: 0,
                       //       )
                       //     :
-                      Container(
+                      SizedBox(
                         width: width * 0.32,
                         child: Text(
                           widget.eventData['coordinator_2'] != null
@@ -775,10 +773,6 @@ class _EventDetailsState extends State<EventDetails> {
               width * .0, width * .03, width * .03, width * .03),
           onPressed: () async {
             Uri _url = Uri.parse("https://www.hestiatkmce.live/events/" +
-                widget.eventData['event_category'] +
-                "/" +
-                widget.eventData['slug']);
-            print("https://www.hestiatkmce.live/events/" +
                 widget.eventData['event_category'] +
                 "/" +
                 widget.eventData['slug']);
