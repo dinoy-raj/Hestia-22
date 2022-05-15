@@ -117,19 +117,28 @@ class _EventDetailsState extends State<EventDetails> {
                       ],
                     ),
                   )
-                :const SizedBox(
+                : const SizedBox(
                     height: 0,
                   ),
-
             widget.eventData['coordinator_1'] != null ||
-                widget.eventData['coordinator_2'] != null ? SizedBox(height: height*0.015) :const SizedBox(height: 0,),
+                    widget.eventData['coordinator_2'] != null
+                ? SizedBox(height: height * 0.015)
+                : const SizedBox(
+                    height: 0,
+                  ),
             widget.eventData['coordinator_1'] != null ||
                     widget.eventData['coordinator_2'] == null
                 ? contactDetails(height, width)
                 : const SizedBox(
                     height: 0,
                   ),
-            widget.eventData['guideline_file'] != null ? SizedBox(height: height*0.013,):const SizedBox(height: 0,),
+            widget.eventData['guideline_file'] != null
+                ? SizedBox(
+                    height: height * 0.013,
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
             widget.eventData['guideline_file'] != null
                 ? guidelines(height, width)
                 : const SizedBox(
@@ -224,282 +233,292 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   Widget eventDetails(double height, double width) {
-    return AnimatedOpacity(
-      duration: const Duration(milliseconds: 500),
+    return AnimatedPadding(
+      padding: start
+          ? EdgeInsets.fromLTRB(width * 0.04, height * 0.01, width * 0.04, 0)
+          : EdgeInsets.only(right: 0, top: height * 0.01, left: 0),
       curve: Curves.decelerate,
-      opacity: start ? 1 : 0.5,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            height: height * 0.12,
-            padding: EdgeInsets.fromLTRB(
-                width * 0.035, height * 0.01, width * 0.035, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AnimatedOpacity(
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.slowMiddle,
-                  opacity: start ? 1 : 0,
-                  child: SizedBox(
-                    width: width * 0.93,
-                    child: Center(
-                      child: Text(
-                        widget.eventData['title'],
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontFamily: fontfamily,
-                          letterSpacing: letterspace,
-                          height: 1.2,
-                          fontSize: 24,
-                          color: Constants.pureWhite.withOpacity(0.85),
-                          fontWeight: FontWeight.bold,
+      duration: const Duration(milliseconds: 1000),
+      child: AnimatedOpacity(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+        opacity: start ? 1 : 0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: height * 0.12,
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.035, height * 0.01, width * 0.035, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedOpacity(
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.slowMiddle,
+                    opacity: start ? 1 : 0,
+                    child: SizedBox(
+                      width: width * 0.93,
+                      child: Center(
+                        child: Text(
+                          widget.eventData['title'],
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontFamily: fontfamily,
+                            letterSpacing: letterspace,
+                            height: 1.2,
+                            fontSize: 24,
+                            color: Constants.pureWhite.withOpacity(0.85),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                widget.eventData['venue']['title'] != null
-                    ? Center(
-                        child: AnimatedOpacity(
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.slowMiddle,
-                          opacity: start ? 1 : 0,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: height * 0.02),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.locationDot,
-                                  color: Constants.iconIn,
-                                  size: 14,
-                                ),
-                                Text(
-                                  "  " +
-                                      widget.eventData['venue']['title']
-                                          .toString(),
-                                  style: TextStyle(
-                                    letterSpacing: letterspace,
-                                    decoration: TextDecoration.none,
-                                    fontSize: 14,
-                                    fontFamily: fontfamily,
-                                    overflow: TextOverflow.clip,
+                  widget.eventData['venue']['title'] != null
+                      ? Center(
+                          child: AnimatedOpacity(
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.slowMiddle,
+                            opacity: start ? 1 : 0,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: height * 0.02),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.locationDot,
                                     color: Constants.iconIn,
-                                    fontWeight: FontWeight.bold,
+                                    size: 14,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "  " +
+                                        widget.eventData['venue']['title']
+                                            .toString(),
+                                    style: TextStyle(
+                                      letterSpacing: letterspace,
+                                      decoration: TextDecoration.none,
+                                      fontSize: 14,
+                                      fontFamily: fontfamily,
+                                      overflow: TextOverflow.clip,
+                                      color: Constants.iconIn,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      : Center(
+                          child: AnimatedOpacity(
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.slowMiddle,
+                            opacity: start ? 1 : 0,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: height * 0.02),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.locationDot,
+                                    color:
+                                        Constants.lightWhite.withOpacity(0.4),
+                                    size: 14,
+                                  ),
+                                  Text(
+                                    "  TKMCE",
+                                    style: TextStyle(
+                                      letterSpacing: letterspace,
+                                      decoration: TextDecoration.none,
+                                      fontSize: 14,
+                                      fontFamily: fontfamily,
+                                      overflow: TextOverflow.clip,
+                                      color:
+                                          Constants.textColor.withOpacity(0.8),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      )
-                    : Center(
-                        child: AnimatedOpacity(
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.slowMiddle,
-                          opacity: start ? 1 : 0,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: height * 0.02),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.locationDot,
-                                  color: Constants.lightWhite.withOpacity(0.4),
-                                  size: 14,
-                                ),
-                                Text(
-                                  "  TKMCE",
-                                  style: TextStyle(
-                                    letterSpacing: letterspace,
-                                    decoration: TextDecoration.none,
-                                    fontSize: 14,
-                                    fontFamily: fontfamily,
-                                    overflow: TextOverflow.clip,
-                                    color: Constants.textColor.withOpacity(0.8),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-              ],
-            ),
-          ),
-          Container(
-            width: width * 0.93,
-            height: height * 0.15,
-            padding: EdgeInsets.only(top: height * 0.02, bottom: height * 0.02),
-            child: AnimatedOpacity(
-              duration: const Duration(seconds: 1),
-              curve: Curves.linear,
-              opacity: start ? 1 : 0,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius:const BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(color: Constants.iconAc, width: 1),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: width * 0.3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Date",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                overflow: TextOverflow.clip,
-                                color: Constants.iconAc,
-                                fontFamily: fontfamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13),
-                          ),
-                          Text(
-                            "May " + dateFormat!.day.toString(),
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                overflow: TextOverflow.clip,
-                                color: Constants.pureWhite,
-                                fontFamily: fontfamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Container(
-                    //   height: height*0.05,
-                    //   width:width*0.004,
-                    //   decoration: BoxDecoration(
-                    //
-                    //     color: Constants.iconIn,
-                    //     borderRadius: BorderRadius.all(Radius.circular(10))
-                    //   ),
-                    // ),
-                    Container(
-                      width: width * 0.31,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Constants.iconAc,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text(
-                            "Prize",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                overflow: TextOverflow.clip,
-                                color: Colors.black,
-                                fontFamily: fontfamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13),
-                          ),
-                          widget.eventData['prize'] == null
-                              ? const Text(
-                                  "0K",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      overflow: TextOverflow.clip,
-                                      color: Colors.black,
-                                      fontFamily: fontfamily,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24),
-                                )
-                              : Text(
-                                  widget.eventData["prize"] < 1000
-                                      ? prizemoney.toString()
-                                      : prizemoney.toString() + "K",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      overflow: TextOverflow.clip,
-                                      color: Colors.black,
-                                      fontFamily: fontfamily,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24),
-                                ),
-                        ],
-                      ),
-                    ),
-                    // Container(
-                    //   height: height*0.05,
-                    //   width:width*0.004,
-                    //   decoration: BoxDecoration(
-                    //
-                    //       color: Constants.iconIn,
-                    //       borderRadius: BorderRadius.all(Radius.circular(10))
-                    //   ),
-                    // ),
-                    SizedBox(
-                      width: width * 0.3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Fee",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                overflow: TextOverflow.clip,
-                                color: Constants.iconAc,
-                                fontFamily: fontfamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13),
-                          ),
-                          widget.eventData['fees'] != null
-                              ? Text(
-                                  widget.eventData['fees'] == 0
-                                      ? "Free"
-                                      : widget.eventData['fees'] < 100
-                                          ? widget.eventData['fees']
-                                                  .toString() +
-                                              "P"
-                                          : fee,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      letterSpacing: contentspace,
-                                      overflow: TextOverflow.clip,
-                                      color: Constants.pureWhite,
-                                      fontFamily: fontfamily,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                )
-                              : Text(
-                                  "0",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      letterSpacing: contentspace,
-                                      overflow: TextOverflow.clip,
-                                      color: Constants.pureWhite,
-                                      fontFamily: fontfamily,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
-          )
-        ],
+            Container(
+              width: width * 0.93,
+              height: height * 0.15,
+              padding:
+                  EdgeInsets.only(top: height * 0.02, bottom: height * 0.02),
+              child: AnimatedOpacity(
+                duration: const Duration(seconds: 1),
+                curve: Curves.linear,
+                opacity: start ? 1 : 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(color: Constants.iconAc, width: 1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: width * 0.3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Date",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  color: Constants.iconAc,
+                                  fontFamily: fontfamily,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13),
+                            ),
+                            Text(
+                              "May " + dateFormat!.day.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  color: Constants.pureWhite,
+                                  fontFamily: fontfamily,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Container(
+                      //   height: height*0.05,
+                      //   width:width*0.004,
+                      //   decoration: BoxDecoration(
+                      //
+                      //     color: Constants.iconIn,
+                      //     borderRadius: BorderRadius.all(Radius.circular(10))
+                      //   ),
+                      // ),
+                      Container(
+                        width: width * 0.31,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Constants.iconAc,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Prize",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  color: Colors.black,
+                                  fontFamily: fontfamily,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13),
+                            ),
+                            widget.eventData['prize'] == null
+                                ? const Text(
+                                    "0K",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        overflow: TextOverflow.clip,
+                                        color: Colors.black,
+                                        fontFamily: fontfamily,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24),
+                                  )
+                                : Text(
+                                    widget.eventData["prize"] < 1000
+                                        ? prizemoney.toString()
+                                        : prizemoney.toString() + "K",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        overflow: TextOverflow.clip,
+                                        color: Colors.black,
+                                        fontFamily: fontfamily,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24),
+                                  ),
+                          ],
+                        ),
+                      ),
+                      // Container(
+                      //   height: height*0.05,
+                      //   width:width*0.004,
+                      //   decoration: BoxDecoration(
+                      //
+                      //       color: Constants.iconIn,
+                      //       borderRadius: BorderRadius.all(Radius.circular(10))
+                      //   ),
+                      // ),
+                      SizedBox(
+                        width: width * 0.3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Fee",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  overflow: TextOverflow.clip,
+                                  color: Constants.iconAc,
+                                  fontFamily: fontfamily,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13),
+                            ),
+                            widget.eventData['fees'] != null
+                                ? Text(
+                                    widget.eventData['fees'] == 0
+                                        ? "Free"
+                                        : widget.eventData['fees'] < 100
+                                            ? widget.eventData['fees']
+                                                    .toString() +
+                                                "P"
+                                            : fee,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        letterSpacing: contentspace,
+                                        overflow: TextOverflow.clip,
+                                        color: Constants.pureWhite,
+                                        fontFamily: fontfamily,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  )
+                                : Text(
+                                    "0",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        letterSpacing: contentspace,
+                                        overflow: TextOverflow.clip,
+                                        color: Constants.pureWhite,
+                                        fontFamily: fontfamily,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -663,8 +682,8 @@ class _EventDetailsState extends State<EventDetails> {
           children: [
             widget.eventData['coordinator_1'] != null
                 ? SizedBox(
-              width: width*0.44,
-                  child: ElevatedButton(
+                    width: width * 0.44,
+                    child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Constants.bg)),
@@ -683,7 +702,8 @@ class _EventDetailsState extends State<EventDetails> {
                       },
                       child: Text(
                         widget.eventData['coordinator_1'] != null
-                            ? widget.eventData['coordinator_1']['name'].toString()
+                            ? widget.eventData['coordinator_1']['name']
+                                .toString()
                             : "No Name",
                         style: TextStyle(
                           letterSpacing: letterspace,
@@ -695,23 +715,26 @@ class _EventDetailsState extends State<EventDetails> {
                         ),
                       ),
                     ),
-                )
+                  )
                 : const SizedBox(
                     height: 0,
                   ),
-            widget.eventData['coordinator_2'] != null ? Container(
-              height: height*0.033,
-              width:width*0.003,
-              decoration: BoxDecoration(
-
-                color: Constants.iconIn,
-                borderRadius:const BorderRadius.all(Radius.circular(10))
-              ),
-            ):const SizedBox(height: 0,),
+            widget.eventData['coordinator_2'] != null
+                ? Container(
+                    height: height * 0.033,
+                    width: width * 0.003,
+                    decoration: BoxDecoration(
+                        color: Constants.iconIn,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
             widget.eventData['coordinator_2'] != null
                 ? SizedBox(
-              width: width*0.44,
-                  child: ElevatedButton(
+                    width: width * 0.44,
+                    child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Constants.bg)),
@@ -730,7 +753,8 @@ class _EventDetailsState extends State<EventDetails> {
                       },
                       child: Text(
                         widget.eventData['coordinator_2'] != null
-                            ? widget.eventData['coordinator_2']['name'].toString()
+                            ? widget.eventData['coordinator_2']['name']
+                                .toString()
                             : "No Name",
                         style: TextStyle(
                           letterSpacing: letterspace,
@@ -742,8 +766,8 @@ class _EventDetailsState extends State<EventDetails> {
                         ),
                       ),
                     ),
-                )
-                :const SizedBox(
+                  )
+                : const SizedBox(
                     height: 0,
                   ),
           ],
