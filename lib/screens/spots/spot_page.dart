@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
@@ -47,19 +48,17 @@ class _SpotPageState extends State<SpotPage> {
                   Hero(
                     tag: widget.data['title'].toString(),
                     child: AnimatedOpacity(
-                        duration: const Duration(milliseconds: 800),
-                        opacity: _opacity,
-                        child: Container(
-                          color: Constants.iconAc.withOpacity(.01),
-                          child: Image.network(
-                            widget.data['picture'] != null
-                                ? widget.data['picture'].toString()
-                                : "https://img.collegepravesh.com/2018/10/TKMCE-Kollam.jpg",
-                            height: 300,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        )),
+                      duration: const Duration(milliseconds: 800),
+                      opacity: _opacity,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.data['picture'] != null
+                            ? widget.data['picture'].toString()
+                            : "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg",
+                        height: 300,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   Positioned(
                     top: 50,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/spots/spot_page.dart';
@@ -106,80 +107,93 @@ class _CardsState extends State<Cards> {
                                         data: widget.data[index],
                                       )));
                         },
-                        child: AnimatedOpacity(
+                        child: AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
-                          opacity: _currentPage == index ? 1.0 : 0.5,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            padding: const EdgeInsets.all(20),
-                            margin: _currentPage == index
-                                ? EdgeInsets.zero
-                                : const EdgeInsets.all(30),
-                            decoration: BoxDecoration(
-                              color: Constants.iconAc.withOpacity(.01),
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                  opacity: 0.5,
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(widget.data[index]
-                                          ['picture'] ??
-                                      "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg")),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  index + 1 < 10
-                                      ? "0" + (index + 1).toString()
-                                      : (index + 1).toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 30,
-                                      color: Constants.color2.withOpacity(.5)),
+                          margin: _currentPage == index
+                              ? EdgeInsets.zero
+                              : const EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                            color: Constants.iconAc.withOpacity(.01),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: AnimatedOpacity(
+                                  duration: const Duration(milliseconds: 800),
+                                  opacity: _animate ? 0 : 0.5,
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                    imageUrl: widget.data[index]['picture'] ??
+                                        "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg",
+                                  ),
                                 ),
-                                Column(
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.data[index]['title'].toString(),
+                                      index + 1 < 10
+                                          ? "0" + (index + 1).toString()
+                                          : (index + 1).toString(),
                                       style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                          color: Constants.color2
-                                              .withOpacity(.75)),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      widget.data[index]['short_desc']
-                                          .toString(),
-                                      style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontSize: 14,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 30,
                                           color:
-                                              Constants.color2.withOpacity(.6)),
+                                              Constants.color2.withOpacity(.5)),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      widget.data[index]['desc'].toString(),
-                                      style: TextStyle(
-                                          overflow: TextOverflow.clip,
-                                          fontSize: 12,
-                                          color:
-                                              Constants.color2.withOpacity(.4)),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          widget.data[index]['title']
+                                              .toString(),
+                                          style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Constants.color2
+                                                  .withOpacity(.75)),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          widget.data[index]['short_desc']
+                                              .toString(),
+                                          style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontSize: 14,
+                                              color: Constants.color2
+                                                  .withOpacity(.6)),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          widget.data[index]['desc'].toString(),
+                                          style: TextStyle(
+                                              overflow: TextOverflow.clip,
+                                              fontSize: 12,
+                                              color: Constants.color2
+                                                  .withOpacity(.4)),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
