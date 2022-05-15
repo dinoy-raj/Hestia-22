@@ -26,8 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: screenHeight * 1.2,
               width: screenWidth * 1.3,
-              child:
-                  Lottie.asset('assets/animations/logo.json', animate: true),
+              child: Image.asset("assets/logo.jpg"),
             ),
             Center(
               child: Column(

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/home/appstart.dart';
@@ -19,7 +20,10 @@ class NavBar extends StatefulWidget {
   State<NavBar> createState() => NavBarState();
 }
 
-class NavBarState extends State<NavBar> {
+class NavBarState extends State<NavBar>   with SingleTickerProviderStateMixin {
+
+
+  FlutterGifController? gifController;
   PageController pageControl = PageController();
   static bool buildFlag = true;
 
@@ -47,6 +51,7 @@ class NavBarState extends State<NavBar> {
   bool flag = false;
 
   void sort(List<dynamic> list) {
+
     list.sort((a, b) {
       if (a['event_start'] == null || b['event_start'] == null) {
         return 0;
@@ -60,6 +65,8 @@ class NavBarState extends State<NavBar> {
   @override
   void initState() {
     super.initState();
+
+ gifController = FlutterGifController(vsync:this);
 
     Future.delayed(const Duration(seconds: 11), () {
       setState(() {
@@ -187,9 +194,6 @@ class NavBarState extends State<NavBar> {
         index = 0;
       });
     });
-
-
-
   }
 
   @override
@@ -213,368 +217,422 @@ class NavBarState extends State<NavBar> {
     } else {
       mode = false;
     }
-    return !flag || isLoading?
-        const Splash():
-    Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Constants.bg,
-      // backgroundColor: const Color.fromRGBO(31, 29, 43, 100),
-      body: Stack(
-        children: [
-          PageView(
-            controller: pageControl,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              Home(show0, show1, show2, show3, show4, show5, show6, profile,
-                  all),
-              ChangeNotifierProvider<DateInfo>(
-                  create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
-                  child: ScheduleScreen(
-                    data1: schedule1,
-                    data2: schedule2,
-                    data3: schedule3,
-                    data4: schedule4,
-                  )),
-              Spots(
-                data: spots,
+    return !flag || isLoading
+        ? Scaffold(
+            backgroundColor: Colors.black,
+            body: SizedBox(
+              height: screenHeight,
+              width: screenWidth,
+              child: Center(
+                child: SizedBox(
+                    height: screenHeight * .3,
+                    width: screenWidth * .3,
+                    child: GifImage(controller: gifController!,
+                    image:const AssetImage("assets/applogo.gif")
+
+                    )),
               ),
-              ProfilePage(
-                data: profile,
-              )
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: screenHeight * .03),
-              child: Stack(
-                children: [
-                  SizedBox(
-                    height: mode ? 70 : screenHeight * .07,
-                    width: screenWidth * .85,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 20,
-                          sigmaY: 20,
-                        ),
-                        child: AnimatedOpacity(
-                          opacity: opaC,
-                          duration: const Duration(seconds: 2),
-                          curve: Curves.decelerate,
-                          child: AnimatedContainer(
-                            duration: const Duration(seconds: 2),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            height: mode ? 70 : screenHeight * .07,
-                            width: screenWidth * .85,
-                            decoration: BoxDecoration(
-                              // color: Colors.white.withOpacity(.05),
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Constants.navBorder),
-                              gradient: LinearGradient(
-                                colors: [
-                                  index == 0
-                                      ? Constants.grad1
-                                      : Constants.grad2,
-                                  index == 1
-                                      ? Constants.grad1
-                                      : Constants.grad2,
-                                  index == 2
-                                      ? Constants.grad1
-                                      : Constants.grad2,
-                                  index == 3
-                                      ? Constants.grad1
-                                      : Constants.grad2,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
+            ),
+          )
+        : Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Constants.bg,
+            // backgroundColor: const Color.fromRGBO(31, 29, 43, 100),
+            body: Stack(
+              children: [
+                PageView(
+                  controller: pageControl,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    Home(show0, show1, show2, show3, show4, show5, show6,
+                        profile, all),
+                    ChangeNotifierProvider<DateInfo>(
+                        create: (context) => DateInfo(DateType.a, 'fd', 'fr'),
+                        child: ScheduleScreen(
+                          data1: schedule1,
+                          data2: schedule2,
+                          data3: schedule3,
+                          data4: schedule4,
+                        )),
+                    Spots(
+                      data: spots,
+                    ),
+                    ProfilePage(
+                      data: profile,
+                    )
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: screenHeight * .03),
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          height: mode ? 70 : screenHeight * .07,
+                          width: screenWidth * .85,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(
+                                sigmaX: 20,
+                                sigmaY: 20,
                               ),
-                            ),
-                            child: Center(
-                              child: Stack(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () {
-                                          setState(() {
-                                            index = 0;
-                                            switchPage(index);
-                                          });
-                                        },
-                                        child: Tooltip(
-                                          message: "Home",
-                                          textStyle: const TextStyle(
-                                            color: Constants.iconAc,
-                                            fontFamily: "Helvetica",
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10,
-                                          ),
-                                          child: AnimatedContainer(
-                                            duration:
-                                                const Duration(seconds: 1),
-                                            curve: Curves.decelerate,
-                                            height: screenHeight * .07,
-                                            width: start
-                                                ? screenWidth * .21
-                                                : screenWidth * .05,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.house,
-                                                    size: mode
-                                                        ? 17
-                                                        : screenHeight * .02,
-                                                    color: index == 0
-                                                        ? Constants.iconAc
-                                                        : Constants.iconIn,
-                                                  ),
-                                                ),
-                                                AnimatedContainer(
-                                                  duration: const Duration(
-                                                      seconds: 2),
-                                                  curve: Curves
-                                                      .fastLinearToSlowEaseIn,
-                                                  height: index == 0
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  width: index == 0
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color:
-                                                              Constants.iconAc),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () {
-                                          setState(() {
-                                            index = 1;
-                                            switchPage(index);
-                                          });
-                                        },
-                                        child: Tooltip(
-                                          message: "Schedule",
-                                          textStyle: const TextStyle(
-                                            color: Constants.iconAc,
-                                            fontFamily: "Helvetica",
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10,
-                                          ),
-                                          child: SizedBox(
-                                            height: screenHeight * .07,
-                                            width: screenWidth * .21,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.list,
-                                                    size: mode
-                                                        ? 17
-                                                        : screenHeight * .02,
-                                                    color: index == 1
-                                                        ? Constants.iconAc
-                                                        : Constants.iconIn,
-                                                  ),
-                                                ),
-                                                AnimatedContainer(
-                                                  duration: const Duration(
-                                                      seconds: 2),
-                                                  curve: Curves
-                                                      .fastLinearToSlowEaseIn,
-                                                  height: index == 1
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  width: index == 1
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color:
-                                                              Constants.iconAc),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () {
-                                          setState(() {
-                                            index = 2;
-                                            switchPage(index);
-                                          });
-                                        },
-                                        child: Tooltip(
-                                          message: "Hotspots",
-                                          textStyle: const TextStyle(
-                                            color: Constants.iconAc,
-                                            fontFamily: "Helvetica",
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10,
-                                          ),
-                                          child: SizedBox(
-                                            height: screenHeight * .07,
-                                            width: screenWidth * .21,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.signsPost,
-                                                    size: mode
-                                                        ? 17
-                                                        : screenHeight * .02,
-                                                    color: index == 2
-                                                        ? Constants.iconAc
-                                                        : Constants.iconIn,
-                                                  ),
-                                                ),
-                                                AnimatedContainer(
-                                                  duration: const Duration(
-                                                      seconds: 2),
-                                                  curve: Curves
-                                                      .fastLinearToSlowEaseIn,
-                                                  height: index == 2
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  width: index == 2
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color:
-                                                              Constants.iconAc),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () {
-                                          setState(() {
-                                            index = 3;
-                                            switchPage(index);
-                                          });
-                                        },
-                                        child: Tooltip(
-                                          message: "Profile",
-                                          textStyle: const TextStyle(
-                                            color: Constants.iconAc,
-                                            fontFamily: "Helvetica",
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10,
-                                          ),
-                                          child: AnimatedContainer(
-                                            duration:
-                                                const Duration(seconds: 1),
-                                            curve: Curves.decelerate,
-                                            height: screenHeight * .07,
-                                            width: start
-                                                ? screenWidth * .21
-                                                : screenWidth * .05,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.user,
-                                                    size: mode
-                                                        ? 17
-                                                        : screenHeight * .02,
-                                                    color: index == 3
-                                                        ? Constants.iconAc
-                                                        : Constants.iconIn,
-                                                  ),
-                                                ),
-                                                AnimatedContainer(
-                                                  duration: const Duration(
-                                                      seconds: 2),
-                                                  curve: Curves
-                                                      .fastLinearToSlowEaseIn,
-                                                  height: index == 3
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  width: index == 3
-                                                      ? screenHeight * .0035
-                                                      : 0,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color:
-                                                              Constants.iconAc),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                              child: AnimatedOpacity(
+                                opacity: opaC,
+                                duration: const Duration(seconds: 2),
+                                curve: Curves.decelerate,
+                                child: AnimatedContainer(
+                                  duration: const Duration(seconds: 2),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  height: mode ? 70 : screenHeight * .07,
+                                  width: screenWidth * .85,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.white.withOpacity(.05),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border:
+                                        Border.all(color: Constants.navBorder),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        index == 0
+                                            ? Constants.grad1
+                                            : Constants.grad2,
+                                        index == 1
+                                            ? Constants.grad1
+                                            : Constants.grad2,
+                                        index == 2
+                                            ? Constants.grad1
+                                            : Constants.grad2,
+                                        index == 3
+                                            ? Constants.grad1
+                                            : Constants.grad2,
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
                                   ),
-                                ],
+                                  child: Center(
+                                    child: Stack(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () {
+                                                setState(() {
+                                                  index = 0;
+                                                  switchPage(index);
+                                                });
+                                              },
+                                              child: Tooltip(
+                                                message: "Home",
+                                                textStyle: const TextStyle(
+                                                  color: Constants.iconAc,
+                                                  fontFamily: "Helvetica",
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 10,
+                                                ),
+                                                child: AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves.decelerate,
+                                                  height: screenHeight * .07,
+                                                  width: start
+                                                      ? screenWidth * .21
+                                                      : screenWidth * .05,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Icon(
+                                                          FontAwesomeIcons
+                                                              .house,
+                                                          size: mode
+                                                              ? 17
+                                                              : screenHeight *
+                                                                  .02,
+                                                          color: index == 0
+                                                              ? Constants.iconAc
+                                                              : Constants
+                                                                  .iconIn,
+                                                        ),
+                                                      ),
+                                                      AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 2),
+                                                        curve: Curves
+                                                            .fastLinearToSlowEaseIn,
+                                                        height: index == 0
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        width: index == 0
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Constants
+                                                                    .iconAc),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () {
+                                                setState(() {
+                                                  index = 1;
+                                                  switchPage(index);
+                                                });
+                                              },
+                                              child: Tooltip(
+                                                message: "Schedule",
+                                                textStyle: const TextStyle(
+                                                  color: Constants.iconAc,
+                                                  fontFamily: "Helvetica",
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 10,
+                                                ),
+                                                child: SizedBox(
+                                                  height: screenHeight * .07,
+                                                  width: screenWidth * .21,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.list,
+                                                          size: mode
+                                                              ? 17
+                                                              : screenHeight *
+                                                                  .02,
+                                                          color: index == 1
+                                                              ? Constants.iconAc
+                                                              : Constants
+                                                                  .iconIn,
+                                                        ),
+                                                      ),
+                                                      AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 2),
+                                                        curve: Curves
+                                                            .fastLinearToSlowEaseIn,
+                                                        height: index == 1
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        width: index == 1
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Constants
+                                                                    .iconAc),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () {
+                                                setState(() {
+                                                  index = 2;
+                                                  switchPage(index);
+                                                });
+                                              },
+                                              child: Tooltip(
+                                                message: "Hotspots",
+                                                textStyle: const TextStyle(
+                                                  color: Constants.iconAc,
+                                                  fontFamily: "Helvetica",
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 10,
+                                                ),
+                                                child: SizedBox(
+                                                  height: screenHeight * .07,
+                                                  width: screenWidth * .21,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Icon(
+                                                          FontAwesomeIcons
+                                                              .signsPost,
+                                                          size: mode
+                                                              ? 17
+                                                              : screenHeight *
+                                                                  .02,
+                                                          color: index == 2
+                                                              ? Constants.iconAc
+                                                              : Constants
+                                                                  .iconIn,
+                                                        ),
+                                                      ),
+                                                      AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 2),
+                                                        curve: Curves
+                                                            .fastLinearToSlowEaseIn,
+                                                        height: index == 2
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        width: index == 2
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Constants
+                                                                    .iconAc),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () {
+                                                setState(() {
+                                                  index = 3;
+                                                  switchPage(index);
+                                                });
+                                              },
+                                              child: Tooltip(
+                                                message: "Profile",
+                                                textStyle: const TextStyle(
+                                                  color: Constants.iconAc,
+                                                  fontFamily: "Helvetica",
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 10,
+                                                ),
+                                                child: AnimatedContainer(
+                                                  duration: const Duration(
+                                                      seconds: 1),
+                                                  curve: Curves.decelerate,
+                                                  height: screenHeight * .07,
+                                                  width: start
+                                                      ? screenWidth * .21
+                                                      : screenWidth * .05,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Icon(
+                                                          FontAwesomeIcons.user,
+                                                          size: mode
+                                                              ? 17
+                                                              : screenHeight *
+                                                                  .02,
+                                                          color: index == 3
+                                                              ? Constants.iconAc
+                                                              : Constants
+                                                                  .iconIn,
+                                                        ),
+                                                      ),
+                                                      AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 2),
+                                                        curve: Curves
+                                                            .fastLinearToSlowEaseIn,
+                                                        height: index == 3
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        width: index == 3
+                                                            ? screenHeight *
+                                                                .0035
+                                                            : 0,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Constants
+                                                                    .iconAc),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
   }
 
   void switchPage(int index) {
