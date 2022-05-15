@@ -285,7 +285,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 width: screenWidth * .1,
                                               ),
                                               const Text(
-                                                "Personal details",
+                                                "Personal Details",
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily: "Helvetica",
@@ -524,7 +524,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     width: screenWidth * .02,
                                                   ),
                                                   const Text(
-                                                    "personal Details",
+                                                    "Personal Details",
                                                     style: TextStyle(
                                                       color: Constants.iconAc,
                                                       fontWeight:
