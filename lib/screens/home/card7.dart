@@ -6,9 +6,9 @@ import '../../main.dart';
 import '../events/events.dart';
 
 class EventCards7 extends StatefulWidget {
-  List<dynamic>? show;
-  int catSelect;
-  EventCards7(this.show, this.catSelect, {Key? key}) : super(key: key);
+  final List<dynamic>? show;
+  final int catSelect;
+  const EventCards7(this.show, this.catSelect, {Key? key}) : super(key: key);
 
   @override
   State<EventCards7> createState() => _EventCardsState();

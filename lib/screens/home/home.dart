@@ -6,7 +6,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
-import 'package:hestia22/screens/home/appstart.dart';
 import 'package:hestia22/screens/home/card2.dart';
 import 'package:hestia22/screens/home/cards1.dart';
 import 'card3.dart';
@@ -44,6 +43,7 @@ class HomeState extends State<Home> {
 
   //filter icon
   static bool filterPressed = false;
+  final TextEditingController _textEditingController =  TextEditingController();
 
   //category list
   static int catSelect = 10;
@@ -241,6 +241,7 @@ class HomeState extends State<Home> {
         FocusManager.instance.primaryFocus?.unfocus();
         setState(() {
           notificationPressed = false;
+          _textEditingController.clear();
         });
       },
       child: Scaffold(
@@ -466,6 +467,7 @@ class HomeState extends State<Home> {
                                       child: TypeAheadField(
                                         textFieldConfiguration:
                                             TextFieldConfiguration(
+                                              controller: _textEditingController,
                                           onTap: () {
                                             if (mounted) {
                                               setState(() {
