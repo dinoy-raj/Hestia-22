@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_gif/flutter_gif.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/home/appstart.dart';
@@ -21,7 +20,6 @@ class NavBar extends StatefulWidget {
 }
 
 class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
-  FlutterGifController? gifController;
   PageController pageControl = PageController();
   static bool buildFlag = true;
 
@@ -62,8 +60,6 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
-    gifController = FlutterGifController(vsync: this);
 
     Future.delayed(const Duration(seconds: 12), () {
       setState(() {
