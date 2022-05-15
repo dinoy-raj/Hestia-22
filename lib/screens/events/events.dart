@@ -29,28 +29,30 @@ class _EventDetailsState extends State<EventDetails> {
   bool isReadmore = false;
   int lines = 4;
   bool start = false;
-  int money=0;
-  int prizemoney=0;
+  int money = 0;
+  int prizemoney = 0;
   DateTime? dateFormat;
+
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
+
     if (widget.eventData['fees'] != null) {
       fee = (widget.eventData['fees'] / 100).toString().replaceAll(r".0", '');
     } else {
       fee = "0";
     }
     if (widget.eventData['prize'] != null) {
-      money=widget.eventData["prize"].round();
+      money = widget.eventData["prize"].round();
       if (money < 1000) {
-        prize=money.toString();
+        prize = money.toString();
       } else {
-        prize=(money/1000).toString();
+        prize = (money / 1000).toString();
       }
     } else {
       prize = "0";
     }
-    prizemoney=double.parse(prize).toInt();
+    prizemoney = double.parse(prize).toInt();
     dateFormat = widget.eventData['event_start'] != null
         ? DateFormat("yyyy-mm-ddThh:mm:ss")
             .parse(widget.eventData['event_start'])
@@ -73,53 +75,46 @@ class _EventDetailsState extends State<EventDetails> {
       imageUrl =
           "https://www.hestiatkmce.live/static/media/Hestia%2022-date%20reveal.3f5f2c21ac76b6abdd0e.jpg";
     }
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Constants.sc,
-      body: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            appbar(height, width),
-            SliverList(
-                delegate: SliverChildListDelegate(
-              [
-                eventDetails(height, width),
-                Divider(
-                  height: width * 0.03,
-                  endIndent: width * 0.035,
-                  indent: width * 0.035,
-                  thickness: 0.3,
-                  color: Constants.lightWhite,
-                ),
-                aboutEvent(height, width),
-                widget.eventData['is_file_upload'] &&
-                        widget.eventData['guideline_file'] != null
-                    ? guidelines(height, width)
-                    : const SizedBox(
-                        height: 0,
-                      ),
-                widget.eventData['coordinator_1'] != null ||
-                        widget.eventData['coordinator_2'] == null
-                    ? contactDetails(height, width)
-                    : const SizedBox(
-                        height: 0,
-                      ),
-                duration!.inSeconds <= 0
-                    ? const Text("")
-                    : floatButton(height, width),
-              ],
-            ))
-          ]),
+      body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
+        appbar(height, width),
+        SliverList(
+            delegate: SliverChildListDelegate(
+          [
+            eventDetails(height, width),
+            Divider(
+              height: width * 0.03,
+              endIndent: width * 0.035,
+              indent: width * 0.035,
+              thickness: 0.3,
+              color: Constants.lightWhite,
+            ),
+            aboutEvent(height, width),
+            widget.eventData['is_file_upload'] &&
+                    widget.eventData['guideline_file'] != null
+                ? guidelines(height, width)
+                : const SizedBox(
+                    height: 0,
+                  ),
+            widget.eventData['coordinator_1'] != null ||
+                    widget.eventData['coordinator_2'] == null
+                ? contactDetails(height, width)
+                : const SizedBox(
+                    height: 0,
+                  ),
+            duration!.inSeconds <= 0
+                ? const Text("")
+                : floatButton(height, width),
+          ],
+        ))
+      ]),
     );
   }
 
@@ -184,7 +179,7 @@ class _EventDetailsState extends State<EventDetails> {
                     imageUrl: imageUrl,
                     errorWidget: (BuildContext context, url, error) =>
                         const Text(
-                          "Error In Loading",
+                          "Error Loading",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 10,
@@ -210,7 +205,7 @@ class _EventDetailsState extends State<EventDetails> {
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(
-                width * 0.035, width * 0.04, width * 0.035, 0),
+                width * 0.035, width * 0.06, width * 0.035, 0),
             child: Stack(
               children: [
                 AnimatedOpacity(
@@ -218,7 +213,7 @@ class _EventDetailsState extends State<EventDetails> {
                   curve: Curves.slowMiddle,
                   opacity: start ? 1 : 0.3,
                   child: SizedBox(
-                    height: width * 0.38,
+                    height: width * 0.3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -235,8 +230,8 @@ class _EventDetailsState extends State<EventDetails> {
                                   fontFamily: fontfamily,
                                   letterSpacing: letterspace,
                                   height: 1.2,
-                                  fontSize: 28,
-                                  color: Constants.pureWhite.withOpacity(1),
+                                  fontSize: 24,
+                                  color: Constants.pureWhite.withOpacity(0.85),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -259,17 +254,16 @@ class _EventDetailsState extends State<EventDetails> {
                                         FontAwesomeIcons.locationDot,
                                         color: Constants.lightWhite
                                             .withOpacity(0.4),
-                                        size: 15,
+                                        size: 14,
                                       ),
                                       Text(
                                         "  " +
                                             widget.eventData['venue']['title']
-                                                .toString()
-                                                .toUpperCase(),
+                                                .toString(),
                                         style: TextStyle(
                                           letterSpacing: letterspace,
                                           decoration: TextDecoration.none,
-                                          fontSize: 15,
+                                          fontSize: 14,
                                           fontFamily: fontfamily,
                                           overflow: TextOverflow.clip,
                                           color: Constants.textColor
@@ -296,14 +290,14 @@ class _EventDetailsState extends State<EventDetails> {
                                         FontAwesomeIcons.locationDot,
                                         color: Constants.lightWhite
                                             .withOpacity(0.4),
-                                        size: 15,
+                                        size: 14,
                                       ),
                                       Text(
                                         "  " + "TKMCE".toString().toUpperCase(),
                                         style: TextStyle(
                                           letterSpacing: letterspace,
                                           decoration: TextDecoration.none,
-                                          fontSize: 15,
+                                          fontSize: 14,
                                           fontFamily: fontfamily,
                                           overflow: TextOverflow.clip,
                                           color: Constants.textColor
@@ -331,40 +325,28 @@ class _EventDetailsState extends State<EventDetails> {
                                         FontAwesomeIcons.indianRupeeSign,
                                         color: Constants.lightWhite
                                             .withOpacity(0.4),
-                                        size: 15,
+                                        size: 14,
                                       ),
-                                      widget.eventData['fees'] == null
-                                          ? Text(
-                                              "0",
-                                              style: TextStyle(
-                                                letterSpacing: letterspace,
-                                                decoration: TextDecoration.none,
-                                                fontSize: 14,
-                                                fontFamily: fontfamily,
-                                                overflow: TextOverflow.clip,
-                                                color: Constants.textColor
-                                                    .withOpacity(0.8),
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            )
-                                          : Text(
-                                              widget.eventData['fees'] < 100
-                                                  ? "  " +
-                                                      widget.eventData['fees']
-                                                          .toString() +
-                                                      " Ps"
-                                                  : "  " + fee,
-                                              style: TextStyle(
-                                                letterSpacing: letterspace,
-                                                decoration: TextDecoration.none,
-                                                fontSize: 15,
-                                                fontFamily: fontfamily,
-                                                overflow: TextOverflow.clip,
-                                                color: Constants.textColor
-                                                    .withOpacity(0.8),
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            )
+                                      Text(
+                                        widget.eventData['fees'] == 0
+                                            ? "  Free"
+                                            : widget.eventData['fees'] < 100
+                                                ? "  " +
+                                                    widget.eventData['fees']
+                                                        .toString() +
+                                                    "P"
+                                                : "  " + fee,
+                                        style: TextStyle(
+                                          letterSpacing: letterspace,
+                                          decoration: TextDecoration.none,
+                                          fontSize: 14,
+                                          fontFamily: fontfamily,
+                                          overflow: TextOverflow.clip,
+                                          color: Constants.textColor
+                                              .withOpacity(0.8),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -384,35 +366,21 @@ class _EventDetailsState extends State<EventDetails> {
                                         FontAwesomeIcons.indianRupeeSign,
                                         color: Constants.lightWhite
                                             .withOpacity(0.4),
-                                        size: 15,
+                                        size: 14,
                                       ),
-                                      widget.eventData['fees'] == null
-                                          ? Text(
-                                              "0",
-                                              style: TextStyle(
-                                                letterSpacing: letterspace,
-                                                decoration: TextDecoration.none,
-                                                fontSize: 15,
-                                                fontFamily: fontfamily,
-                                                overflow: TextOverflow.clip,
-                                                color: Constants.textColor
-                                                    .withOpacity(0.8),
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            )
-                                          : Text(
-                                              "   " + fee,
-                                              style: TextStyle(
-                                                letterSpacing: letterspace,
-                                                decoration: TextDecoration.none,
-                                                fontSize: 15,
-                                                fontFamily: fontfamily,
-                                                overflow: TextOverflow.clip,
-                                                color: Constants.textColor
-                                                    .withOpacity(0.8),
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            )
+                                      Text(
+                                        "  Free",
+                                        style: TextStyle(
+                                          letterSpacing: letterspace,
+                                          decoration: TextDecoration.none,
+                                          fontSize: 15,
+                                          fontFamily: fontfamily,
+                                          overflow: TextOverflow.clip,
+                                          color: Constants.textColor
+                                              .withOpacity(0.8),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -422,135 +390,121 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                 ),
                 Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          AnimatedOpacity(
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.linear,
-                            opacity: start ? 1 : 0.6,
-                            child: Container(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    AnimatedOpacity(
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.linear,
+                      opacity: start ? 1 : 0.6,
+                      child: Container(
+                        width: width * 0.32,
+                        color: Colors.transparent,
+                        child: Stack(
+                          children: [
+                            Container(
                               width: width * 0.32,
-                              color: Colors.transparent,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    width: width * 0.32,
-                                    height: width * 0.14,
-                                    padding: EdgeInsets.only(
-                                        top: width * 0.03,
-                                        left: width * 0.003,
-                                        right: width * 0.003),
-                                    decoration: const BoxDecoration(
-                                      color: Constants.iconAc,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(10),
-                                          topLeft: Radius.circular(10),
-                                          bottomRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10)),
-                                    ),
-                                    child: AnimatedOpacity(
-                                      duration: const Duration(seconds: 1),
-                                      curve: Curves.linear,
-                                      opacity: start ? 1 : 0.3,
-                                      child: Text(
-                                        "MAY " + dateFormat!.day.toString(),
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            letterSpacing: contentspace,
-                                            overflow: TextOverflow.clip,
-                                            color: Constants.textColor.shade100,
-                                            fontFamily: fontfamily,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 15),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: width * 0.32,
-                                    height: width * 0.14,
-                                    margin: EdgeInsets.only(top: width * .085),
-                                    padding: EdgeInsets.only(
-                                        top: width * 0.01,
-                                        bottom: width * 0.01,
-                                        right: width * 0.0001,
-                                        left: width * 0.0001),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[900],
-                                      borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.circular(10),
-                                          bottomRight: Radius.circular(10),
-                                          topRight: Radius.circular(10),
-                                          topLeft: Radius.circular(10)),
-                                    ),
-                                    child: Center(
-                                        child: AnimatedOpacity(
-                                      duration: const Duration(seconds: 1),
-                                      curve: Curves.linear,
-                                      opacity: start ? 1 : 0.3,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          const Icon(
-                                            FontAwesomeIcons.ticket,
-                                            color: Constants.iconAc,
-                                            size: 18,
-                                          ),
-                                          const Text("   "),
-                                          Row(
-                                            children: [
-                                              widget.eventData['prize'] == null
-                                                  ? Text(
-                                                      "0 K",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          letterSpacing:
-                                                              contentspace,
-                                                          overflow:
-                                                              TextOverflow.clip,
-                                                          color:
-                                                              Constants.iconAc,
-                                                          fontFamily:
-                                                              fontfamily,
-                                                          fontSize: 14),
-                                                    )
-                                                  : Text(
-                                                      widget.eventData[
-                                                                  "prize"] <
-                                                              1000
-                                                          ? prizemoney.toString() + " Rs"
-                                                          : prizemoney.toString() + " K",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          letterSpacing:
-                                                              contentspace,
-                                                          overflow:
-                                                              TextOverflow.clip,
-                                                          color:
-                                                              Constants.iconAc,
-                                                          fontFamily:
-                                                              fontfamily,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14),
-                                                    ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )),
-                                  ),
-                                ],
+                              height: width * 0.14,
+                              padding: EdgeInsets.only(
+                                  top: width * 0.03,
+                                  left: width * 0.003,
+                                  right: width * 0.003),
+                              decoration: const BoxDecoration(
+                                color: Constants.iconAc,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    topLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10)),
+                              ),
+                              child: AnimatedOpacity(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.linear,
+                                opacity: start ? 1 : 0.3,
+                                child: Text(
+                                  "May " + dateFormat!.day.toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      letterSpacing: contentspace,
+                                      overflow: TextOverflow.clip,
+                                      color: Constants.textColor.shade100,
+                                      fontFamily: fontfamily,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 15),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            Container(
+                              width: width * 0.32,
+                              height: width * 0.14,
+                              margin: EdgeInsets.only(top: width * .085),
+                              padding: EdgeInsets.only(
+                                  top: width * 0.01,
+                                  bottom: width * 0.01,
+                                  right: width * 0.0001,
+                                  left: width * 0.0001),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[900],
+                                borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    topLeft: Radius.circular(10)),
+                              ),
+                              child: Center(
+                                  child: AnimatedOpacity(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.linear,
+                                opacity: start ? 1 : 0.3,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    const Icon(
+                                      FontAwesomeIcons.ticket,
+                                      color: Constants.iconAc,
+                                      size: 18,
+                                    ),
+                                    const Text("   "),
+                                    Row(
+                                      children: [
+                                        widget.eventData['prize'] == null
+                                            ? Text(
+                                                "0K",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    letterSpacing: contentspace,
+                                                    overflow: TextOverflow.clip,
+                                                    color: Constants.iconAc,
+                                                    fontFamily: fontfamily,
+                                                    fontSize: 14),
+                                              )
+                                            : Text(
+                                                widget.eventData["prize"] < 1000
+                                                    ? prizemoney.toString()
+                                                    : prizemoney.toString() +
+                                                        "K",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    letterSpacing: contentspace,
+                                                    overflow: TextOverflow.clip,
+                                                    color: Constants.iconAc,
+                                                    fontFamily: fontfamily,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
+                                              ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ),
+                          ],
+                        ),
                       ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -581,25 +535,26 @@ class _EventDetailsState extends State<EventDetails> {
                       letterSpacing: 0.8,
                       fontFamily: fontfamily,
                       overflow: TextOverflow.clip,
-                      color: Constants.pureWhite.withOpacity(0.75),
+                      color: Constants.pureWhite.withOpacity(0.65),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(""),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     widget.eventData['desc'],
                     overflow: isReadmore
                         ? TextOverflow.visible
                         : TextOverflow.ellipsis,
                     maxLines: lines,
-                    style: const TextStyle(
+                    style: TextStyle(
                       overflow: TextOverflow.clip,
-                      fontSize: 16,
+                      fontSize: 15,
                       height: 1.5,
                       fontFamily: fontfamily,
-                      color: Constants.textColor,
+                      color: Constants.textColor.withOpacity(.8),
                       inherit: true,
-                      letterSpacing: 0.9,
                       wordSpacing: 1.2,
                     ),
                   ),
@@ -620,9 +575,9 @@ class _EventDetailsState extends State<EventDetails> {
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             overflow: TextOverflow.clip,
-                            fontSize: 14,
+                            fontSize: 12,
                             fontFamily: fontfamily,
-                            color: Constants.lightWhite.withOpacity(0.3),
+                            color: Constants.lightWhite.withOpacity(0.2),
                             inherit: true,
                             fontWeight: FontWeight.normal,
                           ),
@@ -651,8 +606,7 @@ class _EventDetailsState extends State<EventDetails> {
             String url = widget.eventData['guideline_file'];
             final _url = Uri.parse(url);
             if (url != null && url.isNotEmpty) {
-              if (await launchUrl(_url,
-                  mode: LaunchMode.externalApplication)) {
+              if (await launchUrl(_url, mode: LaunchMode.externalApplication)) {
               } else {
                 throw 'Could not launch $url';
               }

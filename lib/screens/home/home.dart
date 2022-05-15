@@ -863,8 +863,8 @@ class HomeState extends State<Home> {
                                                                   'event_start',
                                                                   false);
                                                             } else {
-                                                              sort(
-                                                                  'fees', true);
+                                                              sort('fees',
+                                                                  false);
                                                             }
                                                           },
                                                           style: ButtonStyle(
