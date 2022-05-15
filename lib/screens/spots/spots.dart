@@ -17,6 +17,7 @@ class Spots extends StatefulWidget {
 }
 
 class SpotsState extends State<Spots> {
+  final TextEditingController _controller = TextEditingController();
   bool _animate = true;
 
   List<String> _getSuggestions(String pattern) {
@@ -72,6 +73,8 @@ class SpotsState extends State<Spots> {
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
+
+        _controller.clear();
       },
       child: Scaffold(
         backgroundColor: Constants.sc,
@@ -156,6 +159,7 @@ class SpotsState extends State<Spots> {
                     ),
                     child: TypeAheadField(
                       textFieldConfiguration: TextFieldConfiguration(
+                        controller: _controller,
                         style: const TextStyle(color: Colors.grey),
                         cursorColor: Colors.grey,
                         textCapitalization: TextCapitalization.sentences,
