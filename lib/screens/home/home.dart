@@ -271,77 +271,71 @@ class HomeState extends State<Home> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               //welcome note
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => const Splash()));
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    //expanded removed
-                                    AnimatedOpacity(
-                                      duration: const Duration(seconds: 3),
-                                      curve: Curves.decelerate,
-                                      opacity: start ? 1 : 0,
-                                      child: SizedBox(
-                                        width: screenWidth * .7,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Flexible(
-                                              child: Text(
-                                                "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
-                                                style: const TextStyle(
-                                                  overflow: TextOverflow.fade,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20,
-                                                  fontFamily: 'helvetica',
-                                                  color: Colors.white,
-                                                ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //expanded removed
+                                  AnimatedOpacity(
+                                    duration: const Duration(seconds: 3),
+                                    curve: Curves.decelerate,
+                                    opacity: start ? 1 : 0,
+                                    child: SizedBox(
+                                      width: screenWidth * .7,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                              style: const TextStyle(
+                                                overflow: TextOverflow.fade,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                                fontFamily: 'helvetica',
+                                                color: Colors.white,
                                               ),
                                             ),
-                                            Container(
-                                              width: screenWidth * .01,
+                                          ),
+                                          Container(
+                                            width: screenWidth * .01,
+                                          ),
+                                          AnimatedOpacity(
+                                            opacity: start ? 1 : .5,
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            child: Image.asset(
+                                              "assets/wave.gif",
+                                              height: screenHeight * .025,
+                                              alignment: Alignment.centerLeft,
+                                              width: screenHeight * .025,
                                             ),
-                                            AnimatedOpacity(
-                                              opacity: start ? 1 : .5,
-                                              duration:
-                                                  const Duration(seconds: 1),
-                                              child: Image.asset(
-                                                "assets/wave.gif",
-                                                height: screenHeight * .025,
-                                                alignment: Alignment.centerLeft,
-                                                width: screenHeight * .025,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: screenHeight * .01,
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * .01,
+                                  ),
+                                  AnimatedOpacity(
+                                    duration: const Duration(seconds: 3),
+                                    curve: Curves.decelerate,
+                                    opacity: start ? 1 : 0,
+                                    child: Text(
+                                      "Explore Events",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          fontFamily: 'helvetica',
+                                          color: Constants.iconIn),
                                     ),
-                                    AnimatedOpacity(
-                                      duration: const Duration(seconds: 3),
-                                      curve: Curves.decelerate,
-                                      opacity: start ? 1 : 0,
-                                      child: Text(
-                                        "Explore Events",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 13,
-                                            fontFamily: 'helvetica',
-                                            color: Constants.iconIn),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: screenHeight * .01,
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * .01,
+                                  ),
+                                ],
                               ),
 
                               //notification bell
