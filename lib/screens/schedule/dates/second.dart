@@ -67,6 +67,7 @@ class _SecondPageState extends State<SecondPage> {
                             venue: widget.data![index]['venue']['title']
                                 .toString(),
                             route: EventDetails(widget.data![index]),
+                            image:widget.data![index]["image"],
                           )
                         ],
                       ),

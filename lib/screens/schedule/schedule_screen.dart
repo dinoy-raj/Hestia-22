@@ -88,7 +88,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     color: Colors.white,
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'helvetica',
+                                    fontFamily: 'Helvetica',
                                     letterSpacing: 1.4),
                               ),
                             ),
@@ -225,6 +225,7 @@ class EventCard extends StatefulWidget {
   final String description;
   final String venue;
   final Widget route;
+  final String image;
 
   const EventCard({
     Key? key,
@@ -233,6 +234,7 @@ class EventCard extends StatefulWidget {
     required this.time,
     required this.route,
     required this.venue,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -274,15 +276,20 @@ class _EventCardState extends State<EventCard> {
                   MaterialPageRoute(builder: (context) => widget.route));
             },
             child: AnimatedOpacity(
-              duration: const Duration(seconds: 3),
+              duration: const Duration(seconds: 2),
               curve: Curves.decelerate,
               opacity: start ? 1 : 0,
               child: AnimatedContainer(
-                duration: const Duration(seconds: 3),
+                duration: const Duration(seconds: 2),
                 curve: Curves.slowMiddle,
                 width: size.width * 0.8,
                 height: size.width * 0.22,
                 decoration: BoxDecoration(
+                  image: DecorationImage(
+                    opacity: .5,
+                    fit: BoxFit.fitWidth,
+                    image: NetworkImage(widget.image),
+                  ),
                   color: Constants.iconAc,
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -295,10 +302,10 @@ class _EventCardState extends State<EventCard> {
                     children: [
                       Text(
                         widget.eventName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white,
                         ),
                       ),
                       Padding(

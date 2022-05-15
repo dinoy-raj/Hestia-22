@@ -67,6 +67,7 @@ class _ThirdPageState extends State<ThirdPage> {
                             venue: widget.data![index]['venue']['title']
                                 .toString(),
                             route: EventDetails(widget.data![index]),
+                            image:widget.data![index]["image"],
                           )
                         ],
                       ),

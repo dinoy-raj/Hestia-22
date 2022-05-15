@@ -297,13 +297,13 @@ class HomeState extends State<Home> {
                                             ),
                                           ),
                                           Container(
-                                            width: screenWidth*.01,
+                                            width: screenWidth * .01,
                                           ),
                                           Image.network(
                                             "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif",
-                                            height: screenHeight*.025,
+                                            height: screenHeight * .025,
                                             alignment: Alignment.centerLeft,
-                                            width: screenHeight*.025,
+                                            width: screenHeight * .025,
                                           ),
                                         ],
                                       ),
@@ -359,6 +359,10 @@ class HomeState extends State<Home> {
                                   curve: Curves.fastLinearToSlowEaseIn,
                                   opacity: start ? 1 : 0,
                                   child: Badge(
+                                    elevation: unreadNotifications == null ||
+                                            unreadNotifications!.isEmpty
+                                        ? 0
+                                        : 5,
                                     position: BadgePosition.topEnd(end: -5),
                                     badgeColor: unreadNotifications == null ||
                                             unreadNotifications!.isEmpty
