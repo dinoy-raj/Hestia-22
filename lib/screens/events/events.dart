@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 
 class EventDetails extends StatefulWidget {
-  Map eventData;
-  EventDetails(this.eventData, {Key? key}) : super(key: key);
+  final Map eventData;
+  const EventDetails(this.eventData, {Key? key}) : super(key: key);
   @override
   State<EventDetails> createState() => _EventDetailsState();
 }
@@ -604,7 +604,7 @@ class _EventDetailsState extends State<EventDetails> {
           onPressed: () async {
             String url = widget.eventData['guideline_file'];
             final _url = Uri.parse(url);
-            if (url != null && url.isNotEmpty) {
+            if (url.isNotEmpty) {
               if (await launchUrl(_url, mode: LaunchMode.externalApplication)) {
               } else {
                 throw 'Could not launch $url';

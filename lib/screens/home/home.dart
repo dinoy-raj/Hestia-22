@@ -6,7 +6,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
-import 'package:hestia22/screens/home/appstart.dart';
 import 'package:hestia22/screens/home/card2.dart';
 import 'package:hestia22/screens/home/cards1.dart';
 import 'card3.dart';
@@ -44,6 +43,7 @@ class HomeState extends State<Home> {
 
   //filter icon
   static bool filterPressed = false;
+  final TextEditingController _textEditingController =  TextEditingController();
 
   //category list
   static int catSelect = 10;
@@ -239,6 +239,10 @@ class HomeState extends State<Home> {
     return GestureDetector(
       onTap: () async {
         FocusManager.instance.primaryFocus?.unfocus();
+        setState(() {
+          notificationPressed = false;
+          _textEditingController.clear();
+        });
       },
       child: Scaffold(
         backgroundColor: Constants.sc,
@@ -289,10 +293,10 @@ class HomeState extends State<Home> {
                                           Flexible(
                                             child: Text(
                                               "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 overflow: TextOverflow.fade,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20,
+                                                fontSize: screenHeight * .025,
                                                 fontFamily: 'helvetica',
                                                 color: Colors.white,
                                               ),
@@ -463,6 +467,7 @@ class HomeState extends State<Home> {
                                       child: TypeAheadField(
                                         textFieldConfiguration:
                                             TextFieldConfiguration(
+                                              controller: _textEditingController,
                                           onTap: () {
                                             if (mounted) {
                                               setState(() {

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/schedule/data.dart';
@@ -285,57 +286,76 @@ class _EventCardState extends State<EventCard> {
                 width: size.width * 0.8,
                 height: size.width * 0.22,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    opacity: .5,
-                    fit: BoxFit.fitWidth,
-                    image: NetworkImage(widget.image),
-                  ),
                   color: Constants.iconIn,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 18.0, vertical: 5),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.eventName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 5.0,
-                        ),
-                        child: Text(
-                          widget.description,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Colors.white.withOpacity(0.35),
+                child: Stack(
+                  children: [
+                    AnimatedOpacity(
+                      duration: const Duration(seconds: 2),
+                      curve: Curves.decelerate,
+                      opacity: start ? .5 : 0,
+                      child: AnimatedContainer(
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.slowMiddle,
+                        width: size.width * 0.8,
+                        height: size.width * 0.22,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: CachedNetworkImage(
+                            fadeInDuration: const Duration(milliseconds: 500),
+                            fadeInCurve: Curves.fastLinearToSlowEaseIn,
+                            fit: BoxFit.fitWidth,
+                            imageUrl: widget.image,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 5.0,
-                        ),
-                        child: Text(
-                          widget.venue,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Colors.white.withOpacity(0.55),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18.0, vertical: 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.eventName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 5.0,
+                            ),
+                            child: Text(
+                              widget.description,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                color: Colors.white.withOpacity(0.35),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 5.0,
+                            ),
+                            child: Text(
+                              widget.venue,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: Colors.white.withOpacity(0.55),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
