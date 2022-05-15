@@ -290,7 +290,7 @@ class _EventCardState extends State<EventCard> {
                     fit: BoxFit.fitWidth,
                     image: NetworkImage(widget.image),
                   ),
-                  color: Constants.iconAc,
+                  color: Constants.iconIn,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(

@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -62,7 +61,7 @@ class _EventDetailsState extends State<EventDetails> {
         hours: endDate.hour - DateTime.now().hour,
         minutes: endDate.minute - DateTime.now().minute,
         seconds: endDate.second - DateTime.now().second);
-    Future.delayed(const Duration(milliseconds: 800), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         start = true;
       });
