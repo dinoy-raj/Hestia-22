@@ -289,10 +289,10 @@ class HomeState extends State<Home> {
                                           Flexible(
                                             child: Text(
                                               "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 overflow: TextOverflow.fade,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20,
+                                                fontSize: screenHeight * .025,
                                                 fontFamily: 'helvetica',
                                                 color: Colors.white,
                                               ),
