@@ -306,11 +306,16 @@ class HomeState extends State<Home> {
                                             Container(
                                               width: screenWidth * .01,
                                             ),
-                                            Image.network(
-                                              "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif",
-                                              height: screenHeight * .025,
-                                              alignment: Alignment.centerLeft,
-                                              width: screenHeight * .025,
+                                            AnimatedOpacity(
+                                              opacity: start ? 1 : .5,
+                                              duration:
+                                                  const Duration(seconds: 1),
+                                              child: Image.asset(
+                                                "assets/wave.gif",
+                                                height: screenHeight * .025,
+                                                alignment: Alignment.centerLeft,
+                                                width: screenHeight * .025,
+                                              ),
                                             ),
                                           ],
                                         ),

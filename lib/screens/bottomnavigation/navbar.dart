@@ -44,6 +44,7 @@ class NavBarState extends State<NavBar> {
   List<dynamic>? all;
   Map? profile;
   bool isLoading = true;
+  bool flag = false;
 
   void sort(List<dynamic> list) {
     list.sort((a, b) {
@@ -59,6 +60,12 @@ class NavBarState extends State<NavBar> {
   @override
   void initState() {
     super.initState();
+
+    Future.delayed(const Duration(seconds: 11), () {
+      setState(() {
+        flag = true;
+      });
+    });
 
     buildFlag = true;
 
@@ -180,6 +187,9 @@ class NavBarState extends State<NavBar> {
         index = 0;
       });
     });
+
+
+
   }
 
   @override
@@ -203,7 +213,7 @@ class NavBarState extends State<NavBar> {
     } else {
       mode = false;
     }
-    return isLoading?
+    return !flag || isLoading?
         const Splash():
     Scaffold(
       resizeToAvoidBottomInset: false,
