@@ -61,7 +61,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 12), () {
+    Future.delayed(const Duration(seconds: 8), () {
       setState(() {
         flag = true;
       });
