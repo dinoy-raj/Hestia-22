@@ -101,3 +101,9 @@ class Constants {
 // TODO (v1.0.1)
 // 1. Registration and payment
 // 2. FCM
+// 3. Book Now Clickable
+// 4. Splash Detection
+// 5. Slider Indicator
+// 6. Workshop list Container at the end
+// 7. Spots page spacing of cards
+// 8. Profile Animation 2s -> 1s
