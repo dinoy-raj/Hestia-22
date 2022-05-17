@@ -97,3 +97,7 @@ class Constants {
   static const transparent = Colors.transparent;
   static const lightWhite = Colors.white70;
 }
+
+// TODO (v1.0.1)
+// 1. Registration and payment
+// 2. FCM
