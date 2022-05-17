@@ -106,4 +106,4 @@ class Constants {
 // 5. Slider Indicator
 // 6. Workshop list Container at the end
 // 7. Spots page spacing of cards
-// 8. Profile Animation 2s -> 1s
+// 8. Profile Animation 2s -> 1s : done

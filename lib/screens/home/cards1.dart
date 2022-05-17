@@ -158,7 +158,7 @@ class _EventCardsState extends State<EventCards1> {
                                     errorWidget:
                                         (BuildContext context, url, error) =>
                                             const Text(
-                                      "Error In Loading",
+                                      "Loading",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 10,
