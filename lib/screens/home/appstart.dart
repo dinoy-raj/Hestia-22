@@ -19,9 +19,9 @@ class _SplashState extends State<Splash> {
         width: screenWidth,
         child: Center(
           child: SizedBox(
-              height: screenHeight*.3,
-              width: screenWidth*.3,
-              child:  Image.asset("assets/applogo.gif")),
+              height: screenHeight * .3,
+              width: screenWidth * .3,
+              child: Image.asset("assets/applogo.gif")),
         ),
       ),
     );
