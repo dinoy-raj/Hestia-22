@@ -570,7 +570,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                       //details container
                                       AnimatedOpacity(
-                                        duration: const Duration(seconds: 3),
+                                        duration: const Duration(seconds: 2),
                                         curve: Curves.decelerate,
                                         opacity: det ? 1 : 0,
                                         child: SizedBox(
@@ -773,7 +773,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         padding: EdgeInsets.only(
                                             top: screenHeight * .02),
                                         child: AnimatedOpacity(
-                                          duration: const Duration(seconds: 3),
+                                          duration: const Duration(seconds: 2),
                                           curve: Curves.decelerate,
                                           opacity: det ? 1 : 0,
                                           child: Container(
@@ -831,7 +831,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       : const EdgeInsets.only(
                                           top: 8.0, left: 10, right: 10),
                                   child: AnimatedOpacity(
-                                    duration: const Duration(seconds: 4),
+                                    duration: const Duration(seconds: 2),
                                     curve: Curves.decelerate,
                                     opacity: con ? 1 : 0,
                                     child: Column(
