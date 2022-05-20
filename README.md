@@ -27,16 +27,6 @@ four-day event from the 26th to the 29th of May 2022 is expected to witness a fo
 
 
 
-<table>
-<tr>
-      <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="233px;" alt=""/><br /><sub><b>Dinoy Raj(Raj)</b></sub></a><br /><a href="https://github.com/Dinoy-Raj" </td>
-      <td align="center"><a href="https://github.com/amalnathm7"><img src="https://avatars.githubusercontent.com/u/64605131?v=4" width="233px;" alt=""/><br /><sub><b>Amal Nath</b></sub></a><br /><a href="https://github.com/amalnathm7" title="Ui Design Using Flutter And Backend FireBase">📊</a><a href="hhttps://github.com/Dinoy-Raj/ProductivityApp" title="Code">💻</a></a> <a href="#maintenance-amalnathm7" title="Maintenance">🚧</a></td>
- </tr>
-   
-
-
-</table>
-
 
 
 
