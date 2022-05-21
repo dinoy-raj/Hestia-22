@@ -17,17 +17,42 @@ four-day event from the 26th to the 29th of May 2022 is expected to witness a fo
 * Notifications & alerts
  <div></div>
 
-## Live Now
+## Live Now🎉
 your smart and intuitive companion. 
 Vibrant, vivid and astounding with all the enthralling events rolled up our sleeves. Checkout official app for registrations and updates of your favourite events, workshops & much more!
 
 
 <a href='https://play.google.com/store/apps/details?id=com.tkmce.hestia22&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width = "200px"/></a>
 
+## Theme 🎨
 
-### Contributors
+## Requirements 🧩
+###### for this code
+- [x] Android Studio/  VS code running on windows/ mac os
+- [x] Flutter 3.0 or higher set up
+- [x] Android Phone/ Emulator | Chrome/ Edge | Desktop SetUp For Flutter 
+
+## Contributors 👽
 
 
+<table>
+<tr>
+      <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="100px;" alt=""/></a><br /><sub><b>Dinoy Raj(Raj)</td>
+        
+        <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="100px;" alt=""/></a><br /><sub><b>Dinoy Raj(Raj)</td>
+
+             
+             
+ </tr>
+   
+
+
+</table>
+
+
+## Feedback 🎫
+
+If you have any feedback, please reach out to us at dinoykraj@gmail.com
 
 
 
