@@ -37,9 +37,7 @@ Vibrant, vivid and astounding with all the enthralling events rolled up our slee
 
 <table>
 <tr>
-      <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="100px;" alt=""/></a><br /><sub><b>Dinoy Raj(Raj)</td>
-        
-        <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="100px;" alt=""/></a><br /><sub><b>Dinoy Raj(Raj)</td>
+         <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="130px;" alt=""/><br /><sub><b>Dinoy Raj(Raj)</b></sub></a><br /></td>
 
              
              
