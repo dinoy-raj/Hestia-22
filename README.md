@@ -37,8 +37,12 @@ Vibrant, vivid and astounding with all the enthralling events rolled up our slee
 
 <table>
 <tr>
-         <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="130px;" alt=""/><br /><sub><b>Dinoy Raj(Raj)</b></sub></a><br /></td>
-
+         <td align="center"><a href="https://github.com/Dinoy-Raj"><img src="https://avatars2.githubusercontent.com/u/62199728?s=400&u=ec49e70797755f5091bcc1cd3ee60f5faaec91b6&v=4" width="130px;" alt=""/><br /><sub><b>Dinoy Raj</b></sub></a><br /></td>
+             <td align="center"><a href="https://github.com/amalnathm7"><img src="https://avatars.githubusercontent.com/u/64605131?v=4" width="100px;" alt=""/><br /><sub><b>Amal Nath</td>
+         <td align="center"><a href="https://github.com/jishnujanan"><img src="https://avatars.githubusercontent.com/u/83491843?v=4" width="100px;" alt=""/><br /><sub><b>Jishnu J</td>
+           <td align="center"><a href="https://github.com/adarshskumar"><img src="https://avatars.githubusercontent.com/u/73768476?v=4" width="100px;" alt=""/><br /><sub><b>Adarsh s kumar</td>
+             <td align="center"><a href="https://github.com/Karthik-Sunil-K"><img src="https://avatars.githubusercontent.com/u/62179996?v=4" width="100px;" alt=""/><br /><sub><b>Karthik Sunil K</td>
+               <td align="center"><a href="https://github.com/Neeraj-SD"><img src="https://avatars.githubusercontent.com/u/74582690?v=4" width="100px;" alt=""/><br /><sub><b>Neeraj S D</td>
              
              
  </tr>
