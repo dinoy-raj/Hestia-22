@@ -50,11 +50,17 @@ class _EventDetailsState extends State<EventDetails> {
       prize = "0";
     }
     prizemoney = double.parse(prize).toInt();
-    dateFormat = widget.eventData['event_start'] != null
+    dateFormat = widget.eventData['reg_end'] != null
         ? DateFormat("yyyy-mm-ddThh:mm:ss")
-            .parse(widget.eventData['event_start'])
+            .parse(widget.eventData['reg_end'].toString())
         : DateFormat('yyyy-mm-dd').parse("2022-05-26");
     DateTime endDate = DateTime.parse(dateFormat.toString());
+
+    dateFormat = widget.eventData['event_start'] != null
+        ? DateFormat("yyyy-mm-ddThh:mm:ss")
+        .parse(widget.eventData['event_start'].toString())
+        : DateFormat('yyyy-mm-dd').parse("2022-05-26");
+    DateTime eventStart = DateTime.parse(dateFormat.toString());
 
     duration = Duration(
         days: endDate.day - DateTime.now().day,
@@ -144,7 +150,7 @@ class _EventDetailsState extends State<EventDetails> {
                 : const SizedBox(
                     height: 0,
                   ),
-            duration!.inSeconds <= 0
+            duration!.inSeconds <= 0 || !widget.eventData['is_reg_open']
                 ? const Text("")
                 : floatButton(height, width),
           ],

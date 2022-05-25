@@ -157,12 +157,14 @@ class _EventCardsState extends State<EventCards1> {
                                         ['image'],
                                     errorWidget:
                                         (BuildContext context, url, error) =>
-                                            const Text(
-                                      "Loading",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10,
-                                        color: Colors.white,
+                                            const Center(
+                                      child: Text(
+                                        "Loading",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),

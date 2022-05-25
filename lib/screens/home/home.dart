@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:hestia22/main.dart';
 import 'package:hestia22/screens/events/events.dart';
 import 'package:hestia22/screens/home/card2.dart';
 import 'package:hestia22/screens/home/cards1.dart';
-import 'package:hestia22/services/django/django.dart';
 import 'card3.dart';
 import 'card4.dart';
 import 'card5.dart';
@@ -45,7 +43,7 @@ class HomeState extends State<Home> {
 
   //filter icon
   static bool filterPressed = false;
-  final TextEditingController _textEditingController =  TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   //category list
   static int catSelect = 10;
@@ -294,7 +292,7 @@ class HomeState extends State<Home> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                             // "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                              // "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
                                               "",
                                               style: TextStyle(
                                                 overflow: TextOverflow.fade,
@@ -470,7 +468,7 @@ class HomeState extends State<Home> {
                                       child: TypeAheadField(
                                         textFieldConfiguration:
                                             TextFieldConfiguration(
-                                              controller: _textEditingController,
+                                          controller: _textEditingController,
                                           onTap: () {
                                             if (mounted) {
                                               setState(() {

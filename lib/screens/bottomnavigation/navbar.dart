@@ -381,7 +381,6 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () {
-                                                log(all.toString());
                                                 setState(() {
                                                   index = 1;
                                                   switchPage(index);
