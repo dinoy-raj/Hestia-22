@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
@@ -242,6 +243,7 @@ class HomeState extends State<Home> {
         setState(() {
           notificationPressed = false;
           _textEditingController.clear();
+          log(widget.a.toString());
         });
       },
       child: Scaffold(
