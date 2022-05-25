@@ -46,7 +46,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
   bool isLoading = true;
   bool flag = false;
 
-  void sort(List<dynamic> list) {
+  void sortDate(List<dynamic> list) {
     list.sort((a, b) {
       if (a['event_start'] == null || b['event_start'] == null) {
         return 0;
@@ -54,6 +54,16 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
 
       return DateTime.parse(a['event_start'])
           .compareTo(DateTime.parse(b['event_start']));
+    });
+  }
+
+  void sortShortTitle(List<dynamic> list) {
+    list.sort((a, b) {
+      if (a['short_title'] == null || b['short_title'] == null) {
+        return 0;
+      }
+
+      return a['short_title'].compareTo(b['short_title']);
     });
   }
 
@@ -139,7 +149,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
       if (mounted) {
         setState(() {
           schedule1 = value;
-          sort(schedule1!);
+          sortDate(schedule1!);
         });
       }
     });
@@ -148,7 +158,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
       if (mounted) {
         setState(() {
           schedule2 = value;
-          sort(schedule2!);
+          sortDate(schedule2!);
         });
       }
     });
@@ -157,7 +167,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
       if (mounted) {
         setState(() {
           schedule3 = value;
-          sort(schedule3!);
+          sortDate(schedule3!);
         });
       }
     });
@@ -166,7 +176,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
       if (mounted) {
         setState(() {
           schedule4 = value;
-          sort(schedule4!);
+          sortDate(schedule4!);
         });
       }
     });
@@ -175,6 +185,9 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
       if (mounted) {
         setState(() {
           spots = value;
+          for (var element in spots!) {
+            sortShortTitle(element['events']);
+          }
           isLoading = false;
         });
       }
