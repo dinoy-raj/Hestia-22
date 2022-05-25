@@ -294,7 +294,8 @@ class HomeState extends State<Home> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                             // "Hi, ${widget.profile == null ? "" : widget.profile!['name'].split(' ').first} ",
+                                              "",
                                               style: TextStyle(
                                                 overflow: TextOverflow.fade,
                                                 fontWeight: FontWeight.bold,

@@ -227,7 +227,7 @@ class SpotsState extends State<Spots> {
                                 ? CupertinoIcons.star
                                 : CupertinoIcons.location,
                             color: Constants.color2.withOpacity(.40),
-                            size: 20,
+                            size: 15,
                           ),
                           minLeadingWidth: 0,
                           title: Text(

@@ -78,6 +78,7 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    print(widget.eventData["reg_end"]);
     return Scaffold(
       backgroundColor: Constants.sc,
       body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
@@ -234,10 +235,9 @@ class _EventDetailsState extends State<EventDetails> {
 
   Widget eventDetails(double height, double width) {
     return AnimatedPadding(
-      padding: start ? EdgeInsets.fromLTRB(
-          width * 0.035, height * 0.01, width * 0.035, 0):
-         EdgeInsets.fromLTRB(
-        width * 0.0, height * 0.01, width * 0.0, 0),
+      padding: start
+          ? EdgeInsets.fromLTRB(width * 0.035, height * 0.01, width * 0.035, 0)
+          : EdgeInsets.fromLTRB(width * 0.0, height * 0.01, width * 0.0, 0),
       duration: const Duration(milliseconds: 1000),
       curve: Curves.decelerate,
       child: AnimatedOpacity(
@@ -353,7 +353,7 @@ class _EventDetailsState extends State<EventDetails> {
               ),
             ),
             Container(
-              width: width ,
+              width: width,
               height: height * 0.15,
               padding:
                   EdgeInsets.only(top: height * 0.02, bottom: height * 0.02),
