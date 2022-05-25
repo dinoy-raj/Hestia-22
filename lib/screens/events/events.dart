@@ -28,7 +28,7 @@ class _EventDetailsState extends State<EventDetails> {
   bool start = false;
   int money = 0;
   int prizemoney = 0;
-  DateTime? dateFormat;
+  DateTime? dateTime;
 
   @override
   void initState() {
@@ -50,23 +50,22 @@ class _EventDetailsState extends State<EventDetails> {
       prize = "0";
     }
     prizemoney = double.parse(prize).toInt();
-    dateFormat = widget.eventData['reg_end'] != null
+    dateTime = widget.eventData['reg_end'] != null
         ? DateFormat("yyyy-mm-ddThh:mm:ss")
             .parse(widget.eventData['reg_end'].toString())
         : DateFormat('yyyy-mm-dd').parse("2022-05-26");
-    DateTime endDate = DateTime.parse(dateFormat.toString());
-
-    dateFormat = widget.eventData['event_start'] != null
-        ? DateFormat("yyyy-mm-ddThh:mm:ss")
-        .parse(widget.eventData['event_start'].toString())
-        : DateFormat('yyyy-mm-dd').parse("2022-05-26");
-    DateTime eventStart = DateTime.parse(dateFormat.toString());
 
     duration = Duration(
-        days: endDate.day - DateTime.now().day,
-        hours: endDate.hour - DateTime.now().hour,
-        minutes: endDate.minute - DateTime.now().minute,
-        seconds: endDate.second - DateTime.now().second);
+        days: dateTime!.day - DateTime.now().day,
+        hours: dateTime!.hour - DateTime.now().hour,
+        minutes: dateTime!.minute - DateTime.now().minute,
+        seconds: dateTime!.second - DateTime.now().second);
+
+    dateTime = widget.eventData['event_start'] != null
+        ? DateFormat("yyyy-mm-ddThh:mm:ss")
+            .parse(widget.eventData['event_start'].toString())
+        : DateFormat('yyyy-mm-dd').parse("2022-05-26");
+
     Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         start = true;
@@ -393,7 +392,7 @@ class _EventDetailsState extends State<EventDetails> {
                                   fontSize: 13),
                             ),
                             Text(
-                              "May " + dateFormat!.day.toString(),
+                              "May " + dateTime!.day.toString(),
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -523,7 +522,7 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -84,3 +84,9 @@ Future<List<dynamic>> getSchedule(String start, String end) async {
 
   return jsonDecode(response.body)['results'];
 }
+
+Future<Map<String, dynamic>> getWinners(String slug) async {
+  http.Response response =
+      await http.get(Uri.parse(hostUrl + "/api/v1/event/winner/$slug"));
+  return jsonDecode(response.body);
+}

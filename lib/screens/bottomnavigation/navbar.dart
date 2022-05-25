@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -380,7 +379,7 @@ class NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
                                               splashColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
-                                              onTap: () {
+                                              onTap: () async {
                                                 setState(() {
                                                   index = 1;
                                                   switchPage(index);
