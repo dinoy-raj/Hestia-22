@@ -78,7 +78,6 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    print(widget.eventData["reg_end"]);
     return Scaffold(
       backgroundColor: Constants.sc,
       body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [

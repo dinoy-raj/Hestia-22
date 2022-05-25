@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hestia22/screens/bottomnavigation/navbar.dart';
+import 'package:hestia22/screens/login/login.dart';
 import 'package:hestia22/screens/profile/profile_registration.dart';
 import 'services/django/google_auth.dart';
 
@@ -63,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           builder: (BuildContext context,
               AsyncSnapshot<GoogleSignInAccount?> snapshot) {
             if (auth.token == null || auth.token!.isEmpty) {
-              return const NavBar();
+              return NavBar();
             } else {
               if (auth.isCompleted == null || !auth.isCompleted!) {
                 return const ProfileRegistration();

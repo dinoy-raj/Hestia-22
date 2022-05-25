@@ -4,9 +4,20 @@ import 'package:http/http.dart' as http;
 String hostUrl = "https://backend.hestiatkmce.live";
 
 Future<List<dynamic>> getAllEvents() async {
+  List<dynamic> list = [];
   http.Response response =
       await http.get(Uri.parse(hostUrl + "/api/v1/event/"));
-  return json.decode(response.body)['results'];
+
+  Map map = json.decode(response.body);
+  list.addAll(map['results'].toList());
+
+  while (map['next'] != null) {
+    response = await http.get(Uri.parse(map['next']));
+    map = json.decode(response.body);
+    list.addAll(map['results'].toList());
+  }
+
+  return list;
 }
 
 Future<List<dynamic>> getWorkshops() async {
