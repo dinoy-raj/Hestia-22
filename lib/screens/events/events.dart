@@ -801,10 +801,12 @@ class _EventDetailsState extends State<EventDetails> {
                     borderRadius: BorderRadius.all(Radius.circular(10))))),
             autofocus: true,
             onPressed: () async {
-              Uri _url = Uri.parse("https://www.hestiatkmce.live/events/" +
-                  widget.eventData['event_category'] +
-                  "/" +
-                  widget.eventData['slug']);
+              Uri _url = widget.eventData['event_category'] == "P"
+                  ? Uri.parse("https://insider.in/hestia22-may26-2022/event")
+                  : Uri.parse("https://www.hestiatkmce.live/events/" +
+                      widget.eventData['event_category'] +
+                      "/" +
+                      widget.eventData['slug']);
               if (await launchUrl(_url,
                   mode: LaunchMode.externalApplication)) {}
             },
